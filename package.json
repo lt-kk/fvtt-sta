@@ -9,10 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@league-of-foundry-developers/foundry-vtt-types": "9.280.0"
-  },
   "devDependencies": {
-    "typescript": "^5.3.3"
+    "@league-of-foundry-developers/foundry-vtt-types": "9.280.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "typescript": "5.3.3"
   }
 }
