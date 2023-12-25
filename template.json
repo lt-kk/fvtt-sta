@@ -1,0 +1,170 @@
+{
+  "Actor": {
+    "types": [
+      "character",
+      "starship"
+    ],
+    "character": {
+      "species": "",
+      "rank": "",
+      "assignment": "",
+      "environment": "",
+      "upbringing": "",
+      "notes": "",
+      "attributes": {
+        "control": 7,
+        "daring": 7,
+        "fitness": 7,
+        "insight": 7,
+        "presence": 7,
+        "reason": 7
+      },
+      "disciplines": {
+        "command": 1,
+        "security": 1,
+        "science": 1,
+        "conn": 1,
+        "engineering": 1,
+        "medicine": 1
+      },
+      "focuses": [],
+      "milestones": [],
+      "talents": [],
+      "traits": [],
+      "values": [],
+      "equipment": [],
+      "armor": [],
+      "weapons": []
+    },
+    "starship": {
+      "spaceframe": "",
+      "designation": "",
+      "servicedate": null,
+      "missionprofile": "",
+      "notes": "",
+      "systems": {
+        "communications": 7,
+        "computers": 7,
+        "engines": 7,
+        "sensors": 7,
+        "structure": 7,
+        "weapons": 7
+      },
+      "departments": {
+        "command": 1,
+        "conn": 1,
+        "engineering": 1,
+        "medicine": 1,
+        "science": 1,
+        "security": 1
+      },
+      "launchbay": [],
+      "refit": [],
+      "talents": [],
+      "traits": [],
+      "values": [],
+      "equipment": [],
+      "weapons": []
+    }
+  },
+  "Item": {
+    "types": [
+      "armor",
+      "characterweapon",
+      "focus",
+      "injury",
+      "item",
+      "launchbay",
+      "milestone",
+      "starshipweapon",
+      "talent",
+      "value"
+    ],
+    "armor": {
+      "description": "",
+      "protection": 0,
+      "equipped": true,
+      "opportunity": 0,
+      "escalation": 0
+    },
+    "characterweapon": {
+      "description": "",
+      "damage": 0,
+      "range": "",
+      "hands": 1,
+      "qualities": {
+        "area": false,
+        "intense": false,
+        "knockdown": false,
+        "accurate": false,
+        "charge": false,
+        "cumbersome": false,
+        "deadly": false,
+        "debilitating": false,
+        "grenade": false,
+        "inaccurate": false,
+        "nonlethal": false,
+        "hiddenx": 0,
+        "piercingx": 0,
+        "viciousx": 0,
+        "opportunity": 0,
+        "escalation": 0
+      }
+
+    },
+    "focus": {
+      "description": "",
+      "img": ""
+    },
+    "injury": {
+      "description": ""
+    },
+    "item": {
+      "description": "",
+      "quantity": 1,
+      "uses": -1,
+      "opportunity": 0,
+      "escalation": 0
+    },
+    "launchbay": {
+      "description": "",
+      "quantity": 1,
+      "uses": -1
+    },
+    "milestone": {
+      "description": ""
+    },
+    "starshipweapon": {
+      "description": "",
+      "damage": 0,
+      "range": "",
+      "qualities": {
+        "area": false,
+        "spread": false,
+        "dampening": false,
+        "calibration": false,
+        "devastating": false,
+        "highyield": false,
+        "persistentx": 0,
+        "piercingx": 0,
+        "viciousx": 0,
+        "hiddenx": 0,
+        "versatilex": 0
+      }
+
+    },
+    "talent": {
+      "description": "",
+      "talenttype": {
+        "typeenum": "",
+        "description":"",
+        "minimum":0
+      }
+
+    },
+    "value": {
+      "description": "",
+      "used": false
+    }
+  }
+}

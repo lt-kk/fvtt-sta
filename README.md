@@ -1,3 +1,3 @@
-# Foundry Virtual Tabletop - Star Trek Adventures - Tools
+# Foundry Virtual Tabletop - Star Trek Adventures
 
 

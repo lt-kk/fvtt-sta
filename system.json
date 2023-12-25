@@ -1,0 +1,40 @@
+{
+  "name": "fvtt-sta",
+  "id": "fvtt-sta",
+  "title": "Star Trek Adventures",
+  "description": "by loosetie",
+  "authos": [{
+    "name": "loosetie"
+  }],
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "11"
+  },
+  "esmodules": [
+    "fvtt-sta.js"
+  ],
+  "styles": [
+    "fvtt-sta.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/de.json"
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
+    }
+  ],
+  "gridDistance": 1,
+  "gridUnits": "m",
+  "primaryTokenAttribute": "stress",
+  "secondaryTokenAttribute": "determination",
+  "initiative": "@daring",
+  "url": "https://github.com/lt-kk/fvtt-sta",
+  "manifest": "https://raw.githubusercontent.com/lt-kk/fvtt-sta/main/system.json",
+  "download": ""
+}
