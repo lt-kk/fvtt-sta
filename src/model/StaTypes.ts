@@ -30,7 +30,7 @@ export class StaValue {
   questioned: boolean = false;
 }
 
-export class StaEquipment {
+export class StaItem {
   name: string = "";
   img: string = "";
   description: string = "";

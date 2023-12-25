@@ -1,4 +1,4 @@
-import { CurrentValue, StaEquipment, StaLaunchbay, StaTalent, StaTrait, StaValue, StaWeapon } from "./StaTypes";
+import { CurrentValue, StaItem, StaLaunchbay, StaTalent, StaTrait, StaValue, StaWeapon } from "./StaTypes";
 import { StaRule } from "./StaRule";
 
 export class StaStarship {
@@ -17,7 +17,7 @@ export class StaStarship {
   talents: StaTalent[] = [];
   traits: StaTrait[] = [];
   values: StaValue[] = [];
-  equipment: StaEquipment[] = [];
+  items: StaItem[] = [];
   weapons: StaStarshipWeapon[] = [];
 
   status: StaStarshipStatus = new StaStarshipStatus();

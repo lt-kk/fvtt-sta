@@ -1,5 +1,6 @@
 import { sta } from "../config";
 import { LooseObject } from "../util";
+import { confirmDialog } from "../util/ConfimDialog";
 
 export class CharacterSheet extends ActorSheet {
   get template() {
@@ -28,9 +29,9 @@ export class CharacterSheet extends ActorSheet {
         traits: this.filterItems(data, "trait"),
         values: this.filterItems(data, "value"),
         weapons: this.filterItems(data, "characterweapon"),
-      }
+      },
     };
-    console.log(sheetData)
+    console.log(sheetData);
     return sheetData;
   }
 
@@ -42,32 +43,48 @@ export class CharacterSheet extends ActorSheet {
 
   override activateListeners(html: JQuery) {
     super.activateListeners(html);
-    html.find(".control.create").on("click", this.handleCreate.bind(this))
-    html.find(".control.edit").on("click", this.handleEdit.bind(this))
-    html.find(".control.delete").on("click", this.handleDelete.bind(this))
+    html.find(".control.create").on("click", this.handleCreate.bind(this));
+    html.find(".control.edit").on("click", this.handleEdit.bind(this));
+    html.find(".control.delete").on("click", this.handleDelete.bind(this));
   }
 
   handleCreate(event: JQuery.ClickEvent) {
-    event.preventDefault()
-    const type = $(event.currentTarget).data("type")
+    event.preventDefault();
+    const type = $(event.currentTarget).data("type");
     const itemData = {
       name: sta.game.i18n.localize(`sta.item.${type}.create`),
       type: type,
       data: {},
     };
-    return this.actor.createEmbeddedDocuments('Item', [(itemData)]);
+    this.actor.createEmbeddedDocuments("Item", [(itemData)]);
   }
 
   handleEdit(event: JQuery.ClickEvent) {
-    event.preventDefault()
+    event.preventDefault();
     const itemId = this.findItemId(event);
-    const item = this.actor.items.get(itemId)
-    item?.sheet?.render(true)
+    const item = this.actor.items.get(itemId);
+    item?.sheet?.render(true);
   }
+
   handleDelete(event: JQuery.ClickEvent) {
-    event.preventDefault()
+    event.preventDefault();
     const itemId = this.findItemId(event);
-    return this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+    const doDelete = () => {
+      this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+    };
+    if (event.ctrlKey) {
+      this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+    } else {
+      const item = this.actor.items.get(itemId);
+      confirmDialog(
+        doDelete,
+        sta.game.i18n.localize("sta.confirm.delete.title"),
+        sta.game.i18n.format("sta.confirm.delete.content", {
+          ...item,
+          type: sta.game.i18n.localize(`sta.item.${item?.type}._singular`)
+        }),
+      ).render(true);
+    }
   }
 
   private findItemId(event: JQuery.ClickEvent<any, any, any, any>) {

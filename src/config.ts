@@ -5,10 +5,11 @@ import {
   StaCharacterWeapon,
   StaInjury,
 } from "./model/StaCharacter";
-import { StaEquipment, StaLaunchbay, StaTalent, StaValue } from "./model/StaTypes";
+import { StaItem, StaLaunchbay, StaTalent, StaValue } from "./model/StaTypes";
 import { StaStarshipWeapon } from "./model/StaStarship";
 
 export const sta = {
+  // this reference is here so TypeScript is happy...
   game: game as Game,
   systemName: "fvtt-sta",
   type: {
@@ -17,7 +18,7 @@ export const sta = {
       characterweapon: StaCharacterWeapon,
       focus: StaCharacterFocus,
       injury: StaInjury,
-      item: StaEquipment,
+      item: StaItem,
       launchbay: StaLaunchbay,
       milestone: StaCharacterMilestone,
       starshipweapon: StaStarshipWeapon,

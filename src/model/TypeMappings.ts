@@ -7,7 +7,7 @@ import {
   StaInjury,
 } from "./StaCharacter";
 import { StaStarship, StaStarshipWeapon } from "./StaStarship";
-import { StaEquipment, StaLaunchbay, StaTalent } from "./StaTypes";
+import { StaItem, StaLaunchbay, StaTalent } from "./StaTypes";
 
 export const staTypeMappings = {
   actor: {
@@ -15,7 +15,7 @@ export const staTypeMappings = {
     starship: StaStarship,
   },
   item: {
-    item: StaEquipment,
+    item: StaItem,
     focus: StaCharacterFocus,
     characterweapon: StaCharacterWeapon,
     starshipweapon: StaStarshipWeapon,

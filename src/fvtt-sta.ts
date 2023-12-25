@@ -2,6 +2,7 @@ import "../styles/fvtt-sta.less";
 import { sta } from "./config";
 import { GenericItemSheet } from "./sheets/GenericItemSheet";
 import { CharacterSheet } from "./sheets/CharacterSheet";
+import { registerHandlebarHelpers } from "./TemplateHelpers";
 
 console.log(sta.systemName + " | system loaded.");
 
@@ -9,6 +10,7 @@ Hooks.on("init", () => {
   console.log(sta.systemName + " | Initializing system...");
   sta.game = game as Game
 
+  // Sheets
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet(sta.systemName, CharacterSheet, { types: ["character"] });
   Actors.registerSheet(sta.systemName, CharacterSheet, { types: ["starship"] });
@@ -25,6 +27,8 @@ Hooks.on("init", () => {
   Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["talent"] });
   Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["value"] });
 
+  // Templates
+  registerHandlebarHelpers()
   const templatePath = `systems/${sta.systemName}/templates`
   loadTemplates([
 

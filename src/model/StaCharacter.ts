@@ -1,4 +1,4 @@
-import { CurrentValue, StaEquipment, StaTalent, StaTrait, StaValue, StaWeapon } from "./StaTypes";
+import { CurrentValue, StaItem, StaTalent, StaTrait, StaValue, StaWeapon } from "./StaTypes";
 import { StaRule } from "./StaRule";
 
 export class StaCharacter {
@@ -21,7 +21,7 @@ export class StaCharacter {
   focuses: StaCharacterFocus[] = [];
   weapons: StaCharacterWeapon[] = [];
   armor: StaCharacterArmor[] = [];
-  equipment: StaEquipment[] = [];
+  items: StaItem[] = [];
 
   injuries: StaInjury[] = [];
   reputation: number = 10;
