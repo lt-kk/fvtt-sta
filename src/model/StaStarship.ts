@@ -1,4 +1,5 @@
 import { CurrentValue, StaEquipment, StaLaunchbay, StaTalent, StaTrait, StaValue, StaWeapon } from "./StaTypes";
+import { StaRule } from "./StaRule";
 
 export class StaStarship {
   name: string = "";

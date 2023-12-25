@@ -1,4 +1,5 @@
 import { CurrentValue, StaEquipment, StaTalent, StaTrait, StaValue, StaWeapon } from "./StaTypes";
+import { StaRule } from "./StaRule";
 
 export class StaCharacter {
   name: string = "";
@@ -7,21 +8,26 @@ export class StaCharacter {
   assignment: string = "";
   environment: string = "";
   upbringing: string = "";
+
   notes: string = "";
 
   attributes: StaCharacterAttributes = new StaCharacterAttributes();
   disciplines: StaCharacterDisciplines = new StaCharacterDisciplines();
   milestones: StaCharacterMilestone[] = [];
-  focuses: StaCharacterFocus[] = [];
+  traits: StaTrait[] = [];
 
   talents: StaTalent[] = [];
-  traits: StaTrait[] = [];
   values: StaValue[] = [];
-  equipment: StaEquipment[] = [];
-  armor: StaCharacterArmor[] = [];
+  focuses: StaCharacterFocus[] = [];
   weapons: StaCharacterWeapon[] = [];
+  armor: StaCharacterArmor[] = [];
+  equipment: StaEquipment[] = [];
 
-  status: StaCharacterStatus = new StaCharacterStatus();
+  injuries: StaInjury[] = [];
+  reputation: number = 10;
+  stress: CurrentValue = new CurrentValue(8);
+  determination: CurrentValue = new CurrentValue(3);
+
   roll: StaCharacterRoll = new StaCharacterRoll("control", "command");
 }
 
@@ -91,12 +97,6 @@ export class StaCharacterArmor {
 
   opportunity: number = 0;
   escalation: number = 0;
-}
-
-export class StaCharacterStatus {
-  stress: CurrentValue = new CurrentValue(8);
-  determination: CurrentValue = new CurrentValue(3);
-  injuries: StaInjury[] = [];
 }
 
 export class StaInjury {

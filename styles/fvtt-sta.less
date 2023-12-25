@@ -1,3 +1,166 @@
-.sta {
-  background-color: darkblue;
+@almost-black: #0f0f0fef;
+@trans-black: #0f0f0f7f;
+@almost-white: #dfdfdf;
+@light-grey: #afafaf;
+@yellow: #F2CC0D;
+@light-yellow: #F7E06E;
+@lighter-yellow: #FCF5CF;
+@darkest-blue: #00273f;
+@darker-blue: #004f7f;
+@darker-blue-trans: #004f7f3f;
+@dark-blue: #0077af;
+@blue: #009dff;
+@light-blue: #3fafff;
+@darkest-red: #300603;
+@dark-red: #911308;
+@red: #F2200D;
+@light-red: #F54D3D;
+@dark-mint: #3D8F81;
+@light-mint: #70C2B4;
+@light-orange: #F7A76E;
+@lighter-orange: #FAC49E;
+
+@window-background: @almost-black;
+@text-default: @almost-white;
+@text-emphasis: @light-yellow;
+@text-minor-emphasis: white;
+@text-annotation: @light-grey;
+@text-inverted-default: black;
+@text-momentum: @light-blue;
+@text-threat: @light-red;
+@text-hyperlink: @light-yellow;
+@text-hyperlink-hover: @lighter-yellow;
+@control-inline-default: @darkest-blue;
+@control-inline-hover: @darker-blue;
+@control-inline-focus: @darker-blue-trans;
+@control-default: @dark-blue;
+@control-hover: @blue;
+@control-active: @light-yellow;
+@control-active-hover: @lighter-yellow;
+@control-inverse-fill: @trans-black;
+@control-sidebar-background: rgb(0, 0, 0, 0.05);
+@control-accent-default: @dark-mint;
+@control-accent-hover: @light-mint;
+@control-accent-active: @light-orange;
+@control-accent-active-hover: @lighter-orange;
+@control-red-inline-default: @darkest-red;
+@control-red-default: @dark-red;
+@control-red-hover: @red;
+
+@window-corner-radius: 20px;
+@window-header-margin: 5px;
+@window-header-radius: @window-corner-radius - @window-header-margin;
+
+:root {
+  --color-text-light-highlight: #f0f0e0;
+  --color-text-light-heading: #c9c7b8;
+  --color-text-light-primary: #b5b3a4;
+  --color-text-dark-primary: #191813;
+  --color-text-dark-secondary: #4b4a44;
+  --color-text-dark-header: #23221d;
+  --color-text-dark-inactive: #7a7971;
+  --color-text-hyperlink: #ff6400;
+  --color-text-light-0: #fff;
+  --color-text-light-1: #eee;
+  --color-text-light-2: #ddd;
+  --color-text-light-3: #ccc;
+  --color-text-light-4: #bbb;
+  --color-text-light-5: #aaa;
+  --color-text-light-6: #999;
+  --color-text-light-7: #888;
+  --color-text-dark-1: #111;
+  --color-text-dark-2: #222;
+  --color-text-dark-3: #444;
+  --color-text-dark-4: #555;
+  --color-text-dark-5: #666;
+  --color-text-dark-6: #777;
+  --color-border-light-1: #ddd;
+  --color-border-light-2: #999;
+  --color-border-dark-1: #111;
+  --color-border-dark-2: #222;
+  --color-border-dark-3: #333;
+  --color-border-dark-4: #444;
+  --color-border-dark-5: #666;
+  --color-shadow-primary: #ff0000;
+  --color-shadow-highlight: #ff6400;
+  --color-shadow-dark: #000;
+  --color-underline-inactive: #7a7971;
+  --color-underline-active: #44191A;
+  --color-underline-header: #782e22;
+  --color-border-light-highlight: #f0f0e0;
+  --color-border-light-primary: #b5b3a4;
+  --color-border-light-secondary: #c9c7b8;
+  --color-border-light-tertiary: #7a7971;
+  --color-border-dark: #000;
+  --color-border-dark-primary: #191813;
+  --color-border-dark-secondary: #23221d;
+  --color-border-dark-tertiary: #4b4a44;
+  --color-border-highlight: #ff6400;
+  --color-border-highlight-alt: #ff0000;
+  --color-bg-btn-minor-inactive: #c9c7b8;
+  --color-bg-btn-minor-active: #b5b3a4;
+  --color-bg-option: #dad8cc;
+  --color-checkbox-checked: #666;
+  --color-ownership-none: #5500ff;
+  --color-ownership-observer: #7a7971;
+  --color-ownership-owner: #b5b3a4;
+  --sidebar-width: 300px;
+  --sidebar-header-height: 32px;
+  --sidebar-item-height: 48px;
+  --hotbar-height: 52px;
+  --hotbar-width: 578px;
+  --macro-size: 50px;
+  --players-width: 200px;
+  --form-field-height: 26px;
+  --font-primary: 'Antonio-Regular', sans-serif;
+  --font-mono: monospace;
+  --font-awesome: "Font Awesome 6 Pro";
+  --font-size-11: 0.6875rem;
+  --font-size-12: 0.75rem;
+  --font-size-13: 0.8125rem;
+  --font-size-14: 0.875rem;
+  --font-size-16: 1rem;
+  --font-size-18: 1.125rem;
+  --font-size-20: 1.25rem;
+  --font-size-24: 1.5rem;
+  --font-size-28: 1.75rem;
+  --font-size-32: 2rem;
+  --font-size-48: 3rem;
+  --line-height-12: 0.75rem;
+  --line-height-16: 1rem;
+  --line-height-20: 1.25rem;
+  --line-height-30: 1.875rem;
+  --color-level-info: #5c87b9;
+  --color-level-warning: #b18404;
+  --color-level-error: #750003;
+  --color-level-success: #266c3c;
+}
+
+@import "./fonts.less";
+
+body {
+  scrollbar-color: @control-inline-default transparent;
+  scrollbar-width: thin;
+}
+
+.editor {
+  background-color: @almost-black;
+  color: @text-default;
+  min-height: 100px;
+}
+.tox {
+  background-color: @text-default;
+}
+
+.actor-sheet {
+  .attributes {
+    input {
+      width: 30px;
+    }
+  }
+  .disciplines {
+    input {
+      width: 30px;
+    }
+  }
 }

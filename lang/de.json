@@ -1,1 +1,133 @@
-{}
+{
+  "sta": {
+    "character": {
+      "name": "Name",
+      "species": "Spezies",
+      "rank": "Rang",
+      "assignment": "Rolle",
+      "environment": "Herkunft",
+      "upbringing": "Erziehung",
+      "reputation": "Ansehen",
+      "stress": "Erschöpfung",
+      "determination": "Entschlossenheit",
+      "attribute": {
+        "_singular": "Attribut",
+        "_plural": "Attribute",
+        "control": "Konzentration",
+        "daring": "Wagemut",
+        "fitness": "Fitness",
+        "insight": "Gespür",
+        "presence": "Ausstrahlung",
+        "reason": "Verstand"
+      },
+      "discipline": {
+        "_singular": "Disziplin",
+        "_plural": "Disziplinen",
+        "command": "Kommando",
+        "conn": "Flugkontrolle",
+        "engineering": "Technik",
+        "medicine": "Medizin",
+        "science": "Wissenschaft",
+        "security": "Sicherheit"
+      }
+    },
+    "starship": {
+    },
+    "item": {
+      "armor": {
+        "_singular": "Rüstung",
+        "_plural": "Rüstungen",
+        "create": "Neue Rüstung",
+        "edit": "Rüstung bearbeiten",
+        "delete": "Rüstung löschen",
+        "empty": "Keine Rüstung",
+        "description": "Beschreibung",
+        "protection": "Wiederstand",
+        "equipped": "Ausgerüstet",
+        "opportunity": "Verzichtskosten",
+        "escalation": "Eskalation"
+      },
+      "characterweapon": {
+        "_singular": "Waffe",
+        "_plural": "Waffen",
+        "create": "Neue Waffe",
+        "edit": "Waffe bearbeiten",
+        "delete": "Waffe löschen",
+        "empty": "Keine Waffe"
+      },
+      "focus": {
+        "_singular": "Fokus",
+        "_plural": "Fokus",
+        "create": "Neuer Fokus",
+        "edit": "Fokus bearbeiten",
+        "delete": "Fokus löschen",
+        "empty": "Kein Fokus gewählt"
+      },
+      "injury": {
+        "_singular": "Verletzung",
+        "_plural": "Verletzungen",
+        "create": "Neue Verletzung",
+        "edit": "Verletzung bearbeiten",
+        "delete": "Verletzung löschen",
+        "empty": "keine Verletzung"
+      },
+      "item": {
+        "_singular": "Ausrüstung",
+        "_plural": "Ausrüstung",
+        "create": "Neue Ausrüstung",
+        "edit": "Ausrüstung bearbeiten",
+        "delete": "Ausrüstung löschen",
+        "empty": "keine Ausrüstung"
+      },
+      "milestone": {
+        "_singular": "Meilenstein",
+        "_plural": "Meilensteine",
+        "create": "Neuer Meilenstein",
+        "edit": "Meilenstein bearbeiten",
+        "delete": "Meilenstein löschen",
+        "empty": "Kein Meilenstein erreicht"
+      },
+      "talent": {
+        "_singular": "Talent",
+        "_plural": "Talente",
+        "create": "Neues Talent",
+        "edit": "Talent bearbeiten",
+        "delete": "Talent löschen",
+        "empty": "Kein Talent gewählt",
+        "type": {
+          "general": "Allgemein",
+          "discipline": "Disziplin"
+        },
+        "requirement": "Benötigt"
+      },
+      "trait": {
+        "_singular": "Merkmale",
+        "_plural": "Merkmal",
+        "create": "Neues Merkmal",
+        "edit": "Merkmal bearbeiten",
+        "delete": "Merkmal löschen",
+        "empty": "Kein Merkmal gewählt"
+      },
+      "value": {
+        "_singular": "Überzeugung",
+        "_plural": "Überzeugungen",
+        "create": "Neue Überzeugung",
+        "edit": "Überzeugung bearbeiten",
+        "delete": "Überzeugung löschen",
+        "empty": "Keine Überzeugung gewählt",
+        "used": "Hinterfragt"
+      }
+    },
+    "notes": {
+      "_singular": "Notiz",
+      "_plural": "Notizen"
+    },
+    "status": {
+      "_singular": "Status",
+      "_plural": "Status"
+    },
+    "property": {
+      "_plural": "Eigenschaften"
+    }
+  }
+}

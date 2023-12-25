@@ -3,7 +3,15 @@
     <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
     <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
   </header>
-  <p>Config:{{config.systemName}}</p>
-  <p>Fields:{{fields}}</p>
-  <input name="system.protection" type="text" value="{{data.system.protection}}" data-dtype="Number" />
+
+  <section class="properties">
+    <h2>{{localize "sta.item.property._plural"}}</h2>
+    {{#each data.system as |value name|}}
+      <label class="property property-{{name}}">
+        <span class="label">{{localize (concat "sta.item." data.type "." name)}}</span>
+        <input name="system.{{name}}" type="text" value="{{value}}" />
+      </label>
+    {{/each}}
+  </section>
+  {{editor data.system.description target="system.description" button=true owner=owner editable=editable}}
 </form>

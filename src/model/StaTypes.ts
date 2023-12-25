@@ -1,3 +1,5 @@
+import { StaRule } from "./StaRule";
+
 export class CurrentValue {
   value: number;
   max: number;

@@ -7,6 +7,7 @@ console.log(sta.systemName + " | system loaded.");
 
 Hooks.on("init", () => {
   console.log(sta.systemName + " | Initializing system...");
+  sta.game = game as Game
 
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet(sta.systemName, CharacterSheet, { types: ["character"] });
@@ -23,6 +24,11 @@ Hooks.on("init", () => {
   Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["starshipweapon"] });
   Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["talent"] });
   Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["value"] });
+
+  const templatePath = `systems/${sta.systemName}/templates`
+  loadTemplates([
+
+  ])
 });
 
 Hooks.on("ready", () => {

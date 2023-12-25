@@ -27,14 +27,24 @@
         "engineering": 1,
         "medicine": 1
       },
-      "focuses": [],
       "milestones": [],
-      "talents": [],
       "traits": [],
+      "talents": [],
       "values": [],
-      "equipment": [],
+      "focuses": [],
+      "weapons": [],
       "armor": [],
-      "weapons": []
+      "equipment": [],
+      "injuries": [],
+      "reputation": 10,
+      "stress": {
+        "value": 8,
+        "max": 8
+      },
+      "determination": {
+        "value": 3,
+        "max": 3
+      }
     },
     "starship": {
       "spaceframe": "",
@@ -78,6 +88,7 @@
       "milestone",
       "starshipweapon",
       "talent",
+      "trait",
       "value"
     ],
     "armor": {
@@ -160,7 +171,9 @@
         "description":"",
         "minimum":0
       }
-
+    },
+    "trait": {
+      "description": ""
     },
     "value": {
       "description": "",
