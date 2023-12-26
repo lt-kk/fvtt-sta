@@ -144,23 +144,140 @@ body {
 }
 
 .editor {
-  background-color: @almost-black;
-  color: @text-default;
   min-height: 100px;
 }
+
 .tox {
   background-color: @text-default;
 }
 
 .actor-sheet {
-  .attributes {
-    input {
-      width: 30px;
+  display: flex;
+  flex-wrap: wrap;
+
+  > section {
+    flex-grow: 1;
+    width: 33%;
+    padding: 5px;
+  }
+
+  .avatar {
+    width: 20%;
+
+    .img {
+      height: 100%;
+      width: 100%;
     }
   }
-  .disciplines {
-    input {
-      width: 30px;
+
+  .summary {
+    width: 80%;
+  }
+
+  .attributes, .disciplines {
+    width: 21%;
+  }
+
+  .summary {
+    display: flex;
+    flex-wrap: wrap;
+
+    .property {
+      display: inline-block;
+      width: 33%;
     }
+
+    .name, .rank, .assignment {
+      font-size: var(--font-size-24);
+    }
+
+    .reputation {
+      width: 100%;
+    }
+  }
+
+  .status {
+    display: inline-block;
+    width: calc(33% - 3px);
+  }
+
+  .attributes, .disciplines {
+    display: inline-block;
+    text-align: right;
+
+    .property {
+      display: flex;
+      >* {
+        padding: 0 2px;
+      }
+    }
+
+    input {
+      width: 20px;
+    }
+  }
+
+  .attributes {
+    .property {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .disciplines {
+    text-align: left;
+  }
+
+  .scale {
+    .radios {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-evenly;
+
+      .radio {
+        flex-grow: 1;
+        margin: 1px;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bold;
+        border: 1px solid transparent;
+
+        &.active {
+          background-color: @dark-blue;
+
+          &:hover {
+            border-color: @almost-white;
+          }
+        }
+
+        &:nth-child(1) {
+          background-color: @light-red;
+          border-color: @light-red;
+        }
+
+        &:hover {
+          border-color: @dark-blue;
+        }
+
+        input {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+
+    .item {
+      display: flex;
+      padding: 2px;
+
+      .name {
+        flex-grow: 1;
+        padding: 0 2px;
+      }
+    }
+
   }
 }

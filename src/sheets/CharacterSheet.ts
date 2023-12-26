@@ -31,7 +31,7 @@ export class CharacterSheet extends ActorSheet {
         weapons: this.filterItems(data, "characterweapon"),
       },
     };
-    console.log(sheetData);
+    // console.log(sheetData);
     return sheetData;
   }
 

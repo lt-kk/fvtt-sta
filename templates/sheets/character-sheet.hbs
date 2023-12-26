@@ -1,58 +1,116 @@
 <form class="actor-sheet character-sheet {{cssClass}}" autocomplete="off">
-  <!--    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="64" width="64"/>-->
+
+  <section class="avatar">
+    <img class="img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+  </section>
 
   <section class="summary">
-    <label class="name">
+    <div class="property scale reputation">
+      {{#with data.system.reputation}}
+        <span class="label">{{localize "sta.character.reputation"}}</span>
+        <div class="radios">
+          {{#range 0 max}}
+            <label class="radio {{#if (lte i ../value)}}active{{/if}}">
+              {{i}}
+              <input name="system.reputation.value" type="radio" value="{{i}}"
+                     {{#if (eq ../value index)}}checked="checked"{{/if}} />
+            </label>
+          {{/range}}
+        </div>
+      {{/with}}
+    </div>
+    <label class="property name">
       <span class="label">{{localize "sta.character.name"}}</span>
-      <input name="system.name" type="text" value="{{data.system.name}}" />
+      <input name="system.name" type="text" value="{{data.system.name}}" tabindex="1" />
     </label>
-    <label class="species">
-      <span class="label">{{localize "sta.character.species"}}</span>
-      <input name="system.species" type="text" value="{{data.system.species}}" />
-    </label>
-    <label class="rank">
+    <label class="property rank">
       <span class="label">{{localize "sta.character.rank"}}</span>
-      <input name="system.rank" type="text" value="{{data.system.rank}}" />
+      <input name="system.rank" type="text" value="{{data.system.rank}}" tabindex="1" />
     </label>
-    <label class="assignment">
+    <label class="property assignment">
       <span class="label">{{localize "sta.character.assignment"}}</span>
-      <input name="system.assignment" type="text" value="{{data.system.assignment}}" />
+      <input name="system.assignment" type="text" value="{{data.system.assignment}}" tabindex="1" />
     </label>
-    <label class="environment">
+    <label class="property species">
+      <span class="label">{{localize "sta.character.species"}}</span>
+      <input name="system.species" type="text" value="{{data.system.species}}" tabindex="1" />
+    </label>
+    <label class="property environment">
       <span class="label">{{localize "sta.character.environment"}}</span>
-      <input name="system.environment" type="text" value="{{data.system.environment}}" />
+      <input name="system.environment" type="text" value="{{data.system.environment}}" tabindex="1" />
     </label>
-    <label class="upbringing">
+    <label class="property upbringing">
       <span class="label">{{localize "sta.character.upbringing"}}</span>
-      <input name="system.upbringing" type="text" value="{{data.system.upbringing}}" />
-    </label>
-    <label class="reputation">
-      <span class="label">{{localize "sta.character.reputation"}}</span>
-      <input name="system.reputation" type="text" value="{{data.system.reputation}}" data-dtype="Number" />
+      <input name="system.upbringing" type="text" value="{{data.system.upbringing}}" tabindex="1" />
     </label>
   </section>
 
   <section class="status">
     <h2>{{localize "sta.status._plural"}}</h2>
-    <label class="stress">
-      <span class="label">{{localize "sta.character.stress"}}</span>
-      <input name="system.stress.value" type="text" value="{{data.system.stress.value}}" data-dtype="Number" />
-      {{data.system.stress.max}}
-    </label>
-    <label class="determination">
-      <span class="label">{{localize "sta.character.determination"}}</span>
-      <input name="system.determination.value" type="text" value="{{data.system.determination.value}}"
-             data-dtype="Number" />
-      {{data.system.determination.max}}
-    </label>
+
+    <div class="property scale determination">
+      {{#with data.system.determination}}
+        <span class="label">{{localize "sta.character.determination"}}</span>
+        <div class="radios">
+          {{#range 0 max}}
+            <label class="radio {{#if (lte index ../value)}}active{{/if}}">
+              {{index}}
+              <input name="system.determination.value" type="radio" value="{{index}}"
+                     {{#if (eq ../value index)}}checked="checked"{{/if}} />
+            </label>
+          {{/range}}
+        </div>
+      {{/with}}
+    </div>
+
+    <div class="property scale stress">
+      {{#with data.system.stress}}
+        <span class="label">{{localize "sta.character.stress"}}</span>
+        <div class="radios">
+          {{#range 0 max}}
+            <label class="radio {{#if (lte index ../value)}}active{{/if}}">
+              {{index}}
+              <input name="system.stress.value" type="radio" value="{{index}}"
+                     {{#if (eq ../value index)}}checked="checked"{{/if}} />
+            </label>
+          {{/range}}
+        </div>
+      {{/with}}
+    </div>
+
+    <section class="items injuries">
+      <h3>
+        {{localize "sta.item.injury._plural"}}
+        <a class="control create" title="{{localize "sta.item.injury.create"}}" data-type="injury">
+          <i class="fas fa-plus"></i>
+        </a>
+      </h3>
+      <ol class="list">
+        {{#each sta.injuries}}
+          <li class="item" data-item-id="{{_id}}">
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <div class="name">{{name}}</div>
+            <div class="controls">
+              <a class="control edit" title="{{localize "sta.item.injury.edit"}}"><i class="fas fa-edit"></i></a>
+              <a class="control delete" title="{{localize "sta.item.injury.delete"}}"><i class="fas fa-trash"></i></a>
+            </div>
+            <div class="description">{{description}}</div>
+          </li>
+        {{/each}}
+        {{^sta.injuries}}
+          <li class="item">{{localize "sta.item.injury.empty"}}</li>
+        {{/sta.injuries}}
+      </ol>
+    </section>
   </section>
 
   <section class="attributes">
     <h2>{{localize "sta.character.attribute._plural"}}</h2>
     {{#each data.system.attributes as |value name|}}
-      <label class="attribute attribute-{{name}}">
+      <label class="property attribute attribute-{{name}}">
+        <input name="selected.attribute" type="radio" value={{name}}"">
+        <input name="system.attributes.{{name}}" type="text" value="{{value}}" data-dtype="Number" tabindex="2" />
         <span class="label">{{localize (concat "sta.character.attribute." name)}}</span>
-        <input name="system.attributes.{{name}}" type="text" value="{{value}}" data-dtype="Number" />
       </label>
     {{/each}}
   </section>
@@ -60,14 +118,15 @@
   <section class="disciplines">
     <h2>{{localize "sta.character.discipline._plural"}}</h2>
     {{#each data.system.disciplines as |value name|}}
-      <label class="discipline discipline-{{name}}">
+      <label class="property discipline discipline-{{name}}">
+        <input name="selected.discipline" type="radio" value="{{name}}">
+        <input name="system.disciplines.{{name}}" type="text" value="{{value}}" data-dtype="Number" tabindex="3" />
         <span class="label">{{localize (concat "sta.character.discipline." name)}}</span>
-        <input name="system.disciplines.{{name}}" type="text" value="{{value}}" data-dtype="Number" />
       </label>
     {{/each}}
   </section>
 
-  <section class="talents">
+  <section class="items talents">
     <h2>
       {{localize "sta.item.talent._plural"}}
       <a class="control create" title="{{localize "sta.item.talent.create"}}" data-type="talent">
@@ -77,26 +136,22 @@
     <ol class="list">
       {{#each sta.talents}}
         <li class="item" data-item-id="{{_id}}">
-          <div class="name">
-            <img src="{{img}}" title="{{name}}" width="24" height="24" />
-            <span>{{name}}</span>
-          </div>
+          <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+          <div class="name">{{name}}</div>
           <div class="controls">
             <a class="control edit" title="{{localize "sta.item.talent.edit"}}"><i class="fas fa-edit"></i></a>
             <a class="control delete" title="{{localize "sta.item.talent.delete"}}"><i class="fas fa-trash"></i></a>
           </div>
-          <div class="more">
-            <p class="description">{{description}}</p>
-          </div>
+          <div class="description">{{description}}</div>
         </li>
       {{/each}}
       {{^sta.talents}}
-        <li>{{localize "sta.item.talent.empty"}}</li>
+        <li class="item">{{localize "sta.item.talent.empty"}}</li>
       {{/sta.talents}}
     </ol>
   </section>
 
-  <section class="values">
+  <section class="items values">
     <h2>
       {{localize "sta.item.value._plural"}}
       <a class="control create" title="{{localize "sta.item.value.create"}}" data-type="value">
@@ -106,26 +161,22 @@
     <ol class="list">
       {{#sta.values}}
         <li class="item" data-item-id="{{_id}}">
-          <div class="name">
-            <img src="{{img}}" title="{{name}}" width="24" height="24" />
-            <span>{{name}}</span>
-          </div>
+          <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+          <div class="name">{{name}}</div>
           <div class="controls">
             <a class="control edit" title="{{sta.value.edit}}"><i class="fas fa-edit"></i></a>
             <a class="control delete" title="{{sta.value.delete}}"><i class="fas fa-trash"></i></a>
           </div>
-          <div class="more">
-            <p class="description">{{description}}</p>
-          </div>
+          <div class="description">{{description}}</div>
         </li>
       {{/sta.values}}
       {{^sta.values}}
-        <li>{{localize "sta.item.value.empty"}}</li>
+        <li class="item">{{localize "sta.item.value.empty"}}</li>
       {{/sta.values}}
     </ol>
   </section>
 
-  <section class="focuses">
+  <section class="items focuses">
     <h2>
       {{localize "sta.item.focus._plural"}}
       <a class="control create" title="{{localize "sta.item.focus.create"}}" data-type="focus"><i
@@ -134,80 +185,77 @@
     <ol class="list">
       {{#sta.focuses}}
         <li class="item" data-item-id="{{_id}}">
-          <div class="name">
-            <img src="{{img}}" title="{{name}}" width="24" height="24" />
-            <h4>{{name}}</h4>
-          </div>
+          <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+          <div class="name">{{name}}</div>
           <div class="controls">
             <a class="control edit" title="{{localize "sta.item.focus.edit"}}"><i class="fas fa-edit"></i></a>
             <a class="control delete" title="{{localize "sta.item.focus.delete"}}"><i class="fas fa-trash"></i></a>
           </div>
-          <div class="more">
-            <p class="description">{{description}}</p>
-          </div>
+          <div class="description">{{description}}</div>
         </li>
       {{/sta.focuses}}
       {{^sta.focuses}}
-        <li>{{localize "sta.item.focus.empty"}}</li>
+        <li class="item">{{localize "sta.item.focus.empty"}}</li>
       {{/sta.focuses}}
     </ol>
   </section>
 
-  <section class="traits">
-    <h2>
-      {{localize "sta.item.trait._plural"}}
-      <a class="control create" title="{{localize "sta.item.trait.create"}}" data-type="trait"><i
-        class="fas fa-plus"></i></a>
-    </h2>
-    <ol class="list">
-      {{#sta.traits}}
-        <li class="item" data-item-id="{{_id}}">
-          <div class="name">
-            <img src="{{img}}" title="{{name}}" width="24" height="24" />
-            <h4>{{name}}</h4>
-          </div>
-          <div class="controls">
-            <a class="control edit" title="{{localize "sta.item.trait.edit"}}"><i class="fas fa-edit"></i></a>
-            <a class="control delete" title="{{localize "sta.item.trait.delete"}}"><i class="fas fa-trash"></i></a>
-          </div>
-          <div class="more">
-            <p class="description">{{description}}</p>
-          </div>
-        </li>
-      {{/sta.traits}}
-      {{^sta.traits}}
-        <li>{{localize "sta.item.trait.empty"}}</li>
-      {{/sta.traits}}
-    </ol>
+  <section class="progress">
+    <h2>{{localize "sta.character.progress"}}</h2>
+    <section class="items traits">
+      <h3>
+        {{localize "sta.item.trait._plural"}}
+        <a class="control create" title="{{localize "sta.item.trait.create"}}" data-type="trait"><i
+          class="fas fa-plus"></i></a>
+      </h3>
+      <ol class="list">
+        {{#sta.traits}}
+          <li class="item" data-item-id="{{_id}}">
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <div class="name">{{name}}</div>
+            <div class="controls">
+              <a class="control edit" title="{{localize "sta.item.trait.edit"}}"><i class="fas fa-edit"></i></a>
+              <a class="control delete" title="{{localize "sta.item.trait.delete"}}"><i class="fas fa-trash"></i></a>
+            </div>
+            <div class="description">{{description}}</div>
+          </li>
+        {{/sta.traits}}
+        {{^sta.traits}}
+          <li class="item">{{localize "sta.item.trait.empty"}}</li>
+        {{/sta.traits}}
+      </ol>
+    </section>
+
+    <section class="items milestones">
+      <h3>
+        {{localize "sta.item.milestone._plural"}}
+        <a class="control create" title="{{localize "sta.item.milestone.create"}}" data-type="milestone"><i
+          class="fas fa-plus"></i></a>
+      </h3>
+      <ol class="list">
+        {{#sta.milestones}}
+          <li class="item" data-item-id="{{_id}}">
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <div class="name">{{name}}</div>
+            <div class="controls">
+              <a class="control edit" title="{{localize "sta.item.milestone.edit"}}"><i class="fas fa-edit"></i></a>
+              <a class="control delete" title="{{localize "sta.item.milestone.delete"}}"><i class="fas fa-trash"></i></a>
+            </div>
+            <div class="description">{{description}}</div>
+          </li>
+        {{/sta.milestones}}
+        {{^sta.milestones}}
+          <li class="item">{{localize "sta.item.milestone.empty"}}</li>
+        {{/sta.milestones}}
+      </ol>
+    </section>
+
+    <section class="notes">
+      <h3>{{localize "sta.notes._plural"}}</h3>
+      {{editor data.system.notes target="system.notes" button=true owner=owner editable=editable}}
+    </section>
   </section>
 
-  <section class="milestones">
-    <h2>
-      {{localize "sta.item.milestone._plural"}}
-      <a class="control create" title="{{localize "sta.item.milestone.create"}}" data-type="milestone"><i
-        class="fas fa-plus"></i></a>
-    </h2>
-    <ol class="list">
-      {{#sta.milestones}}
-        <li class="item" data-item-id="{{_id}}">
-          <div class="name">
-            <img src="{{img}}" title="{{name}}" width="24" height="24" />
-            <h4>{{name}}</h4>
-          </div>
-          <div class="controls">
-            <a class="control edit" title="{{localize "sta.item.milestone.edit"}}"><i class="fas fa-edit"></i></a>
-            <a class="control delete" title="{{localize "sta.item.milestone.delete"}}"><i class="fas fa-trash"></i></a>
-          </div>
-          <div class="more">
-            <p class="description">{{description}}</p>
-          </div>
-        </li>
-      {{/sta.milestones}}
-      {{^sta.milestones}}
-        <li>{{localize "sta.item.milestone.empty"}}</li>
-      {{/sta.milestones}}
-    </ol>
-  </section>
 
   <section class="items">
     <h2>
@@ -222,51 +270,47 @@
       <ol class="list">
         {{#sta.weapons}}
           <li class="item" data-item-id="{{_id}}">
-            <div class="name">
-              <img class="img" src="{{img}}" title="{{name}}" width="24" height="24" />
-              <h4 class="name">{{name}}</h4>
-              <span class="range">{{range}}</span>
-              <span class="damage">{{damage}}</span>
-            </div>
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <div class="name">{{name}}</div>
+            <div class="range">{{range}}</div>
+            <div class="damage">{{damage}}</div>
             <div class="controls">
-              <a class="control edit" title="{{localize "sta.item.characterweapon.edit"}}"><i class="fas fa-edit"></i></a>
-              <a class="control delete" title="{{localize "sta.item.characterweapon.delete"}}"><i class="fas fa-trash"></i></a>
+              <a class="control edit" title="{{localize "sta.item.characterweapon.edit"}}">
+                <i class="fas fa-edit"></i>
+              </a>
+              <a class="control delete" title="{{localize "sta.item.characterweapon.delete"}}">
+                <i class="fas fa-trash"></i>
+              </a>
             </div>
-            <div class="more">
-              <p class="description">{{description}}</p>
-            </div>
+            <div class="description">{{description}}</div>
           </li>
         {{/sta.weapons}}
         {{^sta.weapons}}
-          <li>{{localize "sta.item.characterweapon.empty"}}</li>
+          <li class="item">{{localize "sta.item.characterweapon.empty"}}</li>
         {{/sta.weapons}}
       </ol>
     </section>
     <section class="armor">
       <h3>
         {{localize "sta.item.armor._plural"}}
-        <a class="control create" title="{{localize "sta.item.armor.create"}}" data-type="armor"><i class="fas fa-plus"></i></a>
+        <a class="control create" title="{{localize "sta.item.armor.create"}}" data-type="armor"><i
+          class="fas fa-plus"></i></a>
       </h3>
       <ol class="list">
         {{#sta.armor}}
           <li class="item" data-item-id="{{_id}}">
-            <div class="name">
-              <img class="img" src="{{img}}" title="{{name}}" width="24" height="24" />
-              <h4 class="name">{{name}}</h4>
-              <span class="range">{{range}}</span>
-              <span class="damage">{{damage}}</span>
-            </div>
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <div class="name">{{name}}</div>
+            <div class="protection">{{protection}}</div>
             <div class="controls">
               <a class="control edit" title="{{localize "sta.item.armor.edit"}}"><i class="fas fa-edit"></i></a>
               <a class="control delete" title="{{localize "sta.item.armor.delete"}}"><i class="fas fa-trash"></i></a>
             </div>
-            <div class="more">
-              <p class="description">{{description}}</p>
-            </div>
+            <div class="description">{{description}}</div>
           </li>
         {{/sta.armor}}
         {{^sta.armor}}
-          <li>{{localize "sta.item.armor.empty"}}</li>
+          <li class="item">{{localize "sta.item.armor.empty"}}</li>
         {{/sta.armor}}
       </ol>
     </section>
@@ -279,31 +323,22 @@
       <ol class="list">
         {{#sta.items}}
           <li class="item" data-item-id="{{_id}}">
-            <div class="name">
-              <img class="img" src="{{img}}" title="{{name}}" width="24" height="24" />
-              <h4 class="name">{{name}}</h4>
-              <span class="range">{{range}}</span>
-              <span class="damage">{{damage}}</span>
-            </div>
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <div class="name">{{name}}</div>
+            <div class="uses">{{uses}}</div>
             <div class="controls">
               <a class="control edit" title="{{localize "sta.item.item.edit"}}"><i class="fas fa-edit"></i></a>
               <a class="control delete" title="{{localize "sta.item.item.delete"}}"><i class="fas fa-trash"></i></a>
             </div>
-            <div class="more">
-              <p class="description">{{description}}</p>
-            </div>
+            <div class="description">{{description}}</div>
           </li>
         {{/sta.items}}
         {{^sta.items}}
-          <li>{{localize "sta.item.item.empty"}}</li>
+          <li class="item">{{localize "sta.item.item.empty"}}</li>
         {{/sta.items}}
       </ol>
     </section>
   </section>
 
-  <section class="notes">
-    <h2>{{localize "sta.notes._plural"}}</h2>
-    {{editor data.system.notes target="system.notes" button=true owner=owner editable=editable}}
-  </section>
 
 </form>

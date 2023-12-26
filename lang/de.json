@@ -29,7 +29,8 @@
         "medicine": "Medizin",
         "science": "Wissenschaft",
         "security": "Sicherheit"
-      }
+      },
+      "progress": "Entwicklung"
     },
     "starship": {
     },
@@ -101,8 +102,8 @@
         "requirement": "Benötigt"
       },
       "trait": {
-        "_singular": "Merkmale",
-        "_plural": "Merkmal",
+        "_singular": "Merkmal",
+        "_plural": "Merkmale",
         "create": "Neues Merkmal",
         "edit": "Merkmal bearbeiten",
         "delete": "Merkmal löschen",

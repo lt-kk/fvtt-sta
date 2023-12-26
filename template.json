@@ -36,7 +36,10 @@
       "armor": [],
       "equipment": [],
       "injuries": [],
-      "reputation": 10,
+      "reputation": {
+        "value": 10,
+        "max": 20
+      },
       "stress": {
         "value": 8,
         "max": 8
