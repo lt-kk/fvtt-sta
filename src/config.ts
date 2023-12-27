@@ -36,4 +36,8 @@ export const sta = {
       "value"
     ]
   },
+  settings: {
+    maxD20: 5, // not used in sheets
+    maxD6: 10,
+  }
 };

@@ -1,0 +1,181 @@
+.lcars-bar(@size, @color: @darkest-blue) {
+  display: flex;
+  flex-wrap: nowrap;
+  grid-gap: 4px;
+  border-left: @size solid @color;
+  border-right: @size solid @color;
+  border-radius: @size / 2;
+  padding-left: 4px;
+  padding-right: 0;
+  height: @size;
+  font-size: calc(@size - 4px);
+  line-height: calc(@size - 3px);
+  overflow: hidden;
+
+  &:after {
+    content: '';
+    flex-grow: 1;
+    background-color: @color;
+  }
+}
+
+.lcars-bar-reverse() {
+  flex-direction: row-reverse;
+  padding-left: 0;
+  padding-right: 4px;
+}
+
+.lcars-border-left(@header-height: 1rem, @width: 4px, @color: @darkest-blue) {
+  border-bottom-left-radius: 0;
+  margin-left: -(@width + 2);
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 2px;
+    width: @width;
+    height: calc(100% - @header-height);
+    background-color: @color;
+  }
+}
+
+
+.lcars-border-right(@header-height: 1rem, @width: 4px, @color: @darkest-blue) {
+  border-bottom-right-radius: 0;
+  margin-right: -(@width + 2);
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 2px;
+    width: @width;
+    height: calc(100% - @header-height);
+    background-color: @color;
+  }
+}
+
+
+._lcars-scale-value-pill(@colorBase, @colorActive, @colorChecked: @colorActive) {
+  border: 2px solid @colorBase;
+  //background-color: darken(@colorBase, 10%);
+  color: contrast(@colorBase, @almost-white, @almost-black);
+  &:hover {
+    border-color: if((@colorBase = @colorChecked), contrast(@colorBase, @almost-white, @almost-black), @colorChecked);
+  }
+  &.active {
+    border-color: @colorActive;
+    background-color: @colorActive;
+    color: contrast(@colorActive, @almost-white, @almost-black);
+
+    &:hover {
+      border-color: if((@colorActive = @colorChecked),contrast(@colorActive, @almost-white, @almost-black), @colorChecked);
+    }
+  }
+  &.checked {
+    border-color: @colorChecked;
+    background-color: @colorChecked;
+    color: contrast(@colorChecked, @almost-white, @almost-black);
+
+    &:hover {
+      border-color: if((@colorChecked = @colorActive),contrast(@colorChecked, @almost-white, @almost-black), @colorActive);
+    }
+  }
+}
+
+
+.lcars-scale-value(
+  @size,
+  @colorBase: @darkest-blue,
+  @colorActive: @dark-blue,
+  @colorInfo: @light-blue,
+  @colorWarn: @light-yellow,
+  @colorError: @light-red,
+  @colorFatal: @light-grey
+) {
+  .lcars-bar(@size, @colorBase);
+  &:after {
+    flex-grow: unset;
+  }
+  .scale-value {
+    flex-grow: 1;
+    text-align: center;
+    font-weight: bold;
+    ._lcars-scale-value-pill(@colorBase, @colorActive);
+
+    &.info {
+      ._lcars-scale-value-pill(@colorBase, @colorActive, @colorInfo);
+    }
+
+    &.warn {
+      ._lcars-scale-value-pill(@colorBase, @colorActive, @colorWarn);
+    }
+
+    &.error {
+      ._lcars-scale-value-pill(@colorBase, @colorActive, @colorError);
+    }
+
+    &.fatal {
+      ._lcars-scale-value-pill(@colorBase, @colorActive, @colorFatal);
+    }
+  }
+}
+
+.lcars-scale-select(
+  @size,
+  @colorBase: @darkest-blue,
+  @colorInfo: @light-blue,
+  @colorWarn: @light-yellow,
+  @colorError: @light-red,
+  @colorFatal: @light-grey
+) {
+  position: relative;
+  .lcars-bar(@size, @colorBase);
+  &:after {
+    flex-grow: unset;
+  }
+  >label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    color: @colorBase;
+    text-align: center;
+    &:has(~ :hover) {
+      display: none;
+    }
+  }
+  .scale-value {
+    flex-grow: 1;
+    text-align: center;
+    font-weight: bold;
+    color: transparent;
+
+    &:hover, &:has(~ :hover) {
+      background-color: @colorBase;
+      color: contrast(@colorBase, @almost-white, @almost-black);
+    }
+
+    &.info:hover, &:has(~ .info:hover) {
+      background-color: @colorInfo;
+      color: contrast(@colorInfo, @almost-white, @almost-black);
+    }
+
+    &.warn:hover, &:has(~ .warn:hover) {
+      background-color: @colorWarn;
+      color: contrast(@colorWarn, @almost-white, @almost-black);
+    }
+
+    &.error:hover, &:has(~ .error:hover) {
+      background-color: @colorError;
+      color: contrast(@colorError, @almost-white, @almost-black);
+    }
+
+    &.fatal:hover, &:has(~ .fatal:hover) {
+      background-color: @colorFatal;
+      color: contrast(@colorFatal, @almost-white, @almost-black);
+    }
+  }
+}

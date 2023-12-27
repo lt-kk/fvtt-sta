@@ -140,6 +140,14 @@
     },
     "delete": {
       "title": ""
+    },
+    "challenge": {
+      "_singular": "Herausforderung",
+      "_plural": "Herausforderungen"
+    },
+    "task": {
+      "_singular": "Aufgabe",
+      "_plural": "Aufgaben"
     }
   }
 }

@@ -20,9 +20,12 @@ export default {
         { src: "lang/*", dest: "dist/lang" },
         { src: "templates/*", dest: "dist/templates" },
       ],
+      copyOnce: true,
+      copySync: true,
     }),
     less({
       output: "dist/fvtt-sta.css",
+      watch: true,
     }),
     nodeResolve(),
     typescript(),

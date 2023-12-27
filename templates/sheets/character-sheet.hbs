@@ -5,12 +5,13 @@
   </section>
 
   <section class="summary">
-    <div class="property scale reputation">
+    <section class="property reputation border-left">
       {{#with data.system.reputation}}
-        <span class="label">{{localize "sta.character.reputation"}}</span>
-        <div class="radios">
+        <h3>{{localize "sta.character.reputation"}}</h3>
+        <div class="scale">
           {{#range 0 max}}
-            <label class="radio {{#if (lte i ../value)}}active{{/if}}">
+            <label class="scale-value {{#if (lte i ../value)}}active{{/if}} {{#if (eq "0" index)}}error{{/if}} {{#if
+              (eq ../value index)}}checked{{/if}}">
               {{i}}
               <input name="system.reputation.value" type="radio" value="{{i}}"
                      {{#if (eq ../value index)}}checked="checked"{{/if}} />
@@ -18,7 +19,7 @@
           {{/range}}
         </div>
       {{/with}}
-    </div>
+    </section>
     <label class="property name">
       <span class="label">{{localize "sta.character.name"}}</span>
       <input name="system.name" type="text" value="{{data.system.name}}" tabindex="1" />
@@ -43,44 +44,61 @@
       <span class="label">{{localize "sta.character.upbringing"}}</span>
       <input name="system.upbringing" type="text" value="{{data.system.upbringing}}" tabindex="1" />
     </label>
+
+    <div class="scale-selection roll-d6" style="flex-grow: {{config.settings.maxD6}}">
+      <label>{{localize "sta.challenge._singular"}}</label>
+      {{#range 1 config.settings.maxD6}}
+        <a class="control roll scale-value" data-roll="d6" data-value="{{i}}">{{i}}</a>
+      {{/range}}
+    </div>
+    <div class="scale-selection roll-d20" style="flex-grow: 5">
+      <label>{{localize "sta.task._singular"}}</label>
+      <a class="control roll scale-value fatal" data-roll="d20" data-value="1">1</a>
+      <a class="control roll scale-value" data-roll="d20" data-value="2">2</a>
+      <a class="control roll scale-value info" data-roll="d20" data-value="3">3</a>
+      <a class="control roll scale-value warn" data-roll="d20" data-value="4">4</a>
+      <a class="control roll scale-value error" data-roll="d20" data-value="5">5</a>
+    </div>
   </section>
 
-  <section class="status">
-    <h2>{{localize "sta.status._plural"}}</h2>
+  <section class="status border-left">
+    <h2 class="left"><span>{{localize "sta.status._plural"}}</span></h2>
 
-    <div class="property scale determination">
+    <section class="property determination border-left">
       {{#with data.system.determination}}
-        <span class="label">{{localize "sta.character.determination"}}</span>
-        <div class="radios">
+        <h3><span>{{localize "sta.character.determination"}}</span></h3>
+        <div class="scale">
           {{#range 0 max}}
-            <label class="radio {{#if (lte index ../value)}}active{{/if}}">
-              {{index}}
-              <input name="system.determination.value" type="radio" value="{{index}}"
+            <label class="scale-value {{#if (lte i ../value)}}active{{/if}} {{#if (eq "0" index)}}warn{{/if}} {{#if
+              (eq ../value index)}}checked{{/if}}">
+              {{i}}
+              <input name="system.determination.value" type="radio" value="{{i}}"
                      {{#if (eq ../value index)}}checked="checked"{{/if}} />
             </label>
           {{/range}}
         </div>
       {{/with}}
-    </div>
+    </section>
 
-    <div class="property scale stress">
+    <section class="property stress border-left">
       {{#with data.system.stress}}
-        <span class="label">{{localize "sta.character.stress"}}</span>
-        <div class="radios">
+        <h3><span>{{localize "sta.character.stress"}}</span></h3>
+        <div class="scale">
           {{#range 0 max}}
-            <label class="radio {{#if (lte index ../value)}}active{{/if}}">
-              {{index}}
-              <input name="system.stress.value" type="radio" value="{{index}}"
+            <label class="scale-value {{#if (lte i ../value)}}active{{/if}} {{#if (eq "0" index)}}error{{/if}} {{#if
+              (eq ../value index)}}checked{{/if}}">
+              {{i}}
+              <input name="system.stress.value" type="radio" value="{{i}}"
                      {{#if (eq ../value index)}}checked="checked"{{/if}} />
             </label>
           {{/range}}
         </div>
       {{/with}}
-    </div>
+    </section>
 
-    <section class="items injuries">
+    <section class="items injuries border-left">
       <h3>
-        {{localize "sta.item.injury._plural"}}
+        <span>{{localize "sta.item.injury._plural"}}</span>
         <a class="control create" title="{{localize "sta.item.injury.create"}}" data-type="injury">
           <i class="fas fa-plus"></i>
         </a>
@@ -104,8 +122,8 @@
     </section>
   </section>
 
-  <section class="attributes">
-    <h2>{{localize "sta.character.attribute._plural"}}</h2>
+  <section class="attributes border-right reversed">
+    <h2 class="reverse"><span>{{localize "sta.character.attribute._plural"}}</span></h2>
     {{#each data.system.attributes as |value name|}}
       <label class="property attribute attribute-{{name}}">
         <input name="selected.attribute" type="radio" value={{name}}"">
@@ -115,8 +133,8 @@
     {{/each}}
   </section>
 
-  <section class="disciplines">
-    <h2>{{localize "sta.character.discipline._plural"}}</h2>
+  <section class="disciplines border-left">
+    <h2><span>{{localize "sta.character.discipline._plural"}}</span></h2>
     {{#each data.system.disciplines as |value name|}}
       <label class="property discipline discipline-{{name}}">
         <input name="selected.discipline" type="radio" value="{{name}}">
@@ -126,9 +144,9 @@
     {{/each}}
   </section>
 
-  <section class="items talents">
-    <h2>
-      {{localize "sta.item.talent._plural"}}
+  <section class="items talents border-left">
+    <h2 class="left">
+      <span>{{localize "sta.item.talent._plural"}}</span>
       <a class="control create" title="{{localize "sta.item.talent.create"}}" data-type="talent">
         <i class="fas fa-plus"></i>
       </a>
@@ -151,9 +169,9 @@
     </ol>
   </section>
 
-  <section class="items values">
-    <h2>
-      {{localize "sta.item.value._plural"}}
+  <section class="items values border-left">
+    <h2 class="left">
+      <span>{{localize "sta.item.value._plural"}}</span>
       <a class="control create" title="{{localize "sta.item.value.create"}}" data-type="value">
         <i class="fas fa-plus"></i>
       </a>
@@ -176,9 +194,9 @@
     </ol>
   </section>
 
-  <section class="items focuses">
-    <h2>
-      {{localize "sta.item.focus._plural"}}
+  <section class="items focuses border-left">
+    <h2 class="left">
+      <span>{{localize "sta.item.focus._plural"}}</span>
       <a class="control create" title="{{localize "sta.item.focus.create"}}" data-type="focus"><i
         class="fas fa-plus"></i></a>
     </h2>
@@ -200,11 +218,11 @@
     </ol>
   </section>
 
-  <section class="progress">
-    <h2>{{localize "sta.character.progress"}}</h2>
-    <section class="items traits">
+  <section class="progress border-left">
+    <h2 class="left"><span>{{localize "sta.character.progress"}}</span></h2>
+    <section class="items traits border-left">
       <h3>
-        {{localize "sta.item.trait._plural"}}
+        <span>{{localize "sta.item.trait._plural"}}</span>
         <a class="control create" title="{{localize "sta.item.trait.create"}}" data-type="trait"><i
           class="fas fa-plus"></i></a>
       </h3>
@@ -226,9 +244,9 @@
       </ol>
     </section>
 
-    <section class="items milestones">
+    <section class="items milestones border-left">
       <h3>
-        {{localize "sta.item.milestone._plural"}}
+        <span>{{localize "sta.item.milestone._plural"}}</span>
         <a class="control create" title="{{localize "sta.item.milestone.create"}}" data-type="milestone"><i
           class="fas fa-plus"></i></a>
       </h3>
@@ -239,7 +257,8 @@
             <div class="name">{{name}}</div>
             <div class="controls">
               <a class="control edit" title="{{localize "sta.item.milestone.edit"}}"><i class="fas fa-edit"></i></a>
-              <a class="control delete" title="{{localize "sta.item.milestone.delete"}}"><i class="fas fa-trash"></i></a>
+              <a class="control delete" title="{{localize "sta.item.milestone.delete"}}"><i
+                class="fas fa-trash"></i></a>
             </div>
             <div class="description">{{description}}</div>
           </li>
@@ -250,20 +269,20 @@
       </ol>
     </section>
 
-    <section class="notes">
-      <h3>{{localize "sta.notes._plural"}}</h3>
+    <section class="notes border-left">
+      <h3><span>{{localize "sta.notes._plural"}}</span></h3>
       {{editor data.system.notes target="system.notes" button=true owner=owner editable=editable}}
     </section>
   </section>
 
 
-  <section class="items">
-    <h2>
-      {{localize "sta.item.item._plural"}}
+  <section class="items border-left">
+    <h2 class="left">
+      <span>{{localize "sta.item.item._plural"}}</span>
     </h2>
-    <section class="weapons">
+    <section class="weapons border-left">
       <h3>
-        {{localize "sta.item.characterweapon._plural"}}
+        <span>{{localize "sta.item.characterweapon._plural"}}</span>
         <a class="control create" title="{{localize "sta.item.characterweapon.create"}}" data-type="characterweapon"><i
           class="fas fa-plus"></i></a>
       </h3>
@@ -290,9 +309,9 @@
         {{/sta.weapons}}
       </ol>
     </section>
-    <section class="armor">
+    <section class="armor border-left">
       <h3>
-        {{localize "sta.item.armor._plural"}}
+        <span>{{localize "sta.item.armor._plural"}}</span>
         <a class="control create" title="{{localize "sta.item.armor.create"}}" data-type="armor"><i
           class="fas fa-plus"></i></a>
       </h3>
@@ -314,9 +333,9 @@
         {{/sta.armor}}
       </ol>
     </section>
-    <section class="items">
+    <section class="items border-left">
       <h3>
-        {{localize "sta.item.item._plural"}}
+        <span>{{localize "sta.item.item._plural"}}</span>
         <a class="control create" title="{{localize "sta.item.item.create"}}" data-type="item"><i
           class="fas fa-plus"></i></a>
       </h3>

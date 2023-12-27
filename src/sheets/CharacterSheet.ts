@@ -31,7 +31,6 @@ export class CharacterSheet extends ActorSheet {
         weapons: this.filterItems(data, "characterweapon"),
       },
     };
-    // console.log(sheetData);
     return sheetData;
   }
 
@@ -46,6 +45,7 @@ export class CharacterSheet extends ActorSheet {
     html.find(".control.create").on("click", this.handleCreate.bind(this));
     html.find(".control.edit").on("click", this.handleEdit.bind(this));
     html.find(".control.delete").on("click", this.handleDelete.bind(this));
+    html.find(".control.roll").on("click", this.handleRoll.bind(this));
   }
 
   handleCreate(event: JQuery.ClickEvent) {
@@ -85,6 +85,19 @@ export class CharacterSheet extends ActorSheet {
         }),
       ).render(true);
     }
+  }
+
+  handleRoll(event: JQuery.ClickEvent) {
+    event.preventDefault();
+    const element = $(event.currentTarget);
+    const rollType = element.data("roll");
+    const rollValue = element.data("value");
+    const roll = new Roll(`${rollValue}${rollType}`);
+
+    roll.roll();
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+    });
   }
 
   private findItemId(event: JQuery.ClickEvent<any, any, any, any>) {
