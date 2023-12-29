@@ -1,39 +1,65 @@
-@import "variables.less";
-@import "fonts.less";
-@import "character-sheet.less";
+@import "variables";
+@import "fonts";
+@import "app";
+@import "actor/character-sheet";
+@import "item/armor-sheet";
 
 @import "lcars.less";
 
-body {
-  scrollbar-color: @control-inline-default transparent;
-  scrollbar-width: thin;
-  color: @almost-white;
-}
 
-.editor {
-  min-height: 100px;
-  &.tinymce {
-    min-height: 200px;
-  }
-}
-
-.tox {
-  //background-color: @text-default;
-}
-
-
-.window-app {
-  background-image: none;
-  background-color: @almost-black;
-  border-radius: 20px;
+.system-fvtt-sta {
   color: @almost-white;
 
-  .window-content {
-    background-image: none !important;
-    background-color: transparent !important;
-    >* {
-      flex: unset;
+  .editor {
+    min-height: 100px;
+    &.tinymce {
+      min-height: 200px;
     }
+  }
+
+  .tox {
+    //background-color: @text-default;
+  }
+
+
+  .window-app {
+    background-image: none;
+    background-color: @almost-black;
+    border-radius: 20px;
+    color: @almost-white;
+
+    .window-content {
+      background-image: none !important;
+      background-color: transparent !important;
+      >* {
+        flex: unset;
+      }
+    }
+  }
+
+  h1 {
+    font-size: @sta-h1-size;
+    font-weight: bold;
+  }
+  h2 {
+    font-size: @sta-h2-size;
+    font-weight: bold;
+  }
+  h3 {
+    font-size: @sta-h3-size;
+    font-weight: bold;
+  }
+  h4 {
+    font-size: @sta-h4-size;
+    font-weight: bold;
+  }
+  h5 {
+    font-size: @h5-size;
+    font-weight: bold;
+  }
+  h6 {
+    font-size: @h6-size;
+    font-weight: normal;
   }
 }
 

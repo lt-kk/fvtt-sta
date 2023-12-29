@@ -1,0 +1,35 @@
+.armor-sheet {
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: @gap;
+
+  > section {
+    flex-grow: 1;
+
+    &.icon {
+      width: 64px;
+      flex-grow: unset;
+    }
+
+    &.summary {
+      width: 67%;
+    }
+
+    &.status {
+      width: calc(33% - @gap);
+    }
+
+    &.attributes, &.disciplines {
+      width: 220px;
+      flex-grow: unset;
+    }
+
+    &.talents, &.values, &.focuses {
+      width: calc(33% - @gap);
+    }
+
+    &.progress, &.equipment {
+      width: calc(50% - @gap);
+    }
+  }
+}

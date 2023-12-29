@@ -1,0 +1,141 @@
+
+
+.character-sheet {
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: @gap;
+
+  > section {
+    flex-grow: 1;
+
+    &.icon {
+      width: 200px;
+      flex-grow: unset;
+    }
+
+    &.summary {
+      width: 67%;
+    }
+
+    &.status {
+      width: calc(33% - @gap);
+    }
+
+    &.attributes, &.disciplines {
+      width: 220px;
+      flex-grow: unset;
+    }
+
+    &.talents, &.values, &.focuses {
+      width: calc(33% - @gap);
+    }
+
+    &.progress, &.equipment {
+      width: calc(50% - @gap);
+    }
+  }
+
+  .scale-selection {
+    margin: 6px 0;
+    &.roll-d6 {
+      .lcars-scale-select(@light-orange, @light-orange, @sta-h2-size);
+      flex-grow: 1;
+    }
+
+    &.roll-d20 {
+      .lcars-scale-select(@dark-blue, @dark-blue, @sta-h2-size);
+      width: 220px;
+      flex-grow: unset;
+    }
+  }
+
+  .scale {
+    .lcars-scale-value(@sta-color-h3-bg, @sta-color-h3-a, @text-small-size);
+    border: none;
+  }
+
+  .summary {
+    display: flex;
+    grid-gap: @gap;
+    flex-wrap: wrap;
+
+    .property {
+      width: calc(33% - @gap);
+    }
+
+    .reputation {
+      width: 100%;
+    }
+
+    .name, .rank, .assignment {
+      input {
+        font-size: @sta-h3-size;
+        height: calc(@sta-h2-size + @gap);
+      }
+    }
+  }
+
+  .attributes, .disciplines {
+    > h1 {
+      margin-bottom: calc(@sta-h1-size - @sta-h3-size + @gap);
+    }
+
+    .property {
+      .lcars-bar(@sta-color-h1-bg, @sta-color-h3-bg, @sta-h3-size);
+      display: flex;
+      width: calc(100% - 36px);
+
+      .form-control {
+        width: @text-size * 2;
+        flex-grow: unset;
+        text-align: center;
+        background-color: transparent;
+      }
+
+      .select {
+        .lcars-bar-inner(@sta-color-h1-bg);
+      }
+
+      .form-control {
+        .lcars-bar-inner(@dark-blue);
+        background-color: transparent;
+      }
+
+      &:has(:checked) {
+        box-shadow: @sta-color-value 0 0 2px 0;
+      }
+    }
+  }
+
+  .attributes {
+    > h1 {
+      .lcars-edge-right-down(@sta-color-h1-bg, @sta-h1-size, @sta-h3-size);
+    }
+
+    .property {
+      border-right: none;
+      padding-right: 0;
+      margin: @gap 0 @gap auto;
+
+      .select {
+        border-radius: 0 50% 50% 0;
+      }
+    }
+  }
+
+  .disciplines {
+    > h1 {
+      .lcars-edge-left-down(@sta-color-h1-bg, @sta-h1-size, @sta-h3-size);
+    }
+
+    .property {
+      border-left: none;
+      padding-left: 0;
+
+      .select {
+        border-radius: 50% 0 0 50%;
+      }
+    }
+  }
+
+}

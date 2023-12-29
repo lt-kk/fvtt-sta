@@ -2,15 +2,15 @@ import { sta } from "../config";
 import { LooseObject } from "../util";
 import { confirmDialog } from "../util/ConfimDialog";
 
-export class CharacterSheet extends ActorSheet {
+export class CharacterActorSheet extends ActorSheet {
   get template() {
-    return `systems/fvtt-sta/templates/sheets/character-sheet.hbs`;
+    return `systems/fvtt-sta/templates/sheets/actor/character-sheet.hbs`;
   }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      width: 850,
-      height: 910,
+      width: 710,
+      height: 870,
     });
   }
 

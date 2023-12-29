@@ -1,3 +1,4 @@
+/* Colors from https://github.com/FabulistVtt/sta-lcars-ui */
 @almost-black: #0f0f0fef;
 @trans-black: #0f0f0f7f;
 @almost-white: #dfdfdf;
@@ -20,18 +21,41 @@
 @light-orange: #F7A76E;
 @lighter-orange: #FAC49E;
 
-@control-inline-default: @darkest-blue;
-@control-sidebar-background: rgb(0, 0, 0, 0.05);
+/* Colors from https://www.thelcars.com/ */
+@ld-color1: #f9c99c;
+@ld-color2: #f6a84f;
+@ld-color3: #f47322;
+@ld-color4: #f33f1a;
 
-@window-corner-radius: 20px;
-@window-header-margin: 5px;
-@window-header-radius: @window-corner-radius - @window-header-margin;
+@ldp-color1: #97fdfc;
+@ldp-color2: #75cbfa;
+@ldp-color3: #7b99d8;
+@ldp-color4: #5e88e8;
+@ldp-color5: #47557d;
+
+@p-color1: #d0d3dc;
+@p-color2: #9ea4b8;
+@p-color3: #6d738a;
+@p-color4: #52586c;
+@p-color5: #303747;
+@p-color6: #4ba6cd;
+@p-color7: #377190;
+@p-color8: #f6947d;
+@p-color9: #dc3f31;
+
+@tng-color1: #f7a892;
+@tng-color2: #f6a72d;
+@tng-color3: #f47322;
+@tng-color4: #d33f46;
+@tng-color5: #c788f9;
+@tng-color6: #7b88f8;
 
 
+/* Foundry VTT variables */
 @color-text-light-highlight: #f0f0e0;
 @color-text-light-heading: #c9c7b8;
 @color-text-light-primary: #b5b3a4;
-@color-text-dark-primary: @almost-white;
+@color-text-dark-primary: @almost-white; // #191813;
 @color-text-dark-secondary: #4b4a44;
 @color-text-dark-header: #23221d;
 @color-text-dark-inactive: #7a7971;
@@ -66,7 +90,7 @@
 @color-border-light-highlight: #f0f0e0;
 @color-border-light-primary: #b5b3a4;
 @color-border-light-secondary: #c9c7b8;
-@color-border-light-tertiary: #7a7971;
+@color-border-light-tertiary: fade(@dark-blue, 40%); //#7a7971; Text boxes
 @color-border-dark: #000;
 @color-border-dark-primary: #191813;
 @color-border-dark-secondary: #23221d;
@@ -101,20 +125,45 @@
 @font-size-28: 1.75rem;
 @font-size-32: 2rem;
 @font-size-48: 3rem;
-@color-level-info: @dark-blue;
+@color-level-info: @dark-blue; //#5c87b9;
 @color-level-warning: #b18404;
 @color-level-error: #750003;
 @color-level-success: #266c3c;
+
+// directly used variables
 @color-level-fatal: @light-grey;
 
-@h1-size: @font-size-32;
-@h2-size: @font-size-24;
-@h3-size: @font-size-20;
-@h4-size: @font-size-18;
-@h5-size: @font-size-16;
-@h6-size: @font-size-14;
-@text-size: @font-size-14;
+@sta-color-bg: @ld-color2;
+@sta-color-bg: @ld-color2;
+@sta-color-value: @light-yellow;
 
+@sta-color-h1-fg: @p-color6;
+@sta-color-h1-bg: @p-color5;
+@sta-color-h1-a: @p-color5;
+@sta-color-h2-fg: @p-color7;
+@sta-color-h2-bg: @p-color4;
+@sta-color-h2-a: @p-color4;
+@sta-color-h3-fg: @p-color1;
+@sta-color-h3-bg: @p-color3;
+@sta-color-h3-a: @p-color3;
+
+@sta-color-action-bg: @dark-blue;
+@sta-color-action-fg: @almost-white;
+
+
+@sta-title-size: @font-size-32;
+@sta-h1-size: @font-size-32;
+@sta-h2-size: @font-size-24;
+@sta-h3-size: @font-size-20;
+@sta-h4-size: @font-size-18;
+@h5-size: @font-size-16;
+@h6-size: @font-size-16;
+@text-size: @font-size-16;
+@text-small-size: @font-size-14;
+
+@gap: 4px;
+
+/* FoundryVTT CSS variable mappings (configure above less variables instead) */
 :root {
   --color-text-light-highlight: @color-text-light-highlight;
   --color-text-light-heading: @color-text-light-heading;
