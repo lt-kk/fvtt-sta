@@ -7,7 +7,6 @@ section {
   flex-wrap: wrap;
   grid-gap: 4px;
 
-
   > section {
     flex-grow: 1;
     width: 33%;
@@ -58,6 +57,23 @@ section {
 
     > h1, > h2, > h3, > h4 {
       .lcars-border-right();
+    }
+  }
+
+  .edge-left-down {
+    padding-right: 2px;
+
+    > h1, > h2, > h3, > h4 {
+      .lcars-edge-left-down(24px, 20px);
+    }
+  }
+
+  .edge-right-down {
+    padding-left: 2px;
+    padding-right: 8px;
+
+    > h1, > h2, > h3, > h4 {
+      //.lcars-edge-right-down(1.5rem, 20px);
     }
   }
 
