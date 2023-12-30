@@ -1,4 +1,22 @@
-/* A colored */
+/* Set the background for sta. Apply to .window-app */
+.lcars-window() {
+  background-image: none;
+  background-color: @almost-black;
+  border-radius: 20px;
+
+  .window-content {
+    color: @almost-white;
+    background-image: none !important;
+    background-color: transparent !important;
+
+    > * {
+      flex: unset;
+    }
+  }
+}
+
+
+/* A colored bar with rounded edges */
 .lcars-bar(@color, @colorAccent, @size) {
   display: flex;
   flex-wrap: nowrap;
@@ -29,13 +47,13 @@
 
 .lcars-border-left(@color, @header-height: 1rem, @width: @gap) {
   border-bottom-left-radius: 0;
-  margin-left: -(@width + 2);
+  margin-left: -(@width + @gap);
 
   &:before {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 2px;
+    left: 0;
     width: @width;
     height: calc(100% - @header-height);
     background-color: @color;
@@ -58,8 +76,7 @@
 }
 
 
-.lcars-edge-left-down(@color, @sizeFrom, @sizeTo) {
-  @diff: calc(@sizeFrom - @sizeTo);
+.lcars-edge-left-down(@color, @sizeFrom, @sizeTo, @diff: calc(@sizeFrom - @sizeTo)) {
   border-bottom-left-radius: 0;
   border-top-left-radius: calc(@sizeFrom + @diff);
   border-left-width: calc(@sizeFrom + @gap);
@@ -69,21 +86,20 @@
     position: absolute;
     top: calc(@sizeFrom + @gap);
     left: 0;
-    width: @sizeFrom;
+    width: calc(@sizeTo + @diff);
     height: @diff;
     background-color: @color;
     mask-image: radial-gradient(circle @diff at 100% @diff, transparent @diff, black 0);
     clip-path: polygon(0 0,
     100% 0,
     100% @diff,
-    calc(100% - @sizeFrom + @sizeTo) @diff,
-    calc(100% - @sizeFrom + @sizeTo) 100%,
+    calc(100% - @diff) @diff,
+    calc(100% - @diff) 100%,
     0 100%);
   }
 }
 
-.lcars-edge-right-down(@color, @sizeFrom, @sizeTo) {
-  @diff: calc(@sizeFrom - @sizeTo);
+.lcars-edge-right-down(@color, @sizeFrom, @sizeTo, @diff: calc(@sizeFrom - @sizeTo)) {
   border-bottom-right-radius: 0;
   border-top-right-radius: calc(@sizeFrom + @diff);
   border-right-width: calc(@sizeFrom + @gap);
@@ -93,7 +109,7 @@
     position: absolute;
     top: calc(@sizeFrom + @gap);
     right: 0;
-    width: @sizeFrom;
+    width: calc(@sizeTo + @diff);
     height: @diff;
     background-color: @color;
     mask-image: radial-gradient(circle @diff at 0% @diff, transparent @diff, black 0);
@@ -107,10 +123,58 @@
 }
 
 
+.lcars-edge-left-up(@color, @sizeFrom, @sizeTo, @diff: calc(@sizeFrom - @sizeTo)) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: calc(@sizeFrom + @diff);
+  border-left-width: calc(@sizeFrom + @gap);
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: calc(@sizeFrom + @gap);
+    left: 0;
+    width: calc(@sizeTo + @diff);
+    height: @diff;
+    background-color: @color;
+    mask-image: radial-gradient(circle @diff at 100% calc(100% - @diff), transparent @diff, black 0);
+    clip-path: polygon(0 0,
+    calc(100% - @diff) 0,
+    calc(100% - @diff) calc(100% - @diff),
+    100% calc(100% - @diff),
+    100% 100%,
+    0 100%);
+  }
+}
+
+.lcars-edge-right-up(@color, @sizeFrom, @sizeTo, @diff: calc(@sizeFrom - @sizeTo)) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: calc(@sizeFrom + @diff);
+  border-right-width: calc(@sizeFrom + @gap);
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: calc(@sizeFrom + @gap);
+    right: 0;
+    width: calc(@sizeTo + @diff);
+    height: @diff;
+    background-color: @color;
+    mask-image: radial-gradient(circle @diff at 0 calc(100% - @diff), transparent @diff, black 0);
+    clip-path: polygon(@diff 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 calc(100% - @diff),
+    @diff calc(100% - @diff));
+  }
+}
+
+
 .lcars-radio(@color: @almost-white, @colorChecked: @sta-color-value ) {
   display: inline-block;
   position: relative;
   top: 0;
+  height: 100%;
   aspect-ratio: 1/1;
   cursor: pointer;
   appearance: none;
@@ -130,10 +194,10 @@
 }
 
 
-._lcars-scale-value-color(@colorBase, @colorActive, @colorChecked: @colorActive) {
+._lcars-scale-pill-color(@colorBase, @colorActive, @colorChecked: @colorActive) {
   border: 1px solid @colorBase;
   //background-color: darken(@colorBase, 10%);
-  color: contrast(@colorBase, @almost-white, @almost-black);
+  color: contrast(@colorBase, @colorActive, @colorChecked);
   &:hover {
     border-color: if((@colorBase = @colorChecked),
     contrast(@colorBase, @almost-white, @almost-black),
@@ -165,55 +229,49 @@
 
 
 .lcars-scale-value(
-  @colorBase,
-  @colorAccent,
-  @size
+  @colorAccent
 ) {
-  .lcars-bar(@colorBase, @colorAccent, @size);
-
-  margin-bottom: 2px;
+  display: flex;
+  flex-wrap: nowrap;
   grid-gap: calc(@gap / 2);
 
   input, &:after {
     display: none;
   }
-  .scale-value {
+  .scale-pill {
     flex-grow: 1;
     text-align: center;
     font-weight: bold;
     cursor: pointer;
 
-    ._lcars-scale-value-color(@colorAccent, @color-level-info);
+    ._lcars-scale-pill-color(@colorAccent, @color-level-info);
 
     &.success {
-      ._lcars-scale-value-color(@colorAccent, @color-level-info, @color-level-success);
+      ._lcars-scale-pill-color(@colorAccent, @color-level-info, @color-level-success);
     }
 
     &.info {
-      ._lcars-scale-value-color(@colorAccent, @color-level-info, @color-level-info);
+      ._lcars-scale-pill-color(@colorAccent, @color-level-info, @color-level-info);
     }
 
     &.warn {
-      ._lcars-scale-value-color(@colorAccent, @color-level-info, @color-level-warning);
+      ._lcars-scale-pill-color(@colorAccent, @color-level-info, @color-level-warning);
     }
 
     &.error {
-      ._lcars-scale-value-color(@colorAccent, @color-level-info, @color-level-error);
+      ._lcars-scale-pill-color(@colorAccent, @color-level-info, @color-level-error);
     }
 
     &.fatal {
-      ._lcars-scale-value-color(@colorAccent, @color-level-info, @color-level-fatal);
+      ._lcars-scale-pill-color(@colorAccent, @color-level-info, @color-level-fatal);
     }
   }
 }
 
 .lcars-scale-select(
-  @colorBase,
-  @colorAccent,
-  @size
+  @colorAccent
 ) {
   position: relative;
-  .lcars-bar(@colorBase, @colorAccent, @size);
   &:after {
     display: none;
   }
@@ -232,12 +290,16 @@
       transition-delay: 0.25s;
     }
   }
-  .scale-value {
+  .scale-pill {
     flex-grow: 1;
     text-align: center;
     font-weight: bold;
     color: transparent;
     cursor: pointer;
+
+    &:has(:hover) {
+      border-color: @colorAccent;
+    }
 
     &:hover, &:has(~ :hover) {
       background-color: @colorAccent;

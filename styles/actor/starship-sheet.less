@@ -1,4 +1,4 @@
-.character-sheet {
+.starship-sheet {
   .lcars-window();
 
   .sta-body {
@@ -18,22 +18,26 @@
         width: 67%;
       }
 
-      &.status {
-        width: calc(33% - @gap);
+      &.systems {
+        width: calc(100% - 220px - @gap);
       }
 
-      &.attributes, &.disciplines {
+      &.departments {
         width: 220px;
         flex-grow: unset;
       }
 
-      &.talents, &.values, &.focuses {
-        width: calc(33% - @gap);
+      &.talents, &.values {
+
       }
 
       &.progress, &.equipment {
-        width: calc(50% - @gap);
+
       }
+    }
+
+    .scale-pill {
+      width: 10px;
     }
 
     .scale-selection {
@@ -62,27 +66,23 @@
         width: calc(33% - @gap);
       }
 
-      .reputation {
-        width: 100%;
-      }
-
-      .name, .rank, .assignment {
-        input {
-          font-size: @sta-h3-size;
-          height: calc(@sta-h2-size + @gap);
-        }
+      .resistance, .scale {
+        width: 15%;
       }
     }
 
-    .attributes, .disciplines {
+    .systems, .departments {
       > h1 {
-        margin-bottom: calc(@sta-h1-size - @sta-h3-size + @gap);
+        margin-bottom: calc(@sta-h3-size + (@gap * 3));
+
+        &:before {
+          height: calc(@sta-h3-size + (@gap * 2)) !important;
+        }
       }
 
       .property {
         .lcars-bar(@sta-color-h1-bg, @sta-color-h3-bg, @sta-h3-size);
         display: flex;
-        width: calc(100% - 36px);
 
         .form-control {
           width: @text-size * 2;
@@ -100,18 +100,22 @@
           background-color: transparent;
         }
 
-        &:has(:checked) {
+        &:has(.select:checked) {
           box-shadow: @sta-color-value 0 0 2px 0;
         }
       }
     }
 
-    .attributes {
+    .systems {
       > h1 {
         .lcars-edge-right-down(@sta-color-h1-bg, @sta-h1-size, @sta-h3-size);
       }
 
-      .property {
+      &:after {
+        display: none;
+      }
+
+      .property:not(.shields, .power) {
         border-right: none;
         padding-right: 0;
         margin: @gap 0 @gap auto;
@@ -119,21 +123,60 @@
         .select {
           border-radius: 0 50% 50% 0;
         }
+
+        &:after {
+          display: none;
+        }
+      }
+
+      .label {
+        width: 100px;
+        display: flex;
+        grid-gap: @gap;
+
+        &:before {
+          content: '';
+          flex-grow: 1;
+          background-color: @sta-color-h3-bg;
+        }
+      }
+
+      .shields {
+        flex-grow: 1;
+        .lcars-scale-value(@dark-blue);
+        margin: calc(-@sta-h3-size - (@gap * 2)) calc(@sta-h3-size + @gap) calc(@gap * 2) 0;
+      }
+
+      .breaches {
+        .lcars-scale-value(@sta-color-h1-fg);
+        flex-grow: 1;
+      }
+
+      .power {
+        .lcars-scale-value(@ld-color2);
+        .lcars-edge-right-up(@sta-color-h1-bg, @sta-h3-size, @sta-h3-size, @gap);
+        margin-top: @gap *2;
       }
     }
 
-    .disciplines {
+    .departments {
       > h1 {
         .lcars-edge-left-down(@sta-color-h1-bg, @sta-h1-size, @sta-h3-size);
       }
 
-      .property {
+      .property:not(.crew) {
         border-left: none;
         padding-left: 0;
 
         .select {
           border-radius: 50% 0 0 50%;
         }
+      }
+
+      .crew {
+        .lcars-scale-value(@ld-color2);
+        .lcars-edge-left-up(@sta-color-h1-bg, @sta-h3-size, @sta-h3-size, @gap);
+        margin-top: @gap *2;
       }
     }
 

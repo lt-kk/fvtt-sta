@@ -21,10 +21,10 @@
       },
       "disciplines": {
         "command": 1,
-        "security": 1,
-        "science": 1,
         "conn": 1,
+        "security": 1,
         "engineering": 1,
+        "science": 1,
         "medicine": 1
       },
       "milestones": [],
@@ -54,6 +54,11 @@
       "designation": "",
       "servicedate": null,
       "missionprofile": "",
+      "scale": 1,
+      "resistance": 1,
+      "shields": 8,
+      "power": 8,
+      "crew": 8,
       "notes": "",
       "systems": {
         "communications": 7,
@@ -66,13 +71,21 @@
       "departments": {
         "command": 1,
         "conn": 1,
+        "security": 1,
         "engineering": 1,
-        "medicine": 1,
         "science": 1,
-        "security": 1
+        "medicine": 1
+      },
+      "breaches": {
+        "communications": 0,
+        "computers": 0,
+        "engines": 0,
+        "sensors": 0,
+        "structure": 0,
+        "weapons": 0
       },
       "launchbay": [],
-      "refit": [],
+      "refits": [],
       "talents": [],
       "traits": [],
       "values": [],
@@ -89,6 +102,7 @@
       "item",
       "launchbay",
       "milestone",
+      "refit",
       "starshipweapon",
       "talent",
       "trait",
@@ -96,6 +110,7 @@
     ],
     "armor": {
       "description": "",
+      "rules": "",
       "protection": 0,
       "equipped": true,
       "opportunity": 0,
@@ -103,6 +118,7 @@
     },
     "characterweapon": {
       "description": "",
+      "rules": "",
       "damage": 0,
       "range": "",
       "hands": 1,

@@ -1,15 +1,16 @@
-import { sta } from "../config";
-import { LooseObject } from "../util";
-import { confirmDialog } from "../util/ConfimDialog";
+import { sta } from "../../config";
+import { LooseObject } from "../../util";
+import { confirmDialog } from "../../util/ConfimDialog";
 
-export class CharacterActorSheet extends ActorSheet {
+export class StarshipSheet extends ActorSheet {
   get template() {
-    return `systems/fvtt-sta/templates/sheets/actor/character-sheet.hbs`;
+    return `systems/fvtt-sta/templates/sheets/actor/starship-sheet.hbs`;
   }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      width: 710,
+      classes: ["actor-sheet", "starship-sheet"],
+      width: 640,
       height: 870,
     });
   }
@@ -18,7 +19,7 @@ export class CharacterActorSheet extends ActorSheet {
     const data = super.getData(options) as Data;
     let sheetData = {
       ...data,
-      config: sta,
+      settings: sta.settings,
       sta: { // TODO replace with instance of StaCharacter
         armor: this.filterItems(data, "armor"),
         items: this.filterItems(data, "item"),
@@ -31,6 +32,7 @@ export class CharacterActorSheet extends ActorSheet {
         weapons: this.filterItems(data, "characterweapon"),
       },
     };
+    console.log(sheetData);
     return sheetData;
   }
 

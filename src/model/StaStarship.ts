@@ -3,24 +3,31 @@ import { StaRule } from "./StaRule";
 
 export class StaStarship {
   name: string = "";
-  spaceframe: string = "";
   designation: string = "";
+  spaceframe: string = "";
   servicedate: number | null = null;
   missionprofile: string = "";
+  scale: CurrentValue = new CurrentValue(1);
+  resistance: CurrentValue = new CurrentValue(1);
   notes: string = "";
 
   systems: StaStarshipSystems = new StaStarshipSystems();
   departments: StaStarshipDepartments = new StaStarshipDepartments();
-  launchbay: StaLaunchbay[] = [];
-  refit: StaStarshipRefit[] = [];
 
   talents: StaTalent[] = [];
-  traits: StaTrait[] = [];
   values: StaValue[] = [];
-  items: StaItem[] = [];
   weapons: StaStarshipWeapon[] = [];
+  launchbay: StaLaunchbay[] = [];
+  cargo: StaItem[] = [];
 
-  status: StaStarshipStatus = new StaStarshipStatus();
+  refits: StaStarshipRefit[] = [];
+  traits: StaTrait[] = [];
+
+  breaches: StaBreaches = new StaBreaches();
+  crew: CurrentValue = new CurrentValue(1);
+  shields: CurrentValue = new CurrentValue(8);
+  power: CurrentValue = new CurrentValue(8);
+
   roll: StaStarshipRoll = new StaStarshipRoll("communications", "command");
 }
 
@@ -36,10 +43,10 @@ export class StaStarshipSystems {
 export class StaStarshipDepartments {
   command: number = 1;
   conn: number = 1;
-  engineering: number = 1;
-  medicine: number = 1;
-  science: number = 1;
   security: number = 1;
+  engineering: number = 1;
+  science: number = 1;
+  medicine: number = 1;
 }
 
 export class StaStarshipRefit {
@@ -65,13 +72,6 @@ export class StaStarshipWeaponQualities {
   highyield: boolean = false;
   persistentx: number = 0;
   versatilex: number = 0;
-}
-
-export class StaStarshipStatus {
-  shields: CurrentValue = new CurrentValue(8);
-  power: CurrentValue = new CurrentValue(8);
-  crew: CurrentValue = new CurrentValue(1);
-  breaches: StaBreaches = new StaBreaches();
 }
 
 export class StaBreaches {

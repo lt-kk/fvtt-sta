@@ -10,7 +10,7 @@
       "reputation": "Ansehen",
       "stress": "Erschöpfung",
       "determination": "Entschlossenheit",
-      "attribute": {
+      "attributes": {
         "_singular": "Attribut",
         "_plural": "Attribute",
         "control": "Konzentration",
@@ -20,21 +20,56 @@
         "presence": "Ausstrahlung",
         "reason": "Verstand"
       },
-      "discipline": {
+      "disciplines": {
         "_singular": "Disziplin",
         "_plural": "Disziplinen",
+        "command": "Kommando",
+        "conn": "Flugkontrolle",
+        "security": "Sicherheit",
+        "engineering": "Technik",
+        "science": "Wissenschaft",
+        "medicine": "Medizin"
+      },
+      "progress": "Entwicklung"
+    },
+    "starship": {
+      "name": "Name",
+      "designation": "Registriernummer",
+      "spaceframe": "Klasse",
+      "servicedate": "Indienststellung",
+      "missionprofile": "Missionsprofil",
+      "scale": "Größe",
+      "resistance": "Wiederstand",
+      "power": "Energie",
+      "shields": "Schilde",
+      "crew": "Crew",
+      "systems": {
+        "_singular": "System",
+        "_plural": "Systeme",
+        "communications": "Kommunikation",
+        "computers": "Computer",
+        "engines": "Antrieb",
+        "sensors": "Sensoren",
+        "structure": "Hülle",
+        "weapons": "Waffen"
+      },
+      "departments": {
+        "_singular": "Abteilung",
+        "_plural": "Abteilungen",
         "command": "Kommando",
         "conn": "Flugkontrolle",
         "engineering": "Technik",
         "medicine": "Medizin",
         "science": "Wissenschaft",
         "security": "Sicherheit"
-      },
-      "progress": "Entwicklung"
-    },
-    "starship": {
+      }
     },
     "item": {
+      "properties": "Eigenschaften",
+      "description": "Beschreibung",
+      "opportunity": "Verzichtskosten",
+      "escalation": "Eskalation",
+      "rules": "Regeln",
       "armor": {
         "_singular": "Rüstung",
         "_plural": "Rüstungen",
@@ -42,11 +77,8 @@
         "edit": "Rüstung bearbeiten",
         "delete": "Rüstung löschen",
         "empty": "Keine Rüstung",
-        "description": "Beschreibung",
         "protection": "Wiederstand",
-        "equipped": "Ausgerüstet",
-        "opportunity": "Verzichtskosten",
-        "escalation": "Eskalation"
+        "equipped": "Ausgerüstet"
       },
       "characterweapon": {
         "_singular": "Waffe",

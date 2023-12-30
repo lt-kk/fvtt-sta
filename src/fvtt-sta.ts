@@ -1,9 +1,10 @@
 import "../styles/fvtt-sta.less";
 import { sta } from "./config";
 import { GenericItemSheet } from "./sheets/GenericItemSheet";
-import { CharacterActorSheet } from "./sheets/CharacterActorSheet";
+import { CharacterSheet } from "./sheets/actor/CharacterSheet";
 import { registerHandlebarHelpers } from "./TemplateHelpers";
-import { ArmorItemSheet } from "./sheets/ArmorSheet";
+import { ArmorSheet } from "./sheets/item/ArmorSheet";
+import { StarshipSheet } from "./sheets/actor/StarshipSheet";
 
 console.log(sta.systemName + " | system loaded.");
 
@@ -13,11 +14,11 @@ Hooks.on("init", () => {
 
   // Sheets
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet(sta.systemName, CharacterActorSheet, { types: ["character"] });
-  Actors.registerSheet(sta.systemName, CharacterActorSheet, { types: ["starship"] });
+  Actors.registerSheet(sta.systemName, CharacterSheet, { types: ["character"] });
+  Actors.registerSheet(sta.systemName, StarshipSheet, { types: ["starship"] });
 
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet(sta.systemName, ArmorItemSheet, { types: ["armor"] });
+  Items.registerSheet(sta.systemName, ArmorSheet, { types: ["armor"] });
   Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["characterweapon"] });
   Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["focus"] });
   Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["injury"] });

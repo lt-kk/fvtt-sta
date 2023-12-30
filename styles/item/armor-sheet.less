@@ -1,35 +1,73 @@
 .armor-sheet {
-  display: flex;
-  flex-wrap: wrap;
-  grid-gap: @gap;
+  .lcars-window();
 
-  > section {
-    flex-grow: 1;
+  .sta-body {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: @gap;
 
-    &.icon {
-      width: 64px;
-      flex-grow: unset;
+    > section {
+      flex-grow: 1;
+
+      &.icon {
+        width: 64px;
+        flex-grow: unset;
+      }
+
+      &.summary {
+        width: 50%;
+      }
+
+      &.properties {
+        width: 100%;
+      }
     }
 
-    &.summary {
-      width: 67%;
+    .summary {
+      display: flex;
+      grid-gap: @gap;
+      flex-wrap: wrap;
+
+      .property.name {
+        flex-grow: 1;
+        font-size: @sta-h1-size;
+        height: 100%;
+      }
     }
 
-    &.status {
-      width: calc(33% - @gap);
-    }
+    .properties {
+      display: flex;
+      flex-wrap: wrap;
+      grid-gap: @gap;
 
-    &.attributes, &.disciplines {
-      width: 220px;
-      flex-grow: unset;
-    }
+      h1 {
+        width: 100%;
+        flex-grow: 1;
+        border-right: none;
+        padding-right: 0;
+        margin-right: -2px;
 
-    &.talents, &.values, &.focuses {
-      width: calc(33% - @gap);
-    }
+        .property.equipped {
+          flex-grow: 0;
+          display: flex;
+          grid-gap: @gap;
+          font-size: @sta-h3-size;
+          color: @sta-color-h3-fg;
 
-    &.progress, &.equipment {
-      width: calc(50% - @gap);
+          input {
+            background-color: @sta-color-h1-bg;
+            width: @sta-h1-size;
+          }
+        }
+      }
+
+      .property {
+        flex-grow: 1;
+      }
+
+      .description, .rule {
+        width: 100%;
+      }
     }
   }
 }

@@ -42,10 +42,10 @@ export class StaCharacterAttributes {
 
 export class StaCharacterDisciplines {
   command: number = 1;
-  security: number = 1;
-  science: number = 1;
   conn: number = 1;
+  security: number = 1;
   engineering: number = 1;
+  science: number = 1;
   medicine: number = 1;
 }
 

@@ -39,5 +39,21 @@ export const sta = {
   settings: {
     maxD20: 5, // not used in sheets
     maxD6: 10,
+    item: {
+      opportunity: {
+        min: 0,
+        max: 2,
+      },
+      escalation: {
+        min: 0,
+        max: 2,
+      },
+      armor: {
+        protection: {
+          min: 0,
+          max: 4
+        },
+      }
+    }
   }
 };

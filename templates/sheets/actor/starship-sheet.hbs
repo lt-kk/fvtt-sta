@@ -5,45 +5,34 @@
   </section>
 
   <section class="summary">
-    <section class="property reputation border-left">
-      {{#with data.system.reputation}}
-        <h3>{{localize "sta.character.reputation"}}</h3>
-        <div class="scale-value">
-          {{#range 0 max}}
-            <label class="scale-pill
-              {{#if (eq 0 i)}}error{{/if}}
-              {{#if (eq ../value i)}}checked{{/if}}">
-              {{i}}
-              <input name="system.reputation.value" type="radio" value="{{i}}" data-dtype="Number"
-                     {{#if (eq ../value i)}}checked="checked"{{/if}} />
-            </label>
-          {{/range}}
-        </div>
-      {{/with}}
-    </section>
     <label class="property name">
-      <span class="label">{{localize "sta.character.name"}}</span>
+      <span class="label">{{localize "sta.starship.name"}}</span>
       <input name="name" type="text" value="{{data.name}}" tabindex="1" />
     </label>
-    <label class="property rank">
-      <span class="label">{{localize "sta.character.rank"}}</span>
-      <input name="system.rank" type="text" value="{{data.system.rank}}" tabindex="1" />
+    <label class="property designation">
+      <span class="label">{{localize "sta.starship.designation"}}</span>
+      <input name="system.designation" type="text" value="{{data.system.designation}}" tabindex="1" />
     </label>
-    <label class="property assignment">
-      <span class="label">{{localize "sta.character.assignment"}}</span>
-      <input name="system.assignment" type="text" value="{{data.system.assignment}}" tabindex="1" />
+    <label class="property spaceframe">
+      <span class="label">{{localize "sta.starship.spaceframe"}}</span>
+      <input name="system.spaceframe" type="text" value="{{data.system.spaceframe}}" tabindex="1" />
     </label>
-    <label class="property species">
-      <span class="label">{{localize "sta.character.species"}}</span>
-      <input name="system.species" type="text" value="{{data.system.species}}" tabindex="1" />
+    <label class="property servicedate">
+      <span class="label">{{localize "sta.starship.servicedate"}}</span>
+      <input name="system.servicedate" type="text" value="{{data.system.servicedate}}" tabindex="1"
+             data-dtype="Number" />
     </label>
-    <label class="property environment">
-      <span class="label">{{localize "sta.character.environment"}}</span>
-      <input name="system.environment" type="text" value="{{data.system.environment}}" tabindex="1" />
+    <label class="property missionprofile">
+      <span class="label">{{localize "sta.starship.missionprofile"}}</span>
+      <input name="system.missionprofile" type="text" value="{{data.system.missionprofile}}" tabindex="1" />
     </label>
-    <label class="property upbringing">
-      <span class="label">{{localize "sta.character.upbringing"}}</span>
-      <input name="system.upbringing" type="text" value="{{data.system.upbringing}}" tabindex="1" />
+    <label class="property scale">
+      <span class="label">{{localize "sta.starship.scale"}}</span>
+      <input name="system.scale" type="text" value="{{data.system.scale}}" tabindex="1" data-dtype="Number" />
+    </label>
+    <label class="property resistance">
+      <span class="label">{{localize "sta.starship.resistance"}}</span>
+      <input name="system.resistance" type="text" value="{{data.system.resistance}}" tabindex="1" data-dtype="Number" />
     </label>
 
     <div class="scale-selection roll-d6">
@@ -62,91 +51,81 @@
     </div>
   </section>
 
-  <section class="status border-left">
-    <h1>{{localize "sta.status._plural"}}</h1>
+  <section class="systems edge-right-down reverse">
+    <h1 class="reverse">{{localize "sta.starship.systems._plural"}}</h1>
 
-    <section class="property determination border-left">
-      {{#with data.system.determination}}
-        <h3>{{localize "sta.character.determination"}}</h3>
-        <div class="scale-value">
-          {{#range 0 max}}
-            <label class="scale-pill
-              {{#if (eq 0 i)}}warn{{/if}}
-              {{#if (eq ../value i)}}checked{{/if}}">
-              {{i}}
-              <input name="system.determination.value" type="radio" value="{{i}}" data-dtype="Number"
-                     {{#if (eq ../value i)}}checked="checked"{{/if}} />
-            </label>
-          {{/range}}
-        </div>
-      {{/with}}
-    </section>
+    <div class="property shields">
+      {{localize "sta.starship.shields"}}
+      {{#range 0 12}}
+        <label class="scale-pill
+          {{#if (eq 0 i)}}warn{{/if}}
+          {{#if (eq ../data.system.shields i)}}checked{{/if}}">
+          {{i}}
+          <input name="system.shields" type="radio" value="{{i}}" data-dtype="Number"
+                 {{#if (eq ../data.system.shields i)}}checked="checked"{{/if}} />
+        </label>
+      {{/range}}
+    </div>
 
-    <section class="property stress border-left">
-      {{#with data.system.stress}}
-        <h3>{{localize "sta.character.stress"}}</h3>
-        <div class="scale-value">
-          {{#range 0 max}}
-            <label class="scale-pill
-              {{#if (eq 0 i)}}error{{/if}}
-              {{#if (eq ../value i)}}checked{{/if}}">
-              {{i}}
-              <input name="system.stress.value" type="radio" value="{{i}}" data-dtype="Number"
-                     {{#if (eq ../value i)}}checked="checked"{{/if}} />
-            </label>
-          {{/range}}
-        </div>
-      {{/with}}
-    </section>
-
-    <section class="injuries border-left">
-      <h2>
-        {{localize "sta.item.injury._plural"}}
-        <a class="control flex-last create" title="{{localize "sta.item.injury.create"}}" data-type="injury">
-          <i class="fas fa-plus"></i>
-        </a>
-      </h2>
-      <ol class="list">
-        {{#each sta.injuries}}
-          <li class="item" data-item-id="{{_id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-            <div class="name">{{name}}</div>
-            <div class="controls">
-              <a class="control edit" title="{{localize "sta.item.injury.edit"}}"><i class="fas fa-edit"></i></a>
-              <a class="control delete" title="{{localize "sta.item.injury.delete"}}"><i class="fas fa-trash"></i></a>
-            </div>
-            <div class="description">{{description}}</div>
-          </li>
-        {{/each}}
-        {{^sta.injuries}}
-          <li class="item">{{localize "sta.item.injury.empty"}}</li>
-        {{/sta.injuries}}
-      </ol>
-    </section>
-  </section>
-
-  <section class="attributes edge-right-down reversed">
-    <h1 class="reverse">{{localize "sta.character.attributes._plural"}}</h1>
-    {{#each data.system.attributes as |value name|}}
-      <label class="property attribute attribute-{{name}} reverse">
-        <input class="inner select" name="selected.attribute" type="radio" value={{name}}"">
-        <input class="inner form-control" name="system.attributes.{{name}}" type="text" value="{{value}}"
+    {{#each data.system.systems as |value name|}}
+      <label class="property system system-{{name}} reverse">
+        <input class="inner select" name="selected.system" type="radio" value={{name}}"">
+        <input class="inner form-control" name="system.systems.{{name}}" type="text" value="{{value}}"
                data-dtype="Number" tabindex="2" />
-        <span class="label">{{localize (concat "sta.character.attributes." name)}}</span>
+        <span class="label">{{localize (concat "sta.starship.systems." name)}}</span>
+        <span class="breaches breaches-{{name}} flex-last">
+          {{#range 0 ../data.system.scale}}
+            <label class="scale-pill
+              {{#if (eq i 0)}}fatal{{/if}}
+              {{#if (lt i 0)}}error{{/if}}
+              {{#if (lt i 0)}}warn{{/if}}
+              {{#if (eq (concat "data.system.breaches." name) i)}}checked{{/if}}">
+            {{i}}
+              <input name="system.breaches.{{name}}" type="radio" value="{{i}}" data-dtype="Number"
+                     {{#if (eq (concat "data.system.breaches." name) i)}}checked="checked"{{/if}} />
+          </label>
+          {{/range}}
+        </span>
       </label>
     {{/each}}
+
+    <h3 class="property power">
+      {{localize "sta.starship.power"}}
+      {{#range 0 12}}
+        <label class="scale-pill
+          {{#if (eq 0 i)}}error{{/if}}
+          {{#if (eq ../data.system.power i)}}checked{{/if}}">
+          {{i}}
+          <input name="system.power" type="radio" value="{{i}}" data-dtype="Number"
+                 {{#if (eq ../data.system.power i)}}checked="checked"{{/if}} />
+        </label>
+      {{/range}}
+    </h3>
   </section>
 
-  <section class="disciplines edge-left-down">
-    <h1>{{localize "sta.character.disciplines._plural"}}</h1>
-    {{#each data.system.disciplines as |value name|}}
-      <label class="property discipline discipline-{{name}}">
-        <input class="inner select" name="selected.discipline" type="radio" value="{{name}}">
-        <input class="inner form-control" name="system.disciplines.{{name}}" type="text" value="{{value}}"
+  <section class="departments edge-left-down">
+    <h1>{{localize "sta.starship.departments._plural"}}</h1>
+    {{#each data.system.departments as |value name|}}
+      <label class="property department department-{{name}}">
+        <input class="inner select" name="selected.department" type="radio" value="{{name}}">
+        <input class="inner form-control" name="system.departments.{{name}}" type="text" value="{{value}}"
                data-dtype="Number" tabindex="3" />
-        <span class="label">{{localize (concat "sta.character.disciplines." name)}}</span>
+        <span class="label">{{localize (concat "sta.starship.departments." name)}}</span>
       </label>
     {{/each}}
+
+    <div class="property crew reverse">
+      {{localize "sta.starship.crew"}}
+      {{#range 0 data.system.scale}}
+        <label class="scale-pill
+          {{#if (eq 0 i)}}error{{/if}}
+          {{#if (eq ../data.system.crew i)}}checked{{/if}}">
+          {{i}}
+          <input name="system.crew" type="radio" value="{{i}}" data-dtype="Number"
+                 {{#if (eq ../data.system.crew i)}}checked="checked"{{/if}} />
+        </label>
+      {{/range}}
+    </div>
   </section>
 
   <section class="talents border-left">
@@ -199,39 +178,13 @@
     </ol>
   </section>
 
-  <section class="focuses border-left">
-    <h2>
-      {{localize "sta.item.focus._plural"}}
-      <a class="control flex-last create" title="{{localize "sta.item.focus.create"}}" data-type="focus">
-        <i class="fas fa-plus"></i>
-      </a>
-    </h2>
-    <ol class="list">
-      {{#sta.focuses}}
-        <li class="item" data-item-id="{{_id}}">
-          <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-          <div class="name">{{name}}</div>
-          <div class="controls">
-            <a class="control edit" title="{{localize "sta.item.focus.edit"}}"><i class="fas fa-edit"></i></a>
-            <a class="control delete" title="{{localize "sta.item.focus.delete"}}"><i class="fas fa-trash"></i></a>
-          </div>
-          <div class="description">{{description}}</div>
-        </li>
-      {{/sta.focuses}}
-      {{^sta.focuses}}
-        <li class="item">{{localize "sta.item.focus.empty"}}</li>
-      {{/sta.focuses}}
-    </ol>
-  </section>
-
   <section class="progress border-left">
-    <h1>{{localize "sta.character.progress"}}</h1>
+    <h1>{{localize "sta.starship.progress"}}</h1>
     <section class="traits border-left">
       <h2>
         {{localize "sta.item.trait._plural"}}
         <a class="control flex-last create" title="{{localize "sta.item.trait.create"}}" data-type="trait">
-          <i class="fas fa-plus"></i>
-        </a>
+          <i class="fas fa-plus"></i></a>
       </h2>
       <ol class="list">
         {{#sta.traits}}
@@ -251,29 +204,29 @@
       </ol>
     </section>
 
-    <section class="milestones border-left">
+    <section class="refits border-left">
       <h2>
-        {{localize "sta.item.milestone._plural"}}
-        <a class="control flex-last create" title="{{localize "sta.item.milestone.create"}}" data-type="milestone">
+        {{localize "sta.item.refit._plural"}}
+        <a class="control flex-last create" title="{{localize "sta.item.refit.create"}}" data-type="refits">
           <i class="fas fa-plus"></i>
         </a>
       </h2>
       <ol class="list">
-        {{#sta.milestones}}
+        {{#sta.refits}}
           <li class="item" data-item-id="{{_id}}">
             <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
             <div class="name">{{name}}</div>
             <div class="controls">
-              <a class="control edit" title="{{localize "sta.item.milestone.edit"}}"><i class="fas fa-edit"></i></a>
-              <a class="control delete" title="{{localize "sta.item.milestone.delete"}}"><i
+              <a class="control edit" title="{{localize "sta.item.refit.edit"}}"><i class="fas fa-edit"></i></a>
+              <a class="control delete" title="{{localize "sta.item.refit.delete"}}"><i
                 class="fas fa-trash"></i></a>
             </div>
             <div class="description">{{description}}</div>
           </li>
-        {{/sta.milestones}}
-        {{^sta.milestones}}
-          <li class="item">{{localize "sta.item.milestone.empty"}}</li>
-        {{/sta.milestones}}
+        {{/sta.refits}}
+        {{^sta.refits}}
+          <li class="item">{{localize "sta.item.refit.empty"}}</li>
+        {{/sta.refits}}
       </ol>
     </section>
 
@@ -320,8 +273,9 @@
     <section class="armor border-left">
       <h2>
         {{localize "sta.item.armor._plural"}}
-        <a class="control flex-last create" title="{{localize "sta.item.armor.create"}}" data-type="armor"><i
-          class="fas fa-plus"></i></a>
+        <a class="control flex-last create" title="{{localize "sta.item.armor.create"}}" data-type="armor">
+          <i class="fas fa-plus"></i>
+        </a>
       </h2>
       <ol class="list">
         {{#sta.armor}}
@@ -367,6 +321,5 @@
       </ol>
     </section>
   </section>
-
 
 </form>
