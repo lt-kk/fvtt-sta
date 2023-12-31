@@ -6,7 +6,7 @@
 
   <section class="summary">
     <section class="property reputation border-left">
-      {{#with data.system.reputation}}
+      {{#with sta.reputation}}
         <h3>{{localize "sta.character.reputation"}}</h3>
         <div class="scale-value">
           {{#range 0 max}}
@@ -14,7 +14,7 @@
               {{#if (eq 0 i)}}error{{/if}}
               {{#if (eq ../value i)}}checked{{/if}}">
               {{i}}
-              <input name="system.reputation.value" type="radio" value="{{i}}" data-dtype="Number"
+              <input name="system.reputation" type="radio" value="{{i}}" data-dtype="Number"
                      {{#if (eq ../value i)}}checked="checked"{{/if}} />
             </label>
           {{/range}}
@@ -23,27 +23,27 @@
     </section>
     <label class="property name">
       <span class="label">{{localize "sta.character.name"}}</span>
-      <input name="name" type="text" value="{{data.name}}" tabindex="1" />
+      <input name="name" type="text" value="{{sta.name}}" tabindex="1" />
     </label>
     <label class="property rank">
       <span class="label">{{localize "sta.character.rank"}}</span>
-      <input name="system.rank" type="text" value="{{data.system.rank}}" tabindex="1" />
+      <input name="system.rank" type="text" value="{{sta.rank}}" tabindex="1" />
     </label>
     <label class="property assignment">
       <span class="label">{{localize "sta.character.assignment"}}</span>
-      <input name="system.assignment" type="text" value="{{data.system.assignment}}" tabindex="1" />
+      <input name="system.assignment" type="text" value="{{sta.assignment}}" tabindex="1" />
     </label>
     <label class="property species">
       <span class="label">{{localize "sta.character.species"}}</span>
-      <input name="system.species" type="text" value="{{data.system.species}}" tabindex="1" />
+      <input name="system.species" type="text" value="{{sta.species}}" tabindex="1" />
     </label>
     <label class="property environment">
       <span class="label">{{localize "sta.character.environment"}}</span>
-      <input name="system.environment" type="text" value="{{data.system.environment}}" tabindex="1" />
+      <input name="system.environment" type="text" value="{{sta.environment}}" tabindex="1" />
     </label>
     <label class="property upbringing">
       <span class="label">{{localize "sta.character.upbringing"}}</span>
-      <input name="system.upbringing" type="text" value="{{data.system.upbringing}}" tabindex="1" />
+      <input name="system.upbringing" type="text" value="{{sta.upbringing}}" tabindex="1" />
     </label>
 
     <div class="scale-selection roll-d6">
@@ -66,7 +66,7 @@
     <h1>{{localize "sta.status._plural"}}</h1>
 
     <section class="property determination border-left">
-      {{#with data.system.determination}}
+      {{#with sta.determination}}
         <h3>{{localize "sta.character.determination"}}</h3>
         <div class="scale-value">
           {{#range 0 max}}
@@ -74,7 +74,7 @@
               {{#if (eq 0 i)}}warn{{/if}}
               {{#if (eq ../value i)}}checked{{/if}}">
               {{i}}
-              <input name="system.determination.value" type="radio" value="{{i}}" data-dtype="Number"
+              <input name="system.determination" type="radio" value="{{i}}" data-dtype="Number"
                      {{#if (eq ../value i)}}checked="checked"{{/if}} />
             </label>
           {{/range}}
@@ -83,7 +83,7 @@
     </section>
 
     <section class="property stress border-left">
-      {{#with data.system.stress}}
+      {{#with sta.stress}}
         <h3>{{localize "sta.character.stress"}}</h3>
         <div class="scale-value">
           {{#range 0 max}}
@@ -91,7 +91,7 @@
               {{#if (eq 0 i)}}error{{/if}}
               {{#if (eq ../value i)}}checked{{/if}}">
               {{i}}
-              <input name="system.stress.value" type="radio" value="{{i}}" data-dtype="Number"
+              <input name="system.stress" type="radio" value="{{i}}" data-dtype="Number"
                      {{#if (eq ../value i)}}checked="checked"{{/if}} />
             </label>
           {{/range}}
@@ -127,7 +127,7 @@
 
   <section class="attributes edge-right-down reversed">
     <h1 class="reverse">{{localize "sta.character.attributes._plural"}}</h1>
-    {{#each data.system.attributes as |value name|}}
+    {{#each sta.attributes as |value name|}}
       <label class="property attribute attribute-{{name}} reverse">
         <input class="inner select" name="selected.attribute" type="radio" value={{name}}"">
         <input class="inner form-control" name="system.attributes.{{name}}" type="text" value="{{value}}"
@@ -139,7 +139,7 @@
 
   <section class="disciplines edge-left-down">
     <h1>{{localize "sta.character.disciplines._plural"}}</h1>
-    {{#each data.system.disciplines as |value name|}}
+    {{#each sta.disciplines as |value name|}}
       <label class="property discipline discipline-{{name}}">
         <input class="inner select" name="selected.discipline" type="radio" value="{{name}}">
         <input class="inner form-control" name="system.disciplines.{{name}}" type="text" value="{{value}}"
@@ -279,7 +279,7 @@
 
     <section class="notes border-left">
       <h2>{{localize "sta.notes._plural"}}</h2>
-      {{editor data.system.notes target="system.notes" button=true owner=owner editable=editable}}
+      {{editor sta.notes target="system.notes" button=true owner=owner editable=editable}}
     </section>
   </section>
 

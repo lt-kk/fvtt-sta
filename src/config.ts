@@ -1,26 +1,30 @@
-import {
-  StaCharacterArmor,
-  StaCharacterFocus,
-  StaCharacterMilestone,
-  StaCharacterWeapon,
-  StaInjury,
-} from "./model/StaCharacter";
-import { StaItem, StaLaunchbay, StaTalent, StaValue } from "./model/StaTypes";
-import { StaStarshipWeapon } from "./model/StaStarship";
+import { StaArmor } from "./item/armor/StaArmor";
+import { StaFocus } from "./item/focus/StaFocus";
+import { StaMilestone } from "./item/milestone/StaMilestone";
+import { StaCharacterWeapon } from "./item/characterweapon/StaCharacterWeapon";
+import { StaInjury } from "./item/injury/StaInjury";
+import { StaStarshipWeapon } from "./item/starshipweapon/StaStarshipWeapon";
+import { StaItem } from "./item/item/StaItem";
+import { StaLaunchbay } from "./item/launchbay/StaLaunchbay";
+import { StaTalent } from "./item/talent/StaTalent";
+import { StaValue } from "./item/value/StaValue";
+
+const systemName = "fvtt-sta";
 
 export const sta = {
   // this reference is here so TypeScript is happy...
   game: game as Game,
-  systemName: "fvtt-sta",
+  systemName: systemName,
+  templateBasePath: `systems/${systemName}/templates`,
   type: {
     item: {
-      armor: StaCharacterArmor,
+      armor: StaArmor,
       characterweapon: StaCharacterWeapon,
-      focus: StaCharacterFocus,
+      focus: StaFocus,
       injury: StaInjury,
       item: StaItem,
       launchbay: StaLaunchbay,
-      milestone: StaCharacterMilestone,
+      milestone: StaMilestone,
       starshipweapon: StaStarshipWeapon,
       talent: StaTalent,
       value: StaValue,
@@ -33,8 +37,8 @@ export const sta = {
       "item",
       "milestone",
       "talent",
-      "value"
-    ]
+      "value",
+    ],
   },
   settings: {
     maxD20: 5, // not used in sheets
@@ -51,9 +55,9 @@ export const sta = {
       armor: {
         protection: {
           min: 0,
-          max: 4
+          max: 4,
         },
-      }
-    }
-  }
+      },
+    },
+  },
 };

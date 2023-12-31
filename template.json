@@ -5,9 +5,9 @@
       "starship"
     ],
     "character": {
-      "species": "",
       "rank": "",
       "assignment": "",
+      "species": "",
       "environment": "",
       "upbringing": "",
       "notes": "",
@@ -27,46 +27,43 @@
         "science": 1,
         "medicine": 1
       },
-      "milestones": [],
-      "traits": [],
-      "talents": [],
-      "values": [],
-      "focuses": [],
-      "weapons": [],
-      "armor": [],
-      "equipment": [],
-      "injuries": [],
-      "reputation": {
-        "value": 10,
-        "max": 20
-      },
-      "stress": {
-        "value": 8,
-        "max": 8
-      },
-      "determination": {
-        "value": 3,
-        "max": 3
-      }
+      "reputation": 10,
+      "determination": -1,
+      "stress": -1
     },
     "starship": {
-      "spaceframe": "",
       "designation": "",
-      "servicedate": null,
+      "spaceframe": "",
+      "servicedate": -1,
       "missionprofile": "",
       "scale": 1,
       "resistance": 1,
-      "shields": 8,
-      "power": 8,
-      "crew": 8,
       "notes": "",
       "systems": {
-        "communications": 7,
-        "computers": 7,
-        "engines": 7,
-        "sensors": 7,
-        "structure": 7,
-        "weapons": 7
+        "communications": {
+          "value": 7,
+          "breaches": -1
+        },
+        "computers": {
+          "value": 7,
+          "breaches": -1
+        },
+        "engines": {
+          "value": 7,
+          "breaches": -1
+        },
+        "sensors": {
+          "value": 7,
+          "breaches": -1
+        },
+        "structure": {
+          "value": 7,
+          "breaches": -1
+        },
+        "weapons": {
+          "value": 7,
+          "breaches": -1
+        }
       },
       "departments": {
         "command": 1,
@@ -76,21 +73,9 @@
         "science": 1,
         "medicine": 1
       },
-      "breaches": {
-        "communications": 0,
-        "computers": 0,
-        "engines": 0,
-        "sensors": 0,
-        "structure": 0,
-        "weapons": 0
-      },
-      "launchbay": [],
-      "refits": [],
-      "talents": [],
-      "traits": [],
-      "values": [],
-      "equipment": [],
-      "weapons": []
+      "shields": -1,
+      "power": -1,
+      "crew": -1
     }
   },
   "Item": {

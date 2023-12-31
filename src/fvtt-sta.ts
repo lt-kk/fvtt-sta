@@ -1,42 +1,43 @@
 import "../styles/fvtt-sta.less";
 import { sta } from "./config";
-import { GenericItemSheet } from "./sheets/GenericItemSheet";
-import { CharacterSheet } from "./sheets/actor/CharacterSheet";
-import { registerHandlebarHelpers } from "./TemplateHelpers";
-import { ArmorSheet } from "./sheets/item/ArmorSheet";
-import { StarshipSheet } from "./sheets/actor/StarshipSheet";
-
-console.log(sta.systemName + " | system loaded.");
+import { registerHandlebarHelpers } from "./template/TemplateHelpers";
+import { itemTypes, StaItem } from "./item/StaItem";
+import { actorTypes, StaActor } from "./actor/StaActor";
 
 Hooks.on("init", () => {
   console.log(sta.systemName + " | Initializing system...");
-  sta.game = game as Game
+  sta.game = game as Game;
 
-  // Sheets
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet(sta.systemName, CharacterSheet, { types: ["character"] });
-  Actors.registerSheet(sta.systemName, StarshipSheet, { types: ["starship"] });
+  CONFIG.Actor.documentClass = StaActor;
+  CONFIG.Item.documentClass = StaItem;
 
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet(sta.systemName, ArmorSheet, { types: ["armor"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["characterweapon"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["focus"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["injury"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["item"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["launchbay"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["milestone"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["starshipweapon"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["talent"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["value"] });
-
-  // Templates
-  registerHandlebarHelpers()
-  const templatePath = `systems/${sta.systemName}/templates`
-  loadTemplates([
-
-  ])
+  registerTemplates();
+  registerActorSheets();
+  registerItemSheets();
 });
 
 Hooks.on("ready", () => {
   console.log(sta.systemName + " | Initialization complete!");
 });
+
+
+function registerActorSheets() {
+  Actors.unregisterSheet("core", ActorSheet);
+  Object.entries(actorTypes)
+    .forEach(([type, config]) =>
+      Actors.registerSheet(sta.systemName, config.sheet, { types: [type] }),
+    );
+}
+
+function registerItemSheets() {
+  Items.unregisterSheet("core", ItemSheet);
+  Object.entries(itemTypes)
+    .forEach(([type, config]) =>
+      Actors.registerSheet(sta.systemName, config.sheet, { types: [type] }),
+    );
+}
+
+function registerTemplates() {
+  registerHandlebarHelpers();
+  loadTemplates([]);
+}

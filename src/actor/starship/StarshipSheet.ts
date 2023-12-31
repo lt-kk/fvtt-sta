@@ -1,23 +1,25 @@
 import { sta } from "../../config";
-import { LooseObject } from "../../util";
-import { confirmDialog } from "../../util/ConfimDialog";
+import { LooseObject } from "../../util/util";
+import { confirmDialog } from "../../dialog/ConfimDialog";
 
-export class CharacterSheet extends ActorSheet {
+export class StarshipSheet extends ActorSheet {
+  static templatePath = `${sta.templateBasePath}/actor/starship/StarshipSheet.hbs`;
+
   get template() {
-    return `systems/fvtt-sta/templates/sheets/actor/character-sheet.hbs`;
+    return StarshipSheet.templatePath;
   }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["actor-sheet", "character-sheet"],
-      width: 710,
+      classes: ["actor-sheet", "starship-sheet"],
+      width: 640,
       height: 870,
     });
   }
 
   override getData(options?: Partial<ItemSheet.Options>): Data {
-    const data = super.getData(options) as Data;
-    let sheetData = {
+    const data = super.getData(options) as ActorSheet.Data;
+    let sheetData: Data = {
       ...data,
       settings: sta.settings,
       sta: { // TODO replace with instance of StaCharacter
@@ -32,10 +34,11 @@ export class CharacterSheet extends ActorSheet {
         weapons: this.filterItems(data, "characterweapon"),
       },
     };
+    console.log(sheetData);
     return sheetData;
   }
 
-  private filterItems(data: Data, itemType: string): object[] {
+  private filterItems(data: ActorSheet.Data, itemType: string): object[] {
     return data.items.filter((item) => {
       return item.type === itemType;
     });
@@ -82,7 +85,7 @@ export class CharacterSheet extends ActorSheet {
         sta.game.i18n.localize("sta.confirm.delete.title"),
         sta.game.i18n.format("sta.confirm.delete.content", {
           ...item,
-          type: sta.game.i18n.localize(`sta.item.${item?.type}._singular`)
+          type: sta.game.i18n.localize(`sta.item.${item?.type}._singular`),
         }),
       ).render(true);
     }
@@ -109,12 +112,6 @@ export class CharacterSheet extends ActorSheet {
 }
 
 type Data = ActorSheet.Data & {
-  // known to be present
-  data: {
-    system: object;
-    items: Items;
-  };
-  // derived
-  config: object;
-  sta: LooseObject
+  settings: object;
+  sta: LooseObject<any>
 };

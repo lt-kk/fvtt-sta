@@ -1,5 +1,11 @@
-import { CurrentValue, StaItem, StaLaunchbay, StaTalent, StaTrait, StaValue, StaWeapon } from "./StaTypes";
-import { StaRule } from "./StaRule";
+import { CurrentValue } from "../../model/StaTypes";
+import { StaRefit } from "../../item/refit/StaRefit";
+import { StaStarshipWeapon } from "../../item/starshipweapon/StaStarshipWeapon";
+import { StaItem } from "../../item/item/StaItem";
+import { StaLaunchbay } from "../../item/launchbay/StaLaunchbay";
+import { StaTalent } from "../../item/talent/StaTalent";
+import { StaTrait } from "../../item/trait/StaTrait";
+import { StaValue } from "../../item/value/StaValue";
 
 export class StaStarship {
   name: string = "";
@@ -20,7 +26,7 @@ export class StaStarship {
   launchbay: StaLaunchbay[] = [];
   cargo: StaItem[] = [];
 
-  refits: StaStarshipRefit[] = [];
+  refits: StaRefit[] = [];
   traits: StaTrait[] = [];
 
   breaches: StaBreaches = new StaBreaches();
@@ -49,30 +55,6 @@ export class StaStarshipDepartments {
   medicine: number = 1;
 }
 
-export class StaStarshipRefit {
-  name: string = "";
-  description: string = "";
-  rule: StaRule | null = null;
-}
-
-export class StaStarshipWeapon extends StaWeapon {
-  qualities: StaStarshipWeaponQualities = new StaStarshipWeaponQualities();
-}
-
-export class StaStarshipWeaponQualities {
-  area: boolean = false;
-  spread: boolean = false;
-  hiddenx: number = 0;
-  piercingx: number = 0;
-  viciousx: number = 0;
-
-  dampening: boolean = false;
-  calibration: boolean = false;
-  devastating: boolean = false;
-  highyield: boolean = false;
-  persistentx: number = 0;
-  versatilex: number = 0;
-}
 
 export class StaBreaches {
   communications = new StaStarshipBreach("communications");

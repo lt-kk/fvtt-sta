@@ -1,45 +1,31 @@
 import { sta } from "../../config";
-import { LooseObject } from "../../util";
-import { confirmDialog } from "../../util/ConfimDialog";
+import { actorItems, actorSystem, LooseObject } from "../../util/util";
+import { confirmDialog } from "../../dialog/ConfimDialog";
+import { StaCharacter } from "./StaCharacter";
 
-export class StarshipSheet extends ActorSheet {
+export class CharacterSheet extends ActorSheet {
+  static templatePath = `${sta.templateBasePath}/actor/character/CharacterSheet.hbs`;
+
   get template() {
-    return `systems/fvtt-sta/templates/sheets/actor/starship-sheet.hbs`;
+    return CharacterSheet.templatePath;
   }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["actor-sheet", "starship-sheet"],
-      width: 640,
+      classes: ["actor-sheet", "character-sheet"],
+      width: 710,
       height: 870,
     });
   }
 
   override getData(options?: Partial<ItemSheet.Options>): Data {
-    const data = super.getData(options) as Data;
-    let sheetData = {
+    const data = super.getData(options) as ActorSheet.Data;
+    let sheetData: Data = {
       ...data,
       settings: sta.settings,
-      sta: { // TODO replace with instance of StaCharacter
-        armor: this.filterItems(data, "armor"),
-        items: this.filterItems(data, "item"),
-        focuses: this.filterItems(data, "focus"),
-        injuries: this.filterItems(data, "injury"),
-        milestones: this.filterItems(data, "milestone"),
-        talents: this.filterItems(data, "talent"),
-        traits: this.filterItems(data, "trait"),
-        values: this.filterItems(data, "value"),
-        weapons: this.filterItems(data, "characterweapon"),
-      },
+      sta: new StaCharacter(data.actor.name!, actorSystem(data.actor), actorItems(data.actor)),
     };
-    console.log(sheetData);
     return sheetData;
-  }
-
-  private filterItems(data: Data, itemType: string): object[] {
-    return data.items.filter((item) => {
-      return item.type === itemType;
-    });
   }
 
   override activateListeners(html: JQuery) {
@@ -83,7 +69,7 @@ export class StarshipSheet extends ActorSheet {
         sta.game.i18n.localize("sta.confirm.delete.title"),
         sta.game.i18n.format("sta.confirm.delete.content", {
           ...item,
-          type: sta.game.i18n.localize(`sta.item.${item?.type}._singular`)
+          type: sta.game.i18n.localize(`sta.item.${item?.type}._singular`),
         }),
       ).render(true);
     }
@@ -110,12 +96,6 @@ export class StarshipSheet extends ActorSheet {
 }
 
 type Data = ActorSheet.Data & {
-  // known to be present
-  data: {
-    system: object;
-    items: Items;
-  };
-  // derived
-  config: object;
-  sta: LooseObject
+  settings: object;
+  sta: LooseObject<any>
 };

@@ -1,15 +1,17 @@
 import { sta } from "../config";
 
 export class GenericItemSheet extends ItemSheet {
+  static templatePath = `${sta.templateBasePath}/item/GenericItemSheet.hbs`;
+
   get template() {
-    return `systems/fvtt-sta/templates/sheets/generic-item-sheet.hbs`;
+    return GenericItemSheet.templatePath;
   }
 
   override getData(options?: Partial<ItemSheet.Options>): Data {
     const data = super.getData(options) as Data;
     return {
       ...data,
-      config: sta,
+      settings: sta.settings,
       fields: Object.keys(data.data.system),
     };
   }
@@ -21,6 +23,6 @@ type Data = ItemSheet.Data & {
     system: object;
   };
   // derived
-  config: object;
+  settings: object;
   fields: string[];
 };
