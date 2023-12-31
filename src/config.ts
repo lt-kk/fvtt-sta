@@ -42,7 +42,7 @@ export const sta = {
   },
   settings: {
     maxD20: 5, // not used in sheets
-    maxD6: 10,
+    maxD6: 9,
     item: {
       opportunity: {
         min: 0,

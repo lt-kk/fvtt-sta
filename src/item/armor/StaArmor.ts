@@ -1,7 +1,13 @@
 import { itemSystem } from "../../util/util";
 
 
+export function createArmor(document: Item): StaArmor {
+  return new StaArmor(document.id!, document.name!, document.img, itemSystem(document));
+}
+
+
 export class StaArmor {
+  id: string;
   name: string;
   img: string | null;
   protection: number;
@@ -13,6 +19,7 @@ export class StaArmor {
   escalation: number;
 
   constructor(
+    id: string,
     name: string,
     img: string | null,
     {
@@ -24,6 +31,7 @@ export class StaArmor {
       escalation = 0,
     } = {},
   ) {
+    this.id = id;
     this.name = name;
     this.img = img;
     this.protection = protection;
@@ -33,9 +41,4 @@ export class StaArmor {
     this.opportunity = opportunity;
     this.escalation = escalation;
   }
-}
-
-
-export function createArmor(document: Item): StaArmor {
-  return new StaArmor(document.name!, document.img, itemSystem(document));
 }

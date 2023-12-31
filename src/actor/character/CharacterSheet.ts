@@ -1,7 +1,7 @@
 import { sta } from "../../config";
-import { actorItems, actorSystem, LooseObject } from "../../util/util";
+import { LooseObject } from "../../util/util";
 import { confirmDialog } from "../../dialog/ConfimDialog";
-import { StaCharacter } from "./StaCharacter";
+import { createCharacter } from "./StaCharacter";
 
 export class CharacterSheet extends ActorSheet {
   static templatePath = `${sta.templateBasePath}/actor/character/CharacterSheet.hbs`;
@@ -23,7 +23,7 @@ export class CharacterSheet extends ActorSheet {
     let sheetData: Data = {
       ...data,
       settings: sta.settings,
-      sta: new StaCharacter(data.actor.name!, actorSystem(data.actor), actorItems(data.actor)),
+      sta: createCharacter(data.actor),
     };
     return sheetData;
   }

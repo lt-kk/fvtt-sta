@@ -8,10 +8,17 @@ import { createItem, StaItem } from "../../item/item/StaItem";
 import { createTalent, StaTalent } from "../../item/talent/StaTalent";
 import { createTrait, StaTrait } from "../../item/trait/StaTrait";
 import { createValue, StaValue } from "../../item/value/StaValue";
-import { filterItemType } from "../../util/util";
+import { actorItems, actorSystem, filterItemType } from "../../util/util";
+
+
+export function createCharacter(document: Actor): StaCharacter {
+  return new StaCharacter(document.name!, document.img, actorSystem(document), actorItems(document));
+}
+
 
 export class StaCharacter {
   name: string;
+  img: string | null;
   species: string;
   rank: string;
   assignment: string;
@@ -41,6 +48,7 @@ export class StaCharacter {
 
   constructor(
     name: string,
+    img: string | null,
     {
       rank = "",
       assignment = "",
@@ -57,6 +65,7 @@ export class StaCharacter {
     items: Collection<Item>,
   ) {
     this.name = name;
+    this.img = img;
     this.rank = rank;
     this.assignment = assignment;
     this.species = species;
@@ -70,14 +79,14 @@ export class StaCharacter {
     this.stress = new CurrentValue(stress, this.attributes.fitness + this.disciplines.security);
 
     this.armor = filterItemType(items, "armor").map((item) => createArmor(item));
-    this.focuses = filterItemType(items, "armor").map((item) => createFocus(item));
-    this.injuries = filterItemType(items, "armor").map((item) => createInjury(item));
-    this.items = filterItemType(items, "items").map((item) => createItem(item));
-    this.milestones = filterItemType(items, "armor").map((item) => createMilestone(item));
-    this.talents = filterItemType(items, "armor").map((item) => createTalent(item));
-    this.traits = filterItemType(items, "armor").map((item) => createTrait(item));
-    this.values = filterItemType(items, "armor").map((item) => createValue(item));
-    this.weapons = filterItemType(items, "armor").map((item) => createCharacterWeapon(item));
+    this.focuses = filterItemType(items, "focus").map((item) => createFocus(item));
+    this.injuries = filterItemType(items, "injurie").map((item) => createInjury(item));
+    this.items = filterItemType(items, "item").map((item) => createItem(item));
+    this.milestones = filterItemType(items, "milestone").map((item) => createMilestone(item));
+    this.talents = filterItemType(items, "talent").map((item) => createTalent(item));
+    this.traits = filterItemType(items, "trait").map((item) => createTrait(item));
+    this.values = filterItemType(items, "value").map((item) => createValue(item));
+    this.weapons = filterItemType(items, "characterweapon").map((item) => createCharacterWeapon(item));
   }
 
 }

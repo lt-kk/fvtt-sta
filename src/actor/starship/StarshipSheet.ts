@@ -1,6 +1,7 @@
 import { sta } from "../../config";
 import { LooseObject } from "../../util/util";
 import { confirmDialog } from "../../dialog/ConfimDialog";
+import { createStarship } from "./StaStarship";
 
 export class StarshipSheet extends ActorSheet {
   static templatePath = `${sta.templateBasePath}/actor/starship/StarshipSheet.hbs`;
@@ -22,17 +23,7 @@ export class StarshipSheet extends ActorSheet {
     let sheetData: Data = {
       ...data,
       settings: sta.settings,
-      sta: { // TODO replace with instance of StaCharacter
-        armor: this.filterItems(data, "armor"),
-        items: this.filterItems(data, "item"),
-        focuses: this.filterItems(data, "focus"),
-        injuries: this.filterItems(data, "injury"),
-        milestones: this.filterItems(data, "milestone"),
-        talents: this.filterItems(data, "talent"),
-        traits: this.filterItems(data, "trait"),
-        values: this.filterItems(data, "value"),
-        weapons: this.filterItems(data, "characterweapon"),
-      },
+      sta: createStarship(data.actor),
     };
     console.log(sheetData);
     return sheetData;

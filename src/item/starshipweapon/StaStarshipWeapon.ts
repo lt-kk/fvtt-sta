@@ -2,7 +2,13 @@ import { StaRange } from "../../model/StaTypes";
 import { itemSystem } from "../../util/util";
 
 
+export function createStarshipWeapon(document: Item): StaStarshipWeapon {
+  return new StaStarshipWeapon(document.id!, document.name!, document.img, itemSystem(document));
+}
+
+
 export class StaStarshipWeapon {
+  id: string;
   name: string;
   img: string | null;
   damage: number;
@@ -12,6 +18,7 @@ export class StaStarshipWeapon {
   qualities: StaStarshipWeaponQualities;
 
   constructor(
+    id: string,
     name = "",
     img: string | null,
     {
@@ -22,6 +29,7 @@ export class StaStarshipWeapon {
       qualities = {},
     },
   ) {
+    this.id = id;
     this.name = name;
     this.img = img;
     this.damage = damage;
@@ -73,9 +81,4 @@ export class StaStarshipWeaponQualities {
     this.persistentx = persistentx;
     this.versatilex = versatilex;
   }
-}
-
-
-export function createStarshipWeapon(document: Item): StaStarshipWeapon {
-  return new StaStarshipWeapon(document.name!, document.img, itemSystem(document));
 }

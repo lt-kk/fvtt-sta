@@ -2,7 +2,13 @@ import { StaRange } from "../../model/StaTypes";
 import { itemSystem } from "../../util/util";
 
 
+export function createCharacterWeapon(document: Item): StaCharacterWeapon {
+  return new StaCharacterWeapon(document.id!, document.name!, document.img, itemSystem(document));
+}
+
+
 export class StaCharacterWeapon {
+  id: string;
   name: string;
   img: string | null;
   damage: number;
@@ -12,6 +18,7 @@ export class StaCharacterWeapon {
   qualities: StaCharacterWeaponQualities;
 
   constructor(
+    id: string,
     name = "",
     img: string | null,
     {
@@ -22,6 +29,7 @@ export class StaCharacterWeapon {
       qualities = {},
     },
   ) {
+    this.id = id;
     this.name = name;
     this.img = img;
     this.damage = damage;
@@ -95,9 +103,4 @@ export class StaCharacterWeaponQualities {
     this.opportunity = opportunity;
     this.escalation = escalation;
   }
-}
-
-
-export function createCharacterWeapon(document: Item): StaCharacterWeapon {
-  return new StaCharacterWeapon(document.name!, document.img, itemSystem(document));
 }

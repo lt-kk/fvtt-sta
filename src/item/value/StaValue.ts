@@ -1,13 +1,20 @@
 import { itemSystem } from "../../util/util";
 
 
+export function createValue(document: Item): StaValue {
+  return new StaValue(document.id!, document.name!, document.img, itemSystem(document));
+}
+
+
 export class StaValue {
+  id: string;
   name: string;
   img: string | null;
   description: string;
   questioned: boolean;
 
   constructor(
+    id: string,
     name = "",
     img: string | null,
     {
@@ -15,14 +22,10 @@ export class StaValue {
       questioned = false,
     },
   ) {
+    this.id = id;
     this.name = name;
     this.img = img;
     this.description = description;
     this.questioned = questioned;
   }
-}
-
-
-export function createValue(document: Item): StaValue {
-  return new StaValue(document.name!, document.img, itemSystem(document));
 }

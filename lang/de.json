@@ -120,6 +120,22 @@
         "delete": "Meilenstein löschen",
         "empty": "Kein Meilenstein erreicht"
       },
+      "refit": {
+        "_singular": "Überholung",
+        "_plural": "Überholungen",
+        "create": "Neue Überholung",
+        "edit": "Überholung bearbeiten",
+        "delete": "Überholung löschen",
+        "empty": "Keine Überholung"
+      },
+      "starshipweapon": {
+        "_singular": "Waffe",
+        "_plural": "Waffen",
+        "create": "Neue Waffe",
+        "edit": "Waffe bearbeiten",
+        "delete": "Waffe löschen",
+        "empty": "Keine Waffe"
+      },
       "talent": {
         "_singular": "Talent",
         "_plural": "Talente",

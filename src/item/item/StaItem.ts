@@ -1,7 +1,13 @@
 import { itemSystem } from "../../util/util";
 
 
+export function createItem(document: Item): StaItem {
+  return new StaItem(document.id!, document.name!, document.img, itemSystem(document));
+}
+
+
 export class StaItem {
+  id: string;
   name: string;
   img: string | null;
   description: string;
@@ -12,6 +18,7 @@ export class StaItem {
   escalation: number;
 
   constructor(
+    id: string,
     name = "",
     img: string | null,
     {
@@ -23,6 +30,7 @@ export class StaItem {
       escalation = 0,
     },
   ) {
+    this.id = id;
     this.name = name;
     this.img = img;
     this.description = description;
@@ -32,9 +40,4 @@ export class StaItem {
     this.opportunity = opportunity;
     this.escalation = escalation;
   }
-}
-
-
-export function createItem(document: Item): StaItem {
-  return new StaItem(document.name!, document.img, itemSystem(document));
 }
