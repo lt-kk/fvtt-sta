@@ -24,17 +24,17 @@ Hooks.on("ready", () => {
 function registerActorSheets() {
   Actors.unregisterSheet("core", ActorSheet);
   Object.entries(actorTypes)
-    .forEach(([type, config]) =>
-      Actors.registerSheet(sta.systemName, config.sheet, { types: [type] }),
-    );
+    .forEach(([type, config]) => {
+      Actors.registerSheet(sta.systemName, config.sheet, { types: [type] });
+    });
 }
 
 function registerItemSheets() {
   Items.unregisterSheet("core", ItemSheet);
   Object.entries(itemTypes)
-    .forEach(([type, config]) =>
-      Actors.registerSheet(sta.systemName, config.sheet, { types: [type] }),
-    );
+    .forEach(([type, config]) => {
+      Items.registerSheet(sta.systemName, config.sheet, { types: [type] });
+    });
 }
 
 function registerTemplates() {
