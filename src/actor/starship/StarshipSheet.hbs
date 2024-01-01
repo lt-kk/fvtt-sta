@@ -54,51 +54,44 @@
   <section class="systems edge-right-down reverse">
     <h1 class="reverse">{{localize "sta.starship.systems._plural"}}</h1>
 
-    <div class="property shields">
+    <div class="property shields reverse">
       {{localize "sta.starship.shields"}}
-      {{#range sta.shields.min sta.shields.max}}
-        <label class="scale-pill
-          {{#if (eq 0 i)}}warn{{/if}}
-          {{#if (eq ../sta.shields.value i)}}checked{{/if}}">
-          {{i}}
-          <input name="system.shields" type="radio" value="{{i}}" data-dtype="Number"
-                 {{#if (eq ../sta.shields.value i)}}checked="checked"{{/if}} />
+      {{#each sta.shields.pills}}
+        <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+          {{value}}
+          <input name="system.shields" type="radio" value="{{value}}" data-dtype="Number"
+                 {{#if checked}}checked="checked"{{/if}} />
         </label>
-      {{/range}}
+      {{/each}}
     </div>
 
-    {{#each sta.systems as |value name|}}
+    {{#each sta.systems as |system name|}}
       <label class="property system system-{{name}} reverse">
         <input class="inner select" name="selected.system" type="radio" value={{name}}"">
-        <input class="inner form-control" name="system.systems.{{name}}.value" type="text" value="{{value.value}}"
+        <input class="inner form-control" name="system.systems.{{name}}.value" type="text" value="{{system.value}}"
                data-dtype="Number" tabindex="2" />
         <span class="label">{{localize (concat "sta.starship.systems." name)}}</span>
-        <span class="breaches breaches-{{name}} flex-last">
-          {{#range 0 ../sta.scale}}
-            <label class="scale-pill
-              {{#if (eq i 0)}}fatal{{/if}}
-              {{#if (eq i 1)}}error{{/if}}
-              {{#if (eq value.breaches i)}}checked{{/if}}">
-            {{i}}
-              <input name="system.systems.{{name}}.breaches" type="radio" value="{{i}}" data-dtype="Number"
-                     {{#if (eq value.breaches i)}}checked="checked"{{/if}} />
+        <span class="breaches breaches-{{name}} flex-last reverse">
+          {{#each system.pills}}
+            <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+            {{value}}
+              <input name="system.systems.{{name}}.breaches" type="radio" value="{{value}}" data-dtype="Number"
+                     {{#if checked}}checked="checked"{{/if}} />
           </label>
-          {{/range}}
+          {{/each}}
         </span>
       </label>
     {{/each}}
 
-    <h3 class="property power">
+    <h3 class="property power reverse">
       {{localize "sta.starship.power"}}
-      {{#range sta.power.min sta.power.max}}
-        <label class="scale-pill
-          {{#if (eq 0 i)}}error{{/if}}
-          {{#if (eq ../sta.power.value i)}}checked{{/if}}">
-          {{i}}
-          <input name="system.power" type="radio" value="{{i}}" data-dtype="Number"
-                 {{#if (eq ../sta.power.value i)}}checked="checked"{{/if}} />
+      {{#each sta.power.pills}}
+        <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+          {{value}}
+          <input name="system.power" type="radio" value="{{value}}" data-dtype="Number"
+                 {{#if checked}}checked="checked"{{/if}} />
         </label>
-      {{/range}}
+      {{/each}}
     </h3>
   </section>
 
@@ -115,70 +108,44 @@
 
     <div class="property crew reverse">
       {{localize "sta.starship.crew"}}
-      {{#range sta.crew.min sta.crew.max}}
-        <label class="scale-pill
-          {{#if (eq 0 i)}}error{{/if}}
-          {{#if (eq ../sta.crew.value i)}}checked{{/if}}">
-          {{i}}
-          <input name="system.crew" type="radio" value="{{i}}" data-dtype="Number"
-                 {{#if (eq ../sta.crew.value i)}}checked="checked"{{/if}} />
+      {{#each sta.crew.pills}}
+        <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+          {{value}}
+          <input name="system.crew" type="radio" value="{{value}}" data-dtype="Number"
+                 {{#if checked}}checked="checked"{{/if}} />
         </label>
-      {{/range}}
-    </div>
-  </section>
-
-  <section class="talents border-left">
-    <h2>
-      {{localize "sta.item.talent._plural"}}
-      <a class="control flex-last create" title="{{localize "sta.item.talent.create"}}" data-type="talent">
-        <i class="fas fa-plus"></i>
-      </a>
-    </h2>
-    <ol class="list">
-      {{#each sta.talents}}
-        <li class="item" data-item-id="{{id}}">
-          <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-          <div class="name">{{name}}</div>
-          <div class="controls">
-            <a class="control edit" title="{{localize "sta.item.talent.edit"}}"><i class="fas fa-edit"></i></a>
-            <a class="control delete" title="{{localize "sta.item.talent.delete"}}"><i class="fas fa-trash"></i></a>
-          </div>
-          <div class="description">{{description}}</div>
-        </li>
       {{/each}}
-      {{^sta.talents}}
-        <li class="item">{{localize "sta.item.talent.empty"}}</li>
-      {{/sta.talents}}
-    </ol>
-  </section>
-
-  <section class="values border-left">
-    <h2>
-      {{localize "sta.item.value._plural"}}
-      <a class="control flex-last create" title="{{localize "sta.item.value.create"}}" data-type="value">
-        <i class="fas fa-plus"></i>
-      </a>
-    </h2>
-    <ol class="list">
-      {{#sta.values}}
-        <li class="item" data-item-id="{{id}}">
-          <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-          <div class="name">{{name}}</div>
-          <div class="controls">
-            <a class="control edit" title="{{sta.value.edit}}"><i class="fas fa-edit"></i></a>
-            <a class="control delete" title="{{sta.value.delete}}"><i class="fas fa-trash"></i></a>
-          </div>
-          <div class="description">{{description}}</div>
-        </li>
-      {{/sta.values}}
-      {{^sta.values}}
-        <li class="item">{{localize "sta.item.value.empty"}}</li>
-      {{/sta.values}}
-    </ol>
+    </div>
   </section>
 
   <section class="progress border-left">
     <h1>{{localize "sta.starship.progress"}}</h1>
+
+    <section class="talents border-left">
+      <h2>
+        {{localize "sta.item.talent._plural"}}
+        <a class="control flex-last create" title="{{localize "sta.item.talent.create"}}" data-type="talent">
+          <i class="fas fa-plus"></i>
+        </a>
+      </h2>
+      <ol class="list">
+        {{#each sta.talents}}
+          <li class="item" data-item-id="{{id}}">
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <div class="name">{{name}}</div>
+            <div class="controls">
+              <a class="control edit" title="{{localize "sta.item.talent.edit"}}"><i class="fas fa-edit"></i></a>
+              <a class="control delete" title="{{localize "sta.item.talent.delete"}}"><i class="fas fa-trash"></i></a>
+            </div>
+            <div class="description">{{description}}</div>
+          </li>
+        {{/each}}
+        {{^sta.talents}}
+          <li class="item">{{localize "sta.item.talent.empty"}}</li>
+        {{/sta.talents}}
+      </ol>
+    </section>
+
     <section class="traits border-left">
       <h2>
         {{localize "sta.item.trait._plural"}}
@@ -238,6 +205,32 @@
 
   <section class="equipment border-left">
     <h1>{{localize "sta.item.item._plural"}}</h1>
+
+    <section class="values border-left">
+      <h2>
+        {{localize "sta.starship.value._plural"}}
+        <a class="control flex-last create" title="{{localize "sta.starship.value.create"}}" data-type="value">
+          <i class="fas fa-plus"></i>
+        </a>
+      </h2>
+      <ol class="list">
+        {{#sta.values}}
+          <li class="item" data-item-id="{{id}}">
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <div class="name">{{name}}</div>
+            <div class="controls">
+              <a class="control edit" title="{{sta.starship.value.edit}}"><i class="fas fa-edit"></i></a>
+              <a class="control delete" title="{{sta.starship.value.delete}}"><i class="fas fa-trash"></i></a>
+            </div>
+            <div class="description">{{description}}</div>
+          </li>
+        {{/sta.values}}
+        {{^sta.values}}
+          <li class="item">{{localize "sta.starship.value.empty"}}</li>
+        {{/sta.values}}
+      </ol>
+    </section>
+
     <section class="weapons border-left">
       <h2>
         {{localize "sta.item.characterweapon._plural"}}
@@ -269,6 +262,7 @@
         {{/sta.weapons}}
       </ol>
     </section>
+
     <section class="items border-left">
       <h2>
         {{localize "sta.item.item._plural"}}

@@ -12,7 +12,7 @@ export class CharacterSheet extends ActorSheet {
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["actor-sheet", "character-sheet"],
+      classes: ["sta-app", "actor-sheet", "character-sheet"],
       width: 710,
       height: 870,
     });

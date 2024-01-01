@@ -1,4 +1,5 @@
 import { itemSystem } from "../../util/util";
+import { StaStarshipSystems } from "../../actor/starship/StaStarship";
 
 
 export function createRefit(document: Item): StaRefit {
@@ -10,22 +11,19 @@ export class StaRefit {
   id: string;
   name: string;
   img: string | null;
-  description: string;
-  rule: string;
+  system: keyof StaStarshipSystems | null;
 
   constructor(
     id: string,
     name = "",
     img: string | null,
     {
-      description = "",
-      rule = "",
+      system = null as keyof StaStarshipSystems | null
     },
   ) {
     this.id = id;
     this.name = name;
     this.img = img;
-    this.description = description;
-    this.rule = rule;
+    this.system = system;
   }
 }

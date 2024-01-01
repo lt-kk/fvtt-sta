@@ -12,7 +12,7 @@ export class ArmorSheet extends ItemSheet {
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["item-sheet", "armor-sheet"],
+      classes: ["sta-app", "item-sheet", "armor-sheet"],
       width: 480,
       height: 400,
     });

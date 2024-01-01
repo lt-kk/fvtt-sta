@@ -194,27 +194,21 @@
 }
 
 
-._lcars-scale-pill-color(@colorBase, @colorActive, @colorChecked: @colorActive) {
+._lcars-scale-pill-color(@selector, @colorBase, @colorActive, @colorChecked: @colorActive) {
   border: 1px solid @colorBase;
   //background-color: darken(@colorBase, 10%);
   color: contrast(@colorBase, @colorActive, @colorChecked);
-  &:hover {
+  &.@{selector}:hover {
     border-color: if((@colorBase = @colorChecked),
     contrast(@colorBase, @almost-white, @almost-black),
     @colorChecked);
   }
-  &:has(~ .checked) {
+  &:has(~ .@{selector}.checked) {
     border-color: @colorActive;
     background-color: @colorActive;
     color: contrast(@colorActive, @almost-white, @almost-black);
-
-    &:hover {
-      border-color: if((@colorActive = @colorChecked),
-      contrast(@colorActive, @almost-white, @almost-black),
-      @colorChecked);
-    }
   }
-  &.checked {
+  &.@{selector}.checked {
     border-color: @colorChecked;
     background-color: @colorChecked;
     color: contrast(@colorChecked, @almost-white, @almost-black);
@@ -229,7 +223,8 @@
 
 
 .lcars-scale-value(
-  @colorAccent
+  @colorAccent,
+  @colorActive: @color-level-info
 ) {
   display: flex;
   flex-wrap: nowrap;
@@ -244,27 +239,13 @@
     font-weight: bold;
     cursor: pointer;
 
-    ._lcars-scale-pill-color(@colorAccent, @color-level-info);
+    ._lcars-scale-pill-color(scale-pill, @colorAccent, @colorActive);
+    ._lcars-scale-pill-color(success, @colorAccent, @color-level-success);
+    ._lcars-scale-pill-color(info, @colorAccent, @color-level-info);
+    ._lcars-scale-pill-color(warn, @colorAccent, @color-level-warning);
+    ._lcars-scale-pill-color(error, @colorAccent, @color-level-error);
+    ._lcars-scale-pill-color(fatal, @colorAccent, @color-level-fatal);
 
-    &.success {
-      ._lcars-scale-pill-color(@colorAccent, @color-level-info, @color-level-success);
-    }
-
-    &.info {
-      ._lcars-scale-pill-color(@colorAccent, @color-level-info, @color-level-info);
-    }
-
-    &.warn {
-      ._lcars-scale-pill-color(@colorAccent, @color-level-info, @color-level-warning);
-    }
-
-    &.error {
-      ._lcars-scale-pill-color(@colorAccent, @color-level-info, @color-level-error);
-    }
-
-    &.fatal {
-      ._lcars-scale-pill-color(@colorAccent, @color-level-info, @color-level-fatal);
-    }
   }
 }
 

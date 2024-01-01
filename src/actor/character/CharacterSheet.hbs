@@ -6,20 +6,16 @@
 
   <section class="summary">
     <section class="property reputation border-left">
-      {{#with sta.reputation}}
-        <h3>{{localize "sta.character.reputation"}}</h3>
-        <div class="scale-value">
-          {{#range 0 max}}
-            <label class="scale-pill
-              {{#if (eq 0 i)}}error{{/if}}
-              {{#if (eq ../value i)}}checked{{/if}}">
-              {{i}}
-              <input name="system.reputation" type="radio" value="{{i}}" data-dtype="Number"
-                     {{#if (eq ../value i)}}checked="checked"{{/if}} />
-            </label>
-          {{/range}}
-        </div>
-      {{/with}}
+      <h3>{{localize "sta.character.reputation"}}</h3>
+      <div class="scale-value">
+        {{#each sta.reputation.pills}}
+          <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+            {{value}}
+            <input name="system.reputation" type="radio" value="{{value}}" data-dtype="Number"
+                   {{#if checked}}checked="checked"{{/if}} />
+          </label>
+        {{/each}}
+      </div>
     </section>
     <label class="property name">
       <span class="label">{{localize "sta.character.name"}}</span>
@@ -66,37 +62,29 @@
     <h1>{{localize "sta.status._plural"}}</h1>
 
     <section class="property determination border-left">
-      {{#with sta.determination}}
-        <h3>{{localize "sta.character.determination"}}</h3>
-        <div class="scale-value">
-          {{#range 0 max}}
-            <label class="scale-pill
-              {{#if (eq 0 i)}}warn{{/if}}
-              {{#if (eq ../value i)}}checked{{/if}}">
-              {{i}}
-              <input name="system.determination" type="radio" value="{{i}}" data-dtype="Number"
-                     {{#if (eq ../value i)}}checked="checked"{{/if}} />
-            </label>
-          {{/range}}
-        </div>
-      {{/with}}
+      <h3>{{localize "sta.character.determination"}}</h3>
+      <div class="scale-value">
+        {{#each sta.determination.pills}}
+          <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+            {{value}}
+            <input name="system.determination" type="radio" value="{{value}}" data-dtype="Number"
+                   {{#if checked}}checked="checked"{{/if}} />
+          </label>
+        {{/each}}
+      </div>
     </section>
 
     <section class="property stress border-left">
-      {{#with sta.stress}}
-        <h3>{{localize "sta.character.stress"}}</h3>
-        <div class="scale-value">
-          {{#range 0 max}}
-            <label class="scale-pill
-              {{#if (eq 0 i)}}error{{/if}}
-              {{#if (eq ../value i)}}checked{{/if}}">
-              {{i}}
-              <input name="system.stress" type="radio" value="{{i}}" data-dtype="Number"
-                     {{#if (eq ../value i)}}checked="checked"{{/if}} />
-            </label>
-          {{/range}}
-        </div>
-      {{/with}}
+      <h3>{{localize "sta.character.stress"}}</h3>
+      <div class="scale-value">
+        {{#each sta.stress.pills}}
+          <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+            {{value}}
+            <input name="system.stress" type="radio" value="{{value}}" data-dtype="Number"
+                   {{#if checked}}checked="checked"{{/if}} />
+          </label>
+        {{/each}}
+      </div>
     </section>
 
     <section class="injuries border-left">

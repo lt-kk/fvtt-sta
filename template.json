@@ -149,6 +149,9 @@
     "milestone": {
       "description": ""
     },
+    "refit": {
+      "system": ""
+    },
     "starshipweapon": {
       "description": "",
       "damage": 0,
@@ -166,7 +169,6 @@
         "hiddenx": 0,
         "versatilex": 0
       }
-
     },
     "talent": {
       "description": "",

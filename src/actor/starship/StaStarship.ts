@@ -1,4 +1,4 @@
-import { CurrentValue } from "../../model/StaTypes";
+import { CurrentValue, generatePills, ScalePill } from "../../model/StaTypes";
 import { createRefit, StaRefit } from "../../item/refit/StaRefit";
 import { createStarshipWeapon, StaStarshipWeapon } from "../../item/starshipweapon/StaStarshipWeapon";
 import { createItem, StaItem } from "../../item/item/StaItem";
@@ -82,26 +82,54 @@ export class StaStarship {
     this.traits = filterItemType(items, "trait").map((item) => createTrait(item));
     this.values = filterItemType(items, "value").map((item) => createValue(item));
     this.weapons = filterItemType(items, "starshipweapon").map((item) => createStarshipWeapon(item));
+
+    this.derivedValues();
+  }
+
+  derivedValues() {
+    this.applyRules();
+    this.systemStatus();
+  }
+
+  applyRules() {
+
+  }
+
+  systemStatus() {
+    Object.entries(this.systems).forEach(([_, system]) => {
+      system.withScale(this.scale);
+    });
   }
 }
-
-
-export type StaBreach = "fine" | "impacted" | "disabled" | "destroyed";
 
 
 export class StaStarshipSystem {
   value: number;
   breaches: number;
-  status: StaBreach;
+  pills: ScalePill[] = [];
 
   constructor({
     value = 7,
     breaches = 0,
-    status = "fine" as StaBreach,
   } = {}) {
     this.value = value;
     this.breaches = breaches;
-    this.status = status;
+  }
+
+  withScale(scale: number) {
+    this.pills = generatePills(
+      this.breaches,
+      {
+        begin: scale + 1,
+        end: 0,
+        fatal: scale +1,
+        error: scale,
+        warn: Math.ceil(scale / 2),
+        info: 1,
+        success: 0,
+        moreIsWorse: true,
+      },
+    );
   }
 }
 

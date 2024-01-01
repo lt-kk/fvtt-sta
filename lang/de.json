@@ -62,6 +62,15 @@
         "medicine": "Medizin",
         "science": "Wissenschaft",
         "security": "Sicherheit"
+      },
+      "progress": "Erfolgsgeschichte",
+      "value": {
+        "_singular": "Direktive",
+        "_plural": "Direktiven",
+        "create": "Neue Direktive",
+        "edit": "Direktive bearbeiten",
+        "delete": "Direktive löschen",
+        "empty": "Keine Direktive"
       }
     },
     "item": {
@@ -121,12 +130,12 @@
         "empty": "Kein Meilenstein erreicht"
       },
       "refit": {
-        "_singular": "Überholung",
-        "_plural": "Überholungen",
-        "create": "Neue Überholung",
-        "edit": "Überholung bearbeiten",
-        "delete": "Überholung löschen",
-        "empty": "Keine Überholung"
+        "_singular": "Nachrüstung",
+        "_plural": "Nachrüstungen",
+        "create": "Neue Nachrüstung",
+        "edit": "Nachrüstung bearbeiten",
+        "delete": "Nachrüstung löschen",
+        "empty": "Keine Nachrüstung"
       },
       "starshipweapon": {
         "_singular": "Waffe",

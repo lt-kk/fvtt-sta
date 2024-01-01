@@ -12,7 +12,7 @@ export class StarshipSheet extends ActorSheet {
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["actor-sheet", "starship-sheet"],
+      classes: ["sta-app", "actor-sheet", "starship-sheet"],
       width: 640,
       height: 870,
     });

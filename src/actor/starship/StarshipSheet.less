@@ -142,7 +142,7 @@
       }
 
       .shields {
-        .lcars-scale-value(@dark-blue);
+        .lcars-scale-value(@darkest-blue, @ldp-color3);
         flex-grow: 1;
         margin: calc(-@sta-h3-size - (@gap * 2)) calc(@sta-h3-size + @gap) calc(@gap * 2) 0;
         .scale-pill {
@@ -152,7 +152,7 @@
       }
 
       .breaches {
-        .lcars-scale-value(@sta-color-h1-fg);
+        .lcars-scale-value(@sta-color-h3-bg, @sta-color-h1-fg);
         flex-grow: 1;
         padding: 2px 0;
         .scale-pill {
@@ -163,7 +163,7 @@
       }
 
       .power {
-        .lcars-scale-value(@ld-color2);
+        .lcars-scale-value(@darkest-blue, @ld-color1);
         .lcars-edge-right-up(@sta-color-h1-bg, @sta-h3-size, @sta-h3-size, @gap);
         margin-top: @gap *2;
         .scale-pill {
@@ -188,7 +188,7 @@
       }
 
       .crew {
-        .lcars-scale-value(@ld-color2);
+        .lcars-scale-value(@sta-color-h3-bg, @sta-color-h3-bg);
         .lcars-edge-left-up(@sta-color-h1-bg, @sta-h3-size, @sta-h3-size, @gap);
         margin-top: @gap *2;
         .scale-pill {
