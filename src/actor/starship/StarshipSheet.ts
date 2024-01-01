@@ -1,10 +1,14 @@
 import { sta } from "../../config";
 import { LooseObject } from "../../util/util";
 import { confirmDialog } from "../../dialog/ConfimDialog";
-import { createStarship } from "./StaStarship";
+import { createStarship, StaStarship } from "./StaStarship";
+import { starshipTaskRoll } from "./StarshipTaskRoll";
+import { challengeRoll } from "../../roll/ChallangeRoll";
 
 export class StarshipSheet extends ActorSheet {
   static templatePath = `${sta.templateBasePath}/actor/starship/StarshipSheet.hbs`;
+
+  sta: StaStarship | null = null;
 
   get template() {
     return StarshipSheet.templatePath;
@@ -20,12 +24,12 @@ export class StarshipSheet extends ActorSheet {
 
   override getData(options?: Partial<ItemSheet.Options>): Data {
     const data = super.getData(options) as ActorSheet.Data;
+    this.sta = createStarship(data.actor);
     let sheetData: Data = {
       ...data,
       settings: sta.settings,
-      sta: createStarship(data.actor),
+      sta: this.sta,
     };
-    console.log(sheetData);
     return sheetData;
   }
 
@@ -86,10 +90,28 @@ export class StarshipSheet extends ActorSheet {
     event.preventDefault();
     const element = $(event.currentTarget);
     const rollType = element.data("roll");
-    const rollValue = element.data("value");
-    const roll = new Roll(`${rollValue}${rollType}`);
+    const dicePool = element.data("value");
+    switch (rollType) {
+      case "task":
+        this.rollTask(dicePool);
+        break;
+      case "challenge":
+        this.rollChallenge(dicePool);
+        break;
+    }
 
-    roll.roll();
+  }
+
+  async rollTask(dicePool: number) {
+    const roll = starshipTaskRoll(this.sta!, dicePool);
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: await roll.render({ template: `${sta.templateBasePath}/roll/TaskRoll.hbs` }),
+    });
+  }
+
+  rollChallenge(dicePool: number) {
+    const roll = challengeRoll(dicePool);
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });

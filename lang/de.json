@@ -205,6 +205,22 @@
     "task": {
       "_singular": "Aufgabe",
       "_plural": "Aufgaben"
+    },
+    "roll": {
+      "success": {
+        "_singular": "Erfolg",
+        "_plural": "Erfolge"
+      },
+      "complication": {
+        "_singular": "Komplikation",
+        "_plural": "Komplikationen"
+      },
+      "task": {
+        "_singular": "Aufgabe"
+      },
+      "challenge": {
+        "_singular": "Herausforderung"
+      }
     }
   }
 }

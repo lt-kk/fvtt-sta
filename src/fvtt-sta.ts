@@ -3,6 +3,8 @@ import { sta } from "./config";
 import { registerHandlebarHelpers } from "./template/TemplateHelpers";
 import { itemTypes, StaItem } from "./item/StaItem";
 import { actorTypes, StaActor } from "./actor/StaActor";
+import { TaskRoll } from "./roll/TaskRoll";
+import { ChallengeRoll } from "./roll/ChallangeRoll";
 
 Hooks.on("init", () => {
   console.log(sta.systemName + " | Initializing system...");
@@ -10,6 +12,7 @@ Hooks.on("init", () => {
 
   CONFIG.Actor.documentClass = StaActor;
   CONFIG.Item.documentClass = StaItem;
+  CONFIG.Dice.rolls = [Roll, ChallengeRoll, TaskRoll];
 
   registerTemplates();
   registerActorSheets();

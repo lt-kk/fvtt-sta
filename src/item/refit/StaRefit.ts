@@ -18,7 +18,7 @@ export class StaRefit {
     name = "",
     img: string | null,
     {
-      system = null as keyof StaStarshipSystems | null
+      system = null as keyof StaStarshipSystems | null,
     },
   ) {
     this.id = id;

@@ -1,10 +1,14 @@
 import { sta } from "../../config";
 import { LooseObject } from "../../util/util";
 import { confirmDialog } from "../../dialog/ConfimDialog";
-import { createCharacter } from "./StaCharacter";
+import { createCharacter, StaCharacter } from "./StaCharacter";
+import { characterTaskRoll } from "./CharacterTaskRoll";
+import { challengeRoll } from "../../roll/ChallangeRoll";
 
 export class CharacterSheet extends ActorSheet {
   static templatePath = `${sta.templateBasePath}/actor/character/CharacterSheet.hbs`;
+
+  sta: StaCharacter | null = null;
 
   get template() {
     return CharacterSheet.templatePath;
@@ -20,10 +24,11 @@ export class CharacterSheet extends ActorSheet {
 
   override getData(options?: Partial<ItemSheet.Options>): Data {
     const data = super.getData(options) as ActorSheet.Data;
+    this.sta = createCharacter(data.actor);
     let sheetData: Data = {
       ...data,
       settings: sta.settings,
-      sta: createCharacter(data.actor),
+      sta: this.sta!,
     };
     return sheetData;
   }
@@ -79,10 +84,28 @@ export class CharacterSheet extends ActorSheet {
     event.preventDefault();
     const element = $(event.currentTarget);
     const rollType = element.data("roll");
-    const rollValue = element.data("value");
-    const roll = new Roll(`${rollValue}${rollType}`);
+    const dicePool = element.data("value") as number;
+    switch (rollType) {
+      case "task":
+        this.rollTask(dicePool);
+        break;
+      case "challenge":
+        this.rollChallenge(dicePool);
+        break;
+    }
 
-    roll.roll();
+  }
+
+  async rollTask(dicePool: number) {
+    const roll = characterTaskRoll(this.sta!, dicePool);
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: await roll.render({ template: `${sta.templateBasePath}/roll/TaskRoll.hbs` }),
+    });
+  }
+
+  async rollChallenge(dicePool: number) {
+    const roll = challengeRoll(dicePool);
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });

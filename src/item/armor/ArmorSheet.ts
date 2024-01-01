@@ -6,7 +6,6 @@ export class ArmorSheet extends ItemSheet {
   static templatePath = `${sta.templateBasePath}/item/armor/ArmorSheet.hbs`;
 
   get template() {
-    console.log(ArmorSheet.templatePath)
     return ArmorSheet.templatePath;
   }
 

@@ -27,12 +27,8 @@
         flex-grow: unset;
       }
 
-      &.talents, &.values {
-
-      }
-
       &.progress, &.equipment {
-
+        width: calc(50% - @gap);
       }
     }
 
@@ -145,6 +141,7 @@
         .lcars-scale-value(@darkest-blue, @ldp-color3);
         flex-grow: 1;
         margin: calc(-@sta-h3-size - (@gap * 2)) calc(@sta-h3-size + @gap) calc(@gap * 2) 0;
+
         .scale-pill {
           font-size: @text-small-size;
           font-weight: normal;
@@ -155,6 +152,7 @@
         .lcars-scale-value(@sta-color-h3-bg, @sta-color-h1-fg);
         flex-grow: 1;
         padding: 2px 0;
+
         .scale-pill {
           line-height: calc(@text-tiny-size * 1.2);
           font-size: @text-tiny-size;
@@ -166,6 +164,7 @@
         .lcars-scale-value(@darkest-blue, @ld-color1);
         .lcars-edge-right-up(@sta-color-h1-bg, @sta-h3-size, @sta-h3-size, @gap);
         margin-top: @gap *2;
+
         .scale-pill {
           font-size: @text-small-size;
           font-weight: normal;
@@ -191,6 +190,7 @@
         .lcars-scale-value(@sta-color-h3-bg, @sta-color-h3-bg);
         .lcars-edge-left-up(@sta-color-h1-bg, @sta-h3-size, @sta-h3-size, @gap);
         margin-top: @gap *2;
+
         .scale-pill {
           font-size: @text-small-size;
           font-weight: normal;

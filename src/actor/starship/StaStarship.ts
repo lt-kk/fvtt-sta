@@ -39,7 +39,7 @@ export class StaStarship {
   values: StaValue[] = [];
   weapons: StaStarshipWeapon[] = [];
 
-  roll: StaStarshipRoll = new StaStarshipRoll("communications", "command");
+  taskRoll: StaStarshipTaskRoll;
 
   constructor(
     name: string,
@@ -57,6 +57,7 @@ export class StaStarship {
       crew = 1,
       shields = 1,
       power = 1,
+      taskRoll = {},
     } = {},
     items: Collection<Item>,
   ) {
@@ -82,6 +83,8 @@ export class StaStarship {
     this.traits = filterItemType(items, "trait").map((item) => createTrait(item));
     this.values = filterItemType(items, "value").map((item) => createValue(item));
     this.weapons = filterItemType(items, "starshipweapon").map((item) => createStarshipWeapon(item));
+
+    this.taskRoll = new StaStarshipTaskRoll(taskRoll);
 
     this.derivedValues();
   }
@@ -122,7 +125,7 @@ export class StaStarshipSystem {
       {
         begin: scale + 1,
         end: 0,
-        fatal: scale +1,
+        fatal: scale + 1,
         error: scale,
         warn: Math.ceil(scale / 2),
         info: 1,
@@ -185,12 +188,15 @@ export class StaStarshipDepartments {
 }
 
 
-export class StaStarshipRoll {
-  attribute: keyof StaStarshipSystems;
-  discipline: keyof StaStarshipDepartments;
+export class StaStarshipTaskRoll {
+  system: keyof StaStarshipSystems;
+  department: keyof StaStarshipDepartments;
 
-  constructor(attribute: keyof StaStarshipSystems, discipline: keyof StaStarshipDepartments) {
-    this.attribute = attribute;
-    this.discipline = discipline;
+  constructor({
+    system = "communications" as keyof StaStarshipSystems,
+    department = "command" as keyof StaStarshipDepartments,
+  } = {}) {
+    this.system = system;
+    this.department = department;
   }
 }

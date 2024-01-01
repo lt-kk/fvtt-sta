@@ -44,7 +44,7 @@ export class StaCharacter {
   values: StaValue[] = [];
   weapons: StaCharacterWeapon[] = [];
 
-  roll: StaCharacterRoll = new StaCharacterRoll("control", "command");
+  taskRoll: StaCharacterTaskRoll;
 
   constructor(
     name: string,
@@ -61,6 +61,7 @@ export class StaCharacter {
       reputation = 10,
       determination = -1,
       stress = -1,
+      taskRoll = {},
     } = {},
     items: Collection<Item>,
   ) {
@@ -87,6 +88,8 @@ export class StaCharacter {
     this.traits = filterItemType(items, "trait").map((item) => createTrait(item));
     this.values = filterItemType(items, "value").map((item) => createValue(item));
     this.weapons = filterItemType(items, "characterweapon").map((item) => createCharacterWeapon(item));
+
+    this.taskRoll = new StaCharacterTaskRoll(taskRoll);
   }
 
 }
@@ -141,11 +144,14 @@ export class StaCharacterDisciplines {
   }
 }
 
-export class StaCharacterRoll {
+export class StaCharacterTaskRoll {
   attribute: keyof StaCharacterAttributes;
   discipline: keyof StaCharacterDisciplines;
 
-  constructor(attribute: keyof StaCharacterAttributes, discipline: keyof StaCharacterDisciplines) {
+  constructor({
+    attribute = "control" as keyof StaCharacterAttributes,
+    discipline = "command" as keyof StaCharacterDisciplines,
+  } = {}) {
     this.attribute = attribute;
     this.discipline = discipline;
   }
