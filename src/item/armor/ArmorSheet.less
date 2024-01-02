@@ -1,73 +1,25 @@
 .armor-sheet {
-  .lcars-window();
 
-  .sta-body {
-    display: flex;
-    flex-wrap: wrap;
-    grid-gap: @gap;
-
-    > section {
-      flex-grow: 1;
-
-      &.icon {
-        width: 64px;
-        flex-grow: unset;
-      }
-
-      &.summary {
-        width: 50%;
-      }
-
-      &.properties {
-        width: 100%;
-      }
-    }
-
-    .summary {
+  .properties {
+    .property.equipped {
+      flex-grow: 0;
       display: flex;
       grid-gap: @gap;
-      flex-wrap: wrap;
+      font-size: @sta-h3-size;
+      color: @sta-color-h3-fg;
 
-      .property.name {
-        flex-grow: 1;
-        font-size: @sta-h1-size;
-        height: 100%;
+      input {
+        background-color: @sta-color-h1-bg;
+        width: @sta-h1-size;
       }
     }
+  }
 
-    .properties {
-      display: flex;
-      flex-wrap: wrap;
-      grid-gap: @gap;
+  .property {
+    flex-grow: 1;
+  }
 
-      h1 {
-        width: 100%;
-        flex-grow: 1;
-        border-right: none;
-        padding-right: 0;
-        margin-right: -2px;
-
-        .property.equipped {
-          flex-grow: 0;
-          display: flex;
-          grid-gap: @gap;
-          font-size: @sta-h3-size;
-          color: @sta-color-h3-fg;
-
-          input {
-            background-color: @sta-color-h1-bg;
-            width: @sta-h1-size;
-          }
-        }
-      }
-
-      .property {
-        flex-grow: 1;
-      }
-
-      .description, .rule {
-        width: 100%;
-      }
-    }
+  .description, .rule {
+    width: 100%;
   }
 }

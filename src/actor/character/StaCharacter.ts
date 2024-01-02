@@ -81,7 +81,7 @@ export class StaCharacter {
 
     this.armor = filterItemType(items, "armor").map((item) => createArmor(item));
     this.focuses = filterItemType(items, "focus").map((item) => createFocus(item));
-    this.injuries = filterItemType(items, "injurie").map((item) => createInjury(item));
+    this.injuries = filterItemType(items, "injury").map((item) => createInjury(item));
     this.items = filterItemType(items, "item").map((item) => createItem(item));
     this.milestones = filterItemType(items, "milestone").map((item) => createMilestone(item));
     this.talents = filterItemType(items, "talent").map((item) => createTalent(item));

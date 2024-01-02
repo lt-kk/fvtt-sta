@@ -64,15 +64,25 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
     this.dice.forEach((term) => {
       term.results.forEach((d => {
         const value = d.result;
-        result.dice.push(new TaskRollDice(
-          value,
-          value <= data.double ? 2 : value <= data.target ? 1 : 0,
-          value >= term.faces - data.complication ? 1 : 0,
-        ));
+        result.dice.push(this.resultToDice(value, data, term));
       }));
     });
     if (data.determination) result.dice.push(new TaskRollDice(1, 20, 0, true));
     return result;
+  }
+
+  private resultToDice(value: number, data: LooseObject<any> & StaRollData & {
+    dicePool: number;
+    target: number;
+    double: number;
+    complication: number;
+    determination: boolean
+  }, term: DiceTerm) {
+    return new TaskRollDice(
+      value,
+      value <= data.double ? 2 : value <= data.target ? 1 : 0,
+      value >= term.faces - data.complication ? 1 : 0,
+    );
   }
 
   getResultCSS(dice: TaskRollDice): (string | null)[] {

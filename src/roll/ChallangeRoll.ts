@@ -1,7 +1,7 @@
-import { LooseObject } from "../util/util";
-import { sta } from "../config";
-import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "./StaRoll";
-import { TaskRollDice } from "./TaskRoll";
+import {LooseObject} from "../util/util";
+import {sta} from "../config";
+import {StaRoll, StaRollData, StaRollDice, StaRollResult} from "./StaRoll";
+import {TaskRollDice} from "./TaskRoll";
 
 
 export type ChallengeRollData = LooseObject<any> & StaRollData & {
@@ -22,7 +22,7 @@ export class ChallengeRollDice implements StaRollDice {
 }
 
 
-export class ChallengeRollResult implements StaRollResult<ChallengeRollDice>{
+export class ChallengeRollResult implements StaRollResult<ChallengeRollDice> {
   dice: ChallengeRollDice[] = [];
 
   get successes() {
@@ -57,20 +57,24 @@ export class ChallengeRoll extends StaRoll<ChallengeRollData, ChallengeRollResul
     this.dice.forEach((term) => {
       term.results.forEach((d => {
         const value = d.result;
-        result.dice.push(new ChallengeRollDice(
-          value,
-          value == 1 || value == 5 || value == 6 ? 1 : value == 2 ? 2 : 0,
-          value == 5 || value == 6 ? 1 : 0,
-        ));
+        result.dice.push(this.resultToDice(value));
       }));
     });
     return result;
   }
 
 
+  private resultToDice(value: number) {
+    return new ChallengeRollDice(
+      value,
+      value == 1 || value == 5 || value == 6 ? 1 : value == 2 ? 2 : 0,
+      value == 5 || value == 6 ? 1 : 0,
+    );
+  }
+
   getResultCSS(dice: ChallengeRollDice): (string | null)[] {
     return [
-      dice.successes > 0 ? "success": null,
+      dice.successes > 0 ? "success" : null,
       dice.effects > 0 ? "effect" : null,
     ];
   }

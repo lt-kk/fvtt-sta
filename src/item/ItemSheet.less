@@ -1,0 +1,46 @@
+.sta-app.item-sheet {
+  .lcars-window();
+
+  .sta-body {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: @gap;
+
+    > section {
+      flex-grow: 1;
+
+      &.icon {
+        width: 64px;
+        flex-grow: unset;
+      }
+
+      &.summary {
+        width: calc(100% - 64px - @gap);
+        display: flex;
+
+        .name {
+          flex-grow: 1;
+          font-size: @sta-h1-size;
+          height: 100%;
+        }
+      }
+
+      &.properties {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        grid-gap: @gap;
+
+
+        h1 {
+          width: 100%;
+          flex-grow: 1;
+          border-right: none;
+          padding-right: 0;
+          margin-right: -2px;
+        }
+      }
+    }
+  }
+
+}
