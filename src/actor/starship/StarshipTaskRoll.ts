@@ -1,5 +1,5 @@
 import { StaStarship, StaStarshipDepartments, StaStarshipSystems } from "./StaStarship";
-import { TaskRoll, TaskRollData } from "../../roll/TaskRoll";
+import { TaskRoll, TaskRollData, TaskRollDice } from "../../roll/TaskRoll";
 
 export type StarshipTaskRollData = TaskRollData & {
   system: keyof StaStarshipSystems;

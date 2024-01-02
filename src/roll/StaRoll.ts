@@ -1,9 +1,14 @@
 import { sta } from "../config";
-import { LooseObject } from "../util/util";
-import { TaskRollData, TaskRollDice, TaskRollResult } from "./TaskRoll";
+import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
+import { MessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client/dice/roll";
+import {
+  ChatMessageData, ChatMessageDataConstructorData,
+} from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
+import { HasActivateListeners } from "../util/util";
 
-export interface StaRollData {
+export interface StaRollData<R extends StaRollResult<StaRollDice>> {
   dicePool: number;
+  result: R | null;
 }
 
 export interface StaRollDice {
@@ -17,9 +22,8 @@ export interface StaRollResult<D extends StaRollDice> {
 }
 
 
-
-export abstract class StaRoll<D extends StaRollData, R extends StaRollResult<StaRollDice>> extends Roll {
-  sta: R | null = null;
+export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<StaRollDice>>
+  extends Roll<D> implements HasActivateListeners {
 
   toJSON() {
     const data = super.toJSON();
@@ -30,15 +34,13 @@ export abstract class StaRoll<D extends StaRollData, R extends StaRollResult<Sta
   }
 
   _evaluateTotal() {
-    if (this.sta == null) {
-      this.sta = this.evaluateSta(this.data as D);
+    if (this.data.result == null) {
+      this.data.result = this.evaluateSta(this.data as D);
     }
-    return this.sta.successes;
+    return this.data.result.successes;
   }
 
   abstract evaluateSta(data: D): R
-
-  abstract type: string;
 
   async render({
     flavor = null as string | null,
@@ -47,30 +49,46 @@ export abstract class StaRoll<D extends StaRollData, R extends StaRollResult<Sta
   } = {}) {
     if (!this._evaluated) await this.evaluate({ async: true });
     const chatData = {
-      type: this.type,
       formula: isPrivate ? "???" : this._formula,
       flavor: isPrivate ? null : flavor,
       user: sta.game.user?.id,
-      tooltip: this.tooltipData(this.data as D, this.sta!),
+      tooltip: this.tooltipData(this.data as D),
       total: isPrivate ? "?" : Math.round((this.total || 0) * 100) / 100,
       staData: this.data,
-      staResult: this.sta,
     };
     return renderTemplate(template, chatData);
   }
 
-  tooltipData(data: D, result: R) {
+  tooltipData(data: D) {
     return {
       ...data,
-      rolls: result.dice.map(d => {
+      rolls: data.result?.dice.map(d => {
         return {
           ...d,
-          classes: this.getResultCSS(d).filterJoin(" ")
-        }
-      })
+          classes: this.getResultCSS(d).filterJoin(" "),
+        };
+      }),
     };
   }
 
   abstract getResultCSS(dice: StaRollDice): (string | null)[]
 
+  abstract template: string;
+
+  async toMessage<T extends DeepPartial<ChatMessageDataConstructorData> = {}>(
+    messageData: T,
+    {
+      rollMode = 'roll' as keyof CONFIG.Dice.RollModes | 'roll'
+    } = {}
+  ): Promise<InstanceType<ConfiguredDocumentClass<typeof ChatMessage>> | undefined> {
+    if(messageData.content == null) {
+      messageData.content = await this.render({ template: this.template })
+    }
+    return super.toMessage(messageData, {rollMode: rollMode, create: true})
+  }
+
+
+  activateListeners(html: JQuery, message: ChatMessage) {
+    console.log("activateListeners", html, message)
+  }
 }

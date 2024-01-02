@@ -21,3 +21,11 @@ export function itemSystem(document: Item): LooseObject<any> {
   return (document as unknown as LooseObject<LooseObject<any>>).system;
 }
 
+export interface HasActivateListeners {
+  activateListeners(html: JQuery, message: ChatMessage): void;
+}
+
+/** foundry-vtt-types is missing this property */
+export interface HasRolls {
+  rolls: Roll[];
+}

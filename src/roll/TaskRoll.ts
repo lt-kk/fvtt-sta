@@ -3,12 +3,12 @@ import { LooseObject } from "../util/util";
 import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "./StaRoll";
 
 
-export type TaskRollData = LooseObject<any> & StaRollData & {
-  dicePool: number;
+export type TaskRollData = LooseObject<any> & StaRollData<TaskRollResult> & {
   target: number;
   double: number;
   complication: number;
   determination: boolean;
+  result: TaskRollResult;
 }
 
 export class TaskRollDice implements StaRollDice {
@@ -42,10 +42,10 @@ export class TaskRollResult implements StaRollResult<TaskRollDice> {
 }
 
 export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
-  type = "task";
+  template = `${sta.templateBasePath}/roll/TaskRoll.hbs`
 
   constructor(
-    formula: string, data: TaskRollData, options?: Roll["options"],
+    _: string, data: TaskRollData, options?: Roll["options"],
   ) {
     const maxPool = sta.settings.maxD20 - (data.determination ? -1 : 0);
     const pool = Math.min(Math.max(data.dicePool, 1), maxPool);
@@ -71,7 +71,7 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
     return result;
   }
 
-  private resultToDice(value: number, data: LooseObject<any> & StaRollData & {
+  private resultToDice(value: number, data: LooseObject<any> & TaskRollData & {
     dicePool: number;
     target: number;
     double: number;
@@ -87,7 +87,7 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
 
   getResultCSS(dice: TaskRollDice): (string | null)[] {
     return [
-      dice.successes > 0 ? "success": null,
+      dice.successes > 0 ? "success" : null,
       dice.complications > 0 ? "failure" : null,
       dice.determination ? "determination" : null,
     ];

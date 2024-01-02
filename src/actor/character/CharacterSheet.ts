@@ -100,7 +100,6 @@ export class CharacterSheet extends ActorSheet {
     const roll = characterTaskRoll(this.sta!, dicePool);
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: await roll.render({ template: `${sta.templateBasePath}/roll/TaskRoll.hbs` }),
     });
   }
 

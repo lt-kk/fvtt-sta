@@ -5,8 +5,9 @@ import { itemTypes, StaItem } from "./item/StaItem";
 import { actorTypes, StaActor } from "./actor/StaActor";
 import { TaskRoll } from "./roll/TaskRoll";
 import { ChallengeRoll } from "./roll/ChallangeRoll";
+import { HasActivateListeners, HasRolls } from "./util/util";
 
-Hooks.on("init", () => {
+Hooks.once("init", () => {
   console.log(sta.systemName + " | Initializing system...");
   sta.game = game as Game;
 
@@ -18,6 +19,16 @@ Hooks.on("init", () => {
   registerActorSheets();
   registerItemSheets();
 });
+
+Hooks.on("renderChatMessage", (message, html) => {
+  if(message.isRoll) {
+    (message as unknown as HasRolls).rolls.forEach((roll) => {
+      if('activateListeners' in roll) {
+        (roll as HasActivateListeners).activateListeners(html, message);
+      }
+    });
+  }
+})
 
 Hooks.on("ready", () => {
   console.log(sta.systemName + " | Initialization complete!");

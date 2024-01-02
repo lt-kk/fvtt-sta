@@ -4,24 +4,12 @@
   {{/if}}
   <div class="dice-result">
     <div class="dice-formula">
-      {{localize (concat "sta.roll.task._singular")}}:
+      {{localize (concat "sta.roll.challenge._singular")}}:
       {{formula}}
-      &lt;= {{staData.target}}
     </div>
     <div class="dice-tooltip">
       <section class="tooltip-part">
         <div class="dice">
-          <header class="part-header flexrow">
-            <span class="part-formula">
-              {{tooltip.attribute}}
-              {{tooltip.system}}
-              +
-              {{tooltip.discipline}}
-              {{tooltip.department}}
-            </span>
-<!--            <span class="part-flavor"></span>-->
-<!--            <span class="part-total"></span>-->
-          </header>
           <ol class="dice-rolls">
             {{#each tooltip.rolls}}
               <li class="roll {{classes}}">{{{value}}}</li>

@@ -106,7 +106,6 @@ export class StarshipSheet extends ActorSheet {
     const roll = starshipTaskRoll(this.sta!, dicePool);
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: await roll.render({ template: `${sta.templateBasePath}/roll/TaskRoll.hbs` }),
     });
   }
 
