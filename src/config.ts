@@ -1,3 +1,5 @@
+import { StaRanges } from "./model/StaTypes";
+
 const systemName = "fvtt-sta";
 
 export const sta = {
@@ -10,19 +12,22 @@ export const sta = {
     maxD6: 9,
     item: {
       opportunity: {
-        min: 0,
         max: 2,
       },
       escalation: {
-        min: 0,
         max: 2,
       },
       armor: {
         protection: {
-          min: 0,
+          max: 4,
+        },
+      },
+      characterweapon: {
+        damage: {
           max: 4,
         },
       },
     },
+    ranges: StaRanges
   },
 };

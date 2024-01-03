@@ -2,6 +2,7 @@ import {CharacterSheet} from "./actor/character/CharacterSheet";
 import {StarshipSheet} from "./actor/starship/StarshipSheet";
 import {ArmorSheet} from "./item/armor/ArmorSheet";
 import {GenericItemSheet} from "./item/GenericItemSheet";
+import { CharacterWeaponSheet } from "./item/characterweapon/CharacterWeaponSheet";
 
 
 export interface ActorTypeConfig {
@@ -33,7 +34,7 @@ export class ItemTypes {
     chatTemplate: `/item/armor/ArmorChat.hbs`,
   };
   characterweapon: ItemTypeConfig = {
-    sheet: GenericItemSheet,
+    sheet: CharacterWeaponSheet,
     listTemplate: `/item/characterweapon/CharacterWeaponListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };

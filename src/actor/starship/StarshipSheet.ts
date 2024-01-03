@@ -7,7 +7,6 @@ import {challengeRoll} from "../../roll/ChallangeRoll";
 
 export class StarshipSheet extends ActorSheet {
   static templatePath = `${sta.templateBasePath}/actor/starship/StarshipSheet.hbs`;
-
   sta: StaStarship | null = null;
 
   get template() {

@@ -9,7 +9,6 @@ import {itemSystem} from "../../util/document";
 
 export class CharacterSheet extends ActorSheet {
   static templatePath = `${sta.templateBasePath}/actor/character/CharacterSheet.hbs`;
-
   sta: StaCharacter | null = null;
 
   get template() {

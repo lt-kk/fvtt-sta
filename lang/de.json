@@ -79,6 +79,7 @@
       "opportunity": "Verzichtskosten",
       "escalation": "Eskalation",
       "rules": "Regeln",
+      "damage": "Schaden",
       "armor": {
         "_singular": "Rüstung",
         "_plural": "Rüstungen",
@@ -226,6 +227,13 @@
       "challenge": {
         "_singular": "Herausforderung"
       }
+    },
+    "range": {
+      "_singular": "Reichweite",
+      "close": "Nah",
+      "near": "Mittel",
+      "far": "Weit",
+      "extreme": "Extrem"
     }
   }
 }

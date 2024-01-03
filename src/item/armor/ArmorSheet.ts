@@ -1,9 +1,11 @@
 import {sta} from "../../config";
 import {HasStaEntity} from "../../model/StaTypes";
 import {LooseObject} from "../../util/util";
+import { createArmor, StaArmor } from "./StaArmor";
 
 export class ArmorSheet extends ItemSheet {
   static templatePath = `${sta.templateBasePath}/item/armor/ArmorSheet.hbs`;
+  sta: StaArmor | null = null;
 
   get template() {
     return ArmorSheet.templatePath;
@@ -19,10 +21,11 @@ export class ArmorSheet extends ItemSheet {
 
   override getData(options?: Partial<ItemSheet.Options>): Data {
     const data = super.getData(options) as ItemSheet.Data;
+    this.sta = createArmor(this.item)
     const sheetData: Data = {
       ...data,
       settings: sta.settings,
-      sta: (data.item as unknown as HasStaEntity).staEntity,
+      sta: this.sta,
     };
     console.log(sheetData);
     return sheetData;
