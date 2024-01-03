@@ -178,6 +178,24 @@
         "used": "Hinterfragt"
       }
     },
+    "quality": {
+      "_plural": "Schadenseffekte",
+      "area": "Flachenwirkung",
+      "spread": "boolean",
+      "hiddenx": "unauffallig X",
+      "piercingx": "durchdringend X",
+      "viciousx": "verheerend X",
+      "intense": "intensiv",
+      "knockdown": "niederwerfend",
+      "accurate": "prazise",
+      "charge": "aufladbar",
+      "cumbersome": "unhandlich",
+      "deadly": "letal",
+      "debilitating": "verletzend",
+      "grenade": "Granate",
+      "inaccurate": "ungenau",
+      "nonlethal": "nicht todlich"
+    },
     "notes": {
       "_singular": "Notiz",
       "_plural": "Notizen"

@@ -21,8 +21,7 @@ export class CharacterWeaponSheet extends ItemSheet {
   override getData(options?: Partial<ItemSheet.Options>): Data {
     const data = super.getData(options) as ItemSheet.Data;
     this.sta = createCharacterWeapon(this.item)
-    const qualities = Object.entries(this.sta.qualities)
-      .partition(([_, v]) => typeof v == "boolean")
+    const qualities = splitObject(this.sta.qualities, (_, v) => typeof v == "boolean")
     const sheetData: Data = {
       ...data,
       settings: sta.settings,
@@ -34,9 +33,19 @@ export class CharacterWeaponSheet extends ItemSheet {
   }
 }
 
+function splitObject(obj: any, rule: (name: string, value: any) => boolean) {
+  const a: LooseObject<any> = {}
+  const b: LooseObject<any> = {}
+  Object.entries(obj).forEach(([name, value]) => {
+    if(rule(name, value)) a[name] = value;
+    else b[name] = value;
+  })
+  return [a, b]
+}
+
 type Data = ItemSheet.Data & {
   settings: object;
   sta: LooseObject<any>;
-  qualityFlags: [string, any][];
-  qualityQuantities: [string, any][];
+  qualityFlags: LooseObject<any>;
+  qualityQuantities: LooseObject<any>;
 };

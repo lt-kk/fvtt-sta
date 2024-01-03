@@ -42,7 +42,7 @@
     <div>
       {{#each qualityFlags as |value name|}}
         <label class="quantity {{#if value}}checked{{/if}}">
-          {{localize (concat "sta.item.characterweapon.quality." name)}}
+          {{localize (concat "sta.quality." name)}}
           <input name="system.qualities.{{name}}" type="checkbox"
                  {{#if value}}checked="checked"{{/if}} />
         </label>
@@ -51,8 +51,8 @@
     <div>
       {{#each qualityQuantities as |value name|}}
         <label class="quantity">
-          {{localize (concat "sta.item.characterweapon.quality." name)}}
-          <input name="system.qualities.{{name}}" type="checkbox" value="{{value}}" />
+          {{localize (concat "sta.item.quality." name)}}
+          <input name="system.qualities.{{name}}" type="test" value="{{value}}" data-dtype="Number" />
         </label>
       {{/each}}
     </div>

@@ -20,6 +20,9 @@ export class StaCharacterWeapon {
   img: string | null;
   damage: number;
   range: StaRange;
+  // TODO size
+  opportunity: number;
+  escalation: number;
   description: string;
   rule: string;
   qualities: StaCharacterWeaponQualities;
@@ -31,6 +34,8 @@ export class StaCharacterWeapon {
     {
       damage = 0,
       range = "near" as StaRange,
+      opportunity = 0,
+      escalation = 0,
       description = "",
       rule = "",
       qualities = {},
@@ -40,6 +45,8 @@ export class StaCharacterWeapon {
     this.name = name;
     this.img = img;
     this.damage = damage;
+    this.opportunity = opportunity;
+    this.escalation = escalation;
     this.range = range;
     this.description = description;
     this.rule = rule;
@@ -66,9 +73,6 @@ export class StaCharacterWeaponQualities {
   inaccurate: boolean;
   nonlethal: boolean;
 
-  opportunity: number;
-  escalation: number;
-
   constructor({
     area = false,
     spread = false,
@@ -86,9 +90,6 @@ export class StaCharacterWeaponQualities {
     grenade = false,
     inaccurate = false,
     nonlethal = false,
-
-    opportunity = 0,
-    escalation = 0,
   }) {
     this.area = area;
     this.spread = spread;
@@ -106,8 +107,5 @@ export class StaCharacterWeaponQualities {
     this.grenade = grenade;
     this.inaccurate = inaccurate;
     this.nonlethal = nonlethal;
-
-    this.opportunity = opportunity;
-    this.escalation = escalation;
   }
 }
