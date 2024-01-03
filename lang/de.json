@@ -95,7 +95,8 @@
         "create": "Neue Waffe",
         "edit": "Waffe bearbeiten",
         "delete": "Waffe löschen",
-        "empty": "Keine Waffe"
+        "empty": "Keine Waffe",
+        "roll": "Waffe abfeuern"
       },
       "focus": {
         "_singular": "Fokus",
