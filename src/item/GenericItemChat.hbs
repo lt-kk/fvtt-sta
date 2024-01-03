@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
   <header class="sheet-header">
-    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64" />
-    <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}" /></h1>
+    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+    <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
   </header>
 
   <section class="properties">
@@ -9,7 +9,7 @@
     {{#each data.system as |value name|}}
       <label class="property property-{{name}}">
         <span class="label">{{localize (concat "sta.item." data.type "." name)}}</span>
-        <input name="system.{{name}}" type="text" value="{{value}}" />
+        <input name="system.{{name}}" type="text" value="{{value}}"/>
       </label>
     {{/each}}
   </section>

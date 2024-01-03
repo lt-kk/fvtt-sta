@@ -1,6 +1,6 @@
-import { LooseObject } from "../util/util";
-import { sta } from "../config";
-import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "./StaRoll";
+import {LooseObject} from "../util/util";
+import {sta} from "../config";
+import {StaRoll, StaRollData, StaRollDice, StaRollResult} from "./StaRoll";
 
 
 export type ChallengeRollData = LooseObject<any> & StaRollData<ChallengeRollResult>
@@ -20,16 +20,17 @@ export class ChallengeRollDice implements StaRollDice {
 
 
 export class ChallengeRollResult implements StaRollResult<ChallengeRollDice> {
-  dice: ChallengeRollDice[] = [];
+  dice: ChallengeRollDice[];
+  successes: number;
+  effects: number;
 
-  get successes() {
-    return this.dice
+
+  constructor(dice: ChallengeRollDice[]) {
+    this.dice = dice;
+    this.successes = this.dice
       .map((d) => d.successes)
       .reduce((p, c) => p + c);
-  }
-
-  get effects() {
-    return this.dice
+    this.effects = this.dice
       .map((d) => d.effects)
       .reduce((p, c) => p + c);
   }
@@ -37,7 +38,7 @@ export class ChallengeRollResult implements StaRollResult<ChallengeRollDice> {
 
 
 export class ChallengeRoll extends StaRoll<ChallengeRollData, ChallengeRollResult> {
-  template = `${sta.templateBasePath}/roll/ChallengeRoll.hbs`
+  chatTemplate = `${sta.templateBasePath}/roll/ChallengeRollChat.hbs`
 
   constructor(
     _: string, data: ChallengeRollData, options?: Roll["options"],
@@ -50,14 +51,9 @@ export class ChallengeRoll extends StaRoll<ChallengeRollData, ChallengeRollResul
   }
 
   evaluateSta(data: ChallengeRollData): ChallengeRollResult {
-    const result = new ChallengeRollResult();
-    this.dice.forEach((term) => {
-      term.results.forEach((d => {
-        const value = d.result;
-        result.dice.push(this.resultToDice(value));
-      }));
-    });
-    return result;
+    const results = this.dice.flatMap((term) => term.results)
+      .map((d => this.resultToDice(d.result)));
+    return new ChallengeRollResult(results);
   }
 
 
@@ -75,6 +71,7 @@ export class ChallengeRoll extends StaRoll<ChallengeRollData, ChallengeRollResul
       dice.effects > 0 ? "effect" : null,
     ];
   }
+
 }
 
 

@@ -1,0 +1,45 @@
+<div class="dice-roll">
+  {{#if flavor}}
+    <div class="dice-flavor">{{flavor}}</div>
+  {{/if}}
+  <div class="dice-result">
+    <div class="dice-formula">
+      {{localize (concat "sta.roll.task._singular")}}:
+      {{formula}}
+      &lt;= {{staData.target}}
+    </div>
+    <section class="tooltip-part">
+      <div class="dice">
+        <header class="part-header flexrow">
+          <span class="part-formula">
+            {{tooltip.attribute}}
+            {{tooltip.system}}
+            +
+            {{tooltip.discipline}}
+            {{tooltip.department}}
+          </span>
+        </header>
+        <ol class="dice-rolls">
+          {{#each tooltip.rolls}}
+            <li class="roll {{classes}} d20">{{{value}}}</li>
+          {{/each}}
+        </ol>
+      </div>
+    </section>
+    <h4 class="dice-total">
+      <span class="successes">
+        {{localize "sta.roll.success._plural"}}:
+        {{staData.result.successes}}
+      </span>
+      {{#if staData.result.complications}}
+        <span class="complications">
+          {{localize "sta.roll.complication._plural"}}:
+          {{staData.result.complications}}
+        </span>
+      {{/if}}
+    </h4>
+    <div class="actions">
+      <button class="test">Do something nice</button>
+    </div>
+  </div>
+</div>

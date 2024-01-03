@@ -1,13 +1,20 @@
-import { StaRange } from "../../model/StaTypes";
-import { itemSystem } from "../../util/util";
+import {StaRange} from "../../model/StaTypes";
+import {mapItems} from "../../util/actor";
+import {itemSystem} from "../../util/document";
 
 
 export function createCharacterWeapon(document: Item): StaCharacterWeapon {
   return new StaCharacterWeapon(document.id!, document.name!, document.img, itemSystem(document));
 }
 
+export function filterCharacterWeapon(source: Actor | Collection<Item>) {
+  return mapItems(source, StaCharacterWeapon.type, createCharacterWeapon);
+}
+
 
 export class StaCharacterWeapon {
+  static type = "characterweapon"
+
   id: string;
   name: string;
   img: string | null;

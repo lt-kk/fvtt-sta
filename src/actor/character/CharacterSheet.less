@@ -137,5 +137,15 @@
       }
     }
 
+    .list .control.roll {
+      &:hover {
+        content: url(/icons/svg/d20-grey.svg);
+        cursor: pointer;
+      }
+    }
+
+    .item:has(.control:hover) {
+      box-shadow: 0 0 5px var(--color-shadow-primary);
+    }
   }
 }

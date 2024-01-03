@@ -1,12 +1,19 @@
-import { itemSystem } from "../../util/util";
+import {itemSystem} from "../../util/document";
+import {mapItems} from "../../util/actor";
 
 
 export function createArmor(document: Item): StaArmor {
   return new StaArmor(document.id!, document.name!, document.img, itemSystem(document));
 }
 
+export function filterArmor(source: Actor | Collection<Item>) {
+  return mapItems(source, StaArmor.type, createArmor);
+}
+
 
 export class StaArmor {
+  static type = "armor"
+
   id: string;
   name: string;
   img: string | null;

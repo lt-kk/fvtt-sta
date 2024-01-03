@@ -1,38 +1,38 @@
 <form class="sta-body" autocomplete="off">
 
   <section class="icon">
-    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
   </section>
 
   <section class="summary">
     <label class="property name">
       <span class="label">{{localize "sta.starship.name"}}</span>
-      <input name="name" type="text" value="{{data.name}}" tabindex="1" />
+      <input name="name" type="text" value="{{data.name}}" tabindex="1"/>
     </label>
     <label class="property designation">
       <span class="label">{{localize "sta.starship.designation"}}</span>
-      <input name="system.designation" type="text" value="{{sta.designation}}" tabindex="1" />
+      <input name="system.designation" type="text" value="{{sta.designation}}" tabindex="1"/>
     </label>
     <label class="property spaceframe">
       <span class="label">{{localize "sta.starship.spaceframe"}}</span>
-      <input name="system.spaceframe" type="text" value="{{sta.spaceframe}}" tabindex="1" />
+      <input name="system.spaceframe" type="text" value="{{sta.spaceframe}}" tabindex="1"/>
     </label>
     <label class="property servicedate">
       <span class="label">{{localize "sta.starship.servicedate"}}</span>
       <input name="system.servicedate" type="text" value="{{sta.servicedate}}" tabindex="1"
-             data-dtype="Number" />
+             data-dtype="Number"/>
     </label>
     <label class="property missionprofile">
       <span class="label">{{localize "sta.starship.missionprofile"}}</span>
-      <input name="system.missionprofile" type="text" value="{{sta.missionprofile}}" tabindex="1" />
+      <input name="system.missionprofile" type="text" value="{{sta.missionprofile}}" tabindex="1"/>
     </label>
     <label class="property scale">
       <span class="label">{{localize "sta.starship.scale"}}</span>
-      <input name="system.scale" type="text" value="{{sta.scale}}" tabindex="1" data-dtype="Number" />
+      <input name="system.scale" type="text" value="{{sta.scale}}" tabindex="1" data-dtype="Number"/>
     </label>
     <label class="property resistance">
       <span class="label">{{localize "sta.starship.resistance"}}</span>
-      <input name="system.resistance" type="text" value="{{sta.resistance}}" tabindex="1" data-dtype="Number" />
+      <input name="system.resistance" type="text" value="{{sta.resistance}}" tabindex="1" data-dtype="Number"/>
     </label>
 
     <div class="scale-selection roll-d6">
@@ -70,7 +70,7 @@
         <input class="inner select" name="system.taskRoll.system" type="radio" value="{{name}}"
                {{#if (eq ../sta.taskRoll.system name)}}checked="checked"{{/if}}>
         <input class="inner form-control" name="system.systems.{{name}}.value" type="text" value="{{system.value}}"
-               data-dtype="Number" tabindex="2" />
+               data-dtype="Number" tabindex="2"/>
         <span class="label">{{localize (concat "sta.starship.systems." name)}}</span>
         <span class="breaches breaches-{{name}} flex-last reverse">
           {{#each system.pills}}
@@ -103,7 +103,7 @@
         <input class="inner select" name="system.taskRoll.department" type="radio" value="{{name}}"
                {{#if (eq ../sta.taskRoll.department name)}}checked="checked"{{/if}}>
         <input class="inner form-control" name="system.departments.{{name}}" type="text" value="{{value}}"
-               data-dtype="Number" tabindex="3" />
+               data-dtype="Number" tabindex="3"/>
         <span class="label">{{localize (concat "sta.starship.departments." name)}}</span>
       </label>
     {{/each}}
@@ -133,7 +133,7 @@
       <ol class="list">
         {{#each sta.talents}}
           <li class="item" data-item-id="{{id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24"/>
             <div class="name">{{name}}</div>
             <div class="controls">
               <a class="control edit" title="{{localize "sta.item.talent.edit"}}"><i class="fas fa-edit"></i></a>
@@ -157,7 +157,7 @@
       <ol class="list">
         {{#sta.traits}}
           <li class="item" data-item-id="{{id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24"/>
             <div class="name">{{name}}</div>
             <div class="controls">
               <a class="control edit" title="{{localize "sta.item.trait.edit"}}"><i class="fas fa-edit"></i></a>
@@ -182,7 +182,7 @@
       <ol class="list">
         {{#sta.refits}}
           <li class="item" data-item-id="{{id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24"/>
             <div class="name">{{name}}</div>
             <div class="controls">
               <a class="control edit" title="{{localize "sta.item.refit.edit"}}"><i class="fas fa-edit"></i></a>
@@ -218,7 +218,7 @@
       <ol class="list">
         {{#sta.values}}
           <li class="item" data-item-id="{{id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24"/>
             <div class="name">{{name}}</div>
             <div class="controls">
               <a class="control edit" title="{{sta.starship.value.edit}}"><i class="fas fa-edit"></i></a>
@@ -244,7 +244,7 @@
       <ol class="list">
         {{#sta.weapons}}
           <li class="item" data-item-id="{{id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24"/>
             <div class="name">{{name}}</div>
             <div class="range">{{range}}</div>
             <div class="damage">{{damage}}</div>
@@ -275,7 +275,7 @@
       <ol class="list">
         {{#sta.cargo}}
           <li class="item" data-item-id="{{id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
+            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24"/>
             <div class="name">{{name}}</div>
             <div class="uses">{{uses}}</div>
             <div class="controls">

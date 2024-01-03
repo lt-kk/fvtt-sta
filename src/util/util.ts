@@ -3,29 +3,11 @@ export interface LooseObject<V extends any> {
 }
 
 
-export function filterItemType(list: Collection<Item>, itemType: string): Item[] {
-  return list.filter((item) => {
-    return item.type === itemType;
-  });
-}
-
-export function actorSystem(document: Actor): LooseObject<any> {
-  return (document as unknown as LooseObject<LooseObject<any>>).system;
-}
-
-export function actorItems(document: Actor): Collection<Item> {
-  return document.items as unknown as Collection<Item>;
-}
-
-export function itemSystem(document: Item): LooseObject<any> {
-  return (document as unknown as LooseObject<LooseObject<any>>).system;
-}
-
-export interface HasActivateListeners {
-  activateListeners(html: JQuery, message: ChatMessage): void;
-}
-
 /** foundry-vtt-types is missing this property */
-export interface HasRolls {
-  rolls: Roll[];
+export interface HasRolls<D extends Object> {
+  rolls: Roll<D>[];
+}
+
+export function propertyOf<T>(name: keyof T): string {
+  return String(name);
 }

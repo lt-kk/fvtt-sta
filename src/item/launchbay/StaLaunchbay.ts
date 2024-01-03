@@ -1,12 +1,19 @@
-import { itemSystem } from "../../util/util";
+import {mapItems} from "../../util/actor";
+import {itemSystem} from "../../util/document";
 
 
 export function createLaunchbay(document: Item): StaLaunchbay {
   return new StaLaunchbay(document.id!, document.name!, document.img, itemSystem(document));
 }
 
+export function filterLaunchbay(source: Actor | Collection<Item>) {
+  return mapItems(source, StaLaunchbay.type, createLaunchbay);
+}
+
 
 export class StaLaunchbay {
+  static type = "launchbay"
+
   id: string;
   name: string;
   img: string | null;

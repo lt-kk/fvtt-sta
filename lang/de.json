@@ -215,6 +215,10 @@
         "_singular": "Komplikation",
         "_plural": "Komplikationen"
       },
+      "effect": {
+        "_singular": "Effekt",
+        "_plural": "Effekte"
+      },
       "task": {
         "_singular": "Aufgabe"
       },

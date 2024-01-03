@@ -1,12 +1,19 @@
-import { itemSystem } from "../../util/util";
+import {mapItems} from "../../util/actor";
+import {itemSystem} from "../../util/document";
 
 
 export function createFocus(document: Item): StaFocus {
   return new StaFocus(document.id!, document.name!, document.img, itemSystem(document));
 }
 
+export function filterFocus(source: Actor | Collection<Item>) {
+  return mapItems(source, StaFocus.type, createFocus);
+}
+
 
 export class StaFocus {
+  static type = "focus"
+
   id: string;
   name: string;
   img: string | null;

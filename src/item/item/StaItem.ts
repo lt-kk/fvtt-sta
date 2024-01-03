@@ -1,12 +1,19 @@
-import { itemSystem } from "../../util/util";
+import {mapItems} from "../../util/actor";
+import {itemSystem} from "../../util/document";
 
 
 export function createItem(document: Item): StaItem {
   return new StaItem(document.id!, document.name!, document.img, itemSystem(document));
 }
 
+export function filterItem(source: Actor | Collection<Item>) {
+  return mapItems(source, StaItem.type, createItem);
+}
+
 
 export class StaItem {
+  static type = "item"
+
   id: string;
   name: string;
   img: string | null;

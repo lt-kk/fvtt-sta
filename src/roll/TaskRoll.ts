@@ -1,6 +1,6 @@
-import { sta } from "../config";
-import { LooseObject } from "../util/util";
-import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "./StaRoll";
+import {sta} from "../config";
+import {LooseObject} from "../util/util";
+import {StaRoll, StaRollData, StaRollDice, StaRollResult} from "./StaRoll";
 
 
 export type TaskRollData = LooseObject<any> & StaRollData<TaskRollResult> & {
@@ -27,22 +27,22 @@ export class TaskRollDice implements StaRollDice {
 
 export class TaskRollResult implements StaRollResult<TaskRollDice> {
   dice: TaskRollDice[] = [];
+  successes: number;
+  complications: number;
 
-  get successes() {
-    return this.dice
+  constructor(dice: TaskRollDice[]) {
+    this.dice = dice;
+    this.successes = this.dice
       .map((d) => d.successes)
       .reduce((p, c) => p + c);
-  }
-
-  get complications() {
-    return this.dice
+    this.complications = this.dice
       .map((d) => d.complications)
       .reduce((p, c) => p + c);
   }
 }
 
 export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
-  template = `${sta.templateBasePath}/roll/TaskRoll.hbs`
+  chatTemplate = `${sta.templateBasePath}/roll/TaskRollChat.hbs`
 
   constructor(
     _: string, data: TaskRollData, options?: Roll["options"],
@@ -60,15 +60,10 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
   };
 
   evaluateSta(data: TaskRollData): TaskRollResult {
-    const result = new TaskRollResult();
-    this.dice.forEach((term) => {
-      term.results.forEach((d => {
-        const value = d.result;
-        result.dice.push(this.resultToDice(value, data, term));
-      }));
-    });
-    if (data.determination) result.dice.push(new TaskRollDice(1, 20, 0, true));
-    return result;
+    let results = this.dice.flatMap((term) => term.results)
+      .map((d) => this.resultToDice(d.result, data));
+    if (data.determination) results.push(new TaskRollDice(1, 20, 0, true));
+    return new TaskRollResult(results);
   }
 
   private resultToDice(value: number, data: LooseObject<any> & TaskRollData & {
@@ -77,18 +72,19 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
     double: number;
     complication: number;
     determination: boolean
-  }, term: DiceTerm) {
+  }) {
     return new TaskRollDice(
       value,
       value <= data.double ? 2 : value <= data.target ? 1 : 0,
-      value >= term.faces - data.complication ? 1 : 0,
+      value >= 20 - data.complication ? 1 : 0,
     );
   }
 
   getResultCSS(dice: TaskRollDice): (string | null)[] {
     return [
-      dice.successes > 0 ? "success" : null,
-      dice.complications > 0 ? "failure" : null,
+      dice.successes == 1 ? "success" : null,
+      dice.successes == 2 ? "critical" : null,
+      dice.complications > 0 ? "complication" : null,
       dice.determination ? "determination" : null,
     ];
   }

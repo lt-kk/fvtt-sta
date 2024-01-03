@@ -1,12 +1,19 @@
-import { itemSystem } from "../../util/util";
+import {mapItems} from "../../util/actor";
+import {itemSystem} from "../../util/document";
 
 
 export function createTalent(document: Item): StaTalent {
   return new StaTalent(document.id!, document.name!, document.img, itemSystem(document));
 }
 
+export function filterTalent(source: Actor | Collection<Item>) {
+  return mapItems(source, StaTalent.type, createTalent);
+}
+
 
 export class StaTalent {
+  static type = "talent"
+
   id: string;
   name: string;
   img: string | null;

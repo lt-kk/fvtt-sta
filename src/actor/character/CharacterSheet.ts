@@ -1,9 +1,11 @@
-import { sta } from "../../config";
-import { LooseObject } from "../../util/util";
-import { confirmDialog } from "../../dialog/ConfimDialog";
-import { createCharacter, StaCharacter } from "./StaCharacter";
-import { characterTaskRoll } from "./CharacterTaskRoll";
-import { challengeRoll } from "../../roll/ChallangeRoll";
+import {sta} from "../../config";
+import {LooseObject} from "../../util/util";
+import {confirmDialog} from "../../dialog/ConfimDialog";
+import {createCharacter, StaCharacter} from "./StaCharacter";
+import {characterTaskRoll} from "./CharacterTaskRoll";
+import {challengeRoll} from "../../roll/ChallangeRoll";
+import {weaponRoll} from "../../item/characterweapon/CharacterWeaponRoll";
+import {itemSystem} from "../../util/document";
 
 export class CharacterSheet extends ActorSheet {
   static templatePath = `${sta.templateBasePath}/actor/character/CharacterSheet.hbs`;
@@ -83,14 +85,16 @@ export class CharacterSheet extends ActorSheet {
   handleRoll(event: JQuery.ClickEvent) {
     event.preventDefault();
     const element = $(event.currentTarget);
-    const rollType = element.data("roll");
     const dicePool = element.data("value") as number;
-    switch (rollType) {
+    switch (element.data("roll")) {
       case "task":
         this.rollTask(dicePool);
         break;
       case "challenge":
         this.rollChallenge(dicePool);
+        break;
+      case "weapon":
+        this.rollWeapon(element);
         break;
     }
 
@@ -99,14 +103,26 @@ export class CharacterSheet extends ActorSheet {
   async rollTask(dicePool: number) {
     const roll = characterTaskRoll(this.sta!, dicePool);
     roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
     });
   }
 
   async rollChallenge(dicePool: number) {
     const roll = challengeRoll(dicePool);
     roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+    });
+  }
+
+
+  async rollWeapon(html: JQuery) {
+    const itemId = html.closest(".item").data("itemId")
+    const item = this.actor.items.get(itemId)!
+    const damage = Math.abs(itemSystem(item).damage)
+    const security = Math.abs(this.sta?.disciplines.security!)
+    const roll = weaponRoll(damage + security);
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
     });
   }
 

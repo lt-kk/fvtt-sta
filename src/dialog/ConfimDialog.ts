@@ -1,4 +1,4 @@
-import { sta } from "../config";
+import {sta} from "../config";
 
 export function confirmDialog(
   handler: (html: JQuery | HTMLElement) => unknown,
@@ -20,5 +20,5 @@ export function confirmDialog(
       },
     },
     default: "no",
-  }, { minimizable: false });
+  }, {minimizable: false});
 }

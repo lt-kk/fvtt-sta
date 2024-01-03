@@ -1,9 +1,9 @@
-import { sta } from "../../config";
-import { LooseObject } from "../../util/util";
-import { confirmDialog } from "../../dialog/ConfimDialog";
-import { createStarship, StaStarship } from "./StaStarship";
-import { starshipTaskRoll } from "./StarshipTaskRoll";
-import { challengeRoll } from "../../roll/ChallangeRoll";
+import {sta} from "../../config";
+import {LooseObject} from "../../util/util";
+import {confirmDialog} from "../../dialog/ConfimDialog";
+import {createStarship, StaStarship} from "./StaStarship";
+import {starshipTaskRoll} from "./StarshipTaskRoll";
+import {challengeRoll} from "../../roll/ChallangeRoll";
 
 export class StarshipSheet extends ActorSheet {
   static templatePath = `${sta.templateBasePath}/actor/starship/StarshipSheet.hbs`;
@@ -105,14 +105,14 @@ export class StarshipSheet extends ActorSheet {
   async rollTask(dicePool: number) {
     const roll = starshipTaskRoll(this.sta!, dicePool);
     roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
     });
   }
 
   rollChallenge(dicePool: number) {
     const roll = challengeRoll(dicePool);
     roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
     });
   }
 

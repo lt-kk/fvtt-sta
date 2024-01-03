@@ -1,6 +1,6 @@
-import { sta } from "../../config";
-import { HasStaEntity } from "../../model/StaTypes";
-import { LooseObject } from "../../util/util";
+import {sta} from "../../config";
+import {HasStaEntity} from "../../model/StaTypes";
+import {LooseObject} from "../../util/util";
 
 export class CharacterWeaponSheet extends ItemSheet {
   static templatePath = `${sta.templateBasePath}/item/armor/ArmorSheet.hbs`;

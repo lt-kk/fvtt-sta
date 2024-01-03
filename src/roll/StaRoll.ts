@@ -1,10 +1,9 @@
-import { sta } from "../config";
-import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
-import { MessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client/dice/roll";
+import {sta} from "../config";
+import {ConfiguredDocumentClass} from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
 import {
-  ChatMessageData, ChatMessageDataConstructorData,
+  ChatMessageDataConstructorData
 } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
-import { HasActivateListeners } from "../util/util";
+import {HasActivateListeners} from "../util/message";
 
 export interface StaRollData<R extends StaRollResult<StaRollDice>> {
   dicePool: number;
@@ -47,7 +46,7 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
     template = Roll.CHAT_TEMPLATE,
     isPrivate = false,
   } = {}) {
-    if (!this._evaluated) await this.evaluate({ async: true });
+    if (!this._evaluated) await this.evaluate({async: true});
     const chatData = {
       formula: isPrivate ? "???" : this._formula,
       flavor: isPrivate ? null : flavor,
@@ -73,7 +72,7 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
 
   abstract getResultCSS(dice: StaRollDice): (string | null)[]
 
-  abstract template: string;
+  abstract chatTemplate: string;
 
   async toMessage<T extends DeepPartial<ChatMessageDataConstructorData> = {}>(
     messageData: T,
@@ -81,14 +80,20 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
       rollMode = 'roll' as keyof CONFIG.Dice.RollModes | 'roll'
     } = {}
   ): Promise<InstanceType<ConfiguredDocumentClass<typeof ChatMessage>> | undefined> {
-    if(messageData.content == null) {
-      messageData.content = await this.render({ template: this.template })
+    if (messageData.content == null) {
+      messageData.content = await this.render({template: this.chatTemplate})
     }
     return super.toMessage(messageData, {rollMode: rollMode, create: true})
   }
 
 
   activateListeners(html: JQuery, message: ChatMessage) {
-    console.log("activateListeners", html, message)
+    html.find("button").on("click", (event) => {
+      event.preventDefault();
+      this.handleButton(event, message);
+    })
+  }
+
+  handleButton(event: JQuery.ClickEvent, message: ChatMessage) {
   }
 }

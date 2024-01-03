@@ -1,12 +1,19 @@
-import { itemSystem } from "../../util/util";
+import {mapItems} from "../../util/actor";
+import {itemSystem} from "../../util/document";
 
 
 export function createInjury(document: Item): StaInjury {
   return new StaInjury(document.id!, document.name!, document.img, itemSystem(document));
 }
 
+export function filterInjury(source: Actor | Collection<Item>) {
+  return mapItems(source, StaInjury.type, createInjury);
+}
+
 
 export class StaInjury {
+  static type = "injury"
+
   id: string;
   name: string;
   img: string | null;

@@ -1,12 +1,19 @@
-import { itemSystem } from "../../util/util";
+import {mapItems} from "../../util/actor";
+import {itemSystem} from "../../util/document";
 
 
 export function createTrait(document: Item): StaTrait {
   return new StaTrait(document.id!, document.name!, document.img, itemSystem(document));
 }
 
+export function filterTrait(source: Actor | Collection<Item>) {
+  return mapItems(source, StaTrait.type, createTrait);
+}
+
 
 export class StaTrait {
+  static type = "trait"
+
   id: string;
   name: string = "";
   img: string | null;

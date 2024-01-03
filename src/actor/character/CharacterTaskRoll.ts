@@ -1,5 +1,5 @@
-import { StaCharacter, StaCharacterAttributes, StaCharacterDisciplines } from "./StaCharacter";
-import { TaskRoll, TaskRollData, TaskRollDice } from "../../roll/TaskRoll";
+import {StaCharacter, StaCharacterAttributes, StaCharacterDisciplines} from "./StaCharacter";
+import {TaskRoll, TaskRollData} from "../../roll/TaskRoll";
 
 export type CharacterTaskRollData = TaskRollData & {
   focus: boolean;

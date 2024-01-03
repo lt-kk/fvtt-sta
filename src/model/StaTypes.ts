@@ -1,4 +1,4 @@
-import { LooseObject } from "../util/util";
+import {LooseObject} from "../util/util";
 
 export class CurrentValue {
   value: number;
@@ -10,7 +10,7 @@ export class CurrentValue {
     this.value = value;
     this.max = max;
     this.min = min;
-    this.pills = generatePills(value, { begin: min, end: max, fatal: 0 });
+    this.pills = generatePills(value, {begin: min, end: max, fatal: 0});
   }
 
 }

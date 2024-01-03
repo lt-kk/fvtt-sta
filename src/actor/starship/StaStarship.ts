@@ -1,15 +1,20 @@
-import { CurrentValue, generatePills, ScalePill } from "../../model/StaTypes";
-import { createRefit, StaRefit } from "../../item/refit/StaRefit";
-import { createStarshipWeapon, StaStarshipWeapon } from "../../item/starshipweapon/StaStarshipWeapon";
-import { createItem, StaItem } from "../../item/item/StaItem";
-import { createLaunchbay, StaLaunchbay } from "../../item/launchbay/StaLaunchbay";
-import { createTalent, StaTalent } from "../../item/talent/StaTalent";
-import { createTrait, StaTrait } from "../../item/trait/StaTrait";
-import { createValue, StaValue } from "../../item/value/StaValue";
-import { actorItems, actorSystem, filterItemType } from "../../util/util";
+import {CurrentValue, generatePills, ScalePill} from "../../model/StaTypes";
+import {filterRefit, StaRefit} from "../../item/refit/StaRefit";
+import {filterStarshipWeapon, StaStarshipWeapon} from "../../item/starshipweapon/StaStarshipWeapon";
+import {filterItem, StaItem} from "../../item/item/StaItem";
+import {filterLaunchbay, StaLaunchbay} from "../../item/launchbay/StaLaunchbay";
+import {filterTalent, StaTalent} from "../../item/talent/StaTalent";
+import {filterTrait, StaTrait} from "../../item/trait/StaTrait";
+import {filterValue, StaValue} from "../../item/value/StaValue";
+import {actorItems, actorSystem} from "../../util/document";
 
 export function createStarship(document: Actor): StaStarship {
-  return new StaStarship(document.name!, document.img, actorSystem(document), actorItems(document));
+  return new StaStarship(
+    document.name!,
+    document.img,
+    actorSystem(document),
+    actorItems(document),
+  );
 }
 
 
@@ -76,13 +81,13 @@ export class StaStarship {
     this.shields = new CurrentValue(shields, this.systems.structure.value + this.departments.security);
     this.power = new CurrentValue(power, this.systems.engines.value);
 
-    this.cargo = filterItemType(items, "item").map((item) => createItem(item));
-    this.launchbay = filterItemType(items, "launchbay").map((item) => createLaunchbay(item));
-    this.refits = filterItemType(items, "refit").map((item) => createRefit(item));
-    this.talents = filterItemType(items, "talent").map((item) => createTalent(item));
-    this.traits = filterItemType(items, "trait").map((item) => createTrait(item));
-    this.values = filterItemType(items, "value").map((item) => createValue(item));
-    this.weapons = filterItemType(items, "starshipweapon").map((item) => createStarshipWeapon(item));
+    this.cargo = filterItem(items);
+    this.launchbay = filterLaunchbay(items);
+    this.refits = filterRefit(items);
+    this.talents = filterTalent(items);
+    this.traits = filterTrait(items);
+    this.values = filterValue(items);
+    this.weapons = filterStarshipWeapon(items);
 
     this.taskRoll = new StaStarshipTaskRoll(taskRoll);
 

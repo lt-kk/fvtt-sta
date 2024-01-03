@@ -1,12 +1,19 @@
-import { itemSystem } from "../../util/util";
+import {mapItems} from "../../util/actor";
+import {itemSystem} from "../../util/document";
 
 
 export function createValue(document: Item): StaValue {
   return new StaValue(document.id!, document.name!, document.img, itemSystem(document));
 }
 
+export function filterValue(source: Actor | Collection<Item>) {
+  return mapItems(source, StaValue.type, createValue);
+}
+
 
 export class StaValue {
+  static type = "value"
+
   id: string;
   name: string;
   img: string | null;
