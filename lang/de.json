@@ -253,6 +253,8 @@
       "far": "Weit",
       "extreme": "Extrem"
     },
-    "owner": "Besitzer"
+    "owner": "Besitzer",
+    "quantity": "Menge",
+    "uses": "Nutzungen"
   }
 }

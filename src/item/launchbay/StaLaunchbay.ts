@@ -1,5 +1,6 @@
-import {mapItems} from "../../util/actor";
-import {itemSystem} from "../../util/document";
+import { mapItems } from "../../util/actor";
+import { itemSystem } from "../../util/document";
+import { StaItem } from "../StaItem";
 
 
 export function createLaunchbay(document: Item): StaLaunchbay {
@@ -11,8 +12,8 @@ export function filterLaunchbay(source: Actor | Collection<Item>) {
 }
 
 
-export class StaLaunchbay {
-  static type = "launchbay"
+export class StaLaunchbay implements StaItem {
+  static type = "launchbay";
 
   id: string;
   name: string;

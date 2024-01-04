@@ -1,4 +1,4 @@
-import {sta} from "../config";
+import { sta } from "../config";
 
 export class GenericItemSheet extends ItemSheet {
   static templatePath = `${sta.templateBasePath}/item/characterweapon/CharacterWeaponSheet.hbs`;

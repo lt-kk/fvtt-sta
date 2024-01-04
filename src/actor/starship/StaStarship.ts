@@ -1,7 +1,7 @@
 import {CurrentValue, generatePills, ScalePill} from "../../model/StaTypes";
 import {filterRefit, StaRefit} from "../../item/refit/StaRefit";
 import {filterStarshipWeapon, StaStarshipWeapon} from "../../item/starshipweapon/StaStarshipWeapon";
-import {filterItem, StaItem} from "../../item/item/StaItem";
+import {filterBelonging, StaBelonging} from "../../item/belonging/StaBelonging";
 import {filterLaunchbay, StaLaunchbay} from "../../item/launchbay/StaLaunchbay";
 import {filterTalent, StaTalent} from "../../item/talent/StaTalent";
 import {filterTrait, StaTrait} from "../../item/trait/StaTrait";
@@ -36,7 +36,7 @@ export class StaStarship {
   shields: CurrentValue;
   power: CurrentValue;
 
-  cargo: StaItem[] = [];
+  cargo: StaBelonging[] = [];
   launchbay: StaLaunchbay[] = [];
   refits: StaRefit[] = [];
   talents: StaTalent[] = [];
@@ -81,7 +81,7 @@ export class StaStarship {
     this.shields = new CurrentValue(shields, this.systems.structure.value + this.departments.security);
     this.power = new CurrentValue(power, this.systems.engines.value);
 
-    this.cargo = filterItem(items);
+    this.cargo = filterBelonging(items);
     this.launchbay = filterLaunchbay(items);
     this.refits = filterRefit(items);
     this.talents = filterTalent(items);

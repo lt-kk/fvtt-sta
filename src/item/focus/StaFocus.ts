@@ -1,5 +1,6 @@
-import {mapItems} from "../../util/actor";
-import {itemSystem} from "../../util/document";
+import { mapItems } from "../../util/actor";
+import { itemSystem } from "../../util/document";
+import { StaItem } from "../StaItem";
 
 
 export function createFocus(document: Item): StaFocus {
@@ -11,8 +12,8 @@ export function filterFocus(source: Actor | Collection<Item>) {
 }
 
 
-export class StaFocus {
-  static type = "focus"
+export class StaFocus implements StaItem {
+  static type = "focus";
 
   id: string;
   name: string;

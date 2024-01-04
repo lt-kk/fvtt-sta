@@ -1,10 +1,10 @@
 <form class="sta-body" autocomplete="off">
   <section class="icon">
-    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <img src="{{sta.img}}" data-edit="img" title="{{sta.name}}" />
   </section>
 
   <section class="summary">
-    <input class="control property name" name="name" type="text" value="{{data.name}}" />
+    <input class="control property name" name="name" type="text" value="{{sta.name}}" />
     {{#if item.actor}}
       <span class="owner">{{localize "sta.owner"}}: {{item.actor.name}}</span>
     {{/if}}
@@ -25,30 +25,6 @@
       </section>
 
       <section class="numbers">
-        <section class="property damage border-left">
-          <h4>{{localize "sta.item.damage"}}</h4>
-          <div class="scale-value">
-            {{#range 0 settings.item.characterweapon.damage.max}}
-              <label class="scale-pill {{#if (eq ../sta.damage i)}}checked{{/if}}">
-                <span class="label">{{i}}</span>
-                <input name="system.damage" type="radio" value="{{i}}" data-dtype="Number"
-                       {{#if (eq ../sta.damage i)}}checked="checked"{{/if}} />
-              </label>
-            {{/range}}
-          </div>
-        </section>
-        <section class="property range border-left">
-          <h4>{{localize "sta.range._singular"}}</h4>
-          <div class="scale-value">
-            {{#each settings.ranges}}
-              <label class="scale-pill {{#if (eq ../sta.range this)}}checked{{/if}}">
-                {{localize (concat "sta.range." this)}}
-                <input name="system.range" type="radio" value="{{this}}"
-                       {{#if (eq ../sta.range this)}}checked="checked"{{/if}} />
-              </label>
-            {{/each}}
-          </div>
-        </section>
         <section class="property opportunity border-left">
           <h4>{{localize "sta.item.opportunity"}}</h4>
           <div class="scale-value">
@@ -77,11 +53,37 @@
             {{/range}}
           </div>
         </section>
+
+        <section class="property damage border-left">
+          <h4>{{localize "sta.item.damage"}}</h4>
+          <div class="scale-value">
+            {{#range 0 settings.item.characterweapon.damage.max}}
+              <label class="scale-pill {{#if (eq ../sta.damage i)}}checked{{/if}}">
+                <span class="label">{{i}}</span>
+                <input name="system.damage" type="radio" value="{{i}}" data-dtype="Number"
+                       {{#if (eq ../sta.damage i)}}checked="checked"{{/if}} />
+              </label>
+            {{/range}}
+          </div>
+        </section>
+        <section class="property range border-left">
+          <h4>{{localize "sta.range._singular"}}</h4>
+          <div class="scale-value">
+            {{#each settings.ranges}}
+              <label class="scale-pill {{#if (eq ../sta.range this)}}checked{{/if}}">
+                {{localize (concat "sta.range." this)}}
+                <input name="system.range" type="radio" value="{{this}}"
+                       {{#if (eq ../sta.range this)}}checked="checked"{{/if}} />
+              </label>
+            {{/each}}
+          </div>
+        </section>
         <section class="qualities">
           {{#each qualityQuantities as |value name|}}
             <label class="property number quality quality-{{name}} ">
               <span class="label">{{localize (concat "sta.quality." name)}}</span>
-              <input class="form-control" name="system.qualities.{{name}}" type="text" value="{{value}}" data-dtype="Number" />
+              <input class="form-control" name="system.qualities.{{name}}" type="text" value="{{value}}"
+                     data-dtype="Number" />
             </label>
           {{/each}}
         </section>

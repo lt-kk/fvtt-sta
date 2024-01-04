@@ -1,5 +1,6 @@
-import {mapItems} from "../../util/actor";
-import {itemSystem} from "../../util/document";
+import { mapItems } from "../../util/actor";
+import { itemSystem } from "../../util/document";
+import { StaItem } from "../StaItem";
 
 
 export function createTrait(document: Item): StaTrait {
@@ -11,8 +12,8 @@ export function filterTrait(source: Actor | Collection<Item>) {
 }
 
 
-export class StaTrait {
-  static type = "trait"
+export class StaTrait implements StaItem {
+  static type = "trait";
 
   id: string;
   name: string = "";

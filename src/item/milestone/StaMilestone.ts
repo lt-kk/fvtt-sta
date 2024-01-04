@@ -1,5 +1,6 @@
-import {mapItems} from "../../util/actor";
-import {itemSystem} from "../../util/document";
+import { mapItems } from "../../util/actor";
+import { itemSystem } from "../../util/document";
+import { StaItem } from "../StaItem";
 
 
 export function createMilestone(document: Item): StaMilestone {
@@ -11,8 +12,8 @@ export function filterMilestone(source: Actor | Collection<Item>) {
 }
 
 
-export class StaMilestone {
-  static type = "milestone"
+export class StaMilestone implements StaItem {
+  static type = "milestone";
 
   id: string;
   name: string;

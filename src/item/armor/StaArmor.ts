@@ -1,5 +1,6 @@
-import {itemSystem} from "../../util/document";
-import {mapItems} from "../../util/actor";
+import { itemSystem } from "../../util/document";
+import { mapItems } from "../../util/actor";
+import { StaItem } from "../StaItem";
 
 
 export function createArmor(document: Item): StaArmor {
@@ -11,17 +12,16 @@ export function filterArmor(source: Actor | Collection<Item>) {
 }
 
 
-export class StaArmor {
-  static type = "armor"
+export class StaArmor extends StaItem {
+  static type = "armor";
 
   id: string;
   name: string;
   img: string | null;
-  protection: number;
   description: string;
-  equipped: boolean;
   rule: string;
-
+  equipped: boolean;
+  protection: number;
   opportunity: number;
   escalation: number;
 
@@ -30,21 +30,22 @@ export class StaArmor {
     name: string,
     img: string | null,
     {
-      protection = 1,
       description = "",
-      equipped = true,
       rule = "",
+      equipped = true,
+      protection = 1,
       opportunity = 0,
       escalation = 0,
     } = {},
   ) {
+    super();
     this.id = id;
     this.name = name;
     this.img = img;
-    this.protection = protection;
     this.description = description;
-    this.equipped = equipped;
     this.rule = rule;
+    this.equipped = equipped;
+    this.protection = protection;
     this.opportunity = opportunity;
     this.escalation = escalation;
   }

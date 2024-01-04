@@ -1,5 +1,6 @@
-import {mapItems} from "../../util/actor";
-import {itemSystem} from "../../util/document";
+import { mapItems } from "../../util/actor";
+import { itemSystem } from "../../util/document";
+import { StaItem } from "../StaItem";
 
 
 export function createInjury(document: Item): StaInjury {
@@ -11,8 +12,8 @@ export function filterInjury(source: Actor | Collection<Item>) {
 }
 
 
-export class StaInjury {
-  static type = "injury"
+export class StaInjury implements StaItem {
+  static type = "injury";
 
   id: string;
   name: string;

@@ -1,5 +1,6 @@
-import {mapItems} from "../../util/actor";
-import {itemSystem} from "../../util/document";
+import { mapItems } from "../../util/actor";
+import { itemSystem } from "../../util/document";
+import { StaItem } from "../StaItem";
 
 
 export function createValue(document: Item): StaValue {
@@ -11,8 +12,8 @@ export function filterValue(source: Actor | Collection<Item>) {
 }
 
 
-export class StaValue {
-  static type = "value"
+export class StaValue implements StaItem {
+  static type = "value";
 
   id: string;
   name: string;

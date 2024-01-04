@@ -1,14 +1,15 @@
 <form class="sta-body" autocomplete="off">
   <section class="icon">
-    <img src="{{sta.img}}" data-edit="img" title="{{sta.name}}" />
+    <img src="{{item.img}}" data-edit="img" title="{{item.name}}" />
   </section>
 
   <section class="summary">
-    <input class="control property name" name="name" type="text" value="{{sta.name}}" />
+    <input class="control property name" name="name" type="text" value="{{data.name}}" />
     {{#if item.actor}}
       <span class="owner">{{localize "sta.owner"}}: {{item.actor.name}}</span>
     {{/if}}
   </section>
+
 
   <section class="properties border-left">
     <h1 class="">
@@ -49,20 +50,15 @@
       </div>
     </section>
 
-    <section class="property protection border-left">
-      <h4>{{localize "sta.item.armor.protection"}}</h4>
-      <div class="scale-value">
-        {{#range 0 settings.item.armor.protection.max}}
-          <label class="scale-pill
-            {{#if (eq 0 i)}}warn{{/if}}
-            {{#if (eq ../sta.protection i)}}checked{{/if}}">
-            {{i}}
-            <input name="system.protection" type="radio" value="{{i}}" data-dtype="Number"
-                   {{#if (eq ../sta.protection i)}}checked="checked"{{/if}} />
-          </label>
-        {{/range}}
-      </div>
-    </section>
+    <label class="property quantity">
+      <span class="label">{{localize "sta.quantity"}}</span>
+      <input class="form-control" name="system.quantity" type="text" value="{{sta.quantity}}"
+             data-dtype="Number" />
+    </label>
+    <label class="property uses">
+      <span class="label {{#if (eq sta.uses -1)}}infinite{{/if}}">{{localize "sta.uses"}}</span>
+      <input class="form-control" name="system.uses" type="text" value="{{sta.uses}}" data-dtype="Number" />
+    </label>
   </section>
 
   <section class="property description">

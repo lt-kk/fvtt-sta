@@ -1,0 +1,44 @@
+.item-sheet {
+  .properties {
+
+    .property {
+      flex-grow: 1;
+      width: 120px;
+
+      &.equipped {
+        flex-grow: 0;
+        display: flex;
+        grid-gap: @gap;
+        font-size: @sta-h3-size;
+        color: @sta-color-h3-fg;
+
+        input {
+          background-color: @sta-color-h1-bg;
+          width: @sta-h1-size;
+        }
+      }
+
+      &.quantity, &.uses {
+        .lcars-bar(@sta-color-h3-bg, @sta-color-h3-a, @text-size);
+
+        .form-control {
+          .lcars-bar-inner(@dark-blue);
+          flex-grow: unset;
+          background-color: transparent;
+          width: @text-size * 2;
+          text-align: center;
+          order: 999;
+        }
+      }
+    }
+  }
+
+  //.uses .infinite {
+  //  &:after {
+  //    content: "\f534";
+  //    position: absolute;
+  //    font-family: var(--font-awesome);
+  //    color: @almost-white;
+  //  }
+  //}
+}

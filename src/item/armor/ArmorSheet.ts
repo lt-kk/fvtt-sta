@@ -1,38 +1,19 @@
-import {sta} from "../../config";
-import {HasStaEntity} from "../../model/StaTypes";
-import {LooseObject} from "../../util/util";
 import { createArmor, StaArmor } from "./StaArmor";
+import { BaseItemSheet } from "../BaseItemSheet";
 
-export class ArmorSheet extends ItemSheet {
-  static templatePath = `${sta.templateBasePath}/item/armor/ArmorSheet.hbs`;
-  sta: StaArmor | null = null;
+export class ArmorSheet extends BaseItemSheet<StaArmor> {
+  static type = StaArmor.type;
 
-  get template() {
-    return ArmorSheet.templatePath;
+  createSta(item: Item): StaArmor {
+    return createArmor(item);
   }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["sta-app", "item-sheet", "armor-sheet"],
-      width: 350,
+      classes: ["sta-app", "item-sheet", `${this.type}-sheet`],
+      width: 390,
       height: 370,
     });
   }
 
-  override getData(options?: Partial<ItemSheet.Options>): Data {
-    const data = super.getData(options) as ItemSheet.Data;
-    this.sta = createArmor(this.item)
-    const sheetData: Data = {
-      ...data,
-      settings: sta.settings,
-      sta: this.sta,
-    };
-    console.log(sheetData);
-    return sheetData;
-  }
 }
-
-type Data = ItemSheet.Data & {
-  settings: object;
-  sta: LooseObject<any>;
-};

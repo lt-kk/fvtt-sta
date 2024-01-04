@@ -3,6 +3,9 @@ import {StarshipSheet} from "./actor/starship/StarshipSheet";
 import {ArmorSheet} from "./item/armor/ArmorSheet";
 import {GenericItemSheet} from "./item/GenericItemSheet";
 import { CharacterWeaponSheet } from "./item/characterweapon/CharacterWeaponSheet";
+import { FocusSheet } from "./item/focus/FocusSheet";
+import { InjurySheet } from "./item/injury/InjurySheet";
+import { BelongingSheet } from "./item/belonging/BelongingSheet";
 
 
 export interface ActorTypeConfig {
@@ -39,17 +42,17 @@ export class ItemTypes {
     chatTemplate: `/item/GenericItemChat.hbs`,
   };
   focus: ItemTypeConfig = {
-    sheet: GenericItemSheet,
+    sheet: FocusSheet,
     listTemplate: `/item/GenericListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };
   injury: ItemTypeConfig = {
-    sheet: GenericItemSheet,
+    sheet: InjurySheet,
     listTemplate: `/item/GenericListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };
   item: ItemTypeConfig = {
-    sheet: GenericItemSheet,
+    sheet: BelongingSheet,
     listTemplate: `/item/GenericListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };

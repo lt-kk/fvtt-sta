@@ -1,7 +1,8 @@
-import {StaStarshipSystems} from "../../actor/starship/StaStarship";
+import { StaStarshipSystems } from "../../actor/starship/StaStarship";
 
-import {mapItems} from "../../util/actor";
-import {itemSystem} from "../../util/document";
+import { mapItems } from "../../util/actor";
+import { itemSystem } from "../../util/document";
+import { StaItem } from "../StaItem";
 
 
 export function createRefit(document: Item): StaRefit {
@@ -13,12 +14,13 @@ export function filterRefit(source: Actor | Collection<Item>) {
 }
 
 
-export class StaRefit {
-  static type = "refit"
+export class StaRefit implements StaItem {
+  static type = "refit";
 
   id: string;
   name: string;
   img: string | null;
+  description: string;
   system: keyof StaStarshipSystems | null;
 
   constructor(
@@ -26,12 +28,14 @@ export class StaRefit {
     name = "",
     img: string | null,
     {
+      description = "",
       system = null as keyof StaStarshipSystems | null,
     },
   ) {
     this.id = id;
     this.name = name;
     this.img = img;
+    this.description = description;
     this.system = system;
   }
 }

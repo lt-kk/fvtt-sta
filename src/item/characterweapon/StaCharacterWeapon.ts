@@ -1,6 +1,7 @@
-import {StaRange} from "../../model/StaTypes";
-import {mapItems} from "../../util/actor";
-import {itemSystem} from "../../util/document";
+import { StaRange } from "../../model/StaTypes";
+import { mapItems } from "../../util/actor";
+import { itemSystem } from "../../util/document";
+import { StaItem } from "../StaItem";
 
 
 export function createCharacterWeapon(document: Item): StaCharacterWeapon {
@@ -12,8 +13,8 @@ export function filterCharacterWeapon(source: Actor | Collection<Item>) {
 }
 
 
-export class StaCharacterWeapon {
-  static type = "characterweapon"
+export class StaCharacterWeapon implements StaItem {
+  static type = "characterweapon";
 
   id: string;
   name: string;

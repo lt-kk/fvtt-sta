@@ -4,7 +4,7 @@ import {filterFocus, StaFocus} from "../../item/focus/StaFocus";
 import {filterMilestone, StaMilestone} from "../../item/milestone/StaMilestone";
 import {filterCharacterWeapon, StaCharacterWeapon} from "../../item/characterweapon/StaCharacterWeapon";
 import {filterInjury, StaInjury} from "../../item/injury/StaInjury";
-import {filterItem, StaItem} from "../../item/item/StaItem";
+import {filterBelonging, StaBelonging} from "../../item/belonging/StaBelonging";
 import {filterTalent, StaTalent} from "../../item/talent/StaTalent";
 import {filterTrait, StaTrait} from "../../item/trait/StaTrait";
 import {filterValue, StaValue} from "../../item/value/StaValue";
@@ -42,7 +42,7 @@ export class StaCharacter {
   armor: StaArmor[] = [];
   focuses: StaFocus[] = [];
   injuries: StaInjury[] = [];
-  items: StaItem[] = [];
+  items: StaBelonging[] = [];
   milestones: StaMilestone[] = [];
   talents: StaTalent[] = [];
   traits: StaTrait[] = [];
@@ -87,7 +87,7 @@ export class StaCharacter {
     this.armor = filterArmor(items);
     this.focuses = filterFocus(items);
     this.injuries = filterInjury(items);
-    this.items = filterItem(items);
+    this.items = filterBelonging(items);
     this.milestones = filterMilestone(items);
     this.talents = filterTalent(items);
     this.traits = filterTrait(items);

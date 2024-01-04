@@ -1,5 +1,6 @@
-import {mapItems} from "../../util/actor";
-import {itemSystem} from "../../util/document";
+import { mapItems } from "../../util/actor";
+import { itemSystem } from "../../util/document";
+import { StaItem } from "../StaItem";
 
 
 export function createTalent(document: Item): StaTalent {
@@ -11,8 +12,8 @@ export function filterTalent(source: Actor | Collection<Item>) {
 }
 
 
-export class StaTalent {
-  static type = "talent"
+export class StaTalent implements StaItem {
+  static type = "talent";
 
   id: string;
   name: string;
