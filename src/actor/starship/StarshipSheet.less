@@ -78,26 +78,20 @@
 
       .property {
         .lcars-bar(@sta-color-h1-bg, @sta-color-h3-bg, @sta-h3-size);
-        display: flex;
-
-        .form-control {
-          width: @text-size * 2;
-          flex-grow: unset;
-          text-align: center;
-          background-color: transparent;
-        }
-
-        .select {
-          .lcars-bar-inner(@sta-color-h1-bg);
-        }
 
         .form-control {
           .lcars-bar-inner(@dark-blue);
           background-color: transparent;
+          width: @text-size * 2;
+          text-align: center;
         }
 
         &:has(.select:checked) {
           box-shadow: @sta-color-value 0 0 2px 0;
+        }
+
+        &:after {
+          content: unset;
         }
       }
     }
@@ -107,34 +101,15 @@
         .lcars-edge-right-down(@sta-color-h1-bg, @sta-h1-size, @sta-h3-size);
       }
 
-      &:after {
-        display: none;
-      }
-
       .property:not(.shields, .power) {
-        border-right: none;
-        padding-right: 0;
+        .lcars-bar-flag-right(@sta-color-h1-bg);
         margin: @gap 0 @gap auto;
-
-        .select {
-          border-radius: 0 50% 50% 0;
-        }
-
-        &:after {
-          display: none;
-        }
       }
 
       .label {
         width: 100px;
-        display: flex;
-        grid-gap: @gap;
-
-        &:before {
-          content: '';
-          flex-grow: 1;
-          background-color: @sta-color-h3-bg;
-        }
+        display: inline-block;
+        text-align: right;
       }
 
       .shields {
@@ -178,12 +153,7 @@
       }
 
       .property:not(.crew) {
-        border-left: none;
-        padding-left: 0;
-
-        .select {
-          border-radius: 50% 0 0 50%;
-        }
+        .lcars-bar-flag-left(@sta-color-h1-bg);
       }
 
       .crew {

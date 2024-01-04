@@ -67,9 +67,9 @@
 
     {{#each sta.systems as |system name|}}
       <label class="property system system-{{name}} reverse">
-        <input class="inner select" name="system.taskRoll.system" type="radio" value="{{name}}"
+        <input class="flag" name="system.taskRoll.system" type="radio" value="{{name}}"
                {{#if (eq ../sta.taskRoll.system name)}}checked="checked"{{/if}}>
-        <input class="inner form-control" name="system.systems.{{name}}.value" type="text" value="{{system.value}}"
+        <input class="form-control" name="system.systems.{{name}}.value" type="text" value="{{system.value}}"
                data-dtype="Number" tabindex="2"/>
         <span class="label">{{localize (concat "sta.starship.systems." name)}}</span>
         <span class="breaches breaches-{{name}} flex-last reverse">
@@ -100,9 +100,9 @@
     <h1>{{localize "sta.starship.departments._plural"}}</h1>
     {{#each sta.departments as |value name|}}
       <label class="property department department-{{name}}">
-        <input class="inner select" name="system.taskRoll.department" type="radio" value="{{name}}"
+        <input class="flag" name="system.taskRoll.department" type="radio" value="{{name}}"
                {{#if (eq ../sta.taskRoll.department name)}}checked="checked"{{/if}}>
-        <input class="inner form-control" name="system.departments.{{name}}" type="text" value="{{value}}"
+        <input class="form-control" name="system.departments.{{name}}" type="text" value="{{value}}"
                data-dtype="Number" tabindex="3"/>
         <span class="label">{{localize (concat "sta.starship.departments." name)}}</span>
       </label>

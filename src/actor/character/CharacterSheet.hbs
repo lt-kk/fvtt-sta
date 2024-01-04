@@ -117,9 +117,9 @@
     <h1 class="reverse">{{localize "sta.character.attributes._plural"}}</h1>
     {{#each sta.attributes as |value name|}}
       <label class="property attribute attribute-{{name}} reverse">
-        <input class="inner select" name="system.taskRoll.attribute" type="radio" value="{{name}}"
+        <input class="flag" name="system.taskRoll.attribute" type="radio" value="{{name}}"
                {{#if (eq ../sta.taskRoll.attribute name)}}checked="checked"{{/if}}>
-        <input class="inner form-control" name="system.attributes.{{name}}" type="text" value="{{value}}"
+        <input class="form-control" name="system.attributes.{{name}}" type="text" value="{{value}}"
                data-dtype="Number" tabindex="2"/>
         <span class="label">{{localize (concat "sta.character.attributes." name)}}</span>
       </label>
@@ -130,9 +130,9 @@
     <h1>{{localize "sta.character.disciplines._plural"}}</h1>
     {{#each sta.disciplines as |value name|}}
       <label class="property discipline discipline-{{name}}">
-        <input class="inner select" name="system.taskRoll.discipline" type="radio" value="{{name}}"
+        <input class="flag" name="system.taskRoll.discipline" type="radio" value="{{name}}"
                {{#if (eq ../sta.taskRoll.discipline name)}}checked="checked"{{/if}}>
-        <input class="inner form-control" name="system.disciplines.{{name}}" type="text" value="{{value}}"
+        <input class="form-control" name="system.disciplines.{{name}}" type="text" value="{{value}}"
                data-dtype="Number" tabindex="3"/>
         <span class="label">{{localize (concat "sta.character.disciplines." name)}}</span>
       </label>

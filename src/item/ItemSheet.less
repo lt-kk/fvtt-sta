@@ -16,29 +16,31 @@
 
       &.summary {
         width: calc(100% - 64px - @gap);
-        display: flex;
-
         .name {
-          flex-grow: 1;
+          height: unset;
           font-size: @sta-h1-size;
-          height: 100%;
         }
       }
 
       &.properties {
-        width: 100%;
         display: flex;
         flex-wrap: wrap;
-        grid-gap: @gap;
-
+        grid-gap: @gap !important;
 
         h1 {
-          width: 100%;
           flex-grow: 1;
-          border-right: none;
-          padding-right: 0;
           margin-right: -2px;
+          .lcars-bar-flag-right(@sta-color-h3-bg)
         }
+      }
+    }
+
+    .property {
+      > h4 {
+        .lcars-bar(@sta-color-h3-bg, @sta-color-h3-a, @text-size);
+        .lcars-border-left(@sta-color-h3-bg);
+        font-weight: normal;
+        margin-bottom: calc(@gap / 2);
       }
     }
   }

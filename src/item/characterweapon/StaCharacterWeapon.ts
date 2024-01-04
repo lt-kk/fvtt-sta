@@ -56,30 +56,27 @@ export class StaCharacterWeapon {
 
 
 export class StaCharacterWeaponQualities {
-  area: boolean;
-  spread: boolean;
   hiddenx: number;
   piercingx: number;
   viciousx: number;
 
+  charge: boolean;
+  grenade: boolean;
+  area: boolean;
   intense: boolean;
   knockdown: boolean;
   accurate: boolean;
-  charge: boolean;
-  cumbersome: boolean;
-  deadly: boolean;
   debilitating: boolean;
-  grenade: boolean;
+  cumbersome: boolean;
   inaccurate: boolean;
+  deadly: boolean;
   nonlethal: boolean;
 
   constructor({
     area = false,
-    spread = false,
     hiddenx = 0,
     piercingx = 0,
     viciousx = 0,
-
     intense = false,
     knockdown = false,
     accurate = false,
@@ -92,7 +89,6 @@ export class StaCharacterWeaponQualities {
     nonlethal = false,
   }) {
     this.area = area;
-    this.spread = spread;
     this.hiddenx = hiddenx;
     this.piercingx = piercingx;
     this.viciousx = viciousx;

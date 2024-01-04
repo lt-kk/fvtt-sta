@@ -81,27 +81,21 @@
 
       .property {
         .lcars-bar(@sta-color-h1-bg, @sta-color-h3-bg, @sta-h3-size);
-        display: flex;
         width: calc(100% - 36px);
-
-        .form-control {
-          width: @text-size * 2;
-          flex-grow: unset;
-          text-align: center;
-          background-color: transparent;
-        }
-
-        .select {
-          .lcars-bar-inner(@sta-color-h1-bg);
-        }
 
         .form-control {
           .lcars-bar-inner(@dark-blue);
           background-color: transparent;
+          width: @text-size * 2;
+          text-align: center;
         }
 
         &:has(:checked) {
           box-shadow: @sta-color-value 0 0 2px 0;
+        }
+
+        &:after {
+          content: unset;
         }
       }
     }
@@ -112,13 +106,8 @@
       }
 
       .property {
-        border-right: none;
-        padding-right: 0;
+        .lcars-bar-flag-right(@sta-color-h1-bg);
         margin: @gap 0 @gap auto;
-
-        .select {
-          border-radius: 0 50% 50% 0;
-        }
       }
     }
 
@@ -128,12 +117,7 @@
       }
 
       .property {
-        border-left: none;
-        padding-left: 0;
-
-        .select {
-          border-radius: 50% 0 0 50%;
-        }
+        .lcars-bar-flag-left(@sta-color-h1-bg);
       }
     }
 

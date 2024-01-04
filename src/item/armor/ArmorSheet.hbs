@@ -5,6 +5,9 @@
 
   <section class="summary">
     <input class="control property name" name="name" type="text" value="{{data.name}}" />
+    {{#if item.actor}}
+    <span class="owner">{{localize "sta.owner"}}: {{item.actor.name}}</span>
+    {{/if}}
   </section>
 
   <section class="properties border-left">
@@ -18,7 +21,7 @@
     </h1>
 
     <section class="property protection border-left">
-      <h3>{{localize "sta.item.armor.protection"}}</h3>
+      <h4>{{localize "sta.item.armor.protection"}}</h4>
       <div class="scale-value">
         {{#range 0 settings.item.armor.protection.max}}
           <label class="scale-pill
@@ -32,9 +35,9 @@
       </div>
     </section>
     <section class="property opportunity border-left">
-      <h3>{{localize "sta.item.opportunity"}}</h3>
+      <h4>{{localize "sta.item.opportunity"}}</h4>
       <div class="scale-value">
-        {{#range 0 ../settings.item.opportunity.max}}
+        {{#range 0 settings.item.opportunity.max}}
           <label class="scale-pill
               {{#if (eq 0 i)}}success{{/if}}
             {{#if (eq ../sta.opportunity i)}}checked{{/if}}">
@@ -46,9 +49,9 @@
       </div>
     </section>
     <section class="property escalation border-left">
-      <h3>{{localize "sta.item.escalation"}}</h3>
+      <h4>{{localize "sta.item.escalation"}}</h4>
       <div class="scale-value">
-        {{#range 0 ../settings.item.escalation.max}}
+        {{#range 0 settings.item.escalation.max}}
           <label class="scale-pill
               {{#if (eq 0 i)}}success{{/if}}
             {{#if (eq ../sta.escalation i)}}checked{{/if}}">
