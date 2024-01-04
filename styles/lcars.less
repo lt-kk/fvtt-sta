@@ -1,12 +1,31 @@
-.lcars-bar(@size, @color: @darkest-blue) {
+/* Set the background for sta. Apply to .window-app */
+.lcars-window() {
+  background-image: none;
+  background-color: @almost-black;
+  border-radius: 20px;
+
+  .window-content {
+    color: @almost-white;
+    background-image: none !important;
+    background-color: transparent !important;
+
+    > * {
+      flex: unset;
+    }
+  }
+}
+
+
+/* A colored bar with rounded edges */
+.lcars-bar(@color, @colorAccent, @size) {
   display: flex;
   flex-wrap: nowrap;
-  grid-gap: 4px;
+  grid-gap: @gap;
+  padding: 0 @gap;
   border-left: @size solid @color;
   border-right: @size solid @color;
   border-radius: @size / 2;
-  padding-left: 4px;
-  padding-right: 0;
+  margin-bottom: @gap;
   height: @size;
   font-size: calc(@size - 4px);
   line-height: calc(@size - 3px);
@@ -15,25 +34,46 @@
   &:after {
     content: '';
     flex-grow: 1;
-    background-color: @color;
+    background-color: @colorAccent;
   }
 }
 
-.lcars-bar-reverse() {
-  flex-direction: row-reverse;
-  padding-left: 0;
-  padding-right: 4px;
+.lcars-bar-inner(@color: @sta-color-bg) {
+  background-color: @color;
+  min-height: unset;
+  height: 100%;
+  flex-grow: unset;
 }
 
-.lcars-border-left(@header-height: 1rem, @width: 4px, @color: @darkest-blue) {
+.lcars-bar-flag-right(@bgColor) {
+  border-right: none;
+  padding-right: 0;
+
+  .flag {
+    .lcars-bar-inner(@bgColor);
+    border-radius: 0 50% 50% 0;
+  }
+}
+
+.lcars-bar-flag-left(@bgColor) {
+  border-left: none;
+  padding-left: 0;
+
+  .flag {
+    .lcars-bar-inner(@bgColor);
+    border-radius: 50% 0 0 50%;
+  }
+}
+
+.lcars-border-left(@color, @header-height: 1rem, @width: @gap) {
   border-bottom-left-radius: 0;
-  margin-left: -(@width + 2);
+  margin-left: -(@width + @gap);
 
   &:before {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 2px;
+    left: 0;
     width: @width;
     height: calc(100% - @header-height);
     background-color: @color;
@@ -41,7 +81,7 @@
 }
 
 
-.lcars-border-right(@header-height: 1rem, @width: 4px, @color: @darkest-blue) {
+.lcars-border-right(@color, @header-height: 1rem, @width: @gap) {
   border-bottom-right-radius: 0;
   margin-right: -(@width + 2);
   &:before {
@@ -56,126 +96,245 @@
 }
 
 
-._lcars-scale-value-pill(@colorBase, @colorActive, @colorChecked: @colorActive) {
-  border: 2px solid @colorBase;
-  //background-color: darken(@colorBase, 10%);
-  color: contrast(@colorBase, @almost-white, @almost-black);
-  &:hover {
-    border-color: if((@colorBase = @colorChecked), contrast(@colorBase, @almost-white, @almost-black), @colorChecked);
+.lcars-edge-left-down(@color, @sizeFrom, @sizeTo, @diff: calc(@sizeFrom - @sizeTo)) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: calc(@sizeFrom + @diff);
+  border-left-width: calc(@sizeFrom + @gap);
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: calc(@sizeFrom + @gap);
+    left: 0;
+    width: calc(@sizeTo + @diff);
+    height: @diff;
+    background-color: @color;
+    mask-image: radial-gradient(circle @diff at 100% @diff, transparent @diff, black 0);
+    clip-path: polygon(0 0,
+    100% 0,
+    100% @diff,
+    calc(100% - @diff) @diff,
+    calc(100% - @diff) 100%,
+    0 100%);
   }
-  &.active {
+}
+
+.lcars-edge-right-down(@color, @sizeFrom, @sizeTo, @diff: calc(@sizeFrom - @sizeTo)) {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: calc(@sizeFrom + @diff);
+  border-right-width: calc(@sizeFrom + @gap);
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: calc(@sizeFrom + @gap);
+    right: 0;
+    width: calc(@sizeTo + @diff);
+    height: @diff;
+    background-color: @color;
+    mask-image: radial-gradient(circle @diff at 0% @diff, transparent @diff, black 0);
+    clip-path: polygon(0 0,
+    100% 0,
+    100% 100%,
+    @diff 100%,
+    @diff @diff,
+    0 @diff);
+  }
+}
+
+
+.lcars-edge-left-up(@color, @sizeFrom, @sizeTo, @diff: calc(@sizeFrom - @sizeTo)) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: calc(@sizeFrom + @diff);
+  border-left-width: calc(@sizeFrom + @gap);
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: calc(@sizeFrom + @gap);
+    left: 0;
+    width: calc(@sizeTo + @diff);
+    height: @diff;
+    background-color: @color;
+    mask-image: radial-gradient(circle @diff at 100% calc(100% - @diff), transparent @diff, black 0);
+    clip-path: polygon(0 0,
+    calc(100% - @diff) 0,
+    calc(100% - @diff) calc(100% - @diff),
+    100% calc(100% - @diff),
+    100% 100%,
+    0 100%);
+  }
+}
+
+.lcars-edge-right-up(@color, @sizeFrom, @sizeTo, @diff: calc(@sizeFrom - @sizeTo)) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: calc(@sizeFrom + @diff);
+  border-right-width: calc(@sizeFrom + @gap);
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: calc(@sizeFrom + @gap);
+    right: 0;
+    width: calc(@sizeTo + @diff);
+    height: @diff;
+    background-color: @color;
+    mask-image: radial-gradient(circle @diff at 0 calc(100% - @diff), transparent @diff, black 0);
+    clip-path: polygon(@diff 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 calc(100% - @diff),
+    @diff calc(100% - @diff));
+  }
+}
+
+
+.lcars-radio(@color: @almost-white, @colorChecked: @sta-color-value ) {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  height: 100%;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+
+  &:after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: @color;
+    clip-path: circle(30% at 50% 50%);
+  }
+  &:checked:after {
+    background-color: @colorChecked;
+  }
+}
+
+
+._lcars-scale-pill-color(@selector, @colorBase, @colorActive, @colorChecked: @colorActive) {
+  border: 1px solid @colorBase;
+  //background-color: darken(@colorBase, 10%);
+  color: contrast(@colorBase, @colorActive, @colorChecked);
+  &.@{selector}:hover {
+    border-color: if((@colorBase = @colorChecked),
+    contrast(@colorBase, @almost-white, @almost-black),
+    @colorChecked);
+  }
+  &:has(~ .@{selector}.checked) {
     border-color: @colorActive;
     background-color: @colorActive;
     color: contrast(@colorActive, @almost-white, @almost-black);
-
-    &:hover {
-      border-color: if((@colorActive = @colorChecked),contrast(@colorActive, @almost-white, @almost-black), @colorChecked);
-    }
   }
-  &.checked {
+  &.@{selector}.checked {
     border-color: @colorChecked;
     background-color: @colorChecked;
     color: contrast(@colorChecked, @almost-white, @almost-black);
 
     &:hover {
-      border-color: if((@colorChecked = @colorActive),contrast(@colorChecked, @almost-white, @almost-black), @colorActive);
+      border-color: if((@colorChecked = @colorActive),
+      contrast(@colorChecked, @almost-white, @almost-black),
+      @colorActive);
     }
   }
 }
 
 
 .lcars-scale-value(
-  @size,
-  @colorBase: @darkest-blue,
-  @colorActive: @dark-blue,
-  @colorInfo: @light-blue,
-  @colorWarn: @light-yellow,
-  @colorError: @light-red,
-  @colorFatal: @light-grey
+  @colorAccent,
+  @colorActive,
+  @size: @text-small-size
 ) {
-  .lcars-bar(@size, @colorBase);
-  &:after {
-    flex-grow: unset;
+  display: flex;
+  flex-wrap: nowrap;
+  grid-gap: calc(@gap / 2);
+  align-items: baseline;
+
+  input, &:after {
+    display: none;
   }
-  .scale-value {
+  .scale-pill {
+    height: @size;
+    font-size: calc(@size - 4px);
+    line-height: calc(@size - 3px);
     flex-grow: 1;
     text-align: center;
     font-weight: bold;
-    ._lcars-scale-value-pill(@colorBase, @colorActive);
+    cursor: pointer;
 
-    &.info {
-      ._lcars-scale-value-pill(@colorBase, @colorActive, @colorInfo);
-    }
+    ._lcars-scale-pill-color(scale-pill, @colorAccent, @colorActive);
+    ._lcars-scale-pill-color(success, @colorAccent, @color-level-success);
+    ._lcars-scale-pill-color(info, @colorAccent, @color-level-info);
+    ._lcars-scale-pill-color(warn, @colorAccent, @color-level-warning);
+    ._lcars-scale-pill-color(error, @colorAccent, @color-level-error);
+    ._lcars-scale-pill-color(fatal, @colorAccent, @color-level-fatal);
 
-    &.warn {
-      ._lcars-scale-value-pill(@colorBase, @colorActive, @colorWarn);
-    }
-
-    &.error {
-      ._lcars-scale-value-pill(@colorBase, @colorActive, @colorError);
-    }
-
-    &.fatal {
-      ._lcars-scale-value-pill(@colorBase, @colorActive, @colorFatal);
-    }
   }
 }
 
 .lcars-scale-select(
-  @size,
-  @colorBase: @darkest-blue,
-  @colorInfo: @light-blue,
-  @colorWarn: @light-yellow,
-  @colorError: @light-red,
-  @colorFatal: @light-grey
+  @colorAccent
 ) {
   position: relative;
-  .lcars-bar(@size, @colorBase);
   &:after {
-    flex-grow: unset;
+    display: none;
   }
-  >label {
+  > label {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     z-index: -1;
-    color: @colorBase;
+    color: @colorAccent;
     text-align: center;
+
     &:has(~ :hover) {
       display: none;
+      transition-delay: 0.25s;
     }
   }
-  .scale-value {
+  .scale-pill {
     flex-grow: 1;
     text-align: center;
     font-weight: bold;
     color: transparent;
+    cursor: pointer;
+
+    &:has(:hover) {
+      border-color: @colorAccent;
+    }
 
     &:hover, &:has(~ :hover) {
-      background-color: @colorBase;
-      color: contrast(@colorBase, @almost-white, @almost-black);
+      background-color: @colorAccent;
+      color: contrast(@colorAccent, @almost-white, @almost-black);
+    }
+
+    &.success:hover, &:has(~ .success:hover) {
+      background-color: @color-level-success;
+      color: contrast(@color-level-success, @almost-white, @almost-black);
     }
 
     &.info:hover, &:has(~ .info:hover) {
-      background-color: @colorInfo;
-      color: contrast(@colorInfo, @almost-white, @almost-black);
+      background-color: @color-level-info;
+      color: contrast(@color-level-info, @almost-white, @almost-black);
     }
 
     &.warn:hover, &:has(~ .warn:hover) {
-      background-color: @colorWarn;
-      color: contrast(@colorWarn, @almost-white, @almost-black);
+      background-color: @color-level-warning;
+      color: contrast(@color-level-warning, @almost-white, @almost-black);
     }
 
     &.error:hover, &:has(~ .error:hover) {
-      background-color: @colorError;
-      color: contrast(@colorError, @almost-white, @almost-black);
+      background-color: @color-level-error;
+      color: contrast(@color-level-error, @almost-white, @almost-black);
     }
 
     &.fatal:hover, &:has(~ .fatal:hover) {
-      background-color: @colorFatal;
-      color: contrast(@colorFatal, @almost-white, @almost-black);
+      background-color: @color-level-fatal;
+      color: contrast(@color-level-fatal, @almost-white, @almost-black);
     }
   }
 }

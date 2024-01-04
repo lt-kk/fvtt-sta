@@ -1,0 +1,135 @@
+.character-sheet {
+  .lcars-window();
+
+  .sta-body {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: @gap;
+
+    > section {
+      flex-grow: 1;
+
+      &.icon {
+        width: 160px;
+        flex-grow: unset;
+      }
+
+      &.summary {
+        width: 67%;
+      }
+
+      &.status {
+        width: calc(33% - @gap);
+      }
+
+      &.attributes, &.disciplines {
+        width: 220px;
+        flex-grow: unset;
+      }
+
+      &.talents, &.values, &.focuses {
+        width: calc(33% - @gap);
+      }
+
+      &.progress, &.equipment {
+        width: calc(50% - @gap);
+      }
+    }
+
+    .scale-selection {
+      margin: 6px 0;
+
+      &.roll-d6 {
+        .lcars-bar(@light-orange, @light-orange, @sta-h2-size);
+        .lcars-scale-select(@light-orange);
+        flex-grow: 1;
+      }
+
+      &.roll-d20 {
+        .lcars-bar(@dark-blue, @dark-blue, @sta-h2-size);
+        .lcars-scale-select(@dark-blue);
+        width: 220px;
+        flex-grow: unset;
+      }
+    }
+
+    .summary {
+      display: flex;
+      grid-gap: @gap;
+      flex-wrap: wrap;
+
+      .property {
+        width: calc(33% - @gap);
+      }
+
+      .reputation {
+        width: 100%;
+      }
+
+      .name, .rank, .assignment {
+        input {
+          font-size: @sta-h3-size;
+          height: calc(@sta-h2-size + @gap);
+        }
+      }
+    }
+
+    .attributes, .disciplines {
+      > h1 {
+        margin-bottom: calc(@sta-h1-size - @sta-h3-size + @gap);
+      }
+
+      .property {
+        .lcars-bar(@sta-color-h1-bg, @sta-color-h3-bg, @sta-h3-size);
+        width: calc(100% - 36px);
+
+        .form-control {
+          .lcars-bar-inner(@dark-blue);
+          background-color: transparent;
+          width: @text-size * 2;
+          text-align: center;
+        }
+
+        &:has(:checked) {
+          box-shadow: @sta-color-value 0 0 2px 0;
+        }
+
+        &:after {
+          content: unset;
+        }
+      }
+    }
+
+    .attributes {
+      > h1 {
+        .lcars-edge-right-down(@sta-color-h1-bg, @sta-h1-size, @sta-h3-size);
+      }
+
+      .property {
+        .lcars-bar-flag-right(@sta-color-h1-bg);
+        margin: @gap 0 @gap auto;
+      }
+    }
+
+    .disciplines {
+      > h1 {
+        .lcars-edge-left-down(@sta-color-h1-bg, @sta-h1-size, @sta-h3-size);
+      }
+
+      .property {
+        .lcars-bar-flag-left(@sta-color-h1-bg);
+      }
+    }
+
+    .list .control.roll {
+      &:hover {
+        content: url(/icons/svg/d20-grey.svg);
+        cursor: pointer;
+      }
+    }
+
+    .item:has(.control:hover) {
+      box-shadow: 0 0 5px var(--color-shadow-primary);
+    }
+  }
+}

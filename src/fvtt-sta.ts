@@ -1,40 +1,63 @@
 import "../styles/fvtt-sta.less";
-import { sta } from "./config";
-import { GenericItemSheet } from "./sheets/GenericItemSheet";
-import { CharacterSheet } from "./sheets/CharacterSheet";
-import { registerHandlebarHelpers } from "./TemplateHelpers";
+import {registerHandlebarHelpers} from "./template/TemplateHelpers";
+import {TaskRoll} from "./roll/TaskRoll";
+import {ChallengeRoll} from "./roll/ChallangeRoll";
+import {HasRolls} from "./util/util";
+import {CharacterWeaponRoll} from "./item/characterweapon/CharacterWeaponRoll";
+import {HasActivateListeners} from "./util/message";
+import {ActorTypeConfig, actorTypes, ItemTypeConfig, itemTypes} from "./registry";
+import {sta} from "./config";
 
-console.log(sta.systemName + " | system loaded.");
-
-Hooks.on("init", () => {
+Hooks.once("init", () => {
   console.log(sta.systemName + " | Initializing system...");
-  sta.game = game as Game
+  sta.game = game as Game;
 
-  // Sheets
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet(sta.systemName, CharacterSheet, { types: ["character"] });
-  Actors.registerSheet(sta.systemName, CharacterSheet, { types: ["starship"] });
+  // CONFIG.Actor.documentClass = StaActor;
+  // CONFIG.Item.documentClass = StaItem;
+  CONFIG.Dice.rolls = [Roll, ChallengeRoll, TaskRoll, CharacterWeaponRoll];
 
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["armor"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["characterweapon"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["focus"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["injury"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["item"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["launchbay"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["milestone"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["starshipweapon"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["talent"] });
-  Items.registerSheet(sta.systemName, GenericItemSheet, { types: ["value"] });
-
-  // Templates
-  registerHandlebarHelpers()
-  const templatePath = `systems/${sta.systemName}/templates`
-  loadTemplates([
-
-  ])
+  registerTemplates();
+  registerActorSheets();
+  registerItemSheets();
 });
+
+Hooks.on("renderChatMessage", (message, html) => {
+  if (message.isRoll) {
+    (message as unknown as HasRolls<any>).rolls.forEach((roll) => {
+      if ('activateListeners' in roll) {
+        (roll as HasActivateListeners).activateListeners(html, message);
+      }
+    });
+  }
+})
 
 Hooks.on("ready", () => {
   console.log(sta.systemName + " | Initialization complete!");
 });
+
+
+function registerActorSheets() {
+  Actors.unregisterSheet("core", ActorSheet);
+  Object.entries(actorTypes)
+    .forEach(([type, config]) => {
+      const c = config as ActorTypeConfig
+      Actors.registerSheet(sta.systemName, c.sheet, {types: [type]});
+    });
+}
+
+function registerItemSheets() {
+  Items.unregisterSheet("core", ItemSheet);
+  const templates: Set<string> = new Set();
+  Object.entries(itemTypes)
+    .forEach(([type, config]) => {
+      const c = config as ItemTypeConfig
+      Items.registerSheet(sta.systemName, c.sheet, {types: [type]});
+      templates.add(sta.templateBasePath + c.listTemplate)
+      templates.add(sta.templateBasePath + c.chatTemplate)
+    });
+  loadTemplates(Array.from(templates.keys()));
+}
+
+function registerTemplates() {
+  registerHandlebarHelpers();
+}

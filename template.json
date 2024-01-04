@@ -5,9 +5,9 @@
       "starship"
     ],
     "character": {
-      "species": "",
       "rank": "",
       "assignment": "",
+      "species": "",
       "environment": "",
       "upbringing": "",
       "notes": "",
@@ -21,63 +21,61 @@
       },
       "disciplines": {
         "command": 1,
-        "security": 1,
-        "science": 1,
         "conn": 1,
+        "security": 1,
         "engineering": 1,
+        "science": 1,
         "medicine": 1
       },
-      "milestones": [],
-      "traits": [],
-      "talents": [],
-      "values": [],
-      "focuses": [],
-      "weapons": [],
-      "armor": [],
-      "equipment": [],
-      "injuries": [],
-      "reputation": {
-        "value": 10,
-        "max": 20
-      },
-      "stress": {
-        "value": 8,
-        "max": 8
-      },
-      "determination": {
-        "value": 3,
-        "max": 3
-      }
+      "reputation": 10,
+      "determination": -1,
+      "stress": -1
     },
     "starship": {
-      "spaceframe": "",
       "designation": "",
-      "servicedate": null,
+      "spaceframe": "",
+      "servicedate": -1,
       "missionprofile": "",
+      "scale": 1,
+      "resistance": 1,
       "notes": "",
       "systems": {
-        "communications": 7,
-        "computers": 7,
-        "engines": 7,
-        "sensors": 7,
-        "structure": 7,
-        "weapons": 7
+        "communications": {
+          "value": 7,
+          "breaches": -1
+        },
+        "computers": {
+          "value": 7,
+          "breaches": -1
+        },
+        "engines": {
+          "value": 7,
+          "breaches": -1
+        },
+        "sensors": {
+          "value": 7,
+          "breaches": -1
+        },
+        "structure": {
+          "value": 7,
+          "breaches": -1
+        },
+        "weapons": {
+          "value": 7,
+          "breaches": -1
+        }
       },
       "departments": {
         "command": 1,
         "conn": 1,
+        "security": 1,
         "engineering": 1,
-        "medicine": 1,
         "science": 1,
-        "security": 1
+        "medicine": 1
       },
-      "launchbay": [],
-      "refit": [],
-      "talents": [],
-      "traits": [],
-      "values": [],
-      "equipment": [],
-      "weapons": []
+      "shields": -1,
+      "power": -1,
+      "crew": -1
     }
   },
   "Item": {
@@ -89,6 +87,7 @@
       "item",
       "launchbay",
       "milestone",
+      "refit",
       "starshipweapon",
       "talent",
       "trait",
@@ -96,6 +95,7 @@
     ],
     "armor": {
       "description": "",
+      "rules": "",
       "protection": 0,
       "equipped": true,
       "opportunity": 0,
@@ -103,6 +103,7 @@
     },
     "characterweapon": {
       "description": "",
+      "rules": "",
       "damage": 0,
       "range": "",
       "hands": 1,
@@ -127,8 +128,7 @@
 
     },
     "focus": {
-      "description": "",
-      "img": ""
+      "description": ""
     },
     "injury": {
       "description": ""
@@ -148,6 +148,9 @@
     "milestone": {
       "description": ""
     },
+    "refit": {
+      "system": ""
+    },
     "starshipweapon": {
       "description": "",
       "damage": 0,
@@ -165,7 +168,6 @@
         "hiddenx": 0,
         "versatilex": 0
       }
-
     },
     "talent": {
       "description": "",

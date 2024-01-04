@@ -1,0 +1,57 @@
+.dice-rolls {
+  list-style: none;
+  margin: 5px 0;
+  padding: 0;
+  overflow: hidden;
+
+  .roll {
+    position: relative;
+    min-width: 24px;
+    line-height: 24px;
+    float: left;
+    margin-right: 1px;
+    background-image: url("/icons/svg/d6-grey.svg");
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    font-size: @text-tiny-size;
+    color: @almost-black;
+    text-align: center;
+
+    &.d6 {
+      background-image: url("/icons/svg/d6-grey.svg");
+    }
+    &.d20 {
+      background-image: url("/icons/svg/d20-grey.svg");
+    }
+    &.success {
+      filter: sepia(0.5) hue-rotate(60deg);
+      font-weight: bold;
+    }
+    &.critical {
+      filter: sepia(0.5) hue-rotate(60deg);
+      font-weight: bold;
+      font-size: @text-size;
+    }
+    &.effect {
+      filter: sepia(0.5) hue-rotate(-210deg);
+      font-weight: bold;
+    }
+    &.complication {
+      filter: sepia(0.5) hue-rotate(-60deg);
+      font-weight: bold;
+    }
+    &.discarded,
+    &.rerolled {
+      color: inherit;
+      filter: sepia(0.5) contrast(0.75) opacity(0.4);
+    }
+    &.determination:before {
+      font-size: 0.5rem;
+      font-family: var(--font-awesome);
+      content: "\f666";
+      position: absolute;
+      top: -8px;
+      right: 0;
+    }
+  }
+}

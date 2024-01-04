@@ -1,59 +1,68 @@
-import { StaRule } from "./StaRule";
+import {LooseObject} from "../util/util";
 
 export class CurrentValue {
   value: number;
   max: number;
+  min: number;
+  pills: ScalePill[] = [];
 
-  constructor(value = 0, max = value) {
+  constructor(value = 0, max = value, min = 0) {
     this.value = value;
     this.max = max;
+    this.min = min;
+    this.pills = generatePills(value, {begin: min, end: max, fatal: 0});
+  }
+
+}
+
+export class ScalePill {
+  value: number;
+  status: StaStatus;
+  checked: boolean;
+
+  constructor(value: number, status: StaStatus, checked: boolean) {
+    this.value = value;
+    this.status = status;
+    this.checked = checked;
   }
 }
 
-export class StaTalent {
-  name: string = "";
-  img: string = "";
-  description: string = "";
-  rule: StaRule | null = null;
+export function generatePills(
+  value: number,
+  {
+    begin = 0,
+    end = 2,
+    fatal = -1,
+    error = -1,
+    warn = -1,
+    info = -1,
+    success = -1,
+    moreIsWorse = false,
+  } = {}) {
+  const direction = begin < end ? 1 : -1;
+  const pills: ScalePill[] = [];
+  [fatal, error, warn, info, success];
+
+  for (let i = begin; direction > 0 ? i <= end : i >= end; i += direction) {
+    const status: StaStatus = (fatal > -1 && (moreIsWorse ? i >= fatal : i <= fatal)) ? "fatal"
+      : ((error > -1 && (moreIsWorse ? i >= error : i <= error)) ? "error"
+        : ((warn > -1 && (moreIsWorse ? i >= warn : i <= warn)) ? "warn"
+          : ((info > -1 && (moreIsWorse ? i >= info : i <= info)) ? "info"
+            : ((success > -1 && (moreIsWorse ? i >= success : i <= success)) ? "success"
+              : ""))));
+    pills.push(new ScalePill(i, status, i == value));
+  }
+  return pills;
 }
 
-export class StaTrait {
-  name: string = "";
-  img: string = "";
-  description: string = "";
-}
 
-export class StaValue {
-  name: string = "";
-  img: string = "";
-  description: string = "";
-  questioned: boolean = false;
-}
+export const StaStati = ["", "success", "info", "warn", "error", "fatal"]
+export type StaStatus = typeof StaStati[number]
 
-export class StaItem {
-  name: string = "";
-  img: string = "";
-  description: string = "";
-  quantity: number = 1;
-  uses: number = -1;
-  rule: StaRule | null = null;
-  opportunity: number = 0;
-  escalation: number = 0;
-}
+export const StaRanges = ["close", "near", "far", "extreme"]
+export type StaRange = typeof StaRanges[number];
 
-export class StaLaunchbay {
-  name: string = "";
-  img: string = "";
-  description: string = "";
-  ship: string = "";
-}
 
-export type StaRange = "close" | "near" | "far" | "extreme";
-
-export abstract class StaWeapon {
-  name: string = "";
-  damage: number = 0;
-  range: StaRange = "near";
-  description: string = "";
-  rule: StaRule | null = null;
+export type HasStaEntity = {
+  staEntity: LooseObject<any>,
 }

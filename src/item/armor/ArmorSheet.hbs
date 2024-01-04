@@ -1,0 +1,77 @@
+<form class="sta-body" autocomplete="off">
+  <section class="icon">
+    <img src="{{sta.img}}" data-edit="img" title="{{sta.name}}" />
+  </section>
+
+  <section class="summary">
+    <input class="control property name" name="name" type="text" value="{{sta.name}}" />
+    {{#if item.actor}}
+      <span class="owner">{{localize "sta.owner"}}: {{item.actor.name}}</span>
+    {{/if}}
+  </section>
+
+  <section class="properties border-left">
+    <h1 class="">
+      {{localize "sta.item.properties"}}
+      <label class="property equipped flex-last">
+        {{localize "sta.item.armor.equipped"}}
+        <input class="form-control flex-last inner" name="system.equipped" {{checked data.system.equipped}}
+               type="checkbox" data-dtype="Boolean" />
+      </label>
+    </h1>
+
+    <section class="property opportunity border-left">
+      <h4>{{localize "sta.item.opportunity"}}</h4>
+      <div class="scale-value">
+        {{#range 0 settings.item.opportunity.max}}
+          <label class="scale-pill
+              {{#if (eq 0 i)}}success{{/if}}
+            {{#if (eq ../sta.opportunity i)}}checked{{/if}}">
+            {{i}}
+            <input name="system.opportunity" type="radio" value="{{i}}" data-dtype="Number"
+                   {{#if (eq ../sta.opportunity i)}}checked="checked"{{/if}} />
+          </label>
+        {{/range}}
+      </div>
+    </section>
+    <section class="property escalation border-left">
+      <h4>{{localize "sta.item.escalation"}}</h4>
+      <div class="scale-value">
+        {{#range 0 settings.item.escalation.max}}
+          <label class="scale-pill
+              {{#if (eq 0 i)}}success{{/if}}
+            {{#if (eq ../sta.escalation i)}}checked{{/if}}">
+            {{i}}
+            <input name="system.escalation" type="radio" value="{{i}}" data-dtype="Number"
+                   {{#if (eq ../sta.escalation i)}}checked="checked"{{/if}} />
+          </label>
+        {{/range}}
+      </div>
+    </section>
+
+    <section class="property protection border-left">
+      <h4>{{localize "sta.item.armor.protection"}}</h4>
+      <div class="scale-value">
+        {{#range 0 settings.item.armor.protection.max}}
+          <label class="scale-pill
+            {{#if (eq 0 i)}}warn{{/if}}
+            {{#if (eq ../sta.protection i)}}checked{{/if}}">
+            {{i}}
+            <input name="system.protection" type="radio" value="{{i}}" data-dtype="Number"
+                   {{#if (eq ../sta.protection i)}}checked="checked"{{/if}} />
+          </label>
+        {{/range}}
+      </div>
+    </section>
+  </section>
+
+  <section class="property description">
+    <h2>{{localize "sta.item.description"}}</h2>
+    <textarea class="form-control" name="system.description">{{sta.description}}</textarea>
+  </section>
+  <section class="property rules">
+    <h2>{{localize "sta.item.rules"}}</h2>
+    <textarea class="form-control" name="system.rules">{{sta.rules}}</textarea>
+  </section>
+
+</form>
