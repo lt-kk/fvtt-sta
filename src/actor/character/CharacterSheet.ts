@@ -1,11 +1,11 @@
-import {sta} from "../../config";
-import {LooseObject} from "../../util/util";
-import {confirmDialog} from "../../dialog/ConfimDialog";
-import {createCharacter, StaCharacter} from "./StaCharacter";
-import {characterTaskRoll} from "./CharacterTaskRoll";
-import {challengeRoll} from "../../roll/ChallangeRoll";
-import {weaponRoll} from "../../item/characterweapon/CharacterWeaponRoll";
-import {itemSystem} from "../../util/document";
+import { sta } from "../../config";
+import { LooseObject } from "../../util/util";
+import { confirmDialog } from "../../dialog/ConfimDialog";
+import { createCharacter, StaCharacter } from "./StaCharacter";
+import { characterTaskRoll } from "./CharacterTaskRoll";
+import { challengeRoll } from "../../roll/ChallangeRoll";
+import { weaponRoll } from "../../item/characterweapon/CharacterWeaponRoll";
+import { itemSystem } from "../../util/document";
 
 export class CharacterSheet extends ActorSheet {
   static templatePath = `${sta.templateBasePath}/actor/character/CharacterSheet.hbs`;
@@ -30,6 +30,7 @@ export class CharacterSheet extends ActorSheet {
       ...data,
       settings: sta.settings,
       sta: this.sta!,
+      templatePath: sta.templateBasePath,
     };
     return sheetData;
   }
@@ -102,26 +103,26 @@ export class CharacterSheet extends ActorSheet {
   async rollTask(dicePool: number) {
     const roll = characterTaskRoll(this.sta!, dicePool);
     roll.toMessage({
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });
   }
 
   async rollChallenge(dicePool: number) {
     const roll = challengeRoll(dicePool);
     roll.toMessage({
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });
   }
 
 
   async rollWeapon(html: JQuery) {
-    const itemId = html.closest(".item").data("itemId")
-    const item = this.actor.items.get(itemId)!
-    const damage = Math.abs(itemSystem(item).damage)
-    const security = Math.abs(this.sta?.disciplines.security!)
+    const itemId = html.closest(".item").data("itemId");
+    const item = this.actor.items.get(itemId)!;
+    const damage = Math.abs(itemSystem(item).damage);
+    const security = Math.abs(this.sta?.disciplines.security!);
     const roll = weaponRoll(damage + security);
     roll.toMessage({
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });
   }
 
@@ -132,7 +133,7 @@ export class CharacterSheet extends ActorSheet {
   }
 }
 
-type Data = ActorSheet.Data & {
+type Data = ActorSheet.Data & LooseObject<any> & {
   settings: object;
   sta: LooseObject<any>
 };

@@ -20,6 +20,7 @@ export class StaTalent implements StaItem {
   img: string | null;
   description: string;
   rule: string;
+  type: string;
 
   constructor(
     id: string,
@@ -28,6 +29,7 @@ export class StaTalent implements StaItem {
     {
       description = "",
       rule = "",
+      type = "",
     },
   ) {
     this.id = id;
@@ -35,5 +37,6 @@ export class StaTalent implements StaItem {
     this.img = img;
     this.description = description;
     this.rule = rule;
+    this.type = type;
   }
 }

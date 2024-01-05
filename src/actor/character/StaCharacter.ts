@@ -1,14 +1,14 @@
-import {CurrentValue} from "../../model/StaTypes";
-import {filterArmor, StaArmor} from "../../item/armor/StaArmor";
-import {filterFocus, StaFocus} from "../../item/focus/StaFocus";
-import {filterMilestone, StaMilestone} from "../../item/milestone/StaMilestone";
-import {filterCharacterWeapon, StaCharacterWeapon} from "../../item/characterweapon/StaCharacterWeapon";
-import {filterInjury, StaInjury} from "../../item/injury/StaInjury";
-import {filterBelonging, StaBelonging} from "../../item/belonging/StaBelonging";
-import {filterTalent, StaTalent} from "../../item/talent/StaTalent";
-import {filterTrait, StaTrait} from "../../item/trait/StaTrait";
-import {filterValue, StaValue} from "../../item/value/StaValue";
-import {actorItems, actorSystem} from "../../util/document";
+import { CurrentValue } from "../../model/StaTypes";
+import { filterArmor, StaArmor } from "../../item/armor/StaArmor";
+import { filterFocus, StaFocus } from "../../item/focus/StaFocus";
+import { filterMilestone, StaMilestone } from "../../item/milestone/StaMilestone";
+import { filterCharacterWeapon, StaCharacterWeapon } from "../../item/characterweapon/StaCharacterWeapon";
+import { filterInjury, StaInjury } from "../../item/injury/StaInjury";
+import { filterThing, StaThing } from "../../item/thing/StaThing";
+import { filterTalent, StaTalent } from "../../item/talent/StaTalent";
+import { filterTrait, StaTrait } from "../../item/trait/StaTrait";
+import { filterValue, StaValue } from "../../item/value/StaValue";
+import { actorItems, actorSystem } from "../../util/document";
 
 
 export function createCharacter(document: Actor): StaCharacter {
@@ -42,9 +42,9 @@ export class StaCharacter {
   armor: StaArmor[] = [];
   focuses: StaFocus[] = [];
   injuries: StaInjury[] = [];
-  items: StaBelonging[] = [];
   milestones: StaMilestone[] = [];
   talents: StaTalent[] = [];
+  things: StaThing[] = [];
   traits: StaTrait[] = [];
   values: StaValue[] = [];
   weapons: StaCharacterWeapon[] = [];
@@ -87,9 +87,9 @@ export class StaCharacter {
     this.armor = filterArmor(items);
     this.focuses = filterFocus(items);
     this.injuries = filterInjury(items);
-    this.items = filterBelonging(items);
     this.milestones = filterMilestone(items);
     this.talents = filterTalent(items);
+    this.things = filterThing(items);
     this.traits = filterTrait(items);
     this.values = filterValue(items);
     this.weapons = filterCharacterWeapon(items);

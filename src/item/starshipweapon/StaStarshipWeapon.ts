@@ -19,10 +19,10 @@ export class StaStarshipWeapon implements StaItem {
   id: string;
   name: string;
   img: string | null;
-  damage: number;
-  range: StaRange;
   description: string;
   rule: string;
+  damage: number;
+  range: StaRange;
   qualities: StaStarshipWeaponQualities;
 
   constructor(
@@ -30,20 +30,20 @@ export class StaStarshipWeapon implements StaItem {
     name = "",
     img: string | null,
     {
-      damage = 0,
-      range = "near" as StaRange,
       description = "",
       rule = "",
+      damage = 0,
+      range = "near" as StaRange,
       qualities = {},
     },
   ) {
     this.id = id;
     this.name = name;
     this.img = img;
-    this.damage = damage;
-    this.range = range;
     this.description = description;
     this.rule = rule;
+    this.damage = damage;
+    this.range = range;
     this.qualities = new StaStarshipWeaponQualities(qualities);
   }
 }
@@ -52,27 +52,27 @@ export class StaStarshipWeapon implements StaItem {
 export class StaStarshipWeaponQualities {
   area: boolean;
   spread: boolean;
-  hiddenx: number;
-  piercingx: number;
-  viciousx: number;
-
   dampening: boolean;
   calibration: boolean;
   devastating: boolean;
   highyield: boolean;
+
+  hiddenx: number;
+  piercingx: number;
+  viciousx: number;
   persistentx: number;
   versatilex: number;
 
   constructor({
     area = false,
     spread = false,
-    hiddenx = 0,
-    piercingx = 0,
-    viciousx = 0,
     dampening = false,
     calibration = false,
     devastating = false,
     highyield = false,
+    hiddenx = 0,
+    piercingx = 0,
+    viciousx = 0,
     persistentx = 0,
     versatilex = 0,
   }) {

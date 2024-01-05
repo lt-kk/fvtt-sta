@@ -107,7 +107,8 @@
 
       .property {
         .lcars-bar-flag-right(@sta-color-h1-bg);
-        margin: @gap 0 @gap auto;
+        margin-bottom: @gap;
+        margin-left: auto;
       }
     }
 
@@ -118,6 +119,7 @@
 
       .property {
         .lcars-bar-flag-left(@sta-color-h1-bg);
+        margin-bottom: @gap;
       }
     }
 
@@ -126,10 +128,6 @@
         content: url(/icons/svg/d20-grey.svg);
         cursor: pointer;
       }
-    }
-
-    .item:has(.control:hover) {
-      box-shadow: 0 0 5px var(--color-shadow-primary);
     }
   }
 }

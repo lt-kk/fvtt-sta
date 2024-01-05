@@ -1,0 +1,11 @@
+<form class="sta-body" autocomplete="off">
+  {{> (concat templatePath "/item/_partials/ItemHeader.hbs") this }}
+
+  <label class="property type">
+    <span class="label">{{localize "sta.type"}}</span>
+    <input class="form-control" name="system.type" type="text" value="{{sta.type}}" />
+  </label>
+
+  {{> (concat templatePath "/item/_partials/PropertyText.hbs")
+    name="description" title="sta.item.description" value=sta.description}}
+</form>

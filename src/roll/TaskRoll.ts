@@ -1,6 +1,6 @@
-import {sta} from "../config";
-import {LooseObject} from "../util/util";
-import {StaRoll, StaRollData, StaRollDice, StaRollResult} from "./StaRoll";
+import { sta } from "../config";
+import { LooseObject } from "../util/util";
+import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "./StaRoll";
 
 
 export type TaskRollData = LooseObject<any> & StaRollData<TaskRollResult> & {
@@ -42,7 +42,7 @@ export class TaskRollResult implements StaRollResult<TaskRollDice> {
 }
 
 export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
-  chatTemplate = `${sta.templateBasePath}/roll/TaskRollChat.hbs`
+  chatTemplate = `${sta.templateBasePath}/roll/TaskRollChat.hbs`;
 
   constructor(
     _: string, data: TaskRollData, options?: Roll["options"],

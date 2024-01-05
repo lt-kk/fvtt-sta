@@ -1,0 +1,88 @@
+<form class="sta-body" autocomplete="off">
+  {{> (concat templatePath "/item/_partials/ItemHeader.hbs") this }}
+
+  <section class="properties border-left">
+    <h1>{{localize "sta.item.properties"}}</h1>
+
+    <section class="flags">
+      <section class="property opportunity border-left">
+        <h4>{{localize "sta.item.opportunity"}}</h4>
+        <div class="scale-value">
+          {{#range 0 settings.item.opportunity.max}}
+            <label class="scale-pill
+              {{#if (eq 0 i)}}success{{/if}}
+              {{#if (eq ../sta.opportunity i)}}checked{{/if}}">
+              {{i}}
+              <input name="system.opportunity" type="radio" value="{{i}}" data-dtype="Number"
+                     {{#if (eq ../sta.opportunity i)}}checked="checked"{{/if}} />
+            </label>
+          {{/range}}
+        </div>
+      </section>
+      <section class="property escalation border-left">
+        <h4>{{localize "sta.item.escalation"}}</h4>
+        <div class="scale-value">
+          {{#range 0 settings.item.escalation.max}}
+            <label class="scale-pill
+              {{#if (eq 0 i)}}success{{/if}}
+              {{#if (eq ../sta.escalation i)}}checked{{/if}}">
+              {{i}}
+              <input name="system.escalation" type="radio" value="{{i}}" data-dtype="Number"
+                     {{#if (eq ../sta.escalation i)}}checked="checked"{{/if}} />
+            </label>
+          {{/range}}
+        </div>
+      </section>
+      {{#each qualityFlags as |value name|}}
+        <label class="property form-flag quality quality-{{name}} reverse {{#if value}}checked{{/if}}">
+          <input class="form-control flag" name="system.qualities.{{name}}" type="checkbox"
+                 {{#if value}}checked="checked"{{/if}} />
+          <span class="label">{{localize (concat "sta.quality." name)}}</span>
+        </label>
+      {{/each}}
+    </section>
+
+    <section class="numbers">
+
+      <section class="property damage border-left">
+        <h4>{{localize "sta.item.damage"}}</h4>
+        <div class="scale-value">
+          {{#range 0 settings.item.characterweapon.damage.max}}
+            <label class="scale-pill {{#if (eq ../sta.damage i)}}checked{{/if}}">
+              <span class="label">{{i}}</span>
+              <input name="system.damage" type="radio" value="{{i}}" data-dtype="Number"
+                     {{#if (eq ../sta.damage i)}}checked="checked"{{/if}} />
+            </label>
+          {{/range}}
+        </div>
+      </section>
+      <section class="property range border-left">
+        <h4>{{localize "sta.range._singular"}}</h4>
+        <div class="scale-value">
+          {{#each settings.ranges}}
+            <label class="scale-pill {{#if (eq ../sta.range this)}}checked{{/if}}">
+              {{localize (concat "sta.range." this)}}
+              <input name="system.range" type="radio" value="{{this}}"
+                     {{#if (eq ../sta.range this)}}checked="checked"{{/if}} />
+            </label>
+          {{/each}}
+        </div>
+      </section>
+      {{#each qualityQuantities as |value name|}}
+        <label class="property form-number quality quality-{{name}} ">
+          <span class="label">{{localize (concat "sta.quality." name)}}</span>
+          <input class="form-control" name="system.qualities.{{name}}" type="text" value="{{value}}"
+                 data-dtype="Number" />
+        </label>
+      {{/each}}
+    </section>
+  </section>
+
+  <section>
+    {{> (concat templatePath "/item/_partials/PropertyText.hbs")
+      name="description" title="sta.item.description" value=sta.description}}
+    {{> (concat templatePath "/item/_partials/PropertyText.hbs")
+      name="rule" title="sta.item.rule" value=sta.rule}}
+  </section>
+
+</form>

@@ -1,9 +1,9 @@
-import {sta} from "../config";
-import {ConfiguredDocumentClass} from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
+import { sta } from "../config";
+import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
 import {
-  ChatMessageDataConstructorData
+  ChatMessageDataConstructorData,
 } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
-import {HasActivateListeners} from "../util/message";
+import { HasActivateListeners } from "../util/message";
 
 export interface StaRollData<R extends StaRollResult<StaRollDice>> {
   dicePool: number;
@@ -46,7 +46,7 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
     template = Roll.CHAT_TEMPLATE,
     isPrivate = false,
   } = {}) {
-    if (!this._evaluated) await this.evaluate({async: true});
+    if (!this._evaluated) await this.evaluate({ async: true });
     const chatData = {
       formula: isPrivate ? "???" : this._formula,
       flavor: isPrivate ? null : flavor,
@@ -77,13 +77,13 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
   async toMessage<T extends DeepPartial<ChatMessageDataConstructorData> = {}>(
     messageData: T,
     {
-      rollMode = 'roll' as keyof CONFIG.Dice.RollModes | 'roll'
-    } = {}
+      rollMode = "roll" as keyof CONFIG.Dice.RollModes | "roll",
+    } = {},
   ): Promise<InstanceType<ConfiguredDocumentClass<typeof ChatMessage>> | undefined> {
     if (messageData.content == null) {
-      messageData.content = await this.render({template: this.chatTemplate})
+      messageData.content = await this.render({ template: this.chatTemplate });
     }
-    return super.toMessage(messageData, {rollMode: rollMode, create: true})
+    return super.toMessage(messageData, { rollMode: rollMode, create: true });
   }
 
 
@@ -91,7 +91,7 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
     html.find("button").on("click", (event) => {
       event.preventDefault();
       this.handleButton(event, message);
-    })
+    });
   }
 
   handleButton(event: JQuery.ClickEvent, message: ChatMessage) {

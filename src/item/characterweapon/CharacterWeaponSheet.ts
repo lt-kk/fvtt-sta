@@ -13,7 +13,7 @@ export class CharacterWeaponSheet extends BaseItemSheet<StaCharacterWeapon> {
     return mergeObject(super.defaultOptions, {
       classes: ["sta-app", "item-sheet", `${this.type}-sheet`],
       width: 300,
-      height: 540,
+      height: 550,
     });
   }
 

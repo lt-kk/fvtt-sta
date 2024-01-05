@@ -1,12 +1,12 @@
-import {CurrentValue, generatePills, ScalePill} from "../../model/StaTypes";
-import {filterRefit, StaRefit} from "../../item/refit/StaRefit";
-import {filterStarshipWeapon, StaStarshipWeapon} from "../../item/starshipweapon/StaStarshipWeapon";
-import {filterBelonging, StaBelonging} from "../../item/belonging/StaBelonging";
-import {filterLaunchbay, StaLaunchbay} from "../../item/launchbay/StaLaunchbay";
-import {filterTalent, StaTalent} from "../../item/talent/StaTalent";
-import {filterTrait, StaTrait} from "../../item/trait/StaTrait";
-import {filterValue, StaValue} from "../../item/value/StaValue";
-import {actorItems, actorSystem} from "../../util/document";
+import { CurrentValue, generatePills, ScalePill } from "../../model/StaTypes";
+import { filterRefit, StaRefit } from "../../item/refit/StaRefit";
+import { filterStarshipWeapon, StaStarshipWeapon } from "../../item/starshipweapon/StaStarshipWeapon";
+import { filterThing, StaThing } from "../../item/thing/StaThing";
+import { filterLaunchbay, StaLaunchbay } from "../../item/launchbay/StaLaunchbay";
+import { filterTalent, StaTalent } from "../../item/talent/StaTalent";
+import { filterTrait, StaTrait } from "../../item/trait/StaTrait";
+import { filterValue, StaValue } from "../../item/value/StaValue";
+import { actorItems, actorSystem } from "../../util/document";
 
 export function createStarship(document: Actor): StaStarship {
   return new StaStarship(
@@ -36,10 +36,10 @@ export class StaStarship {
   shields: CurrentValue;
   power: CurrentValue;
 
-  cargo: StaBelonging[] = [];
   launchbay: StaLaunchbay[] = [];
   refits: StaRefit[] = [];
   talents: StaTalent[] = [];
+  things: StaThing[] = [];
   traits: StaTrait[] = [];
   values: StaValue[] = [];
   weapons: StaStarshipWeapon[] = [];
@@ -81,10 +81,10 @@ export class StaStarship {
     this.shields = new CurrentValue(shields, this.systems.structure.value + this.departments.security);
     this.power = new CurrentValue(power, this.systems.engines.value);
 
-    this.cargo = filterBelonging(items);
     this.launchbay = filterLaunchbay(items);
     this.refits = filterRefit(items);
     this.talents = filterTalent(items);
+    this.things = filterThing(items);
     this.traits = filterTrait(items);
     this.values = filterValue(items);
     this.weapons = filterStarshipWeapon(items);

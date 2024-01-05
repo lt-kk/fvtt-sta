@@ -1,64 +1,4 @@
 .sta-app {
-  title, h1, h2, h3 {
-    text-transform: uppercase;
-    border: none;
-    margin: @gap 0;
-    .fas {
-      height: 100%;
-    }
-  }
-
-  h1 {
-    .lcars-bar(@sta-color-h1-bg, @sta-color-h1-a, @sta-h1-size);
-    color: @sta-color-h1-fg;
-    .inner {
-      .lcars-bar-inner(@sta-color-h1-a);
-    }
-  }
-
-  h2 {
-    .lcars-bar(@sta-color-h2-bg, @sta-color-h2-a, @sta-h2-size);
-    color: @sta-color-h2-fg;
-    .inner {
-      .lcars-bar-inner(@sta-color-h2-a);
-    }
-  }
-
-  h3 {
-    .lcars-bar(@sta-color-h3-bg, @sta-color-h3-a, @sta-h3-size);
-    color: @sta-color-h3-fg;
-    .inner {
-      .lcars-bar-inner(@sta-color-h2-a);
-    }
-  }
-
-  .border-left {
-    padding-left: @gap * 2;
-
-    > h1 {
-      .lcars-border-left(@sta-color-h1-bg);
-    }
-    > h2 {
-      .lcars-border-left(@sta-color-h2-bg);
-    }
-    > h3 {
-      .lcars-border-left(@sta-color-h3-bg);
-    }
-  }
-
-  .border-right {
-    padding-right: @gap * 2;
-
-    > h1 {
-      .lcars-border-right(@sta-color-h1-bg);
-    }
-    > h2 {
-      .lcars-border-right(@sta-color-h2-bg);
-    }
-    > h3 {
-      .lcars-border-right(@sta-color-h3-bg);
-    }
-  }
 
   .reverse {
     flex-direction: row-reverse;
@@ -66,6 +6,7 @@
 
   section {
     position: relative;
+    margin-bottom: @gap;
   }
 
   .flex-last {
@@ -85,6 +26,24 @@
   textarea {
     color: @almost-white;
     border: 1px solid var(--color-border-light-tertiary);
+  }
+
+  .form-number {
+    .lcars-bar(@sta-color-h3-bg, @sta-color-h3-a, @text-size);
+
+    .form-control {
+      .lcars-bar-inner(@dark-blue);
+      flex-grow: unset;
+      background-color: transparent;
+      width: @text-size;
+      text-align: end;
+      order: 999;
+    }
+  }
+
+  .form-flag {
+    .lcars-bar(@sta-color-h1-bg, @sta-color-h3-bg, @text-size);
+    .lcars-bar-flag-right(@sta-color-h1-bg);
   }
 
   .scale-value {
@@ -116,8 +75,9 @@
   }
 
   &.dialog {
-    .dialog-buttons{
+    .dialog-buttons {
       margin-top: @gap;
+
       button {
         background: @sta-color-action-bg none;
         color: @sta-color-action-fg;

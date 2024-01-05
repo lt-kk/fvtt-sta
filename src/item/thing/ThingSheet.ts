@@ -1,11 +1,11 @@
-import { createBelonging, StaBelonging } from "./StaBelonging";
+import { createThing, StaThing } from "./StaThing";
 import { BaseItemSheet } from "../BaseItemSheet";
 
-export class BelongingSheet extends BaseItemSheet<StaBelonging> {
-  static type = StaBelonging.type;
+export class ThingSheet extends BaseItemSheet<StaThing> {
+  static type = StaThing.type;
 
-  createSta(item: Item): StaBelonging {
-    return createBelonging(item);
+  createSta(item: Item): StaThing {
+    return createThing(item);
   }
 
   static get defaultOptions() {

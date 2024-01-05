@@ -1,0 +1,39 @@
+.starshipweapon-sheet {
+  .properties {
+    h1 {
+      width: 100%;
+    }
+
+    .flags {
+      width: 160px;
+    }
+
+    .numbers {
+      width: 50%;
+      flex-grow: 1
+    }
+  }
+
+  .flags, .numbers {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: calc(@gap / 2);
+    align-items: flex-start;
+
+    .property {
+      flex-grow: 1;
+    }
+  }
+
+  .flags {
+    .property {
+      margin: 0;
+    }
+  }
+
+  .numbers {
+    .property {
+      margin-bottom: calc(@gap / 2);
+    }
+  }
+}

@@ -1,5 +1,5 @@
-import {StaRollResult} from "../roll/StaRoll";
-import {LooseObject} from "./util";
+import { StaRollResult } from "../roll/StaRoll";
+import { LooseObject } from "./util";
 
 export interface HasActivateListeners {
   activateListeners(html: JQuery, message: ChatMessage): void;

@@ -1,49 +1,39 @@
 .characterweapon-sheet {
   .properties {
-    flex-direction: column;
-    grid-gap: 0;
+    h1 {
+      width: 100%;
+    }
 
-    .left-right {
-      display: flex;
-      grid-gap: @gap;
+    .flags {
+      width: 128px;
+    }
 
-      > * {
-        flex-grow: 1;
-      }
+    .numbers {
+      width: 50%;
+      flex-grow: 1
     }
   }
 
-  section.property {
-    margin-bottom: calc(@gap / 2);;
-  }
-
-  .left, .right {
+  .flags, .numbers {
     display: flex;
-    flex-direction: column;
-    grid-gap: @gap;
+    flex-wrap: wrap;
+    grid-gap: calc(@gap / 2);
+    align-items: flex-start;
+
+    .property {
+      flex-grow: 1;
+    }
   }
 
   .flags {
-    grid-gap: @gap;
-
     .property {
-      .lcars-bar(@sta-color-h1-bg, @sta-color-h3-bg, @text-size);
-      .lcars-bar-flag-right(@sta-color-h1-bg);
+      margin: 0;
+    }
+  }
+
+  .numbers {
+    .property {
       margin-bottom: calc(@gap / 2);
     }
   }
-
-  .qualities .number {
-    .lcars-bar(@sta-color-h3-bg, @sta-color-h3-a, @text-size);
-
-    .form-control {
-      .lcars-bar-inner(@dark-blue);
-      flex-grow: unset;
-      background-color: transparent;
-      width: @text-size * 2;
-      text-align: center;
-      order: 999;
-    }
-  }
-
 }

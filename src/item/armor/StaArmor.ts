@@ -20,10 +20,10 @@ export class StaArmor extends StaItem {
   img: string | null;
   description: string;
   rule: string;
-  equipped: boolean;
-  protection: number;
   opportunity: number;
   escalation: number;
+  equipped: boolean;
+  protection: number;
 
   constructor(
     id: string,

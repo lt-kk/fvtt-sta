@@ -28,6 +28,6 @@ export const sta = {
         },
       },
     },
-    ranges: StaRanges
+    ranges: StaRanges,
   },
 };

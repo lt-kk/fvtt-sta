@@ -19,7 +19,7 @@ export class StaLaunchbay implements StaItem {
   name: string;
   img: string | null;
   description: string;
-  ship: string;
+  type: string;
 
   constructor(
     id: string,
@@ -27,13 +27,13 @@ export class StaLaunchbay implements StaItem {
     img: string | null,
     {
       description = "",
-      ship = "",
+      type = "",
     },
   ) {
     this.id = id;
     this.name = name;
     this.img = img;
     this.description = description;
-    this.ship = ship;
+    this.type = type;
   }
 }

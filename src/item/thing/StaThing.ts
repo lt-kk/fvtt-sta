@@ -3,27 +3,27 @@ import { itemSystem } from "../../util/document";
 import { StaItem } from "../StaItem";
 
 
-export function createBelonging(document: Item): StaBelonging {
-  return new StaBelonging(document.id!, document.name!, document.img, itemSystem(document));
+export function createThing(document: Item): StaThing {
+  return new StaThing(document.id!, document.name!, document.img, itemSystem(document));
 }
 
-export function filterBelonging(source: Actor | Collection<Item>) {
-  return mapItems(source, StaBelonging.type, createBelonging);
+export function filterThing(source: Actor | Collection<Item>) {
+  return mapItems(source, StaThing.type, createThing);
 }
 
 
-export class StaBelonging implements StaItem {
-  static type = "item";
+export class StaThing implements StaItem {
+  static type = "thing";
 
   id: string;
   name: string;
   img: string | null;
   description: string;
   rule: string;
-  quantity: number;
-  uses: number;
   opportunity: number;
   escalation: number;
+  quantity: number;
+  uses: number;
 
   constructor(
     id: string,
@@ -32,10 +32,10 @@ export class StaBelonging implements StaItem {
     {
       description = "",
       rule = "",
-      quantity = 1,
-      uses = -1,
       opportunity = 0,
       escalation = 0,
+      quantity = 1,
+      uses = -1,
     },
   ) {
     this.id = id;

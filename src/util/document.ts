@@ -1,4 +1,4 @@
-import {LooseObject} from "./util";
+import { LooseObject } from "./util";
 
 
 export function actorSystem(document: Actor): LooseObject<any> {
@@ -15,6 +15,6 @@ export function itemSystem(document: Item): LooseObject<any> {
 
 export function update(document: StoredDocument<any>, system: LooseObject<any>) {
   document.update({
-    "system": system
+    "system": system,
   });
 }

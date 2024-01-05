@@ -1,0 +1,9 @@
+<form class="sta-body" autocomplete="off">
+  {{> (concat templatePath "/item/_partials/ItemHeader.hbs") this }}
+
+  {{> (concat templatePath "/item/_partials/PropertyText.hbs")
+    name="description" title="sta.item.description" value=sta.description}}
+  {{> (concat templatePath "/item/_partials/PropertyText.hbs")
+    name="rule" title="sta.item.rule" value=sta.rule}}
+
+</form>

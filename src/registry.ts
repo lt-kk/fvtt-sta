@@ -1,15 +1,21 @@
-import {CharacterSheet} from "./actor/character/CharacterSheet";
-import {StarshipSheet} from "./actor/starship/StarshipSheet";
-import {ArmorSheet} from "./item/armor/ArmorSheet";
-import {GenericItemSheet} from "./item/GenericItemSheet";
+import { CharacterSheet } from "./actor/character/CharacterSheet";
+import { StarshipSheet } from "./actor/starship/StarshipSheet";
+import { ArmorSheet } from "./item/armor/ArmorSheet";
 import { CharacterWeaponSheet } from "./item/characterweapon/CharacterWeaponSheet";
 import { FocusSheet } from "./item/focus/FocusSheet";
 import { InjurySheet } from "./item/injury/InjurySheet";
-import { BelongingSheet } from "./item/belonging/BelongingSheet";
+import { ThingSheet } from "./item/thing/ThingSheet";
+import { LaunchbaySheet } from "./item/launchbay/LaunchbaySheet";
+import { MilestoneSheet } from "./item/milestone/MilestoneSheet";
+import { RefitSheet } from "./item/refit/RefitSheet";
+import { StarshipWeaponSheet } from "./item/starshipweapon/StarshipWeaponSheet";
+import { TalentSheet } from "./item/talent/TalentSheet";
+import { TraitSheet } from "./item/trait/TraitSheet";
+import { ValueSheet } from "./item/value/ValueSheet";
 
 
 export interface ActorTypeConfig {
-  sheet: typeof ActorSheet
+  sheet: typeof ActorSheet;
 }
 
 export class ActorTypes {
@@ -25,9 +31,9 @@ export const actorTypes = new ActorTypes();
 
 
 export interface ItemTypeConfig {
-  sheet: typeof ItemSheet
-  listTemplate: string
-  chatTemplate: string
+  sheet: typeof ItemSheet;
+  listTemplate: string;
+  chatTemplate: string;
 }
 
 export class ItemTypes {
@@ -51,43 +57,43 @@ export class ItemTypes {
     listTemplate: `/item/GenericListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };
-  item: ItemTypeConfig = {
-    sheet: BelongingSheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
-  };
   launchbay: ItemTypeConfig = {
-    sheet: GenericItemSheet,
+    sheet: LaunchbaySheet,
     listTemplate: `/item/GenericListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };
   milestone: ItemTypeConfig = {
-    sheet: GenericItemSheet,
+    sheet: MilestoneSheet,
     listTemplate: `/item/GenericListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };
   refit: ItemTypeConfig = {
-    sheet: GenericItemSheet,
+    sheet: RefitSheet,
     listTemplate: `/item/GenericListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };
   starshipweapon: ItemTypeConfig = {
-    sheet: GenericItemSheet,
+    sheet: StarshipWeaponSheet,
     listTemplate: `/item/GenericListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };
   talent: ItemTypeConfig = {
-    sheet: GenericItemSheet,
+    sheet: TalentSheet,
+    listTemplate: `/item/GenericListItem.hbs`,
+    chatTemplate: `/item/GenericItemChat.hbs`,
+  };
+  thing: ItemTypeConfig = {
+    sheet: ThingSheet,
     listTemplate: `/item/GenericListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };
   trait: ItemTypeConfig = {
-    sheet: GenericItemSheet,
+    sheet: TraitSheet,
     listTemplate: `/item/GenericListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };
   value: ItemTypeConfig = {
-    sheet: GenericItemSheet,
+    sheet: ValueSheet,
     listTemplate: `/item/GenericListItem.hbs`,
     chatTemplate: `/item/GenericItemChat.hbs`,
   };

@@ -84,7 +84,7 @@
       "characterweapon",
       "focus",
       "injury",
-      "item",
+      "thing",
       "launchbay",
       "milestone",
       "refit",
@@ -96,14 +96,16 @@
     "armor": {
       "description": "",
       "rules": "",
-      "protection": 0,
-      "equipped": true,
       "opportunity": 0,
-      "escalation": 0
+      "escalation": 0,
+      "equipped": true,
+      "protection": 0
     },
     "characterweapon": {
       "description": "",
       "rules": "",
+      "opportunity": 0,
+      "escalation": 0,
       "damage": 0,
       "range": "",
       "hands": 1,
@@ -121,11 +123,8 @@
         "nonlethal": false,
         "hiddenx": 0,
         "piercingx": 0,
-        "viciousx": 0,
-        "opportunity": 0,
-        "escalation": 0
+        "viciousx": 0
       }
-
     },
     "focus": {
       "description": ""
@@ -133,26 +132,28 @@
     "injury": {
       "description": ""
     },
-    "item": {
+    "thing": {
       "description": "",
-      "quantity": 1,
-      "uses": -1,
       "opportunity": 0,
-      "escalation": 0
-    },
-    "launchbay": {
-      "description": "",
+      "escalation": 0,
       "quantity": 1,
       "uses": -1
     },
+    "launchbay": {
+      "description": "",
+      "type": ""
+    },
     "milestone": {
-      "description": ""
+      "description": "",
+      "rule": ""
     },
     "refit": {
+      "description": "",
       "system": ""
     },
     "starshipweapon": {
       "description": "",
+      "rule": "",
       "damage": 0,
       "range": "",
       "qualities": {
@@ -171,11 +172,8 @@
     },
     "talent": {
       "description": "",
-      "talenttype": {
-        "typeenum": "",
-        "description":"",
-        "minimum":0
-      }
+      "rule": "",
+      "type": ""
     },
     "trait": {
       "description": ""

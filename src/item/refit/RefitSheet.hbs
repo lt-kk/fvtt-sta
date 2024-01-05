@@ -1,0 +1,19 @@
+<form class="sta-body" autocomplete="off">
+  {{> (concat templatePath "/item/_partials/ItemHeader.hbs") this }}
+
+  <section class="property system border-left">
+    <h4>{{localize "sta.starship.system._singular"}}</h4>
+    <div class="scale-value">
+      {{#each starshipSystems as |name|}}
+        <label class="scale-pill single {{#if (eq ../sta.system this)}}checked{{/if}}">
+          {{localize (concat "sta.starship.system." this)}}
+          <input name="system.system" type="radio" value="{{this}}"
+                 {{#if (eq ../sta.system this)}}checked="checked"{{/if}} />
+        </label>
+      {{/each}}
+    </div>
+  </section>
+
+  {{> (concat templatePath "/item/_partials/PropertyText.hbs")
+    name="description" title="sta.item.description" value=sta.description}}
+</form>

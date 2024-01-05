@@ -19,7 +19,7 @@ export abstract class BaseItemSheet<STA extends StaItem> extends ItemSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["sta-app", "item-sheet", `${this.type}-sheet`],
       width: 280,
-      height: 200,
+      height: 210,
     });
   }
 
@@ -31,6 +31,7 @@ export abstract class BaseItemSheet<STA extends StaItem> extends ItemSheet {
       ...this.additionalData(this.sta, data),
       settings: sta.settings,
       sta: this.sta,
+      templatePath: sta.templateBasePath,
     };
   }
 
@@ -42,4 +43,5 @@ export abstract class BaseItemSheet<STA extends StaItem> extends ItemSheet {
 type Data = ItemSheet.Data & LooseObject<any> & {
   settings: object;
   sta: LooseObject<any>;
+  templatePath: string;
 };

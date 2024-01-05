@@ -43,7 +43,7 @@
       "power": "Energie",
       "shields": "Schilde",
       "crew": "Crew",
-      "systems": {
+      "system": {
         "_singular": "System",
         "_plural": "Systeme",
         "communications": "Kommunikation",
@@ -53,7 +53,7 @@
         "structure": "Hülle",
         "weapons": "Waffen"
       },
-      "departments": {
+      "department": {
         "_singular": "Abteilung",
         "_plural": "Abteilungen",
         "command": "Kommando",
@@ -78,7 +78,7 @@
       "description": "Beschreibung",
       "opportunity": "Verzichtskosten",
       "escalation": "Eskalation",
-      "rules": "Regeln",
+      "rule": "Regel",
       "damage": "Schaden",
       "armor": {
         "_singular": "Rüstung",
@@ -115,13 +115,13 @@
         "delete": "Verletzung löschen",
         "empty": "keine Verletzung"
       },
-      "item": {
-        "_singular": "Ausrüstung",
-        "_plural": "Ausrüstung",
-        "create": "Neue Ausrüstung",
-        "edit": "Ausrüstung bearbeiten",
-        "delete": "Ausrüstung löschen",
-        "empty": "keine Ausrüstung"
+      "launchbay": {
+        "_singular": "Shuttle",
+        "_plural": "Shuttlese",
+        "create": "Neues Shuttle",
+        "edit": "Shuttle bearbeiten",
+        "delete": "Shuttle löschen",
+        "empty": "kein Shuttle"
       },
       "milestone": {
         "_singular": "Meilenstein",
@@ -160,6 +160,14 @@
         },
         "requirement": "Benötigt"
       },
+      "thing": {
+        "_singular": "Ausrüstung",
+        "_plural": "Ausrüstung",
+        "create": "Neue Ausrüstung",
+        "edit": "Ausrüstung bearbeiten",
+        "delete": "Ausrüstung löschen",
+        "empty": "keine Ausrüstung"
+      },
       "trait": {
         "_singular": "Merkmal",
         "_plural": "Merkmale",
@@ -181,20 +189,26 @@
     "quality": {
       "_plural": "Schadenseffekte",
       "area": "Flachenwirkung",
-      "spread": "boolean",
-      "hiddenx": "unauffallig X",
-      "piercingx": "durchdringend X",
-      "viciousx": "verheerend X",
-      "intense": "intensiv",
-      "knockdown": "niederwerfend",
-      "accurate": "präzise",
-      "charge": "aufladbar",
-      "cumbersome": "unhandlich",
-      "deadly": "letal",
-      "debilitating": "verletzend",
+      "spread": "Streuend",
+      "hiddenx": "Unauffallig X",
+      "piercingx": "Durchdringend X",
+      "viciousx": "Verheerend X",
+      "intense": "Intensiv",
+      "knockdown": "Niederwerfend",
+      "accurate": "Präzise",
+      "charge": "Aufladbar",
+      "cumbersome": "Unhandlich",
+      "deadly": "Letal",
+      "debilitating": "Verletzend",
       "grenade": "Granate",
-      "inaccurate": "ungenau",
-      "nonlethal": "nicht todlich"
+      "inaccurate": "Ungenau",
+      "nonlethal": "Nicht todlich",
+      "persistentx": "Anhaltend X",
+      "versatilex": "Vielseitig X",
+      "dampening": "Energiesenkend",
+      "calibration": "Kalibrierung",
+      "devastating": "Zerstörerisch",
+      "highyield": "Hohe Durchschlagskraft"
     },
     "notes": {
       "_singular": "Notiz",
@@ -255,6 +269,7 @@
     },
     "owner": "Besitzer",
     "quantity": "Menge",
-    "uses": "Nutzungen"
+    "uses": "Nutzungen",
+    "type": "Typ"
   }
 }

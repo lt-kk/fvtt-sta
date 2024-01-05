@@ -12,6 +12,10 @@ export function propertyOf<T>(name: keyof T): string {
   return String(name);
 }
 
+export function propertiesOf(type: any) {
+  return Object.getOwnPropertyNames(new type());
+}
+
 export function splitObject(obj: any, rule: (name: string, value: any) => boolean) {
   const a: LooseObject<any> = {};
   const b: LooseObject<any> = {};

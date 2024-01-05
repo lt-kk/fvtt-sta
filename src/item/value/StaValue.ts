@@ -19,7 +19,7 @@ export class StaValue implements StaItem {
   name: string;
   img: string | null;
   description: string;
-  questioned: boolean;
+  used: boolean;
 
   constructor(
     id: string,
@@ -27,13 +27,13 @@ export class StaValue implements StaItem {
     img: string | null,
     {
       description = "",
-      questioned = false,
+      used = false,
     },
   ) {
     this.id = id;
     this.name = name;
     this.img = img;
     this.description = description;
-    this.questioned = questioned;
+    this.used = used;
   }
 }

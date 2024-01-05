@@ -1,5 +1,5 @@
 export abstract class StaItem {
-  static type: string
+  static type: string;
 
   abstract id: string;
   abstract name: string;

@@ -1,21 +1,11 @@
 <form class="sta-body" autocomplete="off">
-  <section class="icon">
-    <img src="{{sta.img}}" data-edit="img" title="{{sta.name}}" />
-  </section>
-
-  <section class="summary">
-    <input class="control property name" name="name" type="text" value="{{sta.name}}" />
-    {{#if item.actor}}
-      <span class="owner">{{localize "sta.owner"}}: {{item.actor.name}}</span>
-    {{/if}}
-  </section>
+  {{> (concat templatePath "/item/_partials/ItemHeader.hbs") this }}
 
   <section class="properties border-left">
-    <h1 class="">
-      {{localize "sta.item.properties"}}
-      <label class="property equipped flex-last">
+    <h1>{{localize "sta.item.properties"}}
+      <label class="property equipped on-border">
         {{localize "sta.item.armor.equipped"}}
-        <input class="form-control flex-last inner" name="system.equipped" {{checked data.system.equipped}}
+        <input class="form-control inner" name="system.equipped" {{checked sta.equipped}}
                type="checkbox" data-dtype="Boolean" />
       </label>
     </h1>
@@ -65,13 +55,9 @@
     </section>
   </section>
 
-  <section class="property description">
-    <h2>{{localize "sta.item.description"}}</h2>
-    <textarea class="form-control" name="system.description">{{sta.description}}</textarea>
-  </section>
-  <section class="property rules">
-    <h2>{{localize "sta.item.rules"}}</h2>
-    <textarea class="form-control" name="system.rules">{{sta.rules}}</textarea>
-  </section>
+  {{> (concat templatePath "/item/_partials/PropertyText.hbs")
+    name="description" title="sta.item.description" value=sta.description}}
+  {{> (concat templatePath "/item/_partials/PropertyText.hbs")
+    name="rule" title="sta.item.rule" value=sta.rule}}
 
 </form>

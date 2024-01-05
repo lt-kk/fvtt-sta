@@ -25,7 +25,7 @@
   border-left: @size solid @color;
   border-right: @size solid @color;
   border-radius: @size / 2;
-  margin-bottom: @gap;
+  //margin-bottom: @gap;
   height: @size;
   font-size: calc(@size - 4px);
   line-height: calc(@size - 3px);
@@ -104,7 +104,7 @@
   &:before {
     content: '';
     position: absolute;
-    top: calc(@sizeFrom + @gap);
+    top: calc(@sizeFrom);
     left: 0;
     width: calc(@sizeTo + @diff);
     height: @diff;
@@ -127,7 +127,7 @@
   &:before {
     content: '';
     position: absolute;
-    top: calc(@sizeFrom + @gap);
+    top: calc(@sizeFrom);
     right: 0;
     width: calc(@sizeTo + @diff);
     height: @diff;
@@ -223,7 +223,7 @@
     contrast(@colorBase, @almost-white, @almost-black),
     @colorChecked);
   }
-  &:has(~ .@{selector}.checked) {
+  &:not(&.single):has(~ .@{selector}.checked) {
     border-color: @colorActive;
     background-color: @colorActive;
     color: contrast(@colorActive, @almost-white, @almost-black);

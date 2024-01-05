@@ -1,4 +1,4 @@
-import {LooseObject} from "../util/util";
+import { LooseObject } from "../util/util";
 
 export class CurrentValue {
   value: number;
@@ -10,7 +10,7 @@ export class CurrentValue {
     this.value = value;
     this.max = max;
     this.min = min;
-    this.pills = generatePills(value, {begin: min, end: max, fatal: 0});
+    this.pills = generatePills(value, { begin: min, end: max, fatal: 0 });
   }
 
 }
@@ -56,10 +56,10 @@ export function generatePills(
 }
 
 
-export const StaStati = ["", "success", "info", "warn", "error", "fatal"]
+export const StaStati = ["", "success", "info", "warn", "error", "fatal"];
 export type StaStatus = typeof StaStati[number]
 
-export const StaRanges = ["close", "near", "far", "extreme"]
+export const StaRanges = ["close", "near", "far", "extreme"];
 export type StaRange = typeof StaRanges[number];
 
 

@@ -1,6 +1,6 @@
-import {LooseObject} from "../util/util";
-import {sta} from "../config";
-import {StaRoll, StaRollData, StaRollDice, StaRollResult} from "./StaRoll";
+import { LooseObject } from "../util/util";
+import { sta } from "../config";
+import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "./StaRoll";
 
 
 export type ChallengeRollData = LooseObject<any> & StaRollData<ChallengeRollResult>
@@ -38,7 +38,7 @@ export class ChallengeRollResult implements StaRollResult<ChallengeRollDice> {
 
 
 export class ChallengeRoll extends StaRoll<ChallengeRollData, ChallengeRollResult> {
-  chatTemplate = `${sta.templateBasePath}/roll/ChallengeRollChat.hbs`
+  chatTemplate = `${sta.templateBasePath}/roll/ChallengeRollChat.hbs`;
 
   constructor(
     _: string, data: ChallengeRollData, options?: Roll["options"],

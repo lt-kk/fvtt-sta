@@ -19,13 +19,13 @@ export class StaCharacterWeapon implements StaItem {
   id: string;
   name: string;
   img: string | null;
-  damage: number;
-  range: StaRange;
-  // TODO size
-  opportunity: number;
-  escalation: number;
   description: string;
   rule: string;
+  opportunity: number;
+  escalation: number;
+  damage: number;
+  range: StaRange;
+  hands: number;
   qualities: StaCharacterWeaponQualities;
 
   constructor(
@@ -33,34 +33,32 @@ export class StaCharacterWeapon implements StaItem {
     name = "",
     img: string | null,
     {
-      damage = 0,
-      range = "near" as StaRange,
-      opportunity = 0,
-      escalation = 0,
       description = "",
       rule = "",
+      opportunity = 0,
+      escalation = 0,
+      damage = 0,
+      range = "near" as StaRange,
+      hands = 1,
       qualities = {},
     },
   ) {
     this.id = id;
     this.name = name;
     this.img = img;
-    this.damage = damage;
+    this.rule = rule;
+    this.description = description;
     this.opportunity = opportunity;
     this.escalation = escalation;
+    this.damage = damage;
     this.range = range;
-    this.description = description;
-    this.rule = rule;
+    this.hands = hands;
     this.qualities = new StaCharacterWeaponQualities(qualities);
   }
 }
 
 
 export class StaCharacterWeaponQualities {
-  hiddenx: number;
-  piercingx: number;
-  viciousx: number;
-
   charge: boolean;
   grenade: boolean;
   area: boolean;
@@ -73,11 +71,12 @@ export class StaCharacterWeaponQualities {
   deadly: boolean;
   nonlethal: boolean;
 
+  hiddenx: number;
+  piercingx: number;
+  viciousx: number;
+
   constructor({
     area = false,
-    hiddenx = 0,
-    piercingx = 0,
-    viciousx = 0,
     intense = false,
     knockdown = false,
     accurate = false,
@@ -88,12 +87,11 @@ export class StaCharacterWeaponQualities {
     grenade = false,
     inaccurate = false,
     nonlethal = false,
+    hiddenx = 0,
+    piercingx = 0,
+    viciousx = 0,
   }) {
     this.area = area;
-    this.hiddenx = hiddenx;
-    this.piercingx = piercingx;
-    this.viciousx = viciousx;
-
     this.intense = intense;
     this.knockdown = knockdown;
     this.accurate = accurate;
@@ -104,5 +102,9 @@ export class StaCharacterWeaponQualities {
     this.grenade = grenade;
     this.inaccurate = inaccurate;
     this.nonlethal = nonlethal;
+
+    this.hiddenx = hiddenx;
+    this.piercingx = piercingx;
+    this.viciousx = viciousx;
   }
 }
