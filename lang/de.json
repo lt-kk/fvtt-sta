@@ -39,7 +39,7 @@
       "servicedate": "Indienststellung",
       "missionprofile": "Missionsprofil",
       "scale": "Größe",
-      "resistance": "Wiederstand",
+      "resistance": "Widerstand",
       "power": "Energie",
       "shields": "Schilde",
       "crew": "Crew",
@@ -87,7 +87,7 @@
         "edit": "Rüstung bearbeiten",
         "delete": "Rüstung löschen",
         "empty": "Keine Rüstung",
-        "protection": "Wiederstand",
+        "protection": "Widerstand",
         "equipped": "Ausgerüstet"
       },
       "characterweapon": {
@@ -113,15 +113,17 @@
         "create": "Neue Verletzung",
         "edit": "Verletzung bearbeiten",
         "delete": "Verletzung löschen",
-        "empty": "keine Verletzung"
+        "empty": "keine Verletzung",
+        "healed": "Geheilt"
       },
       "launchbay": {
         "_singular": "Shuttle",
-        "_plural": "Shuttlese",
+        "_plural": "Shuttles",
         "create": "Neues Shuttle",
         "edit": "Shuttle bearbeiten",
         "delete": "Shuttle löschen",
-        "empty": "kein Shuttle"
+        "empty": "kein Shuttle",
+        "landed": "Gelandet"
       },
       "milestone": {
         "_singular": "Meilenstein",
@@ -188,9 +190,9 @@
     },
     "quality": {
       "_plural": "Schadenseffekte",
-      "area": "Flachenwirkung",
+      "area": "Flächenwirkung",
       "spread": "Streuend",
-      "hiddenx": "Unauffallig X",
+      "hiddenx": "Unauffällig X",
       "piercingx": "Durchdringend X",
       "viciousx": "Verheerend X",
       "intense": "Intensiv",
@@ -202,10 +204,10 @@
       "debilitating": "Verletzend",
       "grenade": "Granate",
       "inaccurate": "Ungenau",
-      "nonlethal": "Nicht todlich",
+      "nonlethal": "Nicht tödlich",
       "persistentx": "Anhaltend X",
       "versatilex": "Vielseitig X",
-      "dampening": "Energiesenkend",
+      "dampening": "Energie senkend",
       "calibration": "Kalibrierung",
       "devastating": "Zerstörerisch",
       "highyield": "Hohe Durchschlagskraft"

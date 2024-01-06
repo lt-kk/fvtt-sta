@@ -6,10 +6,14 @@ import { filterLaunchbay, StaLaunchbay } from "../../item/launchbay/StaLaunchbay
 import { filterTalent, StaTalent } from "../../item/talent/StaTalent";
 import { filterTrait, StaTrait } from "../../item/trait/StaTrait";
 import { filterValue, StaValue } from "../../item/value/StaValue";
-import { actorItems, actorSystem } from "../../util/document";
+import { actorItems, actorSystem, update } from "../../util/document";
+import { LooseObject, sumAttributes } from "../../util/util";
+import { StaActor } from "../StaActor";
+import { sta } from "../../config";
 
 export function createStarship(document: Actor): StaStarship {
   return new StaStarship(
+    document.id!,
     document.name!,
     document.img,
     actorSystem(document),
@@ -18,7 +22,8 @@ export function createStarship(document: Actor): StaStarship {
 }
 
 
-export class StaStarship {
+export class StaStarship implements StaActor {
+  id: string;
   name: string;
   img: string | null;
   notes: string;
@@ -47,6 +52,7 @@ export class StaStarship {
   taskRoll: StaStarshipTaskRoll;
 
   constructor(
+    id: string,
     name: string,
     img: string | null,
     {
@@ -66,6 +72,7 @@ export class StaStarship {
     } = {},
     items: Collection<Item>,
   ) {
+    this.id = id;
     this.name = name;
     this.img = img;
     this.designation = designation;
@@ -106,6 +113,28 @@ export class StaStarship {
   systemStatus() {
     Object.entries(this.systems).forEach(([_, system]) => {
       system.withScale(this.scale);
+    });
+  }
+
+  get systemsSum(): number {
+    return sumAttributes<StaStarshipSystem>(this.systems, (s) => s.value);
+  }
+
+  get departmentsSum(): number {
+    return sumAttributes(this.departments, (v) => v as number);
+  }
+
+  resetStatus() {
+    const actor = sta.game.actors!.get(this.id);
+    const systems: LooseObject<{ breaches: number }> = {};
+    Object.keys(this.systems).forEach((name) => {
+      systems[name] = { breaches: 0 };
+    });
+    update(actor, {
+      crew: this.crew.max,
+      shields: this.shields.max,
+      power: this.power.max,
+      systems: systems,
     });
   }
 }

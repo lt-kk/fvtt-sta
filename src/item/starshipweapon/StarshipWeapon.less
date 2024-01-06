@@ -18,22 +18,11 @@
     display: flex;
     flex-wrap: wrap;
     grid-gap: calc(@gap / 2);
-    align-items: flex-start;
+    align-content: flex-start;
 
     .property {
       flex-grow: 1;
-    }
-  }
-
-  .flags {
-    .property {
       margin: 0;
-    }
-  }
-
-  .numbers {
-    .property {
-      margin-bottom: calc(@gap / 2);
     }
   }
 }

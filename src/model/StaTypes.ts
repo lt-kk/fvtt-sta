@@ -13,6 +13,9 @@ export class CurrentValue {
     this.pills = generatePills(value, { begin: min, end: max, fatal: 0 });
   }
 
+  reset() {
+    this.value = this.max;
+  }
 }
 
 export class ScalePill {

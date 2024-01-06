@@ -84,12 +84,12 @@
       "characterweapon",
       "focus",
       "injury",
-      "thing",
       "launchbay",
       "milestone",
       "refit",
       "starshipweapon",
       "talent",
+      "thing",
       "trait",
       "value"
     ],
@@ -130,18 +130,13 @@
       "description": ""
     },
     "injury": {
-      "description": ""
-    },
-    "thing": {
       "description": "",
-      "opportunity": 0,
-      "escalation": 0,
-      "quantity": 1,
-      "uses": -1
+      "healed": false
     },
     "launchbay": {
       "description": "",
-      "type": ""
+      "type": "",
+      "landed": true
     },
     "milestone": {
       "description": "",
@@ -174,6 +169,14 @@
       "description": "",
       "rule": "",
       "type": ""
+    },
+    "thing": {
+      "description": "",
+      "opportunity": 0,
+      "escalation": 0,
+      "equipped": true,
+      "quantity": 1,
+      "uses": -1
     },
     "trait": {
       "description": ""

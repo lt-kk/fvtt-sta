@@ -1,6 +1,16 @@
 <form class="sta-body" autocomplete="off">
   {{> (concat templatePath "/item/_partials/ItemHeader.hbs") this }}
 
+  <section class="properties">
+    <h1>{{localize "sta.item.properties"}}
+      <label class="property healed on-border">
+        {{localize "sta.item.injury.healed"}}
+        <input class="form-control inner" name="system.healed" {{checked sta.healed}}
+               type="checkbox" data-dtype="Boolean" />
+      </label>
+    </h1>
+  </section>
+
   {{> (concat templatePath "/item/_partials/PropertyText.hbs")
     name="description" title="sta.item.description" value=sta.description}}
 

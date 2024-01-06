@@ -74,6 +74,16 @@
         &:before {
           height: calc(@sta-h3-size + (@gap * 2)) !important;
         }
+
+        .on-border {
+          width: @sta-h1-size;
+          color: transparent;
+          font-size: @text-tiny-size;
+          text-align: center;
+          &:hover {
+            color: fade(@almost-white, 20%);
+          }
+        }
       }
 
       .property {

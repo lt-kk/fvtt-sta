@@ -11,8 +11,8 @@ export class LaunchbaySheet extends BaseItemSheet<StaLaunchbay> {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["sta-app", "item-sheet", `${this.type}-sheet`],
-      width: 300,
-      height: 230,
+      width: 320,
+      height: 270,
     });
   }
 }

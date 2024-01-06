@@ -19,6 +19,7 @@ export class StaInjury implements StaItem {
   name: string;
   img: string | null;
   description: string;
+  healed: boolean;
 
   constructor(
     id: string,
@@ -26,11 +27,13 @@ export class StaInjury implements StaItem {
     img: string | null,
     {
       description = "",
+      healed = false,
     },
   ) {
     this.id = id;
     this.name = name;
     this.img = img;
     this.description = description;
+    this.healed = healed;
   }
 }

@@ -59,7 +59,11 @@
   </section>
 
   <section class="status border-left">
-    <h1>{{localize "sta.status._plural"}}</h1>
+    <h1>{{localize "sta.status._plural"}}
+      <a class="control reset-status inner on-border" title="{{localize "sta.resetstatus"}}">
+        <i class="fa-solid fa-rotate-left"></i>
+      </a>
+    </h1>
 
     <section class="property determination border-left">
       <h3>{{localize "sta.character.determination"}}</h3>
@@ -114,7 +118,9 @@
   </section>
 
   <section class="attributes edge-right-down reversed">
-    <h1 class="reverse">{{localize "sta.character.attributes._plural"}}</h1>
+    <h1 class="reverse">{{localize "sta.character.attributes._plural"}}
+      <span class="inner on-border">{{sta.attributesSum}}</span>
+    </h1>
     {{#each sta.attributes as |value name|}}
       <label class="property attribute attribute-{{name}} reverse">
         <input class="flag" name="system.taskRoll.attribute" type="radio" value="{{name}}"
@@ -127,7 +133,9 @@
   </section>
 
   <section class="disciplines edge-left-down">
-    <h1>{{localize "sta.character.disciplines._plural"}}</h1>
+    <h1>{{localize "sta.character.disciplines._plural"}}
+      <span class="inner on-border">{{sta.disciplinesSum}}</span>
+    </h1>
     {{#each sta.disciplines as |value name|}}
       <label class="property discipline discipline-{{name}}">
         <input class="flag" name="system.taskRoll.discipline" type="radio" value="{{name}}"

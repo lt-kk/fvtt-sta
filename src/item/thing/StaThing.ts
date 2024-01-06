@@ -22,6 +22,7 @@ export class StaThing implements StaItem {
   rule: string;
   opportunity: number;
   escalation: number;
+  equipped: boolean;
   quantity: number;
   uses: number;
 
@@ -34,6 +35,7 @@ export class StaThing implements StaItem {
       rule = "",
       opportunity = 0,
       escalation = 0,
+      equipped = true,
       quantity = 1,
       uses = -1,
     },
@@ -45,6 +47,7 @@ export class StaThing implements StaItem {
     this.rule = rule;
     this.quantity = quantity;
     this.uses = uses;
+    this.equipped = equipped;
     this.opportunity = opportunity;
     this.escalation = escalation;
   }

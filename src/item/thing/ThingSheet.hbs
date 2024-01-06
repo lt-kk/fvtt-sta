@@ -5,7 +5,7 @@
     <h1>{{localize "sta.item.properties"}}
       <label class="property equipped on-border">
         {{localize "sta.item.armor.equipped"}}
-        <input class="form-control flex-last inner" name="system.equipped" {{checked sta.equipped}}
+        <input class="form-control inner" name="system.equipped" {{checked sta.equipped}}
                type="checkbox" data-dtype="Boolean" />
       </label>
     </h1>
@@ -39,12 +39,12 @@
       </div>
     </section>
 
-    <label class="property quantity">
+    <label class="property quantity form-number">
       <span class="label">{{localize "sta.quantity"}}</span>
       <input class="form-control" name="system.quantity" type="text" value="{{sta.quantity}}"
              data-dtype="Number" />
     </label>
-    <label class="property uses">
+    <label class="property uses form-number">
       <span class="label {{#if (eq sta.uses -1)}}infinite{{/if}}">{{localize "sta.uses"}}</span>
       <input class="form-control" name="system.uses" type="text" value="{{sta.uses}}" data-dtype="Number" />
     </label>

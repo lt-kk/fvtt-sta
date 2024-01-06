@@ -8,11 +8,15 @@ import { filterThing, StaThing } from "../../item/thing/StaThing";
 import { filterTalent, StaTalent } from "../../item/talent/StaTalent";
 import { filterTrait, StaTrait } from "../../item/trait/StaTrait";
 import { filterValue, StaValue } from "../../item/value/StaValue";
-import { actorItems, actorSystem } from "../../util/document";
+import { actorItems, actorSystem, update } from "../../util/document";
+import { sumAttributes } from "../../util/util";
+import { StaActor } from "../StaActor";
+import { sta } from "../../config";
 
 
 export function createCharacter(document: Actor): StaCharacter {
   return new StaCharacter(
+    document.id!,
     document.name!,
     document.img,
     actorSystem(document),
@@ -21,7 +25,8 @@ export function createCharacter(document: Actor): StaCharacter {
 }
 
 
-export class StaCharacter {
+export class StaCharacter implements StaActor {
+  id: string;
   name: string;
   img: string | null;
   species: string;
@@ -52,6 +57,7 @@ export class StaCharacter {
   taskRoll: StaCharacterTaskRoll;
 
   constructor(
+    id: string,
     name: string,
     img: string | null,
     {
@@ -70,6 +76,7 @@ export class StaCharacter {
     } = {},
     items: Collection<Item>,
   ) {
+    this.id = id;
     this.name = name;
     this.img = img;
     this.rank = rank;
@@ -97,6 +104,29 @@ export class StaCharacter {
     this.taskRoll = new StaCharacterTaskRoll(taskRoll);
   }
 
+  get attributesSum(): number {
+    return sumAttributes(this.attributes, (v) => v as number);
+  }
+
+  get disciplinesSum(): number {
+    return sumAttributes(this.disciplines, (v) => v as number);
+  }
+
+  resetStatus() {
+    const actor = sta.game.actors!.get(this.id)!;
+    update(actor, {
+      stress: this.stress.max,
+      determination: this.determination.max,
+    });
+    this.injuries.forEach((injury) => {
+      actor.updateEmbeddedDocuments("Item", [{
+        _id: injury.id,
+        system: {
+          healed: true,
+        },
+      }]);
+    });
+  }
 }
 
 export class StaCharacterAttributes {

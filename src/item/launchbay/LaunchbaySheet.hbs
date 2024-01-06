@@ -1,10 +1,20 @@
 <form class="sta-body" autocomplete="off">
   {{> (concat templatePath "/item/_partials/ItemHeader.hbs") this }}
 
-  <label class="property type">
-    <span class="label">{{localize "sta.type"}}</span>
-    <input class="form-control" name="system.type" type="text" value="{{sta.type}}" />
-  </label>
+  <section class="properties">
+    <h1>{{localize "sta.item.properties"}}
+      <label class="property landed on-border">
+        {{localize "sta.item.launchbay.landed"}}
+        <input class="form-control inner" name="system.landed" {{checked sta.landed}}
+               type="checkbox" data-dtype="Boolean" />
+      </label>
+    </h1>
+
+    <label class="property type form-bar">
+      <span class="label">{{localize "sta.type"}}</span>
+      <input class="form-control" name="system.type" type="text" value="{{sta.type}}" />
+    </label>
+  </section>
 
   {{> (concat templatePath "/item/_partials/PropertyText.hbs")
     name="description" title="sta.item.description" value=sta.description}}

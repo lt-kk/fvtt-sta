@@ -25,3 +25,9 @@ export function splitObject(obj: any, rule: (name: string, value: any) => boolea
   });
   return [a, b];
 }
+
+export function sumAttributes<T>(obj: any, accessor: (v: T) => number) {
+  return Object.entries(obj)
+    .map(([_, value]) => accessor(value as T) as number)
+    .reduce((a, b) => a + b)
+}

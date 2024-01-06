@@ -52,7 +52,11 @@
   </section>
 
   <section class="systems edge-right-down reverse">
-    <h1 class="reverse">{{localize "sta.starship.system._plural"}}</h1>
+    <h1 class="reverse">{{localize "sta.starship.system._plural"}}
+      <a class="control reset-status inner on-border" title="{{localize "sta.resetstatus"}}">
+        {{sta.systemsSum}}
+      </a>
+    </h1>
 
     <div class="property shields reverse">
       {{localize "sta.starship.shields"}}
@@ -97,7 +101,9 @@
   </section>
 
   <section class="departments edge-left-down">
-    <h1>{{localize "sta.starship.department._plural"}}</h1>
+    <h1>{{localize "sta.starship.department._plural"}}
+      <span class="inner on-border">{{sta.departmentsSum}}</span>
+    </h1>
     {{#each sta.departments as |value name|}}
       <label class="property department department-{{name}}">
         <input class="flag" name="system.taskRoll.department" type="radio" value="{{name}}"

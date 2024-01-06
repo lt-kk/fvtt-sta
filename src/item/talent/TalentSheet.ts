@@ -11,8 +11,8 @@ export class TalentSheet extends BaseItemSheet<StaTalent> {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["sta-app", "item-sheet", `${this.type}-sheet`],
-      width: 300,
-      height: 370,
+      width: 250,
+      height: 360,
     });
   }
 
