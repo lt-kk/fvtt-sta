@@ -1,7 +1,7 @@
 <img class="icon" src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
 <div class="name">{{item.name}}</div>
 <div class="controls">
-  <a class="control toggle used" data-toggle="used" title="{{localize "sta.uses"}}">
+  <a class="control toggle used" data-toggle="used" title="{{localize "sta.item.value.used"}}">
     <i class="fas {{ifThen item.used "fa-toggle-on" "fa-toggle-off"}}"></i>
   </a>
   {{> (tplPath "item/_partials/ListItemDefaultActions") item=item type=type }}

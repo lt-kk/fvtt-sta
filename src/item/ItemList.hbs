@@ -4,7 +4,7 @@
     <i class="fas fa-plus"></i>
   </a>
 </h{{onEmpty h 3}}>
-<ol class="list list-{{type}}">
+<ol class="item-list list-{{type}}">
   {{#each list}}
     <li class="item item-{{../type}}" data-item-id="{{id}}" data-item-type="{{../type}}">
       {{> (tplPath (onEmpty ../template "item/GenericListItem")) item=this type=../type actor=../actor }}

@@ -69,12 +69,12 @@ export class ItemTypes {
   };
   refit: ItemTypeConfig = {
     sheet: RefitSheet,
-    listTemplate: "item/GenericListItem",
+    listTemplate: "item/refit/RefitListItem",
     chatTemplate: "item/GenericItemChat",
   };
   starshipweapon: ItemTypeConfig = {
     sheet: StarshipWeaponSheet,
-    listTemplate: "item/GenericListItem",
+    listTemplate: "item/starshipweapon/StarshipWeaponListItem",
     chatTemplate: "item/GenericItemChat",
   };
   talent: ItemTypeConfig = {

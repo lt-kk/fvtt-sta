@@ -19,6 +19,10 @@ export class CharacterSheet extends BaseActorSheet<StaCharacter> {
       classes: ["sta-app", "actor-sheet", "character-sheet"],
       width: 710,
       height: 870,
+      dragDrop: [{
+        dragSelector: '.item-list .item',
+        dropSelector: null
+      }],
     });
   }
 

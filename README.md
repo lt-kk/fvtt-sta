@@ -20,4 +20,4 @@
 * Migrate Compendium
 * Chat templates
 * Rich Text editor
-* Value constraints
+* validations

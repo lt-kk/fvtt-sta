@@ -21,6 +21,8 @@ export class StaStarshipWeapon implements StaItem {
   img: string | null;
   description: string;
   rule: string;
+  opportunity: number;
+  escalation: number;
   damage: number;
   range: StaRange;
   qualities: StaStarshipWeaponQualities;
@@ -32,6 +34,8 @@ export class StaStarshipWeapon implements StaItem {
     {
       description = "",
       rule = "",
+      opportunity = 0,
+      escalation = 0,
       damage = 0,
       range = "near" as StaRange,
       qualities = {},
@@ -42,6 +46,8 @@ export class StaStarshipWeapon implements StaItem {
     this.img = img;
     this.description = description;
     this.rule = rule;
+    this.opportunity = opportunity;
+    this.escalation = escalation;
     this.damage = damage;
     this.range = range;
     this.qualities = new StaStarshipWeaponQualities(qualities);

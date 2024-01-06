@@ -28,7 +28,7 @@ export abstract class BaseActorSheet<STA extends StaActor> extends ActorSheet {
     html.find(".control.roll").on("click", this.handleRoll.bind(this));
     html.find(".control.toggle").on("click", this.handleToggle.bind(this));
     html.find(".control.reset-status").on("click", this.handleResetStatus.bind(this));
-    html.find(".list .item:has(.tooltip-container)").on("click", this.handleTooltip.bind(this));
+    html.find(".item-list .item:has(.tooltip-container)").on("click", this.handleTooltip.bind(this));
   }
 
   handleCreate(event: JQuery.ClickEvent) {

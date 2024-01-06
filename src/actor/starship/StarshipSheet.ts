@@ -18,6 +18,10 @@ export class StarshipSheet extends BaseActorSheet<StaStarship> {
       classes: ["sta-app", "actor-sheet", "starship-sheet"],
       width: 640,
       height: 870,
+      dragDrop: [{
+        dragSelector: '.item-list .item',
+        dropSelector: null
+      }],
     });
   }
 

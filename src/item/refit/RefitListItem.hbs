@@ -1,0 +1,11 @@
+<img class="icon control roll" data-roll="weapon" src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+<div class="name">{{item.name}}</div>
+<div class="system" title="{{localize "sta.system._singular"}}">
+  {{localize (concat "sta.system." item.system)}}
+</div>
+<div class="controls">
+  {{> (tplPath "item/_partials/ListItemDefaultActions") item=item type=type }}
+</div>
+{{#if item.description }}
+  <div class="description tooltip-container hide">{{item.description}}</div>
+{{/if}}
