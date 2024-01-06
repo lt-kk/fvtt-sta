@@ -1,5 +1,5 @@
 import "../styles/fvtt-sta.less";
-import { registerHandlebarHelpers } from "./template/TemplateHelpers";
+import { registerHandlebarHelpers, tplPath } from "./template/TemplateHelpers";
 import { TaskRoll } from "./roll/TaskRoll";
 import { ChallengeRoll } from "./roll/ChallangeRoll";
 import { HasRolls } from "./util/util";
@@ -52,16 +52,19 @@ function registerItemSheets() {
     .forEach(([type, config]) => {
       const c = config as ItemTypeConfig;
       Items.registerSheet(sta.systemName, c.sheet, { types: [type] });
-      templates.add(sta.templateBasePath + c.listTemplate);
-      templates.add(sta.templateBasePath + c.chatTemplate);
+      templates.add(c.listTemplate);
+      templates.add(c.chatTemplate);
     });
-  loadTemplates(Array.from(templates.keys()));
+  console.log("registerItemSheets", templates);
+  loadTemplates(Array.from(templates.keys()).map(tpl => tplPath(tpl)));
 }
 
 function registerTemplates() {
   registerHandlebarHelpers();
   loadTemplates([
-    `${sta.templateBasePath}/item/_partials/ItemHeader.hbs`,
-    `${sta.templateBasePath}/item/_partials/PropertyText.hbs`,
+    tplPath("item/ItemList"),
+    tplPath("item/_partials/ItemHeader.hbs"),
+    tplPath("item/_partials/ListItemDefaultActions.hbs"),
+    tplPath("item/_partials/PropertyText.hbs"),
   ]);
 }

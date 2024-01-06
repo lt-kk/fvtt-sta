@@ -52,7 +52,7 @@
   </section>
 
   <section class="systems edge-right-down reverse">
-    <h1 class="reverse">{{localize "sta.starship.system._plural"}}
+    <h1 class="reverse">{{localize "sta.system._plural"}}
       <a class="control reset-status inner on-border" title="{{localize "sta.resetstatus"}}">
         {{sta.systemsSum}}
       </a>
@@ -75,7 +75,7 @@
                {{#if (eq ../sta.taskRoll.system name)}}checked="checked"{{/if}}>
         <input class="form-control" name="system.systems.{{name}}.value" type="text" value="{{system.value}}"
                data-dtype="Number" tabindex="2" />
-        <span class="label">{{localize (concat "sta.starship.system." name)}}</span>
+        <span class="label">{{localize (concat "sta.system." name)}}</span>
         <span class="breaches breaches-{{name}} flex-last reverse">
           {{#each system.pills}}
             <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">

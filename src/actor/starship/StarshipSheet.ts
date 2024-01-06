@@ -1,6 +1,4 @@
 import { sta } from "../../config";
-import { LooseObject } from "../../util/util";
-import { confirmDialog } from "../../dialog/ConfimDialog";
 import { createStarship, StaStarship } from "./StaStarship";
 import { starshipTaskRoll } from "./StarshipTaskRoll";
 import { challengeRoll } from "../../roll/ChallangeRoll";

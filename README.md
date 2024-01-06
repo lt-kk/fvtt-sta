@@ -10,7 +10,6 @@
 
 
 ## TODO
-* List item templates
 * Token Bars
 * Restrict drag&drop for items
 * Restrict combat target

@@ -1,4 +1,3 @@
-import { createCharacter, StaCharacter } from "./character/StaCharacter";
 import { sta } from "../config";
 import { LooseObject } from "../util/util";
 import { confirmDialog } from "../dialog/ConfimDialog";
@@ -27,7 +26,9 @@ export abstract class BaseActorSheet<STA extends StaActor> extends ActorSheet {
     html.find(".control.edit").on("click", this.handleEdit.bind(this));
     html.find(".control.delete").on("click", this.handleDelete.bind(this));
     html.find(".control.roll").on("click", this.handleRoll.bind(this));
+    html.find(".control.toggle").on("click", this.handleToggle.bind(this));
     html.find(".control.reset-status").on("click", this.handleResetStatus.bind(this));
+    html.find(".list .item:has(.tooltip-container)").on("click", this.handleTooltip.bind(this));
   }
 
   handleCreate(event: JQuery.ClickEvent) {
@@ -87,19 +88,44 @@ export abstract class BaseActorSheet<STA extends StaActor> extends ActorSheet {
   }
 
   abstract rollTask(dicePool: number): Promise<any>
+
   abstract rollChallenge(dicePool: number): Promise<any>
+
   abstract rollWeapon(html: JQuery): Promise<any>
 
-  findItemId(event: JQuery.ClickEvent<any, any, any, any>) {
+
+  handleToggle(event: JQuery.ClickEvent) {
+    event.preventDefault();
+    const element = $(event.currentTarget);
+    const field = element.data("toggle") as string;
+    const itemId = this.findItemId(event);
+    const item = this.actor.items.get(itemId)!;
+
+    this.actor.updateEmbeddedDocuments("Item", [{
+      _id: itemId,
+      system: {
+        [field]: !(item as LooseObject<any>).system[field] as boolean,
+      },
+    }]);
+  }
+
+  handleResetStatus(event: JQuery.ClickEvent) {
+    event.preventDefault();
+    this.sta?.resetStatus();
+  }
+
+  handleTooltip(event: JQuery.ClickEvent) {
+    event.preventDefault();
+    $(event.currentTarget).children(".tooltip-container")
+      .toggleClass("hide");
+  }
+
+
+  findItemId(event: JQuery.ClickEvent) {
     const element = $(event.currentTarget);
     const itemEl = element.closest(".item");
     return itemEl.data("itemId");
   }
-
-  handleResetStatus(event: JQuery.ClickEvent) {
-    this.sta?.resetStatus()
-  }
-
 }
 
 type Data = ActorSheet.Data & LooseObject<any> & {

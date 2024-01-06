@@ -1,0 +1,18 @@
+<img class="icon" src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+<div class="name">{{item.name}}</div>
+<div class="quantity" title="{{localize "sta.quantity"}}">{{item.quantity}}</div>
+{{#if (gt item.uses -1)}}
+  <div class="uses" title="{{localize "sta.uses"}}">
+    x{{item.uses}}
+    <!--    <i class="fas fa-infinity"></i>-->
+  </div>
+{{/if}}
+<div class="controls">
+  <a class="equipped control toggle" data-toggle="equipped" title="{{localize "sta.item.armor.equipped"}}>
+    <i class=" fas {{ifThen item.equipped "fa-toggle-on" "fa-toggle-off"}}"></i>
+  </a>
+  {{> (tplPath "item/_partials/ListItemDefaultActions") item=item type=type }}
+</div>
+{{#if item.description }}
+  <div class="description tooltip-container hide">{{item.description}}</div>
+{{/if}}

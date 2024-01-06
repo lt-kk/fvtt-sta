@@ -92,33 +92,13 @@
     </section>
 
     <section class="injuries border-left">
-      <h3>
-        {{localize "sta.item.injury._plural"}}
-        <a class="control flex-last create" title="{{localize "sta.item.injury.create"}}" data-type="injury">
-          <i class="fas fa-plus"></i>
-        </a>
-      </h3>
-      <ol class="list">
-        {{#each sta.injuries}}
-          <li class="item" data-item-id="{{id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-            <div class="name">{{name}}</div>
-            <div class="controls">
-              <a class="control edit" title="{{localize "sta.item.injury.edit"}}"><i class="fas fa-edit"></i></a>
-              <a class="control delete" title="{{localize "sta.item.injury.delete"}}"><i class="fas fa-trash"></i></a>
-            </div>
-            <div class="description">{{description}}</div>
-          </li>
-        {{/each}}
-        {{^sta.injuries}}
-          <li class="item">{{localize "sta.item.injury.empty"}}</li>
-        {{/sta.injuries}}
-      </ol>
+      {{> (tplPath "item/ItemList") type="injury" template="item/injury/InjuryListItem"
+        list=sta.injuries actor=sta}}
     </section>
   </section>
 
   <section class="attributes edge-right-down reversed">
-    <h1 class="reverse">{{localize "sta.character.attributes._plural"}}
+    <h1 class="reverse">{{localize "sta.attributes._plural"}}
       <span class="inner on-border">{{sta.attributesSum}}</span>
     </h1>
     {{#each sta.attributes as |value name|}}
@@ -127,13 +107,13 @@
                {{#if (eq ../sta.taskRoll.attribute name)}}checked="checked"{{/if}}>
         <input class="form-control" name="system.attributes.{{name}}" type="text" value="{{value}}"
                data-dtype="Number" tabindex="2" />
-        <span class="label">{{localize (concat "sta.character.attributes." name)}}</span>
+        <span class="label">{{localize (concat "sta.attributes." name)}}</span>
       </label>
     {{/each}}
   </section>
 
   <section class="disciplines edge-left-down">
-    <h1>{{localize "sta.character.disciplines._plural"}}
+    <h1>{{localize "sta.disciplines._plural"}}
       <span class="inner on-border">{{sta.disciplinesSum}}</span>
     </h1>
     {{#each sta.disciplines as |value name|}}
@@ -142,137 +122,36 @@
                {{#if (eq ../sta.taskRoll.discipline name)}}checked="checked"{{/if}}>
         <input class="form-control" name="system.disciplines.{{name}}" type="text" value="{{value}}"
                data-dtype="Number" tabindex="3" />
-        <span class="label">{{localize (concat "sta.character.disciplines." name)}}</span>
+        <span class="label">{{localize (concat "sta.disciplines." name)}}</span>
       </label>
     {{/each}}
   </section>
 
   <section class="talents border-left">
-    <h2>
-      {{localize "sta.item.talent._plural"}}
-      <a class="control flex-last create" title="{{localize "sta.item.talent.create"}}" data-type="talent">
-        <i class="fas fa-plus"></i>
-      </a>
-    </h2>
-    <ol class="list">
-      {{#each sta.talents}}
-        <li class="item" data-item-id="{{id}}">
-          <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-          <div class="name">{{name}}</div>
-          <div class="controls">
-            <a class="control edit" title="{{localize "sta.item.talent.edit"}}"><i class="fas fa-edit"></i></a>
-            <a class="control delete" title="{{localize "sta.item.talent.delete"}}"><i class="fas fa-trash"></i></a>
-          </div>
-          <div class="description">{{description}}</div>
-        </li>
-      {{/each}}
-      {{^sta.talents}}
-        <li class="item">{{localize "sta.item.talent.empty"}}</li>
-      {{/sta.talents}}
-    </ol>
+    {{> (tplPath "item/ItemList") type="talent" h=2
+      list=sta.talents actor=sta}}
   </section>
 
   <section class="values border-left">
-    <h2>
-      {{localize "sta.item.value._plural"}}
-      <a class="control flex-last create" title="{{localize "sta.item.value.create"}}" data-type="value">
-        <i class="fas fa-plus"></i>
-      </a>
-    </h2>
-    <ol class="list">
-      {{#sta.values}}
-        <li class="item" data-item-id="{{id}}">
-          <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-          <div class="name">{{name}}</div>
-          <div class="controls">
-            <a class="control edit" title="{{sta.value.edit}}"><i class="fas fa-edit"></i></a>
-            <a class="control delete" title="{{sta.value.delete}}"><i class="fas fa-trash"></i></a>
-          </div>
-          <div class="description">{{description}}</div>
-        </li>
-      {{/sta.values}}
-      {{^sta.values}}
-        <li class="item">{{localize "sta.item.value.empty"}}</li>
-      {{/sta.values}}
-    </ol>
+    {{> (tplPath "item/ItemList") type="value" h=2 template="item/value/ValueListItem"
+      list=sta.values actor=sta}}
   </section>
 
   <section class="focuses border-left">
-    <h2>
-      {{localize "sta.item.focus._plural"}}
-      <a class="control flex-last create" title="{{localize "sta.item.focus.create"}}" data-type="focus">
-        <i class="fas fa-plus"></i>
-      </a>
-    </h2>
-    <ol class="list">
-      {{#sta.focuses}}
-        <li class="item" data-item-id="{{id}}">
-          <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-          <div class="name">{{name}}</div>
-          <div class="controls">
-            <a class="control edit" title="{{localize "sta.item.focus.edit"}}"><i class="fas fa-edit"></i></a>
-            <a class="control delete" title="{{localize "sta.item.focus.delete"}}"><i class="fas fa-trash"></i></a>
-          </div>
-          <div class="description">{{description}}</div>
-        </li>
-      {{/sta.focuses}}
-      {{^sta.focuses}}
-        <li class="item">{{localize "sta.item.focus.empty"}}</li>
-      {{/sta.focuses}}
-    </ol>
+    {{> (tplPath "item/ItemList") type="focus" h=2
+      list=sta.focuses actor=sta}}
   </section>
 
   <section class="progress border-left">
     <h1>{{localize "sta.character.progress"}}</h1>
     <section class="traits border-left">
-      <h2>
-        {{localize "sta.item.trait._plural"}}
-        <a class="control flex-last create" title="{{localize "sta.item.trait.create"}}" data-type="trait">
-          <i class="fas fa-plus"></i>
-        </a>
-      </h2>
-      <ol class="list">
-        {{#sta.traits}}
-          <li class="item" data-item-id="{{id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-            <div class="name">{{name}}</div>
-            <div class="controls">
-              <a class="control edit" title="{{localize "sta.item.trait.edit"}}"><i class="fas fa-edit"></i></a>
-              <a class="control delete" title="{{localize "sta.item.trait.delete"}}"><i class="fas fa-trash"></i></a>
-            </div>
-            <div class="description">{{description}}</div>
-          </li>
-        {{/sta.traits}}
-        {{^sta.traits}}
-          <li class="item">{{localize "sta.item.trait.empty"}}</li>
-        {{/sta.traits}}
-      </ol>
+      {{> (tplPath "item/ItemList") type="trait"
+        list=sta.traits actor=sta}}
     </section>
 
     <section class="milestones border-left">
-      <h2>
-        {{localize "sta.item.milestone._plural"}}
-        <a class="control flex-last create" title="{{localize "sta.item.milestone.create"}}" data-type="milestone">
-          <i class="fas fa-plus"></i>
-        </a>
-      </h2>
-      <ol class="list">
-        {{#sta.milestones}}
-          <li class="item" data-item-id="{{id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-            <div class="name">{{name}}</div>
-            <div class="controls">
-              <a class="control edit" title="{{localize "sta.item.milestone.edit"}}"><i class="fas fa-edit"></i></a>
-              <a class="control delete" title="{{localize "sta.item.milestone.delete"}}"><i
-                class="fas fa-trash"></i></a>
-            </div>
-            <div class="description">{{description}}</div>
-          </li>
-        {{/sta.milestones}}
-        {{^sta.milestones}}
-          <li class="item">{{localize "sta.item.milestone.empty"}}</li>
-        {{/sta.milestones}}
-      </ol>
+      {{> (tplPath "item/ItemList") type="milestone"
+        list=sta.milestones actor=sta}}
     </section>
 
     <section class="notes border-left">
@@ -285,72 +164,16 @@
   <section class="equipment border-left">
     <h1>{{localize "sta.item.thing._plural"}}</h1>
     <section class="weapons border-left">
-      <h2>
-        {{localize "sta.item.characterweapon._plural"}}
-        <a class="control flex-last create" title="{{localize "sta.item.characterweapon.create"}}"
-           data-type="characterweapon">
-          <i class="fas fa-plus"></i>
-        </a>
-      </h2>
-      <ol class="list">
-        {{#sta.weapons}}
-          {{> "systems/fvtt-sta/templates/item/characterweapon/CharacterWeaponListItem.hbs" this character=../sta}}
-        {{/sta.weapons}}
-        {{^sta.weapons}}
-          <li class="item">{{localize "sta.item.characterweapon.empty"}}</li>
-        {{/sta.weapons}}
-      </ol>
+      {{> (tplPath "item/ItemList") type="characterweapon" template="item/characterweapon/CharacterWeaponListItem"
+        list=sta.weapons actor=sta}}
     </section>
     <section class="armor border-left">
-      <h2>
-        {{localize "sta.item.armor._plural"}}
-        <a class="control flex-last create" title="{{localize "sta.item.armor.create"}}" data-type="armor"><i
-          class="fas fa-plus"></i></a>
-      </h2>
-      <ol class="list">
-        {{#sta.armor}}
-          <li class="item" data-item-id="{{id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-            <div class="name">{{name}}</div>
-            <div class="protection">{{protection}}</div>
-            <div class="controls">
-              <a class="control edit" title="{{localize "sta.item.armor.edit"}}"><i class="fas fa-edit"></i></a>
-              <a class="control delete" title="{{localize "sta.item.armor.delete"}}"><i class="fas fa-trash"></i></a>
-            </div>
-            <div class="description">{{description}}</div>
-          </li>
-        {{/sta.armor}}
-        {{^sta.armor}}
-          <li class="item">{{localize "sta.item.armor.empty"}}</li>
-        {{/sta.armor}}
-      </ol>
+      {{> (tplPath "item/ItemList") type="armor" template="item/armor/ArmorListItem"
+        list=sta.armor actor=sta}}
     </section>
     <section class="items border-left">
-      <h2>
-        {{localize "sta.item.thing._plural"}}
-        <a class="control flex-last create" title="{{localize "sta.item.thing.create"}}" data-type="thing">
-          <i class="fas fa-plus"></i>
-        </a>
-      </h2>
-      <ol class="list">
-        {{#sta.things}}
-          <li class="item" data-item-id="{{id}}">
-            <img class="icon" src="{{img}}" title="{{name}}" width="24" height="24" />
-            <div class="name">{{name}}</div>
-            <div class="uses">{{uses}}</div>
-            <div class="controls">
-              <a class="control edit" title="{{localize "sta.item.thing.edit"}}"><i class="fas fa-edit"></i></a>
-              <a class="control delete" title="{{localize "sta.item.thing.delete"}}"><i class="fas fa-trash"></i></a>
-            </div>
-            <div class="description">{{description}}</div>
-          </li>
-        {{/sta.things}}
-        {{^sta.things}}
-          <li class="item">{{localize "sta.item.thing.empty"}}</li>
-        {{/sta.things}}
-      </ol>
+      {{> (tplPath "item/ItemList") type="thing" template="item/thing/ThingListItem"
+        list=sta.things actor=sta}}
     </section>
   </section>
-
-
 </form>

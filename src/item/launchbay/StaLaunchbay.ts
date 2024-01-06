@@ -1,7 +1,6 @@
 import { mapItems } from "../../util/actor";
 import { itemSystem } from "../../util/document";
 import { StaItem } from "../StaItem";
-import { b } from "vitest/dist/reporters-O4LBziQ_";
 
 
 export function createLaunchbay(document: Item): StaLaunchbay {

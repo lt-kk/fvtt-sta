@@ -9,13 +9,27 @@
 
       input {
         width: @sta-h1-size;
+
         &:after {
           background-color: @color-level-error;
         }
+
         &:checked:after {
           background-color: @color-level-success;
         }
       }
+    }
+  }
+}
+
+.list-injury {
+  .healed {
+    .fa-toggle-on {
+      color: @color-level-success;
+    }
+
+    .fa-toggle-off {
+      color: @color-level-error;
     }
   }
 }

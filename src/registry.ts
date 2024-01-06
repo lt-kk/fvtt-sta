@@ -39,63 +39,63 @@ export interface ItemTypeConfig {
 export class ItemTypes {
   armor: ItemTypeConfig = {
     sheet: ArmorSheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/armor/ArmorChat.hbs`,
+    listTemplate: "item/armor/ArmorListItem",
+    chatTemplate: "item/armor/ArmorChat",
   };
   characterweapon: ItemTypeConfig = {
     sheet: CharacterWeaponSheet,
-    listTemplate: `/item/characterweapon/CharacterWeaponListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
+    listTemplate: "item/characterweapon/CharacterWeaponListItem",
+    chatTemplate: "item/GenericItemChat",
   };
   focus: ItemTypeConfig = {
     sheet: FocusSheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
+    listTemplate: "item/GenericListItem",
+    chatTemplate: "item/GenericItemChat",
   };
   injury: ItemTypeConfig = {
     sheet: InjurySheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
+    listTemplate: "item/injury/InjuryListItem",
+    chatTemplate: "item/GenericItemChat",
   };
   launchbay: ItemTypeConfig = {
     sheet: LaunchbaySheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
+    listTemplate: "item/GenericListItem",
+    chatTemplate: "item/GenericItemChat",
   };
   milestone: ItemTypeConfig = {
     sheet: MilestoneSheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
+    listTemplate: "item/GenericListItem",
+    chatTemplate: "item/GenericItemChat",
   };
   refit: ItemTypeConfig = {
     sheet: RefitSheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
+    listTemplate: "item/GenericListItem",
+    chatTemplate: "item/GenericItemChat",
   };
   starshipweapon: ItemTypeConfig = {
     sheet: StarshipWeaponSheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
+    listTemplate: "item/GenericListItem",
+    chatTemplate: "item/GenericItemChat",
   };
   talent: ItemTypeConfig = {
     sheet: TalentSheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
+    listTemplate: "item/GenericListItem",
+    chatTemplate: "item/GenericItemChat",
   };
   thing: ItemTypeConfig = {
     sheet: ThingSheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
+    listTemplate: "item/thing/ThingListItem",
+    chatTemplate: "item/GenericItemChat",
   };
   trait: ItemTypeConfig = {
     sheet: TraitSheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
+    listTemplate: "item/GenericListItem",
+    chatTemplate: "item/GenericItemChat",
   };
   value: ItemTypeConfig = {
     sheet: ValueSheet,
-    listTemplate: `/item/GenericListItem.hbs`,
-    chatTemplate: `/item/GenericItemChat.hbs`,
+    listTemplate: "item/value/ValueListItem",
+    chatTemplate: "item/GenericItemChat",
   };
 }
 

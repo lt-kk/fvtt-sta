@@ -10,26 +10,6 @@
       "reputation": "Ansehen",
       "stress": "Erschöpfung",
       "determination": "Entschlossenheit",
-      "attributes": {
-        "_singular": "Attribut",
-        "_plural": "Attribute",
-        "control": "Konzentration",
-        "daring": "Wagemut",
-        "fitness": "Fitness",
-        "insight": "Gespür",
-        "presence": "Ausstrahlung",
-        "reason": "Verstand"
-      },
-      "disciplines": {
-        "_singular": "Disziplin",
-        "_plural": "Disziplinen",
-        "command": "Kommando",
-        "conn": "Flugkontrolle",
-        "security": "Sicherheit",
-        "engineering": "Technik",
-        "science": "Wissenschaft",
-        "medicine": "Medizin"
-      },
       "progress": "Entwicklung"
     },
     "starship": {
@@ -43,26 +23,6 @@
       "power": "Energie",
       "shields": "Schilde",
       "crew": "Crew",
-      "system": {
-        "_singular": "System",
-        "_plural": "Systeme",
-        "communications": "Kommunikation",
-        "computers": "Computer",
-        "engines": "Antrieb",
-        "sensors": "Sensoren",
-        "structure": "Hülle",
-        "weapons": "Waffen"
-      },
-      "department": {
-        "_singular": "Abteilung",
-        "_plural": "Abteilungen",
-        "command": "Kommando",
-        "conn": "Flugkontrolle",
-        "engineering": "Technik",
-        "medicine": "Medizin",
-        "science": "Wissenschaft",
-        "security": "Sicherheit"
-      },
       "progress": "Erfolgsgeschichte",
       "value": {
         "_singular": "Direktive",
@@ -73,6 +33,46 @@
         "empty": "Keine Direktive"
       }
     },
+    "attributes": {
+      "_singular": "Attribut",
+      "_plural": "Attribute",
+      "control": "Konzentration",
+      "daring": "Wagemut",
+      "fitness": "Fitness",
+      "insight": "Gespür",
+      "presence": "Ausstrahlung",
+      "reason": "Verstand"
+    },
+    "disciplines": {
+      "_singular": "Disziplin",
+      "_plural": "Disziplinen",
+      "command": "Kommando",
+      "conn": "Flugkontrolle",
+      "security": "Sicherheit",
+      "engineering": "Technik",
+      "science": "Wissenschaft",
+      "medicine": "Medizin"
+    },
+    "system": {
+      "_singular": "System",
+      "_plural": "Systeme",
+      "communications": "Kommunikation",
+      "computers": "Computer",
+      "engines": "Antrieb",
+      "sensors": "Sensoren",
+      "structure": "Hülle",
+      "weapons": "Waffen"
+    },
+    "department": {
+      "_singular": "Abteilung",
+      "_plural": "Abteilungen",
+      "command": "Kommando",
+      "conn": "Flugkontrolle",
+      "engineering": "Technik",
+      "medicine": "Medizin",
+      "science": "Wissenschaft",
+      "security": "Sicherheit"
+    },
     "item": {
       "properties": "Eigenschaften",
       "description": "Beschreibung",
@@ -80,6 +80,9 @@
       "escalation": "Eskalation",
       "rule": "Regel",
       "damage": "Schaden",
+      "edit": "bearbeiten",
+      "delete": "löschen",
+      "empty": "leer",
       "armor": {
         "_singular": "Rüstung",
         "_plural": "Rüstungen",
@@ -231,9 +234,6 @@
       "delete.title": "Löschen bestätigen",
       "delete.content": "Möchtest du '{type}': '{name}' wirklich löschen?"
     },
-    "delete": {
-      "title": ""
-    },
     "challenge": {
       "_singular": "Herausforderung",
       "_plural": "Herausforderungen"
@@ -268,6 +268,9 @@
       "near": "Mittel",
       "far": "Weit",
       "extreme": "Extrem"
+    },
+    "damage": {
+      "dice": "Schadenswürfel"
     },
     "owner": "Besitzer",
     "quantity": "Menge",

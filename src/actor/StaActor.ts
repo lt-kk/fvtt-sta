@@ -3,5 +3,5 @@ export interface StaActor {
   name: string;
   img: string | null;
 
-  resetStatus(): void
+  resetStatus(): void;
 }

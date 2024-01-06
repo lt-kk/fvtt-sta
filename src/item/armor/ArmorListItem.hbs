@@ -1,6 +1,10 @@
 <img class="icon" src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
 <div class="name">{{item.name}}</div>
+<div class="resistance" title="{{localize "sta.item.armor.resistance"}}">{{item.resistance}}</div>
 <div class="controls">
+  <a class="equipped control toggle" data-toggle="equipped" title="{{localize "sta.item.armor.equipped"}}">
+    <i class="fas {{ifThen item.equipped "fa-toggle-on" "fa-toggle-off"}}"></i>
+  </a>
   {{> (tplPath "item/_partials/ListItemDefaultActions") item=item type=type }}
 </div>
 {{#if item.description }}

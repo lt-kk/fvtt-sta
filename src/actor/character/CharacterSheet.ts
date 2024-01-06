@@ -1,6 +1,4 @@
 import { sta } from "../../config";
-import { LooseObject } from "../../util/util";
-import { confirmDialog } from "../../dialog/ConfimDialog";
 import { createCharacter, StaCharacter } from "./StaCharacter";
 import { characterTaskRoll } from "./CharacterTaskRoll";
 import { challengeRoll } from "../../roll/ChallangeRoll";
