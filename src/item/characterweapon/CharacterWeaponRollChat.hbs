@@ -27,6 +27,13 @@
         </span>
       {{/if}}
     </h4>
+    <section class="qualities">
+      {{#each staData.source.qualities as |value name|}}
+        {{#if value}}
+          {{name}}: {{value}}
+        {{/if}}
+      {{/each}}
+    </section>
     <div class="actions">
       <button data-action="applyDamage">Damage!</button>
     </div>

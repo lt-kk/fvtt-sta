@@ -8,6 +8,7 @@ import { StaEntity } from "../../model/StaSystemDocument";
 import { StaSystemActor } from "../../actor/StaSystemActor";
 import { StaCharacterWeapon } from "./StaCharacterWeapon";
 import { StaCharacter } from "../../actor/character/StaCharacter";
+import { tplPath } from "../../template/TemplateHelpers";
 
 
 export function weaponRoll(source: StaEntity, dicePool: number) {
@@ -19,7 +20,7 @@ export function weaponRoll(source: StaEntity, dicePool: number) {
 
 
 export class CharacterWeaponRoll extends ChallengeRoll<ChallengeRollData> {
-  chatTemplate = `${sta.templateBasePath}/item/characterweapon/CharacterWeaponRollChat.hbs`;
+  chatTemplate = tplPath("item/characterweapon/CharacterWeaponRollChat.hbs");
 
   handleButton(event: JQuery.ClickEvent, message: ChatMessage) {
     const actor = getActor(message);

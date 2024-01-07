@@ -8,6 +8,7 @@ import { StaSystemActor } from "../../actor/StaSystemActor";
 import { Breach, StaStarship, StaStarshipSystems } from "../../actor/starship/StaStarship";
 import { StaStarshipWeapon } from "./StaStarshipWeapon";
 import { LooseObject, randomIndex } from "../../util/util";
+import { tplPath } from "../../template/TemplateHelpers";
 
 
 export function weaponRoll(source: StaEntity, dicePool: number, targetSystem?: keyof StaStarshipSystems) {
@@ -24,7 +25,7 @@ export type StarshipWeaponRollData = ChallengeRollData & {
 
 
 export class StarshipWeaponRoll extends ChallengeRoll<StarshipWeaponRollData> {
-  chatTemplate = `${sta.templateBasePath}/item/characterweapon/CharacterWeaponRollChat.hbs`;
+  chatTemplate = tplPath("item/characterweapon/CharacterWeaponRollChat.hbs");
 
   handleButton(event: JQuery.ClickEvent, message: ChatMessage) {
     const actor = getActor(message);

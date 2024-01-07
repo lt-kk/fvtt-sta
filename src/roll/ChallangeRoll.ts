@@ -2,6 +2,7 @@ import { LooseObject } from "../util/util";
 import { sta } from "../config";
 import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "./StaRoll";
 import { StaEntity } from "../model/StaSystemDocument";
+import { tplPath } from "../template/TemplateHelpers";
 
 
 export type ChallengeRollData = LooseObject<any> & StaRollData<ChallengeRollResult>
@@ -39,7 +40,7 @@ export class ChallengeRollResult implements StaRollResult<ChallengeRollDice> {
 
 
 export class ChallengeRoll<D extends ChallengeRollData> extends StaRoll<D, ChallengeRollResult> {
-  chatTemplate = `${sta.templateBasePath}/roll/ChallengeRollChat.hbs`;
+  chatTemplate = tplPath("roll/ChallengeRollChat.hbs");
 
   constructor(
     _: string, data: D, options?: Roll["options"],
