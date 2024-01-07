@@ -1,7 +1,5 @@
-export interface StaActor {
-  id: string;
-  name: string;
-  img: string | null;
+import { StaEntity } from "../model/StaSystemDocument";
 
-  resetStatus(): void;
+export abstract class StaActor extends StaEntity {
+  abstract resetStatus(): void;
 }

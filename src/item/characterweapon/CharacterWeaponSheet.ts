@@ -1,13 +1,9 @@
 import { LooseObject, splitObject } from "../../util/util";
-import { createCharacterWeapon, StaCharacterWeapon } from "./StaCharacterWeapon";
+import { StaCharacterWeapon } from "./StaCharacterWeapon";
 import { BaseItemSheet } from "../BaseItemSheet";
 
 export class CharacterWeaponSheet extends BaseItemSheet<StaCharacterWeapon> {
   static type = StaCharacterWeapon.type;
-
-  createSta(item: Item): StaCharacterWeapon {
-    return createCharacterWeapon(item);
-  }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {

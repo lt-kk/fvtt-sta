@@ -2,7 +2,6 @@ export interface LooseObject<V extends any> {
   [key: string]: V;
 }
 
-
 /** foundry-vtt-types is missing this property */
 export interface HasRolls<D extends Object> {
   rolls: Roll<D>[];
@@ -30,4 +29,8 @@ export function sumAttributes<T>(obj: any, accessor: (v: T) => number) {
   return Object.entries(obj)
     .map(([_, value]) => accessor(value as T) as number)
     .reduce((a, b) => a + b);
+}
+
+export function randomIndex(max: number) {
+  return Math.floor(Math.random() * max);
 }

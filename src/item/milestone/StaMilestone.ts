@@ -1,6 +1,7 @@
 import { mapItems } from "../../util/actor";
 import { itemSystem } from "../../util/document";
 import { StaItem } from "../StaItem";
+import { HasRule, StaRule } from "../../model/StaRule";
 
 
 export function createMilestone(document: Item): StaMilestone {
@@ -12,14 +13,10 @@ export function filterMilestone(source: Actor | Collection<Item>) {
 }
 
 
-export class StaMilestone implements StaItem {
+export class StaMilestone extends StaItem implements HasRule {
   static type = "milestone";
 
-  id: string;
-  name: string;
-  img: string | null;
-  description: string;
-  rule: string;
+  rule: StaRule | undefined;
 
   constructor(
     id: string,
@@ -30,10 +27,7 @@ export class StaMilestone implements StaItem {
       rule = "",
     },
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.description = description;
-    this.rule = rule;
+    super(id, name, img, description);
+    this.rule = rule ? new StaRule(`${name}[${id}]`, rule) : undefined;
   }
 }

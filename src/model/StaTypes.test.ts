@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { generatePills } from "./StaTypes";
+import { generatePills } from "./ScalePill";
 
 
 describe.concurrent("generatePills", () => {

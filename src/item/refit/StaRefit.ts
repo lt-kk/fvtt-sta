@@ -14,13 +14,9 @@ export function filterRefit(source: Actor | Collection<Item>) {
 }
 
 
-export class StaRefit implements StaItem {
+export class StaRefit extends StaItem {
   static type = "refit";
 
-  id: string;
-  name: string;
-  img: string | null;
-  description: string;
   system: keyof StaStarshipSystems | null;
 
   constructor(
@@ -32,10 +28,7 @@ export class StaRefit implements StaItem {
       system = null as keyof StaStarshipSystems | null,
     },
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.description = description;
+    super(id, name, img, description);
     this.system = system;
   }
 }

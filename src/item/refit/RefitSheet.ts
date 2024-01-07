@@ -1,14 +1,10 @@
 import { BaseItemSheet } from "../BaseItemSheet";
-import { createRefit, StaRefit } from "./StaRefit";
+import { StaRefit } from "./StaRefit";
 import { LooseObject, propertiesOf } from "../../util/util";
 import { StaStarshipSystems } from "../../actor/starship/StaStarship";
 
 export class RefitSheet extends BaseItemSheet<StaRefit> {
   static type = StaRefit.type;
-
-  createSta(item: Item): StaRefit {
-    return createRefit(item);
-  }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {

@@ -1,4 +1,3 @@
-import { CurrentValue, generatePills, ScalePill } from "../../model/StaTypes";
 import { filterRefit, StaRefit } from "../../item/refit/StaRefit";
 import { filterStarshipWeapon, StaStarshipWeapon } from "../../item/starshipweapon/StaStarshipWeapon";
 import { filterThing, StaThing } from "../../item/thing/StaThing";
@@ -10,6 +9,8 @@ import { actorItems, actorSystem, update } from "../../util/document";
 import { LooseObject, sumAttributes } from "../../util/util";
 import { StaActor } from "../StaActor";
 import { sta } from "../../config";
+import { generatePills } from "../../model/ScalePill";
+import { CurrentValue } from "../../model/CurrentValue";
 
 export function createStarship(document: Actor): StaStarship {
   return new StaStarship(
@@ -21,11 +22,7 @@ export function createStarship(document: Actor): StaStarship {
   );
 }
 
-
-export class StaStarship implements StaActor {
-  id: string;
-  name: string;
-  img: string | null;
+export class StaStarship extends StaActor {
   notes: string;
   designation: string;
   spaceframe: string;
@@ -66,15 +63,19 @@ export class StaStarship implements StaActor {
       systems = {},
       departments = {},
       crew = 1,
-      shields = 1,
-      power = 1,
+      shields = {
+        "value": 8,
+        "max": 8,
+      },
+      power = {
+        "value": 7,
+        "max": 7,
+      },
       taskRoll = {},
     } = {},
     items: Collection<Item>,
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
+    super(id, name, img);
     this.designation = designation;
     this.spaceframe = spaceframe;
     this.servicedate = servicedate;
@@ -85,8 +86,8 @@ export class StaStarship implements StaActor {
     this.systems = new StaStarshipSystems(systems);
     this.departments = new StaStarshipDepartments(departments);
     this.crew = new CurrentValue(crew, this.scale);
-    this.shields = new CurrentValue(shields, this.systems.structure.value + this.departments.security);
-    this.power = new CurrentValue(power, this.systems.engines.value);
+    this.shields = new CurrentValue(shields.value, shields.max);
+    this.power = new CurrentValue(power.value, power.max);
 
     this.launchbay = filterLaunchbay(items);
     this.refits = filterRefit(items);
@@ -97,17 +98,31 @@ export class StaStarship implements StaActor {
     this.weapons = filterStarshipWeapon(items);
 
     this.taskRoll = new StaStarshipTaskRoll(taskRoll);
-
-    this.derivedValues();
   }
 
   derivedValues() {
+    this.shields.max = this.systems.structure.effective + this.departments.security;
+    this.power.max = this.systems.engines.effective;
     this.applyRules();
     this.systemStatus();
+    return {};
   }
 
-  applyRules() {
+  allRules() {
 
+  }
+
+  _rulesApplied = false;
+
+  applyRules() {
+    if (this._rulesApplied) return;
+    this.talents.forEach((i) => i.rule?.run(this));
+    this.things.forEach((i) => i.rule?.run(this));
+    this.weapons.forEach((i) => i.rule?.run(this));
+    this.refits.forEach((i) => {
+      if (i.system) this.systems[i.system].refits++;
+    });
+    this._rulesApplied = true;
   }
 
   systemStatus() {
@@ -132,18 +147,44 @@ export class StaStarship implements StaActor {
     });
     update(actor, {
       crew: this.crew.max,
-      shields: this.shields.max,
-      power: this.power.max,
+      "shields.value": this.shields.max,
+      "power.value": this.power.max,
       systems: systems,
     });
   }
+}
+
+export type Breach = {
+  system: keyof StaStarshipSystems,
+  value: number,
 }
 
 
 export class StaStarshipSystem {
   value: number;
   breaches: number;
-  pills: ScalePill[] = [];
+  refits: number = 0;
+  scale: number = 1;
+
+  get effective() {
+    return this.value + this.refits;
+  }
+
+  get pills() {
+    return generatePills(
+      this.breaches,
+      {
+        begin: this.scale + 1,
+        end: 0,
+        fatal: this.scale + 1,
+        error: this.scale,
+        warn: Math.ceil(this.scale / 2),
+        info: 1,
+        success: 0,
+        moreIsWorse: true,
+      },
+    );
+  };
 
   constructor({
     value = 7,
@@ -154,19 +195,7 @@ export class StaStarshipSystem {
   }
 
   withScale(scale: number) {
-    this.pills = generatePills(
-      this.breaches,
-      {
-        begin: scale + 1,
-        end: 0,
-        fatal: scale + 1,
-        error: scale,
-        warn: Math.ceil(scale / 2),
-        info: 1,
-        success: 0,
-        moreIsWorse: true,
-      },
-    );
+    this.scale = scale;
   }
 }
 

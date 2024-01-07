@@ -1,13 +1,14 @@
 import { LooseObject } from "../util/util";
 import { sta } from "../config";
 import { StaItem } from "./StaItem";
+import { StaSystemItem } from "./StaSystemItem";
 
 export abstract class BaseItemSheet<STA extends StaItem> extends ItemSheet {
-  sta: STA | null = null;
+  get sta(): STA {
+    return (this.item as StaSystemItem).sta as unknown as STA;
+  }
 
   static type: string;
-
-  abstract createSta(item: Item): STA
 
   get template() {
     const clazz = this.constructor.name;
@@ -25,7 +26,6 @@ export abstract class BaseItemSheet<STA extends StaItem> extends ItemSheet {
 
   override getData(options?: Partial<ItemSheet.Options>): Data {
     const data = super.getData(options) as ItemSheet.Data;
-    this.sta = this.createSta(this.item);
     return {
       ...data,
       ...this.additionalData(this.sta, data),

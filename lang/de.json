@@ -117,6 +117,7 @@
         "edit": "Verletzung bearbeiten",
         "delete": "Verletzung löschen",
         "empty": "keine Verletzung",
+        "newBy": "Verletzung von {attacker}",
         "healed": "Geheilt"
       },
       "launchbay": {

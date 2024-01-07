@@ -12,13 +12,8 @@ export function filterFocus(source: Actor | Collection<Item>) {
 }
 
 
-export class StaFocus implements StaItem {
+export class StaFocus extends StaItem {
   static type = "focus";
-
-  id: string;
-  name: string;
-  img: string | null;
-  description: string;
 
   constructor(
     id: string,
@@ -28,9 +23,6 @@ export class StaFocus implements StaItem {
       description = "",
     },
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.description = description;
+    super(id, name, img, description);
   }
 }

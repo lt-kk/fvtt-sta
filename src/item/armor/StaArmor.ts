@@ -1,6 +1,7 @@
 import { itemSystem } from "../../util/document";
 import { mapItems } from "../../util/actor";
 import { StaItem } from "../StaItem";
+import { HasRule, StaRule } from "../../model/StaRule";
 
 
 export function createArmor(document: Item): StaArmor {
@@ -12,14 +13,10 @@ export function filterArmor(source: Actor | Collection<Item>) {
 }
 
 
-export class StaArmor extends StaItem {
+export class StaArmor extends StaItem implements HasRule {
   static type = "armor";
 
-  id: string;
-  name: string;
-  img: string | null;
-  description: string;
-  rule: string;
+  rule: StaRule | undefined;
   opportunity: number;
   escalation: number;
   equipped: boolean;
@@ -31,19 +28,15 @@ export class StaArmor extends StaItem {
     img: string | null,
     {
       description = "",
-      rule = "",
+      rule = undefined,
       equipped = true,
       protection = 1,
       opportunity = 0,
       escalation = 0,
     } = {},
   ) {
-    super();
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.description = description;
-    this.rule = rule;
+    super(id, name, img, description);
+    this.rule = rule ? new StaRule(`${name}[${id}]`, rule) : undefined;
     this.equipped = equipped;
     this.protection = protection;
     this.opportunity = opportunity;

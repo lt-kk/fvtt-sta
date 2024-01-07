@@ -1,6 +1,7 @@
 import { LooseObject } from "../util/util";
 import { sta } from "../config";
 import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "./StaRoll";
+import { StaEntity } from "../model/StaSystemDocument";
 
 
 export type ChallengeRollData = LooseObject<any> & StaRollData<ChallengeRollResult>
@@ -37,17 +38,17 @@ export class ChallengeRollResult implements StaRollResult<ChallengeRollDice> {
 }
 
 
-export class ChallengeRoll extends StaRoll<ChallengeRollData, ChallengeRollResult> {
+export class ChallengeRoll<D extends ChallengeRollData> extends StaRoll<D, ChallengeRollResult> {
   chatTemplate = `${sta.templateBasePath}/roll/ChallengeRollChat.hbs`;
 
   constructor(
-    _: string, data: ChallengeRollData, options?: Roll["options"],
+    _: string, data: D, options?: Roll["options"],
   ) {
     const pool = Math.min(Math.max(data.dicePool, 1), sta.settings.maxD6);
     super(`${pool}d6`, {
       ...data,
       dicePool: pool,
-    } as ChallengeRollData, options);
+    } as D, options);
   }
 
   evaluateSta(data: ChallengeRollData): ChallengeRollResult {
@@ -75,8 +76,9 @@ export class ChallengeRoll extends StaRoll<ChallengeRollData, ChallengeRollResul
 }
 
 
-export function challengeRoll(dicePool: number) {
+export function challengeRoll(source: StaEntity, dicePool: number) {
   return new ChallengeRoll("", {
+    source: source,
     dicePool: dicePool,
   } as ChallengeRollData);
 }

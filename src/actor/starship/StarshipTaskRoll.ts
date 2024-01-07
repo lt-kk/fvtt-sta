@@ -1,5 +1,6 @@
 import { StaStarship, StaStarshipDepartments, StaStarshipSystems } from "./StaStarship";
 import { TaskRoll, TaskRollData } from "../../roll/TaskRoll";
+import { StaEntity } from "../../model/StaSystemDocument";
 
 export type StarshipTaskRollData = TaskRollData & {
   system: keyof StaStarshipSystems;
@@ -12,9 +13,10 @@ export type StarshipTaskRollData = TaskRollData & {
 export function starshipTaskRoll(sta: StaStarship, dicePool: number, {
   complication = 0,
 } = {}) {
-  const systemValue = sta.systems[sta.taskRoll.system].value;
+  const systemValue = sta.systems[sta.taskRoll.system].effective;
   const departmentValue = sta.departments[sta.taskRoll.department];
   return new TaskRoll("", {
+    source: sta as StaEntity,
     dicePool: dicePool,
     target: systemValue + departmentValue,
     double: departmentValue,

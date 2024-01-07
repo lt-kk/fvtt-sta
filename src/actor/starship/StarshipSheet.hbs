@@ -63,7 +63,7 @@
       {{#each sta.shields.pills}}
         <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
           {{value}}
-          <input name="system.shields" type="radio" value="{{value}}" data-dtype="Number"
+          <input name="system.shields.value" type="radio" value="{{value}}" data-dtype="Number"
                  {{#if checked}}checked="checked"{{/if}} />
         </label>
       {{/each}}
@@ -75,6 +75,7 @@
                {{#if (eq ../sta.taskRoll.system name)}}checked="checked"{{/if}}>
         <input class="form-control" name="system.systems.{{name}}.value" type="text" value="{{system.value}}"
                data-dtype="Number" tabindex="2" />
+        <span class="modifier refit" title="{{localize "sta.item.refit._singular"}}">{{system.refits}}</span>
         <span class="label">{{localize (concat "sta.system." name)}}</span>
         <span class="breaches breaches-{{name}} flex-last reverse">
           {{#each system.pills}}
@@ -93,7 +94,7 @@
       {{#each sta.power.pills}}
         <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
           {{value}}
-          <input name="system.power" type="radio" value="{{value}}" data-dtype="Number"
+          <input name="system.power.value" type="radio" value="{{value}}" data-dtype="Number"
                  {{#if checked}}checked="checked"{{/if}} />
         </label>
       {{/each}}

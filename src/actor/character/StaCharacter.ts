@@ -1,4 +1,3 @@
-import { CurrentValue } from "../../model/StaTypes";
 import { filterArmor, StaArmor } from "../../item/armor/StaArmor";
 import { filterFocus, StaFocus } from "../../item/focus/StaFocus";
 import { filterMilestone, StaMilestone } from "../../item/milestone/StaMilestone";
@@ -9,9 +8,10 @@ import { filterTalent, StaTalent } from "../../item/talent/StaTalent";
 import { filterTrait, StaTrait } from "../../item/trait/StaTrait";
 import { filterValue, StaValue } from "../../item/value/StaValue";
 import { actorItems, actorSystem, update } from "../../util/document";
-import { sumAttributes } from "../../util/util";
+import { LooseObject, sumAttributes } from "../../util/util";
 import { StaActor } from "../StaActor";
 import { sta } from "../../config";
+import { CurrentValue } from "../../model/CurrentValue";
 
 
 export function createCharacter(document: Actor): StaCharacter {
@@ -25,10 +25,7 @@ export function createCharacter(document: Actor): StaCharacter {
 }
 
 
-export class StaCharacter implements StaActor {
-  id: string;
-  name: string;
-  img: string | null;
+export class StaCharacter extends StaActor {
   species: string;
   rank: string;
   assignment: string;
@@ -70,15 +67,19 @@ export class StaCharacter implements StaActor {
       attributes = {},
       disciplines = {},
       reputation = 10,
-      determination = -1,
-      stress = -1,
+      determination = {
+        value: 3,
+        max: 3,
+      },
+      stress = {
+        value: 8,
+        max: 8,
+      },
       taskRoll = {},
     } = {},
     items: Collection<Item>,
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
+    super(id, name, img);
     this.rank = rank;
     this.assignment = assignment;
     this.species = species;
@@ -88,8 +89,8 @@ export class StaCharacter implements StaActor {
     this.attributes = new StaCharacterAttributes(attributes);
     this.disciplines = new StaCharacterDisciplines(disciplines);
     this.reputation = new CurrentValue(reputation, 20);
-    this.determination = new CurrentValue(determination, 3);
-    this.stress = new CurrentValue(stress, this.attributes.fitness + this.disciplines.security);
+    this.determination = new CurrentValue(determination.value, determination.max);
+    this.stress = new CurrentValue(stress.value, stress.max);
 
     this.armor = filterArmor(items);
     this.focuses = filterFocus(items);
@@ -104,6 +105,28 @@ export class StaCharacter implements StaActor {
     this.taskRoll = new StaCharacterTaskRoll(taskRoll);
   }
 
+  derivedValues(): LooseObject<any> {
+    this.determination.max = 3;
+    this.stress.max = this.attributes.fitness + this.disciplines.security;
+    this.applyRules();
+    return {
+      "determination.max": this.determination.max,
+      "stress.max": this.stress.max,
+    };
+  }
+
+  _rulesApplied = false;
+
+  applyRules() {
+    if (this._rulesApplied) return;
+    this.armor.forEach((i) => i.rule?.run(this));
+    this.milestones.forEach((i) => i.rule?.run(this));
+    this.talents.forEach((i) => i.rule?.run(this));
+    this.things.forEach((i) => i.rule?.run(this));
+    this.weapons.forEach((i) => i.rule?.run(this));
+    this._rulesApplied = true;
+  }
+
   get attributesSum(): number {
     return sumAttributes(this.attributes, (v) => v as number);
   }
@@ -112,20 +135,32 @@ export class StaCharacter implements StaActor {
     return sumAttributes(this.disciplines, (v) => v as number);
   }
 
+  addInjury(attacker: string) {
+    const actor = sta.game.actors!.get(this.id)!;
+    const itemData = {
+      name: sta.game.i18n.format("sta.item.injury.newBy", { attacker: attacker }),
+      type: "injury",
+      data: {},
+    };
+    actor.createEmbeddedDocuments("Item", [(itemData)]);
+  }
+
   resetStatus() {
     const actor = sta.game.actors!.get(this.id)!;
     update(actor, {
-      stress: this.stress.max,
-      determination: this.determination.max,
+      "stress.value": this.stress.max,
+      "determination.value": this.determination.max,
     });
-    this.injuries.forEach((injury) => {
-      actor.updateEmbeddedDocuments("Item", [{
-        _id: injury.id,
-        system: {
-          healed: true,
-        },
-      }]);
-    });
+    actor.updateEmbeddedDocuments("Item",
+      this.injuries.map((injury) => {
+        return {
+          _id: injury.id,
+          system: {
+            healed: true,
+          },
+        };
+      }),
+    );
   }
 }
 

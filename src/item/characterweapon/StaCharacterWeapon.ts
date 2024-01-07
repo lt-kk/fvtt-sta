@@ -2,6 +2,7 @@ import { StaRange } from "../../model/StaTypes";
 import { mapItems } from "../../util/actor";
 import { itemSystem } from "../../util/document";
 import { StaItem } from "../StaItem";
+import { HasRule, StaRule } from "../../model/StaRule";
 
 
 export function createCharacterWeapon(document: Item): StaCharacterWeapon {
@@ -13,14 +14,10 @@ export function filterCharacterWeapon(source: Actor | Collection<Item>) {
 }
 
 
-export class StaCharacterWeapon implements StaItem {
+export class StaCharacterWeapon extends StaItem implements HasRule {
   static type = "characterweapon";
 
-  id: string;
-  name: string;
-  img: string | null;
-  description: string;
-  rule: string;
+  rule: StaRule | undefined;
   opportunity: number;
   escalation: number;
   damage: number;
@@ -43,10 +40,8 @@ export class StaCharacterWeapon implements StaItem {
       qualities = {},
     },
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.rule = rule;
+    super(id, name, img, description);
+    this.rule = rule ? new StaRule(`${name}[${id}]`, rule) : undefined;
     this.description = description;
     this.opportunity = opportunity;
     this.escalation = escalation;

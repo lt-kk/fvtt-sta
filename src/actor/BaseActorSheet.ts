@@ -2,23 +2,30 @@ import { sta } from "../config";
 import { LooseObject } from "../util/util";
 import { confirmDialog } from "../dialog/ConfimDialog";
 import { StaActor } from "./StaActor";
+import { StaSystemActor } from "./StaSystemActor";
 
 export abstract class BaseActorSheet<STA extends StaActor> extends ActorSheet {
-  sta: STA | null = null;
+
+  get sta(): STA {
+    return (this.actor as StaSystemActor).sta as unknown as STA;
+  }
 
   override getData(options?: Partial<ItemSheet.Options>): Data {
     const data = super.getData(options) as ActorSheet.Data;
-    this.sta = this.createSta(data.actor);
     let sheetData: Data = {
       ...data,
+      ...this.additionalData(this.sta, data),
       settings: sta.settings,
-      sta: this.sta!,
+      sta: (this.actor as StaSystemActor).sta!,
       templatePath: sta.templateBasePath,
     };
+    // console.log(sheetData);
     return sheetData;
   }
 
-  abstract createSta(document: Actor): STA
+  additionalData(sta: STA, data: ActorSheet.Data): LooseObject<any> {
+    return {};
+  }
 
   override activateListeners(html: JQuery) {
     super.activateListeners(html);
@@ -111,7 +118,7 @@ export abstract class BaseActorSheet<STA extends StaActor> extends ActorSheet {
 
   handleResetStatus(event: JQuery.ClickEvent) {
     event.preventDefault();
-    this.sta?.resetStatus();
+    this.sta!.resetStatus();
   }
 
   handleTooltip(event: JQuery.ClickEvent) {

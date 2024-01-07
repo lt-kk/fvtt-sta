@@ -1,13 +1,9 @@
 import { LooseObject, splitObject } from "../../util/util";
 import { BaseItemSheet } from "../BaseItemSheet";
-import { createStarshipWeapon, StaStarshipWeapon } from "./StaStarshipWeapon";
+import { StaStarshipWeapon } from "./StaStarshipWeapon";
 
 export class StarshipWeaponSheet extends BaseItemSheet<StaStarshipWeapon> {
   static type = StaStarshipWeapon.type;
-
-  createSta(item: Item): StaStarshipWeapon {
-    return createStarshipWeapon(item);
-  }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {

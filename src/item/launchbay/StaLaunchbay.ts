@@ -12,13 +12,9 @@ export function filterLaunchbay(source: Actor | Collection<Item>) {
 }
 
 
-export class StaLaunchbay implements StaItem {
+export class StaLaunchbay extends StaItem {
   static type = "launchbay";
 
-  id: string;
-  name: string;
-  img: string | null;
-  description: string;
   type: string;
   landed: boolean;
 
@@ -32,10 +28,7 @@ export class StaLaunchbay implements StaItem {
       landed = true,
     },
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.description = description;
+    super(id, name, img, description);
     this.type = type;
     this.landed = landed;
   }

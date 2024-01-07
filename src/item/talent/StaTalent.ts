@@ -1,6 +1,7 @@
 import { mapItems } from "../../util/actor";
 import { itemSystem } from "../../util/document";
 import { StaItem } from "../StaItem";
+import { HasRule, StaRule } from "../../model/StaRule";
 
 
 export function createTalent(document: Item): StaTalent {
@@ -12,14 +13,10 @@ export function filterTalent(source: Actor | Collection<Item>) {
 }
 
 
-export class StaTalent implements StaItem {
+export class StaTalent extends StaItem implements HasRule {
   static type = "talent";
 
-  id: string;
-  name: string;
-  img: string | null;
-  description: string;
-  rule: string;
+  rule: StaRule | undefined;
   type: string;
 
   constructor(
@@ -32,11 +29,8 @@ export class StaTalent implements StaItem {
       type = "",
     },
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.description = description;
-    this.rule = rule;
+    super(id, name, img, description);
+    this.rule = rule ? new StaRule(`${name}[${id}]`, rule) : undefined;
     this.type = type;
   }
 }

@@ -1,6 +1,7 @@
 import { mapItems } from "../../util/actor";
 import { itemSystem } from "../../util/document";
 import { StaItem } from "../StaItem";
+import { HasRule, StaRule } from "../../model/StaRule";
 
 
 export function createThing(document: Item): StaThing {
@@ -12,14 +13,10 @@ export function filterThing(source: Actor | Collection<Item>) {
 }
 
 
-export class StaThing implements StaItem {
+export class StaThing extends StaItem implements HasRule {
   static type = "thing";
 
-  id: string;
-  name: string;
-  img: string | null;
-  description: string;
-  rule: string;
+  rule: StaRule | undefined;
   opportunity: number;
   escalation: number;
   equipped: boolean;
@@ -40,11 +37,8 @@ export class StaThing implements StaItem {
       uses = -1,
     },
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.description = description;
-    this.rule = rule;
+    super(id, name, img, description);
+    this.rule = rule ? new StaRule(`${name}[${id}]`, rule) : undefined;
     this.quantity = quantity;
     this.uses = uses;
     this.equipped = equipped;

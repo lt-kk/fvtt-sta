@@ -71,7 +71,7 @@
         {{#each sta.determination.pills}}
           <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
             {{value}}
-            <input name="system.determination" type="radio" value="{{value}}" data-dtype="Number"
+            <input name="system.determination.value" type="radio" value="{{value}}" data-dtype="Number"
                    {{#if checked}}checked="checked"{{/if}} />
           </label>
         {{/each}}
@@ -84,7 +84,7 @@
         {{#each sta.stress.pills}}
           <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
             {{value}}
-            <input name="system.stress" type="radio" value="{{value}}" data-dtype="Number"
+            <input name="system.stress.value" type="radio" value="{{value}}" data-dtype="Number"
                    {{#if checked}}checked="checked"{{/if}} />
           </label>
         {{/each}}

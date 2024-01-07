@@ -1,11 +1,12 @@
 import { sta } from "../../config";
-import { createCharacter, StaCharacter } from "./StaCharacter";
+import { StaCharacter } from "./StaCharacter";
 import { characterTaskRoll } from "./CharacterTaskRoll";
 import { challengeRoll } from "../../roll/ChallangeRoll";
 import { weaponRoll } from "../../item/characterweapon/CharacterWeaponRoll";
 import { itemSystem } from "../../util/document";
 
 import { BaseActorSheet } from "../BaseActorSheet";
+import { StaSystemItem } from "../../item/StaSystemItem";
 
 export class CharacterSheet extends BaseActorSheet<StaCharacter> {
   static templatePath = `${sta.templateBasePath}/actor/character/CharacterSheet.hbs`;
@@ -20,14 +21,10 @@ export class CharacterSheet extends BaseActorSheet<StaCharacter> {
       width: 710,
       height: 870,
       dragDrop: [{
-        dragSelector: '.item-list .item',
-        dropSelector: null
+        dragSelector: ".item-list .item",
+        dropSelector: null,
       }],
     });
-  }
-
-  createSta(document: Actor): StaCharacter {
-    return createCharacter(document);
   }
 
 
@@ -39,7 +36,7 @@ export class CharacterSheet extends BaseActorSheet<StaCharacter> {
   }
 
   async rollChallenge(dicePool: number) {
-    const roll = challengeRoll(dicePool);
+    const roll = challengeRoll(this.sta, dicePool);
     return roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });
@@ -48,10 +45,10 @@ export class CharacterSheet extends BaseActorSheet<StaCharacter> {
 
   async rollWeapon(html: JQuery) {
     const itemId = html.closest(".item").data("itemId");
-    const item = this.actor.items.get(itemId)!;
+    const item = this.actor.items.get(itemId)! as StaSystemItem;
     const damage = Math.abs(itemSystem(item).damage);
     const security = Math.abs(this.sta?.disciplines.security!);
-    const roll = weaponRoll(damage + security);
+    const roll = weaponRoll(item.sta!, damage + security);
     return roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });

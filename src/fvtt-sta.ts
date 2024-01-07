@@ -7,14 +7,23 @@ import { CharacterWeaponRoll } from "./item/characterweapon/CharacterWeaponRoll"
 import { HasActivateListeners } from "./util/message";
 import { ActorTypeConfig, actorTypes, ItemTypeConfig, itemTypes } from "./registry";
 import { sta } from "./config";
+import { StaSystemActor } from "./actor/StaSystemActor";
+import { StaSystemItem } from "./item/StaSystemItem";
+import { StarshipWeaponRoll } from "./item/starshipweapon/StarshipWeaponRoll";
 
 Hooks.once("init", () => {
   console.log(sta.systemName + " | Initializing system...");
   sta.game = game as Game;
 
-  // CONFIG.Actor.documentClass = StaActor;
-  // CONFIG.Item.documentClass = StaItem;
-  CONFIG.Dice.rolls = [Roll, ChallengeRoll, TaskRoll, CharacterWeaponRoll];
+  CONFIG.Actor.documentClass = StaSystemActor;
+  CONFIG.Item.documentClass = StaSystemItem;
+  CONFIG.Dice.rolls = [
+    Roll,
+    ChallengeRoll,
+    TaskRoll,
+    CharacterWeaponRoll,
+    StarshipWeaponRoll,
+  ];
 
   registerTemplates();
   registerActorSheets();
@@ -55,7 +64,6 @@ function registerItemSheets() {
       templates.add(c.listTemplate);
       templates.add(c.chatTemplate);
     });
-  console.log("registerItemSheets", templates);
   loadTemplates(Array.from(templates.keys()).map(tpl => tplPath(tpl)));
 }
 
@@ -66,5 +74,6 @@ function registerTemplates() {
     tplPath("item/_partials/ItemHeader.hbs"),
     tplPath("item/_partials/ListItemDefaultActions.hbs"),
     tplPath("item/_partials/PropertyText.hbs"),
+    tplPath("item/_partials/Rule.hbs"),
   ]);
 }

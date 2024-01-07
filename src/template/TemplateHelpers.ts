@@ -6,6 +6,7 @@ export function registerHandlebarHelpers() {
     range: range,
     onEmpty: onEmpty,
     tplPath: tplPath,
+    isGM: isGM,
   });
 }
 
@@ -28,4 +29,8 @@ export function tplPath(staPath: string, content?: HelperOptions) {
   if (staPath.startsWith("/")) staPath = staPath.substring(1);
   if (staPath.endsWith(".hbs")) staPath = staPath.substring(0, staPath.length - 4);
   return `${sta.templateBasePath}/${staPath}.hbs`;
+}
+
+function isGM(content: HelperOptions): number {
+  return sta.game.user?.isGM ? 1 : 0;
 }

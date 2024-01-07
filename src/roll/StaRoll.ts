@@ -4,10 +4,12 @@ import {
   ChatMessageDataConstructorData,
 } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
 import { HasActivateListeners } from "../util/message";
+import { StaEntity } from "../model/StaSystemDocument";
 
 export interface StaRollData<R extends StaRollResult<StaRollDice>> {
   dicePool: number;
   result: R | null;
+  source: StaEntity | undefined;
 }
 
 export interface StaRollDice {
@@ -55,6 +57,7 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
       total: isPrivate ? "?" : Math.round((this.total || 0) * 100) / 100,
       staData: this.data,
     };
+    console.log(chatData);
     return renderTemplate(template, chatData);
   }
 

@@ -12,13 +12,9 @@ export function filterValue(source: Actor | Collection<Item>) {
 }
 
 
-export class StaValue implements StaItem {
+export class StaValue extends StaItem {
   static type = "value";
 
-  id: string;
-  name: string;
-  img: string | null;
-  description: string;
   used: boolean;
 
   constructor(
@@ -30,10 +26,7 @@ export class StaValue implements StaItem {
       used = false,
     },
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.description = description;
+    super(id, name, img, description);
     this.used = used;
   }
 }

@@ -1,10 +1,11 @@
 import { sta } from "../../config";
-import { createStarship, StaStarship } from "./StaStarship";
+import { StaStarship } from "./StaStarship";
 import { starshipTaskRoll } from "./StarshipTaskRoll";
 import { challengeRoll } from "../../roll/ChallangeRoll";
 import { BaseActorSheet } from "../BaseActorSheet";
 import { itemSystem } from "../../util/document";
-import { weaponRoll } from "../../item/characterweapon/CharacterWeaponRoll";
+import { StaSystemItem } from "../../item/StaSystemItem";
+import { weaponRoll } from "../../item/starshipweapon/StarshipWeaponRoll";
 
 export class StarshipSheet extends BaseActorSheet<StaStarship> {
   static templatePath = `${sta.templateBasePath}/actor/starship/StarshipSheet.hbs`;
@@ -19,14 +20,10 @@ export class StarshipSheet extends BaseActorSheet<StaStarship> {
       width: 640,
       height: 870,
       dragDrop: [{
-        dragSelector: '.item-list .item',
-        dropSelector: null
+        dragSelector: ".item-list .item",
+        dropSelector: null,
       }],
     });
-  }
-
-  createSta(document: Actor): StaStarship {
-    return createStarship(document);
   }
 
   async rollTask(dicePool: number) {
@@ -37,7 +34,7 @@ export class StarshipSheet extends BaseActorSheet<StaStarship> {
   }
 
   async rollChallenge(dicePool: number) {
-    const roll = challengeRoll(dicePool);
+    const roll = challengeRoll(this.sta, dicePool);
     return roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });
@@ -45,11 +42,11 @@ export class StarshipSheet extends BaseActorSheet<StaStarship> {
 
   async rollWeapon(html: JQuery) {
     const itemId = html.closest(".item").data("itemId");
-    const item = this.actor.items.get(itemId)!;
+    const item = this.actor.items.get(itemId)! as StaSystemItem;
     const damage = Math.abs(itemSystem(item).damage);
-    const weapons = Math.abs(this.sta?.systems.weapons.value!);
+    const scale = this.sta?.scale;
     const security = Math.abs(this.sta?.departments.security!);
-    const roll = weaponRoll(damage + weapons + security);
+    const roll = weaponRoll(item.sta!, damage + scale + security);
     return roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });

@@ -1,12 +1,8 @@
-import { createThing, StaThing } from "./StaThing";
+import { StaThing } from "./StaThing";
 import { BaseItemSheet } from "../BaseItemSheet";
 
 export class ThingSheet extends BaseItemSheet<StaThing> {
   static type = StaThing.type;
-
-  createSta(item: Item): StaThing {
-    return createThing(item);
-  }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {

@@ -1,4 +1,5 @@
 .sta-app {
+  box-shadow: 0 0 5px @color-border-highlight;
 
   .reverse {
     flex-direction: row-reverse;
@@ -26,6 +27,7 @@
   textarea {
     color: @almost-white;
     border: 1px solid var(--color-border-light-tertiary);
+    font-size: @text-tiny-size;
   }
 
 
@@ -121,5 +123,9 @@
         color: @sta-color-action-fg;
       }
     }
+  }
+
+  .property.rule {
+    width: 100%;
   }
 }

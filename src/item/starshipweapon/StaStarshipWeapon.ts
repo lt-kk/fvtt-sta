@@ -2,6 +2,7 @@ import { StaRange } from "../../model/StaTypes";
 import { mapItems } from "../../util/actor";
 import { itemSystem } from "../../util/document";
 import { StaItem } from "../StaItem";
+import { HasRule, StaRule } from "../../model/StaRule";
 
 
 export function createStarshipWeapon(document: Item): StaStarshipWeapon {
@@ -13,14 +14,10 @@ export function filterStarshipWeapon(source: Actor | Collection<Item>) {
 }
 
 
-export class StaStarshipWeapon implements StaItem {
+export class StaStarshipWeapon extends StaItem implements HasRule {
   static type = "starshipweapon";
 
-  id: string;
-  name: string;
-  img: string | null;
-  description: string;
-  rule: string;
+  rule: StaRule | undefined;
   opportunity: number;
   escalation: number;
   damage: number;
@@ -41,11 +38,8 @@ export class StaStarshipWeapon implements StaItem {
       qualities = {},
     },
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.description = description;
-    this.rule = rule;
+    super(id, name, img, description);
+    this.rule = rule ? new StaRule(`${name}[${id}]`, rule) : undefined;
     this.opportunity = opportunity;
     this.escalation = escalation;
     this.damage = damage;

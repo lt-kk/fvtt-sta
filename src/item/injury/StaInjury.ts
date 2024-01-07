@@ -12,13 +12,9 @@ export function filterInjury(source: Actor | Collection<Item>) {
 }
 
 
-export class StaInjury implements StaItem {
+export class StaInjury extends StaItem {
   static type = "injury";
 
-  id: string;
-  name: string;
-  img: string | null;
-  description: string;
   healed: boolean;
 
   constructor(
@@ -30,10 +26,7 @@ export class StaInjury implements StaItem {
       healed = false,
     },
   ) {
-    this.id = id;
-    this.name = name;
-    this.img = img;
-    this.description = description;
+    super(id, name, img, description);
     this.healed = healed;
   }
 }

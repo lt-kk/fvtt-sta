@@ -28,8 +28,14 @@
         "medicine": 1
       },
       "reputation": 10,
-      "determination": -1,
-      "stress": -1
+      "determination": {
+        "value": 3,
+        "max": 3
+      },
+      "stress": {
+        "value": 8,
+        "max": 8
+      }
     },
     "starship": {
       "designation": "",
@@ -73,8 +79,14 @@
         "science": 1,
         "medicine": 1
       },
-      "shields": -1,
-      "power": -1,
+      "shields": {
+        "value": 8,
+        "max": 8
+      },
+      "power": {
+        "value": 8,
+        "max": 8
+      },
       "crew": -1
     }
   },
