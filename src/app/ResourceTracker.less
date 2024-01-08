@@ -1,0 +1,47 @@
+.sta-app.resource-tracker {
+  position: absolute;
+  bottom: 66px;
+  left: 220px;
+  background-color: @trans-black;
+  box-shadow: none;
+  z-index: var(--z-index-ui);
+
+  section {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+
+  .tracker h2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    border: none;
+    > * {
+      text-align: center;
+      width: 30px;
+    }
+  }
+
+  .tracker-momentum h2 {
+    .lcars-bar(@color-level-info, @color-level-info, @sta-h2-size);
+    > * {
+      .lcars-bar-inner(@color-level-info)
+    }
+    &:after {
+      display: none;
+    }
+  }
+
+  .tracker-threat h2 {
+    .lcars-bar(@color-level-error, @color-level-error, @sta-h2-size);
+    > * {
+      .lcars-bar-inner(@color-level-error)
+    }
+    &:after {
+      display: none;
+    }
+  }
+}
+

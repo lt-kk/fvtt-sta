@@ -276,6 +276,10 @@
     "owner": "Besitzer",
     "quantity": "Menge",
     "uses": "Nutzungen",
-    "type": "Typ"
+    "type": "Typ",
+    "tracker": {
+      "momentum": "Momentum",
+      "threat": "Bedrohung"
+    }
   }
 }

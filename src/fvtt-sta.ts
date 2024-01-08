@@ -10,6 +10,8 @@ import { sta } from "./config";
 import { StaSystemActor } from "./actor/StaSystemActor";
 import { StaSystemItem } from "./item/StaSystemItem";
 import { StarshipWeaponRoll } from "./item/starshipweapon/StarshipWeaponRoll";
+import {ResourceTracker} from "./app/ResourceTracker";
+import {ResourceTrackerApplication} from "./app/ResourceTrackerApplication";
 
 Hooks.once("init", () => {
   console.log(sta.systemName + " | Initializing system...");
@@ -28,6 +30,7 @@ Hooks.once("init", () => {
   registerTemplates();
   registerActorSheets();
   registerItemSheets();
+  registerSettings();
 });
 
 Hooks.on("renderChatMessage", (message, html) => {
@@ -41,6 +44,9 @@ Hooks.on("renderChatMessage", (message, html) => {
 });
 
 Hooks.on("ready", () => {
+  let resourceTracker = new ResourceTrackerApplication();
+  resourceTracker.render(true);
+  sta.resourceTracker = resourceTracker;
   console.log(sta.systemName + " | Initialization complete!");
 });
 
@@ -70,10 +76,28 @@ function registerItemSheets() {
 function registerTemplates() {
   registerHandlebarHelpers();
   loadTemplates([
-    tplPath("item/ItemList"),
+    tplPath("app/ResourceTracker.hbs"),
+    tplPath("item/ItemList.hbs"),
     tplPath("item/_partials/ItemHeader.hbs"),
     tplPath("item/_partials/ListItemDefaultActions.hbs"),
     tplPath("item/_partials/PropertyText.hbs"),
     tplPath("item/_partials/Rule.hbs"),
   ]);
+}
+
+
+function registerSettings() {
+  sta.game.settings.register('sta', 'threat', {
+    scope: 'world',
+    type: Number,
+    default: 0,
+    config: false
+  });
+
+  sta.game.settings.register('sta', 'momentum', {
+    scope: 'world',
+    type: Number,
+    default: 0,
+    config: false
+  });
 }

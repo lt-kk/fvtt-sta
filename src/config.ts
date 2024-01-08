@@ -1,4 +1,5 @@
-import { StaRanges } from "./model/StaTypes";
+import {StaRanges} from "./model/StaTypes";
+import {ResourceTracker} from "./app/ResourceTracker";
 
 const systemName = "fvtt-sta";
 
@@ -7,6 +8,7 @@ export const sta = {
   game: game as Game,
   systemName: systemName,
   templateBasePath: `systems/${systemName}/templates`,
+  resourceTracker: undefined as ResourceTracker | undefined,
   settings: {
     maxD20: 5, // not used in sheets
     maxD6: 9,

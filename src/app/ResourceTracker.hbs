@@ -1,0 +1,16 @@
+<div class="sta-app resource-tracker">
+  {{#each resources as |value resource|}}
+    <section class="tracker tracker-{{resource}}">
+      <h2>
+        {{localize (concat 'sta.tracker.' resource)}}
+        <a class="control adjust" data-resource="{{resource}}" data-delta="-1">
+          <i class="fas fa-minus"></i>
+        </a>
+        <input type="text" class="form-control" value="{{value}}" data-dtype="Number" />
+        <a class="control adjust" data-resource="{{resource}}" data-delta="1">
+          <i class="fas fa-plus"></i>
+        </a>
+      </h2>
+    </section>
+  {{/each}}
+</div>

@@ -91,12 +91,10 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
 
 
   activateListeners(html: JQuery, message: ChatMessage) {
-    html.find("button").on("click", (event) => {
-      event.preventDefault();
-      this.handleButton(event, message);
-    });
+    html.find("button").on("click", ((event: JQuery.ClickEvent) => this.handleButton(event, message)));
   }
 
   handleButton(event: JQuery.ClickEvent, message: ChatMessage) {
+    event.preventDefault();
   }
 }
