@@ -1,7 +1,7 @@
 import {tplPath} from "../template/TemplateHelpers";
 import {sta} from "../config";
-import {Resource, RESOURCE_TRACKER_SOCKET, Resources, ResourceTracker,} from "./ResourceTracker";
-import {LooseObject} from "../util/util";
+import {Resource, Resources, ResourceTracker, SocketMessage, STA_SOCKET,} from "./ResourceTracker";
+import {constrainNumber, LooseObject} from "../util/util";
 
 export class ResourceTrackerApplication extends Application implements ResourceTracker {
 
@@ -16,50 +16,94 @@ export class ResourceTrackerApplication extends Application implements ResourceT
   override getData(options?: Partial<ItemSheet.Options>): LooseObject<any> {
     const data = super.getData(options) as ActorSheet.Data;
     const resources: LooseObject<any> = {}
-    Resources.forEach((r) => resources[r] = this.value(r))
-    let sheetData = {
+    Resources.forEach((r) => resources[r] = {
+      value: this.value(r),
+      plus: this.mayChange(r, 1) != "denied",
+      minus: this.mayChange(r, -1) != "denied",
+    });
+    return {
       ...data,
       settings: sta.settings,
       resources: resources,
     };
-    // console.log(sheetData);
-    return sheetData;
   }
 
   value(resource: Resource) {
     return sta.game.settings.get("sta", resource) as number
   }
 
-  changeResource(resource: Resource, value: number, send: boolean) {
-    sta.game.settings.set('sta', resource, value);
-    this.updateView();
-    if (send) this.send(new UpdateMessage(resource));
+  changeResource(resource: Resource, delta: number, userName: string) {
+    const changeable = this.mayChange(resource, delta)
+    switch (changeable) {
+      case "permitted":
+        this.changeResourcePermitted(resource, delta);
+        break;
+      case "delegated":
+        if (userName == sta.game.user?.name!) {
+          this.send(new AdjustResourceMessage(resource, this.value(resource), delta, sta.game.user?.name!));
+        }
+        break;
+      default:
+        ui.notifications?.error(`You may not change ${resource}`)
+    }
+  }
+
+  private changeResourcePermitted(resource: string, delta: number) {
+    let newValue = constrainNumber(this.value(resource) + delta, 0, this.maxValue(resource));
+    sta.game.settings.set('sta', resource, newValue).then(() => {
+      this.updateView();
+      this.send(new ResourceChangedMessage(resource));
+    })
+  }
+
+  maxValue(resource: Resource): number {
+    switch (resource) {
+      case "momentum":
+        return sta.settings.maxMomentum;
+      case "threat":
+        return sta.settings.maxThreat;
+    }
+    return 99;
+  }
+
+  mayChange(resource: Resource, delta: number): Changeable {
+    if (sta.game.user?.isGM) return "permitted"
+    switch (resource) {
+      case "momentum":
+        return delta < 0 ? "delegated" : "denied"
+      case "threat":
+        return delta > 0 ? "delegated" : "denied"
+    }
+    return "denied"
   }
 
   private updateView() {
     Resources.forEach((resource) => {
       const value = this.value(resource)
-      $(document).find(`.property.${resource} .form-control`).val(value)
+      const trackerEl = $(document).find(".resource-tracker").first();
+      const element = trackerEl.find(`.tracker-${resource} .form-control`)
+      element.val(value)
     })
   }
-
 
   activateListeners(html: JQuery) {
     super.activateListeners(html);
     html.find(".control.adjust").on("click", this.handleAdjust.bind(this))
-    // html.find(".control .form-control").on("change", this.handleChange.bind(this))
-    sta.game.socket!.on(RESOURCE_TRACKER_SOCKET, this.receive.bind(this));
+    sta.game.socket!.on(STA_SOCKET, this.receive.bind(this)); // TODO more general place
   }
 
-  private send(msg: Message) {
-    sta.game.socket!.emit(RESOURCE_TRACKER_SOCKET, msg);
+  private send(msg: ResourceTrackerMessage) {
+    sta.game.socket!.emit(STA_SOCKET, msg);
   }
 
-  private receive(msg: Message) {
-    if (msg.type == UpdateMessage.constructor.name) {
+  receive(msg: ResourceTrackerMessage) {
+    if (msg.type == ResourceChangedMessage.name) {
       this.updateView();
-    } else if (msg.type == SetMessage.constructor.name) {
-      this.changeResource(msg.resource, (msg as SetMessage).value, false);
+    } else if (msg.type == AdjustResourceMessage.name) {
+      let adjustMessage = msg as AdjustResourceMessage;
+      if (adjustMessage.old == this.value(adjustMessage.resource)) {
+        this.changeResource(msg.resource, adjustMessage.delta, adjustMessage.userName);
+      }
     }
   }
 
@@ -67,26 +111,23 @@ export class ResourceTrackerApplication extends Application implements ResourceT
     event.preventDefault();
     let element = $(event.currentTarget);
     const resource = element.data("resource") as Resource
-    const delta = parseInt(element.data("delta"))
-    this.changeResource(resource, this.value(resource) + delta, true);
-  }
-
-  private handleChange(event: JQuery.ClickEvent) {
-    event.preventDefault();
-    let element = $(event.currentTarget);
-    const resource = element.data("resource") as Resource
-    const value = element.val()
-    this.changeResource(resource, value, true);
+    let delta = parseInt(element.data("delta"))
+    if (event.ctrlKey && sta.game.user?.isGM) {
+      if (delta < 0) delta = -this.value(resource)
+      if (delta > 0) delta = this.maxValue(resource)
+    }
+    this.changeResource(resource, delta, sta.game.user?.name!);
   }
 }
 
 
-interface Message {
-  type: string;
+type Changeable = "denied" | "permitted" | "delegated";
+
+interface ResourceTrackerMessage extends SocketMessage {
   resource: Resource;
 }
 
-class UpdateMessage implements Message {
+class ResourceChangedMessage implements ResourceTrackerMessage {
   type = this.constructor.name;
   resource: Resource;
 
@@ -95,13 +136,17 @@ class UpdateMessage implements Message {
   }
 }
 
-class SetMessage implements Message {
+class AdjustResourceMessage implements ResourceTrackerMessage {
   type = this.constructor.name;
   resource: Resource;
-  value: number;
+  old: number;
+  delta: number;
+  userName: string;
 
-  constructor(resource: Resource, value: number) {
+  constructor(resource: Resource, old: number, delta: number, userName: string) {
     this.resource = resource;
-    this.value = value;
+    this.old = old;
+    this.delta = delta;
+    this.userName = userName;
   }
 }

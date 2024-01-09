@@ -1,3 +1,5 @@
+import {valHooks} from "jquery";
+
 export interface LooseObject<V extends any> {
   [key: string]: V;
 }
@@ -33,4 +35,8 @@ export function sumAttributes<T>(obj: any, accessor: (v: T) => number) {
 
 export function randomIndex(max: number) {
   return Math.floor(Math.random() * max);
+}
+
+export function constrainNumber(value: number, min: number, max: number): number {
+  return Math.max(min, Math.min(max, value));
 }

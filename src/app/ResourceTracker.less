@@ -2,7 +2,6 @@
   position: absolute;
   bottom: 66px;
   left: 220px;
-  background-color: @trans-black;
   box-shadow: none;
   z-index: var(--z-index-ui);
 
@@ -11,7 +10,8 @@
     margin-bottom: 0;
   }
 
-  .tracker h2 {
+  .tracker h3 {
+    background-color: @trans-black;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -20,28 +20,29 @@
     border: none;
     > * {
       text-align: center;
-      width: 30px;
+      aspect-ratio: 1;
     }
-  }
 
-  .tracker-momentum h2 {
-    .lcars-bar(@color-level-info, @color-level-info, @sta-h2-size);
-    > * {
-      .lcars-bar-inner(@color-level-info)
+    .adjust:not(.control) {
+      color: transparent;
+      cursor: unset;
     }
     &:after {
       display: none;
     }
   }
 
-  .tracker-threat h2 {
-    .lcars-bar(@color-level-error, @color-level-error, @sta-h2-size);
-    > * {
-      .lcars-bar-inner(@color-level-error)
+  .tracker-momentum h3 {
+    .lcars-bar(@color-level-info, @color-level-info, @sta-h3-size);
+    > a {
+      .lcars-bar-inner(fadeout(@color-level-info, 40%))
     }
-    &:after {
-      display: none;
+  }
+
+  .tracker-threat h3 {
+    .lcars-bar(@color-level-error, @color-level-error, @sta-h3-size);
+    > a {
+      .lcars-bar-inner(fadeout(@color-level-error, 40%))
     }
   }
 }
-

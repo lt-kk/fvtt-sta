@@ -11,6 +11,7 @@
     "minimum": "10",
     "verified": "11"
   },
+  "socket": true,
   "esmodules": [
     "fvtt-sta.js"
   ],

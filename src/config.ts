@@ -31,5 +31,7 @@ export const sta = {
       },
     },
     ranges: StaRanges,
+    maxMomentum: 6,
+    maxThreat: 99,
   },
 };
