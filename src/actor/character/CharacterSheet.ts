@@ -7,6 +7,7 @@ import { itemSystem } from "../../util/document";
 
 import { BaseActorSheet } from "../BaseActorSheet";
 import { StaSystemItem } from "../../item/StaSystemItem";
+import { StaCharacterWeapon } from "../../item/characterweapon/StaCharacterWeapon";
 
 export class CharacterSheet extends BaseActorSheet<StaCharacter> {
   static templatePath = `${sta.templateBasePath}/actor/character/CharacterSheet.hbs`;
@@ -48,7 +49,7 @@ export class CharacterSheet extends BaseActorSheet<StaCharacter> {
     const item = this.actor.items.get(itemId)! as StaSystemItem;
     const damage = Math.abs(itemSystem(item).damage);
     const security = Math.abs(this.sta?.disciplines.security!);
-    const roll = weaponRoll(item.sta!, damage + security);
+    const roll = await weaponRoll(item.sta as StaCharacterWeapon, security, damage);
     return roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });

@@ -5,6 +5,8 @@
   <div class="dice-result">
     <div class="dice-formula">
       {{localize "sta.item.characterweapon.roll"}} {{formula}}
+      {{localize "sta.actions"}}:&nbsp;<span class="actions-simple">{{staData.actions.simple}}</span>/<span
+      class="actions-task">{{staData.actions.task}}</span>
     </div>
     <section class="tooltip-part">
       <div class="dice">
@@ -30,7 +32,7 @@
     <section class="qualities">
       {{#each staData.source.qualities as |value name|}}
         {{#if value}}
-          {{name}}: {{value}}
+          <span class="quality">{{localize (concat "sta.quality." name) X=value}}</span>
         {{/if}}
       {{/each}}
     </section>

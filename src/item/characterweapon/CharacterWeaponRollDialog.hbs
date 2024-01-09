@@ -1,0 +1,49 @@
+<form class="sta-task-roll">
+  <section class="border-left">
+    <h2 class="border-left">{{roll.source.name}}</h2>
+    <section class="border-left">
+      <h4>{{localize "sta.roll.dicePool"}}</h4>
+      <div class="scale-value">
+        {{#range (max 1 (add roll.dicePool -3)) (add roll.dicePool 3)}}
+          <label class="scale-pill single">
+            {{i}}
+            <input name="dicePool" type="radio" value="{{i}}" data-dtype="Number"
+                   {{#if (eq ../roll.dicePool i)}}checked="checked"{{/if}} />
+          </label>
+        {{/range}}
+      </div>
+      {{localize "sta.discipline.security"}}({{roll.security}})
+      {{localize "sta.item.damage"}}({{roll.damage}})
+    </section>
+
+    {{#if roll.source.qualities.charge}}
+      <section class="charge border-left">
+        <h4>{{localize "sta.quality.charge"}}</h4>
+        <div class="scale-value fatal">
+            <label class="scale-pill single">
+              {{localize "sta.none"}}
+              <input name="charged" type="radio" value="none" checked />
+            </label>
+        </div>
+        <div class="scale-value">
+            <label class="scale-pill single">
+              {{localize "sta.quality.area"}}
+              <input name="charged" type="radio" value="area" />
+            </label>
+        </div>
+        <div class="scale-value">
+            <label class="scale-pill single">
+              {{localize "sta.quality.intense" X=1}}
+              <input name="charged" type="radio" value="viciousx" />
+            </label>
+        </div>
+        <div class="scale-value">
+            <label class="scale-pill single">
+              {{localize "sta.quality.piercingx" X=2}}
+              <input name="charged" type="radio" value="piercingx" />
+            </label>
+        </div>
+      </section>
+    {{/if}}
+  </section>
+</form>

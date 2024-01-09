@@ -70,7 +70,7 @@
       </section>
       {{#each qualityQuantities as |value name|}}
         <label class="property form-number quality quality-{{name}} ">
-          <span class="label">{{localize (concat "sta.quality." name)}}</span>
+          <span class="label">{{localize (concat "sta.quality." name) X="X"}}</span>
           <input class="form-control" name="system.qualities.{{name}}" type="text" value="{{value}}"
                  data-dtype="Number" />
         </label>

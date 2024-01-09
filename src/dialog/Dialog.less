@@ -1,0 +1,30 @@
+.sta-dialog {
+  .dialog-buttons {
+    margin-top: @gap * 2;
+  }
+
+  .dialog-button {
+    .lcars-bar(@color-level-success, transparent, @sta-h3-size);
+    justify-content: center;
+    background: none;
+    border-top: none;
+    border-bottom: none;
+    color: @almost-white !important;
+
+    &:after {
+      display: none;
+    }
+
+    .icon {
+      display: inline-block;
+      height: @sta-h3-size;
+      width: @sta-h3-size;
+    }
+  }
+
+  .sta-task-roll {
+    .property {
+      margin-bottom: @gap;
+    }
+  }
+}

@@ -1,43 +1,39 @@
-<div class="dice-roll">
-  {{#if flavor}}
-    <div class="dice-flavor">{{flavor}}</div>
-  {{/if}}
-  <div class="dice-result">
-    <div class="dice-formula">
-      {{localize "sta.roll.task._singular"}} {{formula}} &lt;= {{staData.target}}
+<section class="message-content border-left">
+  <h3 class="roll-formula">
+    {{localize "sta.roll.task._singular"}} {{formula}} &lt;= {{staData.target}}
+  </h3>
+  <div class="columns">
+    <div class="roll-dice">
+      {{#each tooltip.rolls}}
+        <label class="roll {{classes}} d20">
+          {{value}}
+          <input class="reroll" type="checkbox" name="reroll-{{@index}}" />
+        </label>
+      {{/each}}
     </div>
-    <section class="tooltip-part">
-      <div class="dice">
-        <header class="part-header flexrow">
-          <span class="part-formula">
-            {{tooltip.attribute}}
-            {{tooltip.system}}
-            +
-            {{tooltip.discipline}}
-            {{tooltip.department}}
-          </span>
-        </header>
-        <ol class="dice-rolls">
-          {{#each tooltip.rolls}}
-            <li class="roll {{classes}} d20">{{{value}}}</li>
-          {{/each}}
-        </ol>
-      </div>
-    </section>
-    <h4 class="dice-total">
-      <span class="successes">
-        {{localize "sta.roll.success._plural"}}:
-        {{staData.result.successes}}
+    <div class="rows">
+      <span class="roll-data">
+        {{ifThen tooltip.attribute (localize (concat "sta.attribute." tooltip.attribute)) ""}}
+        {{ifThen tooltip.system (localize (concat "sta.system." tooltip.system)) ""}}
+        +
+        {{ifThen tooltip.discipline (localize (concat "sta.discipline." tooltip.discipline)) ""}}
+        {{ifThen tooltip.department (localize (concat "sta.department." tooltip.department)) ""}}
       </span>
-      {{#if staData.result.complications}}
-        <span class="complications">
-          {{localize "sta.roll.complication._plural"}}:
-          {{staData.result.complications}}
+      <div class="roll-result">
+        <span class="successes">
+          <span class="tiny">{{localize "sta.roll.success._plural"}}:</span>
+          {{staData.result.successes}}
         </span>
-      {{/if}}
-    </h4>
-    <div class="actions">
-      <button class="test">Do something nice</button>
+        {{#if staData.result.complications}}
+          <span class="complications">
+            <span class="tiny">{{localize "sta.roll.complication._plural"}}:</span>
+            {{staData.result.complications}}
+          </span>
+        {{/if}}
+      </div>
     </div>
   </div>
-</div>
+</section>
+<section class="message-actions">
+  <button data-action="reroll">{{localize "sta.roll.rereoll"}}</button>
+</section>

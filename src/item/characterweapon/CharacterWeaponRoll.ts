@@ -8,13 +8,24 @@ import { StaSystemActor } from "../../actor/StaSystemActor";
 import { StaCharacterWeapon } from "./StaCharacterWeapon";
 import { StaCharacter } from "../../actor/character/StaCharacter";
 import { tplPath } from "../../template/TemplateHelpers";
+import { rollDataDialog } from "../../roll/RollDialog";
 
 
-export function weaponRoll(source: StaEntity, dicePool: number) {
-  return new CharacterWeaponRoll("", {
+export async function weaponRoll(source: StaCharacterWeapon, security: number, damage: number) {
+  let rollData: ChallengeRollData = {
+    result: undefined,
+    actions: {simple: 0, task: 1},
+    dicePool: security + damage,
     source: source,
-    dicePool: dicePool,
-  } as ChallengeRollData);
+    security: security,
+    damage: damage,
+  };
+  rollData = await rollDataDialog(rollData, "item/characterweapon/CharacterWeaponRollDialog.hbs");
+  if(rollData.charged == "area") source.qualities.area = true;
+  if(rollData.charged == "viciousx") source.qualities.viciousx = 1;
+  if(rollData.charged == "piercingx") source.qualities.piercingx = 2;
+  if(rollData.charged != "none") rollData.actions.simple++;
+  return new CharacterWeaponRoll("", rollData);
 }
 
 

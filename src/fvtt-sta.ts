@@ -13,11 +13,11 @@ import { StarshipWeaponRoll } from "./item/starshipweapon/StarshipWeaponRoll";
 import { ResourceTrackerApplication } from "./app/ResourceTrackerApplication";
 
 Hooks.once("init", () => {
-  console.log(sta.systemName + " | Initializing system...");
   sta.game = game as Game;
 
   CONFIG.Actor.documentClass = StaSystemActor;
   CONFIG.Item.documentClass = StaSystemItem;
+  CONFIG.ChatMessage.template = tplPath("chat/ChatMessage.hbs");
   CONFIG.Dice.rolls = [
     Roll,
     ChallengeRoll,

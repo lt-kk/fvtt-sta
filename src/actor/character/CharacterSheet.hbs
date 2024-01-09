@@ -98,31 +98,31 @@
   </section>
 
   <section class="attributes edge-right-down reversed">
-    <h1 class="reverse">{{localize "sta.attributes._plural"}}
+    <h1 class="reverse">{{localize "sta.attribute._plural"}}
       <span class="inner on-border">{{sta.attributesSum}}</span>
     </h1>
     {{#each sta.attributes as |value name|}}
       <label class="property attribute attribute-{{name}} reverse">
         <input class="flag" name="system.taskRoll.attribute" type="radio" value="{{name}}"
                {{#if (eq ../sta.taskRoll.attribute name)}}checked="checked"{{/if}}>
-        <input class="form-control" name="system.attributes.{{name}}" type="text" value="{{value}}"
+        <input class="form-control" name="system.attribute.{{name}}" type="text" value="{{value}}"
                data-dtype="Number" tabindex="2" />
-        <span class="label">{{localize (concat "sta.attributes." name)}}</span>
+        <span class="label">{{localize (concat "sta.attribute." name)}}</span>
       </label>
     {{/each}}
   </section>
 
   <section class="disciplines edge-left-down">
-    <h1>{{localize "sta.disciplines._plural"}}
+    <h1>{{localize "sta.discipline._plural"}}
       <span class="inner on-border">{{sta.disciplinesSum}}</span>
     </h1>
     {{#each sta.disciplines as |value name|}}
       <label class="property discipline discipline-{{name}}">
         <input class="flag" name="system.taskRoll.discipline" type="radio" value="{{name}}"
                {{#if (eq ../sta.taskRoll.discipline name)}}checked="checked"{{/if}}>
-        <input class="form-control" name="system.disciplines.{{name}}" type="text" value="{{value}}"
+        <input class="form-control" name="system.discipline.{{name}}" type="text" value="{{value}}"
                data-dtype="Number" tabindex="3" />
-        <span class="label">{{localize (concat "sta.disciplines." name)}}</span>
+        <span class="label">{{localize (concat "sta.discipline." name)}}</span>
       </label>
     {{/each}}
   </section>

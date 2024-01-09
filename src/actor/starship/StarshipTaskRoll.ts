@@ -1,7 +1,8 @@
 import { StaStarship, StaStarshipDepartments, StaStarshipSystems } from "./StaStarship";
 import { TaskRoll, TaskRollData } from "../../roll/TaskRoll";
 import { StaEntity } from "../../model/StaSystemDocument";
-import { rollDataDialog } from "../../roll/StaRoll";
+import { rollDataDialog } from "../../roll/RollDialog";
+
 
 export type StarshipTaskRollData = TaskRollData & {
   system: keyof StaStarshipSystems;
@@ -12,12 +13,13 @@ export type StarshipTaskRollData = TaskRollData & {
 
 
 export async function starshipTaskRoll(sta: StaStarship, dicePool: number, {
-  complication = 0,
+  complication = 1,
 } = {}) {
   const systemValue = sta.systems[sta.taskRoll.system].effective;
   const departmentValue = sta.departments[sta.taskRoll.department];
-  let rollData = await rollDataDialog({
+  let rollData = await rollDataDialog<StarshipTaskRollData>({
     result: undefined,
+    actions: {simple: 0, task: 1},
     source: sta as StaEntity,
     dicePool: dicePool,
     target: systemValue + departmentValue,

@@ -1,7 +1,8 @@
 import { StaCharacter, StaCharacterAttributes, StaCharacterDisciplines } from "./StaCharacter";
 import { TaskRoll, TaskRollData } from "../../roll/TaskRoll";
 import { StaEntity } from "../../model/StaSystemDocument";
-import { rollDataDialog } from "../../roll/StaRoll";
+import { rollDataDialog } from "../../roll/RollDialog";
+
 
 export type CharacterTaskRollData = TaskRollData & {
   focus: boolean;
@@ -13,14 +14,15 @@ export type CharacterTaskRollData = TaskRollData & {
 
 
 export async function characterTaskRoll(sta: StaCharacter, dicePool: number, {
-  complication = 0,
+  complication = 1,
   determination = false,
   focus = false,
 } = {}) {
   const attributeValue = sta.attributes[sta.taskRoll.attribute];
   const disciplineValue = sta.disciplines[sta.taskRoll.discipline];
-  let rollData = await rollDataDialog<CharacterTaskRollData>({
+  let rollData: CharacterTaskRollData = {
     result: undefined,
+    actions: {simple: 0, task: 1},
     source: sta as StaEntity,
     dicePool: dicePool,
     target: attributeValue + disciplineValue,
@@ -32,7 +34,8 @@ export async function characterTaskRoll(sta: StaCharacter, dicePool: number, {
     discipline: sta.taskRoll.discipline,
     attributeValue: attributeValue,
     disciplineValue: disciplineValue,
-  }, "actor/character/CharacterTaskRollDialog.hbs");
+  }
+  rollData = await rollDataDialog(rollData, "actor/character/CharacterTaskRollDialog.hbs");
   if (rollData.focus) rollData.double = disciplineValue;
   return new TaskRoll("", rollData);
 }

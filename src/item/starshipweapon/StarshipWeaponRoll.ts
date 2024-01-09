@@ -11,11 +11,14 @@ import { tplPath } from "../../template/TemplateHelpers";
 
 
 export function weaponRoll(source: StaEntity, dicePool: number, targetSystem?: keyof StaStarshipSystems) {
-  return new StarshipWeaponRoll("", {
+  const rollData: StarshipWeaponRollData = {
+    result: undefined,
+    actions: {simple: 0, task: 1},
     source: source,
     dicePool: dicePool,
     targetSystem: targetSystem,
-  } as StarshipWeaponRollData);
+  };
+  return new StarshipWeaponRoll("", rollData);
 }
 
 export type StarshipWeaponRollData = ChallengeRollData & {

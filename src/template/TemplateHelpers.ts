@@ -1,12 +1,16 @@
 import { HelperOptions } from "handlebars";
 import { sta } from "../config";
+import { e } from "vitest/dist/reporters-O4LBziQ_";
 
 export function registerHandlebarHelpers() {
   Handlebars.registerHelper({
     range: range,
-    onEmpty: onEmpty,
+    onEmpty: (value, onEmpty) => value ? value : onEmpty,
     tplPath: tplPath,
-    isGM: isGM,
+    isGM: () => !!sta.game.user?.isGM,
+    add: (a, b) => parseFloat(a) + parseFloat(b),
+    min: (a, b) => parseFloat(a) < parseFloat(b) ? a : b,
+    max: (a, b) => parseFloat(a) > parseFloat(b) ? a : b,
   });
 }
 
@@ -19,18 +23,9 @@ function range(begin: number, end: number, content: HelperOptions) {
   return result;
 }
 
-
-function onEmpty(value: any, onEmpty: any, content: HelperOptions) {
-  return value ? value : onEmpty;
-}
-
-
 export function tplPath(staPath: string, content?: HelperOptions) {
   if (staPath.startsWith("/")) staPath = staPath.substring(1);
   if (staPath.endsWith(".hbs")) staPath = staPath.substring(0, staPath.length - 4);
   return `${sta.templateBasePath}/${staPath}.hbs`;
 }
 
-function isGM(content: HelperOptions): number {
-  return sta.game.user?.isGM ? 1 : 0;
-}

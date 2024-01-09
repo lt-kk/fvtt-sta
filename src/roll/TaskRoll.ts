@@ -48,14 +48,15 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
   ) {
     const maxPool = sta.settings.maxD20 - (data.determination ? -1 : 0);
     const pool = Math.min(Math.max(data.dicePool, 1), maxPool);
-    super(`${pool}d20`, {
+    const rollData: TaskRollData = {
       ...data,
       dicePool: pool,
       target: Math.min(Math.max(data.target, 1), 20),
       double: Math.min(Math.max(data.double, 1), 20),
       complication: Math.min(Math.max(data.complication, 1), 5),
       determination: data.determination,
-    } as TaskRollData, options);
+    };
+    super(`${pool}d20`, rollData, options);
   };
 
   evaluateSta(data: TaskRollData): TaskRollResult {

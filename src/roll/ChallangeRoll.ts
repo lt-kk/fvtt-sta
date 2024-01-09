@@ -45,10 +45,11 @@ export class ChallengeRoll<D extends ChallengeRollData> extends StaRoll<D, Chall
     _: string, data: D, options?: Roll["options"],
   ) {
     const pool = Math.min(Math.max(data.dicePool, 1), sta.settings.maxD6);
-    super(`${pool}d6`, {
+    const rollData: D = {
       ...data,
       dicePool: pool,
-    } as D, options);
+    };
+    super(`${pool}d6`, rollData, options);
   }
 
   evaluateSta(data: ChallengeRollData): ChallengeRollResult {
@@ -77,8 +78,11 @@ export class ChallengeRoll<D extends ChallengeRollData> extends StaRoll<D, Chall
 
 
 export function challengeRoll(source: StaEntity, dicePool: number) {
-  return new ChallengeRoll("", {
+  const rollData: ChallengeRollData = {
+    result: undefined,
+    actions: {simple: 0, task: 1},
     source: source,
     dicePool: dicePool,
-  } as ChallengeRollData);
+  };
+  return new ChallengeRoll("", rollData);
 }

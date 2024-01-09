@@ -33,7 +33,7 @@
         "empty": "Keine Direktive"
       }
     },
-    "attributes": {
+    "attribute": {
       "_singular": "Attribut",
       "_plural": "Attribute",
       "control": "Konzentration",
@@ -43,7 +43,7 @@
       "presence": "Ausstrahlung",
       "reason": "Verstand"
     },
-    "disciplines": {
+    "discipline": {
       "_singular": "Disziplin",
       "_plural": "Disziplinen",
       "command": "Kommando",
@@ -196,9 +196,9 @@
       "_plural": "Schadenseffekte",
       "area": "Flächenwirkung",
       "spread": "Streuend",
-      "hiddenx": "Unauffällig X",
-      "piercingx": "Durchdringend X",
-      "viciousx": "Verheerend X",
+      "hiddenx": "Unauffällig {X}",
+      "piercingx": "Durchdringend {X}",
+      "viciousx": "Verheerend {X}",
       "intense": "Intensiv",
       "knockdown": "Niederwerfend",
       "accurate": "Präzise",
@@ -209,8 +209,8 @@
       "grenade": "Granate",
       "inaccurate": "Ungenau",
       "nonlethal": "Nicht tödlich",
-      "persistentx": "Anhaltend X",
-      "versatilex": "Vielseitig X",
+      "persistentx": "Anhaltend {X}",
+      "versatilex": "Vielseitig {X}",
       "dampening": "Energie senkend",
       "calibration": "Kalibrierung",
       "devastating": "Zerstörerisch",
@@ -287,6 +287,8 @@
     "tracker": {
       "momentum": "Momentum",
       "threat": "Bedrohung"
-    }
+    },
+    "none": "keine",
+    "actions": "Aktionen"
   }
 }
