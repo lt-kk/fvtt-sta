@@ -20,12 +20,12 @@
         {{ifThen tooltip.department (localize (concat "sta.department." tooltip.department)) ""}}
       </span>
       <div class="roll-result">
-        <span class="successes">
+        <span class="result-value successes">
           <span class="tiny">{{localize "sta.roll.success._plural"}}:</span>
           {{staData.result.successes}}
         </span>
         {{#if staData.result.complications}}
-          <span class="complications">
+          <span class="result-value complications">
             <span class="tiny">{{localize "sta.roll.complication._plural"}}:</span>
             {{staData.result.complications}}
           </span>
