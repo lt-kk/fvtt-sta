@@ -5,7 +5,7 @@
     <h4>{{localize "sta.system._singular"}}</h4>
     <div class="scale-value">
       {{#each starshipSystems as |name|}}
-        <label class="scale-pill single {{#if (eq ../sta.system this)}}checked{{/if}}">
+        <label class="scale-pill single">
           {{localize (concat "sta.system." this)}}
           <input name="system.system" type="radio" value="{{this}}"
                  {{#if (eq ../sta.system this)}}checked="checked"{{/if}} />

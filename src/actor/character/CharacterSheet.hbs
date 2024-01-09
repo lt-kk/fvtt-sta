@@ -9,7 +9,7 @@
       <h3>{{localize "sta.character.reputation"}}</h3>
       <div class="scale-value">
         {{#each sta.reputation.pills}}
-          <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+          <label class="scale-pill {{status}}">
             {{value}}
             <input name="system.reputation" type="radio" value="{{value}}" data-dtype="Number"
                    {{#if checked}}checked="checked"{{/if}} />
@@ -69,7 +69,7 @@
       <h3>{{localize "sta.character.determination"}}</h3>
       <div class="scale-value">
         {{#each sta.determination.pills}}
-          <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+          <label class="scale-pill {{status}}">
             {{value}}
             <input name="system.determination.value" type="radio" value="{{value}}" data-dtype="Number"
                    {{#if checked}}checked="checked"{{/if}} />
@@ -82,7 +82,7 @@
       <h3>{{localize "sta.character.stress"}}</h3>
       <div class="scale-value">
         {{#each sta.stress.pills}}
-          <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+          <label class="scale-pill {{status}}">
             {{value}}
             <input name="system.stress.value" type="radio" value="{{value}}" data-dtype="Number"
                    {{#if checked}}checked="checked"{{/if}} />

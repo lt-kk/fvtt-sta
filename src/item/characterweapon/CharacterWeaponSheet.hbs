@@ -48,7 +48,7 @@
         <h4>{{localize "sta.item.damage"}}</h4>
         <div class="scale-value">
           {{#range 0 settings.item.characterweapon.damage.max}}
-            <label class="scale-pill {{#if (eq ../sta.damage i)}}checked{{/if}}">
+            <label class="scale-pill">
               <span class="label">{{i}}</span>
               <input name="system.damage" type="radio" value="{{i}}" data-dtype="Number"
                      {{#if (eq ../sta.damage i)}}checked="checked"{{/if}} />
@@ -60,7 +60,7 @@
         <h4>{{localize "sta.range._singular"}}</h4>
         <div class="scale-value">
           {{#each settings.ranges}}
-            <label class="scale-pill {{#if (eq ../sta.range this)}}checked{{/if}}">
+            <label class="scale-pill">
               {{localize (concat "sta.range." this)}}
               <input name="system.range" type="radio" value="{{this}}"
                      {{#if (eq ../sta.range this)}}checked="checked"{{/if}} />

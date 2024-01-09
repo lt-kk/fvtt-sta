@@ -1,11 +1,10 @@
-import { LooseObject } from "../util/util";
 import { sta } from "../config";
 import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "./StaRoll";
 import { StaEntity } from "../model/StaSystemDocument";
 import { tplPath } from "../template/TemplateHelpers";
 
 
-export type ChallengeRollData = LooseObject<any> & StaRollData<ChallengeRollResult>
+export type ChallengeRollData = StaRollData<ChallengeRollResult>
 
 
 export class ChallengeRollDice implements StaRollDice {

@@ -1,7 +1,7 @@
-import {tplPath} from "../template/TemplateHelpers";
-import {sta} from "../config";
-import {Resource, Resources, ResourceTracker, SocketMessage, STA_SOCKET,} from "./ResourceTracker";
-import {constrainNumber, LooseObject} from "../util/util";
+import { tplPath } from "../template/TemplateHelpers";
+import { sta } from "../config";
+import { Resource, Resources, ResourceTracker, SocketMessage, STA_SOCKET } from "./ResourceTracker";
+import { constrainNumber, LooseObject } from "../util/util";
 
 export class ResourceTrackerApplication extends Application implements ResourceTracker {
 
@@ -15,7 +15,7 @@ export class ResourceTrackerApplication extends Application implements ResourceT
 
   override getData(options?: Partial<ItemSheet.Options>): LooseObject<any> {
     const data = super.getData(options) as ActorSheet.Data;
-    const resources: LooseObject<any> = {}
+    const resources: LooseObject<any> = {};
     Resources.forEach((r) => resources[r] = {
       value: this.value(r),
       plus: this.mayChange(r, 1) != "denied",
@@ -29,31 +29,31 @@ export class ResourceTrackerApplication extends Application implements ResourceT
   }
 
   value(resource: Resource) {
-    return sta.game.settings.get("sta", resource) as number
+    return sta.game.settings.get("sta", resource) as number;
   }
 
   changeResource(resource: Resource, delta: number, userName: string) {
-    const changeable = this.mayChange(resource, delta)
+    const changeable = this.mayChange(resource, delta);
     switch (changeable) {
       case "permitted":
         this.changeResourcePermitted(resource, delta);
         break;
       case "delegated":
-        if (userName == sta.game.user?.name!) {
+        if (userName == sta.game.user?.name!) { // prevent endless loop
           this.send(new AdjustResourceMessage(resource, this.value(resource), delta, sta.game.user?.name!));
         }
         break;
       default:
-        ui.notifications?.error(`You may not change ${resource}`)
+        ui.notifications?.error(`You may not change ${resource}`);
     }
   }
 
   private changeResourcePermitted(resource: string, delta: number) {
     let newValue = constrainNumber(this.value(resource) + delta, 0, this.maxValue(resource));
-    sta.game.settings.set('sta', resource, newValue).then(() => {
+    sta.game.settings.set("sta", resource, newValue).then(() => {
       this.updateView();
       this.send(new ResourceChangedMessage(resource));
-    })
+    });
   }
 
   maxValue(resource: Resource): number {
@@ -67,28 +67,28 @@ export class ResourceTrackerApplication extends Application implements ResourceT
   }
 
   mayChange(resource: Resource, delta: number): Changeable {
-    if (sta.game.user?.isGM) return "permitted"
+    if (sta.game.user?.isGM) return "permitted";
     switch (resource) {
       case "momentum":
-        return delta < 0 ? "delegated" : "denied"
+        return delta < 0 ? "delegated" : "denied";
       case "threat":
-        return delta > 0 ? "delegated" : "denied"
+        return delta > 0 ? "delegated" : "denied";
     }
-    return "denied"
+    return "denied";
   }
 
   private updateView() {
     Resources.forEach((resource) => {
-      const value = this.value(resource)
+      const value = this.value(resource);
       const trackerEl = $(document).find(".resource-tracker").first();
-      const element = trackerEl.find(`.tracker-${resource} .form-control`)
-      element.val(value)
-    })
+      const element = trackerEl.find(`.tracker-${resource} .form-control`);
+      element.val(value);
+    });
   }
 
   activateListeners(html: JQuery) {
     super.activateListeners(html);
-    html.find(".control.adjust").on("click", this.handleAdjust.bind(this))
+    html.find(".control.adjust").on("click", this.handleAdjust.bind(this));
     sta.game.socket!.on(STA_SOCKET, this.receive.bind(this)); // TODO more general place
   }
 
@@ -101,7 +101,7 @@ export class ResourceTrackerApplication extends Application implements ResourceT
       this.updateView();
     } else if (msg.type == AdjustResourceMessage.name) {
       let adjustMessage = msg as AdjustResourceMessage;
-      if (adjustMessage.old == this.value(adjustMessage.resource)) {
+      if (adjustMessage.old == this.value(adjustMessage.resource)) { // keep data integrity
         this.changeResource(msg.resource, adjustMessage.delta, adjustMessage.userName);
       }
     }
@@ -110,11 +110,11 @@ export class ResourceTrackerApplication extends Application implements ResourceT
   private handleAdjust(event: JQuery.ClickEvent) {
     event.preventDefault();
     let element = $(event.currentTarget);
-    const resource = element.data("resource") as Resource
-    let delta = parseInt(element.data("delta"))
+    const resource = element.data("resource") as Resource;
+    let delta = parseInt(element.data("delta"));
     if (event.ctrlKey && sta.game.user?.isGM) {
-      if (delta < 0) delta = -this.value(resource)
-      if (delta > 0) delta = this.maxValue(resource)
+      if (delta < 0) delta = -this.value(resource);
+      if (delta > 0) delta = this.maxValue(resource);
     }
     this.changeResource(resource, delta, sta.game.user?.name!);
   }

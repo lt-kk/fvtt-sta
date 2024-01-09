@@ -18,6 +18,7 @@
     justify-content: center;
     margin-bottom: 0;
     border: none;
+
     > * {
       text-align: center;
       aspect-ratio: 1;
@@ -27,6 +28,7 @@
       color: transparent;
       cursor: unset;
     }
+
     &:after {
       display: none;
     }
@@ -34,6 +36,7 @@
 
   .tracker-momentum h3 {
     .lcars-bar(@color-level-info, @color-level-info, @sta-h3-size);
+
     > a {
       .lcars-bar-inner(fadeout(@color-level-info, 40%))
     }
@@ -41,6 +44,7 @@
 
   .tracker-threat h3 {
     .lcars-bar(@color-level-error, @color-level-error, @sta-h3-size);
+
     > a {
       .lcars-bar-inner(fadeout(@color-level-error, 40%))
     }

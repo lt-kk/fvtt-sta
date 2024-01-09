@@ -61,7 +61,7 @@
     <div class="property shields reverse">
       {{localize "sta.starship.shields"}}
       {{#each sta.shields.pills}}
-        <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+        <label class="scale-pill {{status}}">
           {{value}}
           <input name="system.shields.value" type="radio" value="{{value}}" data-dtype="Number"
                  {{#if checked}}checked="checked"{{/if}} />
@@ -79,7 +79,7 @@
         <span class="label">{{localize (concat "sta.system." name)}}</span>
         <span class="breaches breaches-{{name}} flex-last reverse">
           {{#each system.pills}}
-            <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+            <label class="scale-pill {{status}}">
             {{value}}
               <input name="system.systems.{{name}}.breaches" type="radio" value="{{value}}" data-dtype="Number"
                      {{#if checked}}checked="checked"{{/if}} />
@@ -92,7 +92,7 @@
     <h3 class="property power reverse">
       {{localize "sta.starship.power"}}
       {{#each sta.power.pills}}
-        <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+        <label class="scale-pill {{status}}">
           {{value}}
           <input name="system.power.value" type="radio" value="{{value}}" data-dtype="Number"
                  {{#if checked}}checked="checked"{{/if}} />
@@ -118,7 +118,7 @@
     <div class="property crew reverse">
       {{localize "sta.starship.crew"}}
       {{#each sta.crew.pills}}
-        <label class="scale-pill {{status}} {{#if checked}}checked{{/if}}">
+        <label class="scale-pill {{status}}">
           {{value}}
           <input name="system.crew" type="radio" value="{{value}}" data-dtype="Number"
                  {{#if checked}}checked="checked"{{/if}} />

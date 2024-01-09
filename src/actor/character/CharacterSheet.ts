@@ -29,8 +29,8 @@ export class CharacterSheet extends BaseActorSheet<StaCharacter> {
 
 
   async rollTask(dicePool: number) {
-    const roll = characterTaskRoll(this.sta!, dicePool);
-    return roll.toMessage({
+    const roll = await characterTaskRoll(this.sta!, dicePool);
+    roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });
   }

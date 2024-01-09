@@ -27,7 +27,7 @@ export class StarshipSheet extends BaseActorSheet<StaStarship> {
   }
 
   async rollTask(dicePool: number) {
-    const roll = starshipTaskRoll(this.sta!, dicePool);
+    const roll = await starshipTaskRoll(this.sta!, dicePool);
     return roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });

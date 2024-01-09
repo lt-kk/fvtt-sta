@@ -3,12 +3,11 @@ import { LooseObject } from "../util/util";
 import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "./StaRoll";
 
 
-export type TaskRollData = LooseObject<any> & StaRollData<TaskRollResult> & {
+export type TaskRollData = StaRollData<TaskRollResult> & {
   target: number;
   double: number;
   complication: number;
   determination: boolean;
-  result: TaskRollResult;
 }
 
 export class TaskRollDice implements StaRollDice {
@@ -54,7 +53,7 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
       dicePool: pool,
       target: Math.min(Math.max(data.target, 1), 20),
       double: Math.min(Math.max(data.double, 1), 20),
-      complication: Math.min(Math.max(data.complication, 0), 5),
+      complication: Math.min(Math.max(data.complication, 1), 5),
       determination: data.determination,
     } as TaskRollData, options);
   };
@@ -62,7 +61,7 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
   evaluateSta(data: TaskRollData): TaskRollResult {
     let results = this.dice.flatMap((term) => term.results)
       .map((d) => this.resultToDice(d.result, data));
-    if (data.determination) results.push(new TaskRollDice(1, 20, 0, true));
+    if (data.determination) results.push(new TaskRollDice(1, 2, 0, true));
     return new TaskRollResult(results);
   }
 
@@ -89,3 +88,4 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
     ];
   }
 }
+

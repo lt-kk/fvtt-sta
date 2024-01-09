@@ -1,5 +1,3 @@
-import {valHooks} from "jquery";
-
 export interface LooseObject<V extends any> {
   [key: string]: V;
 }

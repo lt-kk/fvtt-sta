@@ -15,4 +15,3 @@
 * Chat templates
 * Rich Text editor
 * validations
-* Momentum

@@ -222,12 +222,12 @@
     contrast(@colorBase, @almost-white, @almost-black),
     @colorChecked);
   }
-  &:not(&.single):has(~ .@{selector}.checked) {
+  &:not(&.single):has(~ .@{selector} :checked) {
     border-color: @colorActive;
     background-color: @colorActive;
     color: contrast(@colorActive, @almost-white, @almost-black);
   }
-  &.@{selector}.checked {
+  &.@{selector}:has(:checked) {
     border-color: @colorChecked;
     background-color: @colorChecked;
     color: contrast(@colorChecked, @almost-white, @almost-black);

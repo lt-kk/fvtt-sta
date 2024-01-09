@@ -1,5 +1,5 @@
-import {StaRanges} from "./model/StaTypes";
-import {ResourceTracker} from "./app/ResourceTracker";
+import { StaRanges } from "./model/StaTypes";
+import { ResourceTracker } from "./app/ResourceTracker";
 
 const systemName = "fvtt-sta";
 
@@ -33,5 +33,7 @@ export const sta = {
     ranges: StaRanges,
     maxMomentum: 6,
     maxThreat: 99,
+    maxComplication: 5,
+    maxTaskPool: 5,
   },
 };

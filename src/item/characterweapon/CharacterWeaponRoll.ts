@@ -1,5 +1,4 @@
 import { ChallengeRoll, ChallengeRollData } from "../../roll/ChallangeRoll";
-import { sta } from "../../config";
 import { getActor, getRollData } from "../../util/message";
 import { actorSystem, update } from "../../util/document";
 import { filterArmor } from "../armor/StaArmor";

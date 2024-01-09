@@ -5,10 +5,13 @@ import {
 } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
 import { HasActivateListeners } from "../util/message";
 import { StaEntity } from "../model/StaSystemDocument";
+import { StaDialog } from "../app/StaDialog";
+import { tplPath } from "../template/TemplateHelpers";
+import { LooseObject } from "../util/util";
 
-export interface StaRollData<R extends StaRollResult<StaRollDice>> {
+export interface StaRollData<R extends StaRollResult<StaRollDice>> extends LooseObject<any> {
   dicePool: number;
-  result: R | null;
+  result: R | undefined;
   source: StaEntity | undefined;
 }
 
@@ -96,5 +99,47 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
 
   handleButton(event: JQuery.ClickEvent, message: ChatMessage) {
     event.preventDefault();
+  }
+}
+
+
+export async function rollDataDialog<D extends StaRollData<any>>(rollData: D, template: string): Promise<D> {
+  const htmlContent = await renderTemplate(tplPath(template), {
+    roll: rollData,
+    settings: sta.settings,
+  });
+  return new Promise<D>((resolve) => {
+    const dialog = new RollDialog(htmlContent, (values: LooseObject<any>) => {
+      resolve(mergeObject(rollData, values) as D);
+    });
+    dialog.render(true);
+  });
+}
+
+export class RollDialog extends StaDialog {
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
+      width: 200,
+    });
+  }
+
+  constructor(htmlContent: string, callback: (values: LooseObject<any>) => void) {
+    super({
+      title: sta.game.i18n.localize("sta.task.roll.title"),
+      content: htmlContent,
+      buttons: {
+        roll: {
+          label: sta.game.i18n.localize("sta.task.roll.confirm"),
+          callback: (html: HTMLElement | JQuery<HTMLElement>) => {
+            let values: LooseObject<any> = {};
+            $(html).find("form").serializeArray().forEach((entry) => {
+              values[entry.name] = entry.value;
+            });
+            console.log(values);
+            callback(values);
+          },
+        },
+      },
+    });
   }
 }

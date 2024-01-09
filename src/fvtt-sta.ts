@@ -10,8 +10,7 @@ import { sta } from "./config";
 import { StaSystemActor } from "./actor/StaSystemActor";
 import { StaSystemItem } from "./item/StaSystemItem";
 import { StarshipWeaponRoll } from "./item/starshipweapon/StarshipWeaponRoll";
-import {ResourceTracker} from "./app/ResourceTracker";
-import {ResourceTrackerApplication} from "./app/ResourceTrackerApplication";
+import { ResourceTrackerApplication } from "./app/ResourceTrackerApplication";
 
 Hooks.once("init", () => {
   console.log(sta.systemName + " | Initializing system...");
@@ -87,17 +86,17 @@ function registerTemplates() {
 
 
 function registerSettings() {
-  sta.game.settings.register('sta', 'threat', {
-    scope: 'world',
+  sta.game.settings.register("sta", "threat", {
+    scope: "world",
     type: Number,
     default: 0,
-    config: false
+    config: false,
   });
 
-  sta.game.settings.register('sta', 'momentum', {
-    scope: 'world',
+  sta.game.settings.register("sta", "momentum", {
+    scope: "world",
     type: Number,
     default: 0,
-    config: false
+    config: false,
   });
 }

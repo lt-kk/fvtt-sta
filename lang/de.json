@@ -241,7 +241,11 @@
     },
     "task": {
       "_singular": "Aufgabe",
-      "_plural": "Aufgaben"
+      "_plural": "Aufgaben",
+      "roll": {
+        "title": "Aufgabe würfeln",
+        "confirm": "würfeln"
+      }
     },
     "roll": {
       "success": {
@@ -252,6 +256,9 @@
         "_singular": "Komplikation",
         "_plural": "Komplikationen"
       },
+      "focus": "Fokus anwendbar",
+      "determination": "Entschlossenheit nutzen?",
+      "dicePool": "Würfelpool",
       "effect": {
         "_singular": "Effekt",
         "_plural": "Effekte"

@@ -1,0 +1,28 @@
+<form class="sta-task-roll">
+  <section class="property complication border-left">
+    <h4>{{localize "sta.roll.complication._singular"}}</h4>
+    <div class="scale-value">
+      {{#range 1 settings.maxComplication}}
+        <label class="scale-pill">
+          {{i}}
+          <input name="complication" type="radio" value="{{i}}" data-dtype="Number"
+                 {{#if (eq ../roll.complication i)}}checked="checked"{{/if}} />
+        </label>
+      {{/range}}
+    </div>
+  </section>
+
+  <section class="property dicePool border-left">
+    <h4>{{localize "sta.roll.dicePool"}}</h4>
+    <div class="scale-value">
+      {{#range 1 settings.maxTaskPool}}
+        <label class="scale-pill">
+          {{i}}
+          <input name="dicePool" type="radio" value="{{i}}" data-dtype="Number"
+                 {{#if (eq ../roll.dicePool i)}}checked="checked"{{/if}} />
+        </label>
+      {{/range}}
+    </div>
+  </section>
+
+</form>
