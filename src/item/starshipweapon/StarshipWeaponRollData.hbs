@@ -1,0 +1,7 @@
+<span class="qualities">
+  {{#each staData.source.qualities as |value name|}}
+    {{#if value}}
+      <span class="quality">{{localize (concat "sta.quality." name) X=value}}</span>
+    {{/if}}
+  {{/each}}
+</span>

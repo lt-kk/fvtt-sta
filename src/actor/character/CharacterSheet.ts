@@ -1,7 +1,7 @@
 import { sta } from "../../config";
 import { StaCharacter } from "./StaCharacter";
 import { characterTaskRoll } from "./CharacterTaskRoll";
-import { challengeRoll } from "../../roll/ChallangeRoll";
+import { challengeRoll } from "../../roll/challange/ChallangeRoll";
 import { weaponRoll } from "../../item/characterweapon/CharacterWeaponRoll";
 import { itemSystem } from "../../util/document";
 

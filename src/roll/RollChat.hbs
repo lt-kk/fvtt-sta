@@ -1,0 +1,11 @@
+<section class="message-content border-left">
+  {{> (lookup tpl "formula") this}}
+  <div class="roll-details">
+    {{> (lookup tpl "dice") this}}
+    <div class="roll-info">
+      {{> (lookup tpl "data") this}}
+      {{> (lookup tpl "result") this}}
+    </div>
+  </div>
+</section>
+{{> (lookup tpl "actions") this}}

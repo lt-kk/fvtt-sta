@@ -1,0 +1,18 @@
+<div class="roll-result">
+  <span class="result-value successes">
+    {{localize "sta.roll.success._plural"}}:
+    <span class="value">{{staData.result.successes}}</span>
+  </span>
+  {{#if staData.result.complications}}
+    <span class="result-value complications">
+      {{localize "sta.roll.complication._plural"}}:
+      <span class="value">{{staData.result.complications}}</span>
+    </span>
+  {{/if}}
+  {{#if staData.result.effects}}
+    <span class="result-value effects">
+      {{localize "sta.roll.effect._plural"}}:
+      <span class="value">{{staData.result.effects}}</span>
+    </span>
+  {{/if}}
+</div>

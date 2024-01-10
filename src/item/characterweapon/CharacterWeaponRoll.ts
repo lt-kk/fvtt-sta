@@ -1,47 +1,42 @@
-import { ChallengeRoll, ChallengeRollData } from "../../roll/ChallangeRoll";
+import { ChallengeRoll, ChallengeRollData } from "../../roll/challange/ChallangeRoll";
 import { getActor, getRollData } from "../../util/message";
 import { actorSystem, update } from "../../util/document";
 import { filterArmor } from "../armor/StaArmor";
 import { currentTargets } from "../../util/user";
-import { StaEntity } from "../../model/StaSystemDocument";
 import { StaSystemActor } from "../../actor/StaSystemActor";
 import { StaCharacterWeapon } from "./StaCharacterWeapon";
 import { StaCharacter } from "../../actor/character/StaCharacter";
 import { tplPath } from "../../template/TemplateHelpers";
 import { rollDataDialog } from "../../roll/RollDialog";
+import { LooseObject } from "../../util/util";
 
 
 export async function weaponRoll(source: StaCharacterWeapon, security: number, damage: number) {
   let rollData: ChallengeRollData = {
     result: undefined,
-    actions: {simple: 0, task: 1},
+    actions: { simple: 0, task: 1 },
     dicePool: security + damage,
     source: source,
     security: security,
     damage: damage,
   };
   rollData = await rollDataDialog(rollData, "item/characterweapon/CharacterWeaponRollDialog.hbs");
-  if(rollData.charged == "area") source.qualities.area = true;
-  if(rollData.charged == "viciousx") source.qualities.viciousx = 1;
-  if(rollData.charged == "piercingx") source.qualities.piercingx = 2;
-  if(rollData.charged != "none") rollData.actions.simple++;
+  if (rollData.charged == "area") source.qualities.area = true;
+  if (rollData.charged == "viciousx") source.qualities.viciousx = 1;
+  if (rollData.charged == "piercingx") source.qualities.piercingx = 2;
+  if (rollData.charged != "none") rollData.actions.simple++;
   return new CharacterWeaponRoll("", rollData);
 }
 
 
 export class CharacterWeaponRoll extends ChallengeRoll<ChallengeRollData> {
-  chatTemplate = tplPath("item/characterweapon/CharacterWeaponRollChat.hbs");
 
-  handleButton(event: JQuery.ClickEvent, message: ChatMessage) {
-    const actor = getActor(message);
-    switch ($(event.currentTarget).data("action")) {
-      case "applyDamage":
-        this.handleDamage(actor, message);
-        break;
-    }
+
+  handleAction(message: ChatMessage, action: string, formData: LooseObject<any>) {
+    if(action == "applyDamage") this.handleDamage(message);
   }
 
-  private handleDamage(actor: Actor, message: ChatMessage) {
+  private handleDamage(message: ChatMessage) {
     const targets = currentTargets();
     const rollData = getRollData<ChallengeRollData>(message);
     targets.forEach((target) => {

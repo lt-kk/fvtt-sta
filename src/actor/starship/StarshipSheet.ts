@@ -1,7 +1,7 @@
 import { sta } from "../../config";
 import { StaStarship } from "./StaStarship";
 import { starshipTaskRoll } from "./StarshipTaskRoll";
-import { challengeRoll } from "../../roll/ChallangeRoll";
+import { challengeRoll } from "../../roll/challange/ChallangeRoll";
 import { BaseActorSheet } from "../BaseActorSheet";
 import { itemSystem } from "../../util/document";
 import { StaSystemItem } from "../../item/StaSystemItem";

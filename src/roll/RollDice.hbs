@@ -1,0 +1,10 @@
+<div class="roll-dice">
+  {{#each rolls}}
+    {{#each this}}
+      <label class="roll {{classes}} d{{faces}}">
+        {{value}}
+        <input class="reroll" type="checkbox" name="reroll-{{@../index}}-{{@index}}" />
+      </label>
+    {{/each}}
+  {{/each}}
+</div>

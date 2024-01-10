@@ -1,4 +1,4 @@
-import { ChallengeRoll, ChallengeRollData } from "../../roll/ChallangeRoll";
+import { ChallengeRoll, ChallengeRollData } from "../../roll/challange/ChallangeRoll";
 import { getActor, getRollData } from "../../util/message";
 import { actorSystem, update } from "../../util/document";
 import { currentTargets } from "../../util/user";
@@ -13,7 +13,7 @@ import { tplPath } from "../../template/TemplateHelpers";
 export function weaponRoll(source: StaEntity, dicePool: number, targetSystem?: keyof StaStarshipSystems) {
   const rollData: StarshipWeaponRollData = {
     result: undefined,
-    actions: {simple: 0, task: 1},
+    actions: { simple: 0, task: 1 },
     source: source,
     dicePool: dicePool,
     targetSystem: targetSystem,
@@ -25,20 +25,18 @@ export type StarshipWeaponRollData = ChallengeRollData & {
   targetSystem?: keyof StaStarshipSystems
 }
 
-
 export class StarshipWeaponRoll extends ChallengeRoll<StarshipWeaponRollData> {
-  chatTemplate = tplPath("item/characterweapon/CharacterWeaponRollChat.hbs");
-
-  handleButton(event: JQuery.ClickEvent, message: ChatMessage) {
-    const actor = getActor(message);
-    switch ($(event.currentTarget).data("action")) {
-      case "applyDamage":
-        this.handleDamage(actor, message);
-        break;
-    }
+  init() {
+    super.init();
+    this.tpl.additionalData = tplPath("item/starshipweapon/StarshipWeaponRollData.hbs")
   }
 
-  private handleDamage(actor: Actor, message: ChatMessage) {
+  handleAction(message: ChatMessage, action: string, formData: LooseObject<any>) {
+    super.handleAction(message, action, formData);
+    if (action == "applyDamage") this.handleDamage(message);
+  }
+
+  private handleDamage(message: ChatMessage) {
     const targets = currentTargets();
     const rollData = getRollData<StarshipWeaponRollData>(message);
     targets.forEach((target) => {

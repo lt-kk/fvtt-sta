@@ -38,3 +38,17 @@ export function randomIndex(max: number) {
 export function constrainNumber(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
 }
+
+
+export function formData(html: HTMLElement | JQuery ): LooseObject<any> {
+  html = $(html);
+  let form: JQuery = html.find("form")
+  if(form.empty()) form = html.closest("form");
+
+  let values: LooseObject<any> = {};
+  form.serializeArray().forEach((entry) => {
+    values[entry.name] = entry.value;
+  });
+  console.log("formData", form, values);
+  return values;
+}

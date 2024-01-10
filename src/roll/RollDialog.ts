@@ -1,5 +1,5 @@
 import { StaDialog } from "../app/StaDialog";
-import { LooseObject } from "../util/util";
+import { formData, LooseObject } from "../util/util";
 import { sta } from "../config";
 import { tplPath } from "../template/TemplateHelpers";
 import { StaRollData } from "./StaRoll";
@@ -32,13 +32,10 @@ export class RollDialog extends StaDialog {
       content: htmlContent,
       buttons: {
         roll: {
-          icon: '<img class="icon roll d20" src="/icons/svg/d20-grey.svg" />',
+          icon: "<img class=\"icon roll d20\" src=\"/icons/svg/d20-grey.svg\" />",
           label: sta.game.i18n.localize("sta.task.roll.confirm"),
           callback: (html: HTMLElement | JQuery<HTMLElement>) => {
-            let values: LooseObject<any> = {};
-            $(html).find("form").serializeArray().forEach((entry) => {
-              values[entry.name] = entry.value;
-            });
+            let values = formData(html);
             callback(values);
           },
         },

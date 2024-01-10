@@ -1,7 +1,7 @@
 import "../styles/fvtt-sta.less";
 import { registerHandlebarHelpers, tplPath } from "./template/TemplateHelpers";
-import { TaskRoll } from "./roll/TaskRoll";
-import { ChallengeRoll } from "./roll/ChallangeRoll";
+import { TaskRoll } from "./roll/task/TaskRoll";
+import { ChallengeRoll } from "./roll/challange/ChallangeRoll";
 import { HasRolls } from "./util/util";
 import { CharacterWeaponRoll } from "./item/characterweapon/CharacterWeaponRoll";
 import { HasActivateListeners } from "./util/message";
@@ -11,6 +11,7 @@ import { StaSystemActor } from "./actor/StaSystemActor";
 import { StaSystemItem } from "./item/StaSystemItem";
 import { StarshipWeaponRoll } from "./item/starshipweapon/StarshipWeaponRoll";
 import { ResourceTrackerApplication } from "./app/ResourceTrackerApplication";
+import { StaRollTemplates } from "./roll/StaRoll";
 
 Hooks.once("init", () => {
   sta.game = game as Game;
@@ -81,7 +82,10 @@ function registerTemplates() {
     tplPath("item/_partials/ListItemDefaultActions.hbs"),
     tplPath("item/_partials/PropertyText.hbs"),
     tplPath("item/_partials/Rule.hbs"),
+    tplPath("item/starshipweapon/StarshipWeaponRollData.hbs"),
+    tplPath("template/Empty.hbs"),
   ]);
+  loadTemplates(Object.values(new StaRollTemplates()))
 }
 
 

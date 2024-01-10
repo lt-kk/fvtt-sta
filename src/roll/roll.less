@@ -34,10 +34,7 @@
   }
 
   .message-content {
-    .tiny {
-      font-size: @text-tiny-size;
-    }
-    .columns {
+    .roll-details {
       display: flex;
       > * {
         flex-grow: 1;
@@ -45,30 +42,47 @@
         justify-content: stretch;
       }
     }
-    .rows {
+    .roll-info {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-    }
-    .roll-formula {
-    }
-    .roll-data {
-      white-space: nowrap;
       font-size: @text-tiny-size;
+      margin-right: @gap;
+      .value {
+        font-size: @text-size;
+      }
     }
-    .roll-dice {
-    }
-    .roll-result {
-    }
+  }
 
-    .result-value {
+  .roll-formula {
+    .label {
+      font-size: smaller;
+    }
+  }
+  .roll-dice {
+  }
+  .roll-data {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    .roll-source, .actions-used, .quality {
       white-space: nowrap;
     }
+  }
+  .roll-result {
+    display: flex;
+    //flex-direction: column;
+    align-items: flex-end;
+    grid-gap: @gap;
+  }
+
+  .result-value {
+    white-space: nowrap;
   }
 
   .message-actions {
     padding-right: @gap;
-    button {
+    .message-action {
       .lcars-bar(@color-level-info, transparent, @sta-h4-size);
       justify-content: center;
       background: none;

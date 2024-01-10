@@ -1,5 +1,5 @@
 import { StaCharacter, StaCharacterAttributes, StaCharacterDisciplines } from "./StaCharacter";
-import { TaskRoll, TaskRollData } from "../../roll/TaskRoll";
+import { TaskRoll, TaskRollData } from "../../roll/task/TaskRoll";
 import { StaEntity } from "../../model/StaSystemDocument";
 import { rollDataDialog } from "../../roll/RollDialog";
 

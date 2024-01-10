@@ -268,7 +268,8 @@
       },
       "challenge": {
         "_singular": "Herausforderung"
-      }
+      },
+      "reroll": "Neu würfeln"
     },
     "range": {
       "_singular": "Reichweite",
