@@ -1,6 +1,6 @@
 <form class="sta-body" autocomplete="off">
-  {{> (concat templatePath "/item/_partials/ItemHeader.hbs") this }}
+  {{> (tplPath "item/_partials/ItemHeader.hbs") this }}
 
-  {{> (concat templatePath "/item/_partials/PropertyText.hbs")
+  {{> (tplPath "item/_partials/PropertyText.hbs")
     name="description" title="sta.item.description" value=sta.description}}
 </form>

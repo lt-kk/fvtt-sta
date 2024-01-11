@@ -31,7 +31,6 @@ export abstract class BaseItemSheet<STA extends StaItem> extends ItemSheet {
       ...this.additionalData(this.sta, data),
       settings: sta.settings,
       sta: this.sta,
-      templatePath: sta.templateBasePath,
     };
   }
 
@@ -43,5 +42,4 @@ export abstract class BaseItemSheet<STA extends StaItem> extends ItemSheet {
 type Data = ItemSheet.Data & LooseObject<any> & {
   settings: object;
   sta: LooseObject<any>;
-  templatePath: string;
 };

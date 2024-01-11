@@ -290,6 +290,10 @@
       "threat": "Bedrohung"
     },
     "none": "keine",
-    "actions": "Aktionen"
+    "action": {
+      "_plural": "Aktionen",
+      "simple": "Einfach",
+      "task": "Aufgabe"
+    }
   }
 }

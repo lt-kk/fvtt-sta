@@ -6,9 +6,10 @@ import { BaseActorSheet } from "../BaseActorSheet";
 import { itemSystem } from "../../util/document";
 import { StaSystemItem } from "../../item/StaSystemItem";
 import { weaponRoll } from "../../item/starshipweapon/StarshipWeaponRoll";
+import { tplPath } from "../../template/TemplateHelpers";
 
 export class StarshipSheet extends BaseActorSheet<StaStarship> {
-  static templatePath = `${sta.templateBasePath}/actor/starship/StarshipSheet.hbs`;
+  static templatePath = tplPath("actor/starship/StarshipSheet.hbs");
 
   get template() {
     return StarshipSheet.templatePath;

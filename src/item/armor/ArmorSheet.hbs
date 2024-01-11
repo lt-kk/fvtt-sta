@@ -1,5 +1,5 @@
 <form class="sta-body" autocomplete="off">
-  {{> (concat templatePath "/item/_partials/ItemHeader.hbs") this }}
+  {{> (tplPath "item/_partials/ItemHeader.hbs") this }}
 
   <section class="properties border-left">
     <h1>{{localize "sta.item.properties"}}
@@ -55,9 +55,9 @@
     </section>
   </section>
 
-  {{> (concat templatePath "/item/_partials/PropertyText.hbs")
+  {{> (tplPath "item/_partials/PropertyText.hbs")
     name="description" title="sta.item.description" value=sta.description}}
-  {{> (concat templatePath "/item/_partials/Rule.hbs")
+  {{> (tplPath "item/_partials/Rule.hbs")
     title="sta.item.rule" rule=sta.rule}}
 
 </form>

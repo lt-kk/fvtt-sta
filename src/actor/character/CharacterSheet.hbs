@@ -105,7 +105,7 @@
       <label class="property attribute attribute-{{name}} reverse">
         <input class="flag" name="system.taskRoll.attribute" type="radio" value="{{name}}"
                {{#if (eq ../sta.taskRoll.attribute name)}}checked="checked"{{/if}}>
-        <input class="form-control" name="system.attribute.{{name}}" type="text" value="{{value}}"
+        <input class="form-control" name="system.attributes.{{name}}" type="text" value="{{value}}"
                data-dtype="Number" tabindex="2" />
         <span class="label">{{localize (concat "sta.attribute." name)}}</span>
       </label>
@@ -120,7 +120,7 @@
       <label class="property discipline discipline-{{name}}">
         <input class="flag" name="system.taskRoll.discipline" type="radio" value="{{name}}"
                {{#if (eq ../sta.taskRoll.discipline name)}}checked="checked"{{/if}}>
-        <input class="form-control" name="system.discipline.{{name}}" type="text" value="{{value}}"
+        <input class="form-control" name="system.disciplines.{{name}}" type="text" value="{{value}}"
                data-dtype="Number" tabindex="3" />
         <span class="label">{{localize (concat "sta.discipline." name)}}</span>
       </label>

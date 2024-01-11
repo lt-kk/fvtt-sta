@@ -8,9 +8,10 @@ import { itemSystem } from "../../util/document";
 import { BaseActorSheet } from "../BaseActorSheet";
 import { StaSystemItem } from "../../item/StaSystemItem";
 import { StaCharacterWeapon } from "../../item/characterweapon/StaCharacterWeapon";
+import { tplPath } from "../../template/TemplateHelpers";
 
 export class CharacterSheet extends BaseActorSheet<StaCharacter> {
-  static templatePath = `${sta.templateBasePath}/actor/character/CharacterSheet.hbs`;
+  static templatePath = tplPath("actor/character/CharacterSheet.hbs");
 
   get template() {
     return CharacterSheet.templatePath;

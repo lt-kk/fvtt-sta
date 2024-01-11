@@ -36,18 +36,16 @@
   .message-content {
     .roll-details {
       display: flex;
-      > * {
-        flex-grow: 1;
-        align-items: stretch;
-        justify-content: stretch;
-      }
-    }
-    .roll-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
       font-size: @text-tiny-size;
-      margin-right: @gap;
+      align-items: stretch;
+      justify-content: stretch;
+
+      > .left, > .right {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
       .value {
         font-size: @text-size;
       }
@@ -59,16 +57,31 @@
       font-size: smaller;
     }
   }
+
   .roll-dice {
   }
+
   .roll-data {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    .roll-source, .actions-used, .quality {
+
+    .roll-source, .actions-used {
       white-space: nowrap;
     }
+
+    .qualities {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      margin-top: @gap;
+
+      .quality {
+        white-space: nowrap;
+      }
+    }
   }
+
   .roll-result {
     display: flex;
     //flex-direction: column;
@@ -82,6 +95,7 @@
 
   .message-actions {
     padding-right: @gap;
+
     .message-action {
       .lcars-bar(@color-level-info, transparent, @sta-h4-size);
       justify-content: center;
@@ -104,6 +118,7 @@
 
   .roll {
     cursor: pointer;
+
     .reroll {
       display: none;
     }

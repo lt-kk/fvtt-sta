@@ -17,7 +17,6 @@ export abstract class BaseActorSheet<STA extends StaActor> extends ActorSheet {
       ...this.additionalData(this.sta, data),
       settings: sta.settings,
       sta: (this.actor as StaSystemActor).sta!,
-      templatePath: sta.templateBasePath,
     };
     // console.log(sheetData);
     return sheetData;

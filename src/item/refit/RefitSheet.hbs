@@ -1,5 +1,5 @@
 <form class="sta-body" autocomplete="off">
-  {{> (concat templatePath "/item/_partials/ItemHeader.hbs") this }}
+  {{> (tplPath "item/_partials/ItemHeader.hbs") this }}
 
   <section class="property system border-left">
     <h4>{{localize "sta.system._singular"}}</h4>
@@ -14,6 +14,6 @@
     </div>
   </section>
 
-  {{> (concat templatePath "/item/_partials/PropertyText.hbs")
+  {{> (tplPath "item/_partials/PropertyText.hbs")
     name="description" title="sta.item.description" value=sta.description}}
 </form>
