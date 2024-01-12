@@ -254,21 +254,21 @@
       },
       "complication": {
         "_singular": "Komplikation",
-        "_plural": "Komplikationen"
+        "_plural": "Komplikationen",
+        "X": "Komplikationsspanne {X}"
       },
       "focus": "Fokus anwendbar",
+      "useFocus": "Fokus",
       "determination": "Entschlossenheit nutzen?",
+      "useDetermination": "Entschlossenheit",
       "dicePool": "Würfelpool",
       "effect": {
         "_singular": "Effekt",
         "_plural": "Effekte"
       },
-      "task": {
-        "_singular": "Aufgabe"
-      },
-      "challenge": {
-        "_singular": "Herausforderung"
-      },
+      "task": "Aufgabe",
+      "challenge":  "Herausforderung",
+      "damage": "Schaden",
       "reroll": "Neu würfeln"
     },
     "range": {
