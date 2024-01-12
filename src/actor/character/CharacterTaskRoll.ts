@@ -22,7 +22,7 @@ export async function characterTaskRoll(sta: StaCharacter, dicePool: number, {
   const disciplineValue = sta.disciplines[sta.taskRoll.discipline];
   let rollData: CharacterTaskRollData = {
     result: undefined,
-    actions: {simple: 0, task: 1},
+    actions: { simple: 0, task: 1 },
     source: sta as StaEntity,
     dicePool: dicePool,
     target: attributeValue + disciplineValue,
@@ -34,7 +34,7 @@ export async function characterTaskRoll(sta: StaCharacter, dicePool: number, {
     discipline: sta.taskRoll.discipline,
     attributeValue: attributeValue,
     disciplineValue: disciplineValue,
-  }
+  };
   rollData = await rollDataDialog(rollData, "actor/character/CharacterTaskRollDialog.hbs");
   if (rollData.focus) rollData.double = disciplineValue;
   return new TaskRoll("", rollData);

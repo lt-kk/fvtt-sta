@@ -45,6 +45,9 @@
         display: flex;
         flex-direction: column;
       }
+      > .left {
+        justify-content: space-between;
+      }
 
       .value {
         font-size: @text-size;
@@ -65,18 +68,18 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    grid-gap: @gap;
 
     .roll-source, .actions-used {
       white-space: nowrap;
     }
 
-    .qualities {
+    .qualities, .properties, .modifiers {
       display: flex;
       flex-direction: column;
       align-items: end;
-      margin-top: @gap;
 
-      .quality {
+      > * {
         white-space: nowrap;
       }
     }
@@ -125,6 +128,12 @@
 
     &:has(.reroll:checked) {
       box-shadow: 0 0 5px @color-shadow-highlight;
+    }
+  }
+
+  .type-taskroll {
+    .roll-source {
+      display: none;
     }
   }
 

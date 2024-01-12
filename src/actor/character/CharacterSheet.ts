@@ -1,4 +1,3 @@
-import { sta } from "../../config";
 import { StaCharacter } from "./StaCharacter";
 import { characterTaskRoll } from "./CharacterTaskRoll";
 import { challengeRoll } from "../../roll/challange/ChallangeRoll";
@@ -9,6 +8,7 @@ import { BaseActorSheet } from "../BaseActorSheet";
 import { StaSystemItem } from "../../item/StaSystemItem";
 import { StaCharacterWeapon } from "../../item/characterweapon/StaCharacterWeapon";
 import { tplPath } from "../../template/TemplateHelpers";
+import { sta } from "../../config";
 
 export class CharacterSheet extends BaseActorSheet<StaCharacter> {
   static templatePath = tplPath("actor/character/CharacterSheet.hbs");

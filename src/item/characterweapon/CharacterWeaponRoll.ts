@@ -6,9 +6,10 @@ import { currentTargets } from "../../util/user";
 import { StaSystemActor } from "../../actor/StaSystemActor";
 import { StaCharacterWeapon } from "./StaCharacterWeapon";
 import { StaCharacter } from "../../actor/character/StaCharacter";
-import { tplPath } from "../../template/TemplateHelpers";
 import { rollDataDialog } from "../../roll/RollDialog";
 import { LooseObject } from "../../util/util";
+import { tplPath } from "../../template/TemplateHelpers";
+import { sta } from "../../config";
 
 
 export async function weaponRoll(source: StaCharacterWeapon, security: number, damage: number) {
@@ -30,10 +31,14 @@ export async function weaponRoll(source: StaCharacterWeapon, security: number, d
 
 
 export class CharacterWeaponRoll extends ChallengeRoll<ChallengeRollData> {
-
+  init() {
+    super.init();
+    this.tpl.additionalData = tplPath("item/characterweapon/CharacterWeaponRollData.hbs");
+    this.title = sta.game.i18n.localize("sta.roll.damage")
+  }
 
   handleAction(message: ChatMessage, action: string, formData: LooseObject<any>) {
-    if(action == "applyDamage") this.handleDamage(message);
+    if (action == "applyDamage") this.handleDamage(message);
   }
 
   private handleDamage(message: ChatMessage) {

@@ -1,6 +1,6 @@
 import { sta } from "../../config";
 import { LooseObject } from "../../util/util";
-import { StaRoll, StaRollData, StaRollDice, StaRollResult, StaRollTemplates } from "../StaRoll";
+import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "../StaRoll";
 import { tplPath } from "../../template/TemplateHelpers";
 
 
@@ -23,9 +23,9 @@ export class TaskRollDice implements StaRollDice {
     value: number,
     successes: number,
     complications: number,
-    determination = false
+    determination = false,
   ) {
-    this.faces = faces
+    this.faces = faces;
     this.value = value;
     this.successes = successes;
     this.complications = complications;
@@ -69,12 +69,19 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
     super(`${pool}d20`, rollData, options);
   };
 
+  init() {
+    super.init();
+    this.tpl.formula = tplPath("roll/task/TaskRollFormula.hbs")
+    this.tpl.additionalData = tplPath("roll/task/TaskRollData.hbs")
+    this.title = sta.game.i18n.localize("sta.roll.task");
+  }
+
   evaluateSta(data: TaskRollData): TaskRollResult {
     let results = this.dice
       .map((t) => {
         return t.results.map((r => {
           return this.resultToDice(t.faces, r.result, data);
-        }))
+        }));
       });
     if (data.determination) {
       results.push([new TaskRollDice(20, 1, 2, 0, true)]);

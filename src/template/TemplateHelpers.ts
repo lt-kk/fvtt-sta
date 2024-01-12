@@ -1,6 +1,5 @@
 import { HelperOptions } from "handlebars";
 import { sta } from "../config";
-import { e } from "vitest/dist/reporters-O4LBziQ_";
 
 export function registerHandlebarHelpers() {
   Handlebars.registerHelper({

@@ -1,0 +1,15 @@
+<span class="properties">
+  <span>
+    {{#with staData.attribute}}{{localize (concat "sta.attribute." this)}}{{/with}}
+    {{#with staData.system}}{{localize (concat "sta.system." this)}}{{/with}}
+    +
+    {{#with staData.discipline}}{{localize (concat "sta.discipline." this)}}{{/with}}
+    {{#with staData.department}}{{localize (concat "sta.department." this)}}{{/with}}
+  </span>
+</span>
+<span class="modifiers">
+  <span class="complication">{{localize "sta.roll.complication.X" X=staData.complication}}</span>
+  {{#if staData.determination}}<span class="determination">{{localize "sta.roll.useDetermination"}}</span>{{/if}}
+  {{#if staData.focus}}<span class="focus">{{localize "sta.roll.useFocus"}}</span>{{/if}}
+  {{log this}}
+</span>

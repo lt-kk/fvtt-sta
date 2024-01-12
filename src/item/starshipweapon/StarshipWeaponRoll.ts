@@ -8,6 +8,7 @@ import { Breach, StaStarship, StaStarshipSystems } from "../../actor/starship/St
 import { StaStarshipWeapon } from "./StaStarshipWeapon";
 import { LooseObject, randomIndex } from "../../util/util";
 import { tplPath } from "../../template/TemplateHelpers";
+import { sta } from "../../config";
 
 
 export function weaponRoll(source: StaEntity, dicePool: number, targetSystem?: keyof StaStarshipSystems) {
@@ -28,7 +29,8 @@ export type StarshipWeaponRollData = ChallengeRollData & {
 export class StarshipWeaponRoll extends ChallengeRoll<StarshipWeaponRollData> {
   init() {
     super.init();
-    this.tpl.additionalData = tplPath("item/starshipweapon/StarshipWeaponRollData.hbs")
+    this.tpl.additionalData = tplPath("item/starshipweapon/StarshipWeaponRollData.hbs");
+    this.title = sta.game.i18n.localize("sta.roll.damage")
   }
 
   handleAction(message: ChatMessage, action: string, formData: LooseObject<any>) {

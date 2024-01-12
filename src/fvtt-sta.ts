@@ -82,10 +82,13 @@ function registerTemplates() {
     tplPath("item/_partials/ListItemDefaultActions.hbs"),
     tplPath("item/_partials/PropertyText.hbs"),
     tplPath("item/_partials/Rule.hbs"),
+    tplPath("item/characterweapon/CharacterWeaponRollData.hbs"),
     tplPath("item/starshipweapon/StarshipWeaponRollData.hbs"),
+    tplPath("roll/task/TaskRollData.hbs"),
+    tplPath("roll/task/TaskRollFormula.hbs"),
     tplPath("template/Empty.hbs"),
   ]);
-  loadTemplates(Object.values(new StaRollTemplates()))
+  loadTemplates(Object.values(new StaRollTemplates()));
 }
 
 

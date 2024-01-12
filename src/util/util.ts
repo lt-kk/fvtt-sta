@@ -40,15 +40,13 @@ export function constrainNumber(value: number, min: number, max: number): number
 }
 
 
-export function formData(html: HTMLElement | JQuery ): LooseObject<any> {
+export function formData(html: HTMLElement | JQuery): LooseObject<any> {
   html = $(html);
-  let form: JQuery = html.find("form")
-  if(form.empty()) form = html.closest("form");
-
+  let form: JQuery = html.find("form");
+  if (form.length < 1) form = html.closest("form");
   let values: LooseObject<any> = {};
   form.serializeArray().forEach((entry) => {
     values[entry.name] = entry.value;
   });
-  console.log("formData", form, values);
   return values;
 }

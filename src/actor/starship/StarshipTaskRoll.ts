@@ -19,7 +19,7 @@ export async function starshipTaskRoll(sta: StaStarship, dicePool: number, {
   const departmentValue = sta.departments[sta.taskRoll.department];
   let rollData = await rollDataDialog<StarshipTaskRollData>({
     result: undefined,
-    actions: {simple: 0, task: 1},
+    actions: { simple: 0, task: 1 },
     source: sta as StaEntity,
     dicePool: dicePool,
     target: systemValue + departmentValue,
@@ -30,6 +30,6 @@ export async function starshipTaskRoll(sta: StaStarship, dicePool: number, {
     department: sta.taskRoll.department,
     systemValue: systemValue,
     departmentValue: departmentValue,
-  }, "roll/TaskRollDialog.hbs");
+  }, "roll/task/TaskRollDialog.hbs");
   return new TaskRoll("", rollData);
 }

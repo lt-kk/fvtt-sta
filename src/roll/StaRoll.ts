@@ -37,6 +37,8 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
 
   tpl: StaRollTemplates = new StaRollTemplates();
 
+  title: string | undefined;
+
   actions: StaRollAction[] = [];
 
   constructor(
@@ -47,7 +49,7 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
   }
 
   init() {
-    this.actions.push(new StaRollAction("reroll"))
+    this.actions.push(new StaRollAction("reroll"));
   }
 
   toJSON() {
@@ -68,13 +70,14 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
   abstract evaluateSta(data: D): R
 
   async render({
-    title = sta.game.i18n.localize("sta.roll"),
+    title = this.title,
     flavor = undefined as string | undefined,
     isPrivate = false,
   } = {}) {
     if (!this._evaluated) await this.evaluate({ async: true });
 
     const chatData = {
+      type: this.constructor.name.toLowerCase(),
       title: title,
       formula: isPrivate ? "???" : this._formula,
       flavor: isPrivate ? null : flavor,
@@ -149,7 +152,7 @@ export class StaRollTemplates {
     dice = tplPath("roll/RollDice.hbs"),
     result = tplPath("roll/RollResult.hbs"),
     actions = tplPath("roll/RollActions.hbs"),
-    additionalData = tplPath("template/Empty.hbs")
+    additionalData = tplPath("template/Empty.hbs"),
   } = {}) {
     this.chat = chat;
     this.formula = formula;

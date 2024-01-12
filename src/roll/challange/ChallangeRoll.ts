@@ -54,12 +54,17 @@ export class ChallengeRoll<D extends ChallengeRollData> extends StaRoll<D, Chall
     super(`${pool}d6`, rollData, options);
   }
 
+  init() {
+    super.init();
+    this.title = sta.game.i18n.localize("sta.roll.challenge");
+  }
+
   evaluateSta(data: ChallengeRollData): ChallengeRollResult {
     const results = this.dice.map((t) => {
       return t.results.map(r => {
-        return this.resultToDice(t.faces, r.result)
-      })
-    })
+        return this.resultToDice(t.faces, r.result);
+      });
+    });
     return new ChallengeRollResult(results);
   }
 
@@ -85,7 +90,7 @@ export class ChallengeRoll<D extends ChallengeRollData> extends StaRoll<D, Chall
 export function challengeRoll(source: StaEntity, dicePool: number) {
   const rollData: ChallengeRollData = {
     result: undefined,
-    actions: {simple: 0, task: 1},
+    actions: { simple: 0, task: 1 },
     source: source,
     dicePool: dicePool,
   };

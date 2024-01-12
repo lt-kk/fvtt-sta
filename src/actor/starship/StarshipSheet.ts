@@ -1,4 +1,3 @@
-import { sta } from "../../config";
 import { StaStarship } from "./StaStarship";
 import { starshipTaskRoll } from "./StarshipTaskRoll";
 import { challengeRoll } from "../../roll/challange/ChallangeRoll";
@@ -7,6 +6,7 @@ import { itemSystem } from "../../util/document";
 import { StaSystemItem } from "../../item/StaSystemItem";
 import { weaponRoll } from "../../item/starshipweapon/StarshipWeaponRoll";
 import { tplPath } from "../../template/TemplateHelpers";
+import { sta } from "../../config";
 
 export class StarshipSheet extends BaseActorSheet<StaStarship> {
   static templatePath = tplPath("actor/starship/StarshipSheet.hbs");
@@ -30,6 +30,7 @@ export class StarshipSheet extends BaseActorSheet<StaStarship> {
   async rollTask(dicePool: number) {
     const roll = await starshipTaskRoll(this.sta!, dicePool);
     return roll.toMessage({
+      title: sta.game.i18n.localize("sta.roll.task"),
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });
   }
@@ -37,6 +38,7 @@ export class StarshipSheet extends BaseActorSheet<StaStarship> {
   async rollChallenge(dicePool: number) {
     const roll = challengeRoll(this.sta, dicePool);
     return roll.toMessage({
+      title: sta.game.i18n.localize("sta.roll.challenge"),
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });
   }
@@ -49,6 +51,7 @@ export class StarshipSheet extends BaseActorSheet<StaStarship> {
     const security = Math.abs(this.sta?.departments.security!);
     const roll = weaponRoll(item.sta!, damage + scale + security);
     return roll.toMessage({
+      title: sta.game.i18n.localize("sta.roll.damage"),
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
     });
   }
