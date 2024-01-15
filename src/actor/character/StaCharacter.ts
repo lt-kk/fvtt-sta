@@ -149,7 +149,7 @@ export class StaCharacter extends StaActor {
     const actor = sta.game.actors!.get(this.id)!;
     update(actor, {
       "stress.value": this.stress.max,
-      "determination.value": this.determination.max,
+      "determination.value": 1,
     });
     actor.updateEmbeddedDocuments("Item",
       this.injuries.map((injury) => {
