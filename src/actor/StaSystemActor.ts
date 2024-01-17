@@ -9,6 +9,7 @@ export class StaSystemActor extends Actor implements StaSystemDocument<StaActor>
 
   prepareBaseData() {
     super.prepareBaseData();
+    console.log(this.type, this.name, this)
     this.sta = actorType(this.type).entityFactory(this);
   }
 
