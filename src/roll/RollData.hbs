@@ -1,10 +1,4 @@
 <div class="roll-data">
   <span class="roll-source">{{staData.source.name}}</span>
-  <span class="actions-used">
-    <span class="label">{{localize "sta.action._plural"}}:</span>
-    <span class="value-simple" title="{{localize "sta.actions.simple"}}">{{staData.actions.simple}}</span>
-    <span>/</span>
-    <span class="value-task" title="{{localize "sta.actions.task"}}">{{staData.actions.task}}</span>
-  </span>
   {{> (lookup tpl "additionalData") this }}
 </div>
