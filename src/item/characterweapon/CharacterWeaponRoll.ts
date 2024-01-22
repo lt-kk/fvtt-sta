@@ -10,23 +10,24 @@ import { rollDataDialog } from "../../roll/RollDialog";
 import { LooseObject } from "../../util/util";
 import { tplPath } from "../../template/TemplateHelpers";
 import { sta } from "../../config";
+import { StaRollAction } from "../../roll/StaRoll";
 
 
 export async function weaponRoll(source: StaCharacterWeapon, security: number, damage: number) {
+  const sourceEntity = deepClone(source)
   let rollData: ChallengeRollData = {
     result: undefined,
     actions: { simple: 0, task: 1 },
     dicePool: security + damage,
-    source: source,
+    source: sourceEntity,
     security: security,
     damage: damage,
   };
-  // FIXME item is modified
   rollData = await rollDataDialog(rollData, "item/characterweapon/CharacterWeaponRollDialog.hbs");
-  if (rollData.charged == "area") source.qualities.area = true;
-  if (rollData.charged == "viciousx") source.qualities.viciousx = 1;
-  if (rollData.charged == "piercingx") source.qualities.piercingx = 2;
-  if (rollData.charged == "none") source.qualities.charge = false;
+  if (rollData.charged == "area") sourceEntity.qualities.area = true;
+  if (rollData.charged == "viciousx") sourceEntity.qualities.viciousx = 1;
+  if (rollData.charged == "piercingx") sourceEntity.qualities.piercingx = 2;
+  if (rollData.charged == "none") sourceEntity.qualities.charge = false;
   return new CharacterWeaponRoll("", rollData);
 }
 
@@ -36,10 +37,11 @@ export class CharacterWeaponRoll extends ChallengeRoll<ChallengeRollData> {
     super.init();
     this.tpl.additionalData = tplPath("item/characterweapon/CharacterWeaponRollData.hbs");
     this.title = sta.game.i18n.localize("sta.roll.damage")
+    this.actions.push(new StaRollAction("apply-damage"));
   }
 
   handleAction(message: ChatMessage, action: string, formData: LooseObject<any>) {
-    if (action == "applyDamage") this.handleDamage(message);
+    if (action == "apply-damage") this.handleDamage(message);
   }
 
   private handleDamage(message: ChatMessage) {

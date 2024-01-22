@@ -269,7 +269,8 @@
       "task": "Aufgabe",
       "challenge":  "Herausforderung",
       "damage": "Schaden",
-      "reroll": "Neu würfeln"
+      "reroll": "Neu würfeln",
+      "apply-damage": "Schaden anwenden"
     },
     "range": {
       "_singular": "Reichweite",

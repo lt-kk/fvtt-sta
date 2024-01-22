@@ -102,9 +102,14 @@
   }
 
   .message-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: stretch;
+    grid-gap: @gap;
     padding-right: @gap;
 
     .message-action {
+      flex-grow: 1;
       .lcars-bar(@color-level-info, transparent, @sta-h4-size);
       justify-content: center;
       background: none;
@@ -121,6 +126,10 @@
         height: @sta-h3-size;
         width: @sta-h3-size;
       }
+
+      &:hover {
+        box-shadow: 0 0 5px 0 @color-shadow-highlight;
+      }
     }
   }
 
@@ -132,7 +141,7 @@
     }
 
     &:has(.reroll:checked) {
-      box-shadow: 0 0 5px @color-shadow-highlight;
+      box-shadow: 0 0 5px 1px @color-shadow-highlight;
     }
   }
 

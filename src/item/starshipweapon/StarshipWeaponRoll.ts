@@ -9,6 +9,7 @@ import { StaStarshipWeapon } from "./StaStarshipWeapon";
 import { LooseObject, randomIndex } from "../../util/util";
 import { tplPath } from "../../template/TemplateHelpers";
 import { sta } from "../../config";
+import { StaRollAction } from "../../roll/StaRoll";
 
 
 export function weaponRoll(source: StaEntity, dicePool: number, targetSystem?: keyof StaStarshipSystems) {
@@ -31,11 +32,12 @@ export class StarshipWeaponRoll extends ChallengeRoll<StarshipWeaponRollData> {
     super.init();
     this.tpl.additionalData = tplPath("item/starshipweapon/StarshipWeaponRollData.hbs");
     this.title = sta.game.i18n.localize("sta.roll.damage")
+    this.actions.push(new StaRollAction("apply-damage"));
   }
 
   handleAction(message: ChatMessage, action: string, formData: LooseObject<any>) {
     super.handleAction(message, action, formData);
-    if (action == "applyDamage") this.handleDamage(message);
+    if (action == "apply-damage") this.handleDamage(message);
   }
 
   private handleDamage(message: ChatMessage) {
