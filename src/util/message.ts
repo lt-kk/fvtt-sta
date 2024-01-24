@@ -5,6 +5,10 @@ export interface HasActivateListeners {
   activateListeners(html: JQuery, message: ChatMessage): void;
 }
 
+export interface HasRolls {
+  rolls: Roll[];
+}
+
 
 export function getActor(message: ChatMessage) {
   return (game as Game).actors!

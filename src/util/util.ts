@@ -50,3 +50,14 @@ export function formData(html: HTMLElement | JQuery): LooseObject<any> {
   });
   return values;
 }
+
+
+export function mapNotNullOrUndefined<T, R>(arr: T[], fn: (item: T) => R | null | undefined): R[] {
+  return arr.reduce((result: R[], item: T) => {
+    const value = fn(item);
+    if (value !== null && value !== undefined) {
+      result.push(value);
+    }
+    return result;
+  }, []);
+}

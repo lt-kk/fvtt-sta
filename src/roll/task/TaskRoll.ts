@@ -1,5 +1,4 @@
 import { sta } from "../../config";
-import { LooseObject } from "../../util/util";
 import { StaRoll, StaRollData, StaRollDice, StaRollResult } from "../StaRoll";
 import { tplPath } from "../../template/TemplateHelpers";
 
@@ -11,25 +10,23 @@ export type TaskRollData = StaRollData<TaskRollResult> & {
   determination: boolean;
 }
 
-export class TaskRollDice implements StaRollDice {
-  faces: number;
-  value: number;
-  successes: number;
+export class TaskRollDice extends StaRollDice {
   complications: number;
   determination: boolean;
 
   constructor(
     faces: number,
     value: number,
+    rerolled: boolean,
     successes: number,
     complications: number,
     determination = false,
   ) {
-    this.faces = faces;
-    this.value = value;
-    this.successes = successes;
+    super(faces, value, rerolled, successes);
     this.complications = complications;
     this.determination = determination;
+
+    this.rerollable = this.rerollable && !this.determination;
   }
 }
 
@@ -42,11 +39,11 @@ export class TaskRollResult implements StaRollResult<TaskRollDice> {
     this.rolls = rolls;
     this.successes = this.rolls
       .flatMap((r) => r)
-      .map((d) => d.successes)
+      .map((d) => d.rerolled ? 0 : d.successes)
       .reduce((p, c) => p + c);
     this.complications = this.rolls
       .flatMap((r) => r)
-      .map((d) => d.complications)
+      .map((d) => d.rerolled ? 0 : d.complications)
       .reduce((p, c) => p + c);
   }
 }
@@ -71,8 +68,8 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
 
   init() {
     super.init();
-    this.tpl.formula = tplPath("roll/task/TaskRollFormula.hbs")
-    this.tpl.additionalData = tplPath("roll/task/TaskRollData.hbs")
+    this.tpl.formula = tplPath("roll/task/TaskRollFormula.hbs");
+    this.tpl.additionalData = tplPath("roll/task/TaskRollData.hbs");
     this.title = sta.game.i18n.localize("sta.roll.task");
   }
 
@@ -80,25 +77,27 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
     let results = this.dice
       .map((t) => {
         return t.results.map((r => {
-          return this.resultToDice(t.faces, r.result, data);
+          return this.resultToDice(t.faces, r, data);
         }));
       });
     if (data.determination) {
-      results.push([new TaskRollDice(20, 1, 2, 0, true)]);
+      results.push([new TaskRollDice(20, 1, false, 2, 0, true)]);
     }
     return new TaskRollResult(results);
   }
 
-  private resultToDice(faces: number, value: number, data: LooseObject<any> & TaskRollData & {
+  private resultToDice(faces: number, result: DiceTerm.Result, data: TaskRollData & {
     dicePool: number;
     target: number;
     double: number;
     complication: number;
     determination: boolean
   }) {
+    const value = result.result;
     return new TaskRollDice(
       faces,
       value,
+      result.rerolled || false,
       value <= data.double ? 2 : value <= data.target ? 1 : 0,
       value >= 20 - data.complication ? 1 : 0,
     );
@@ -106,6 +105,7 @@ export class TaskRoll extends StaRoll<TaskRollData, TaskRollResult> {
 
   getResultCSS(dice: TaskRollDice): (string | null)[] {
     return [
+      dice.rerolled ? "rerolled" : null,
       dice.successes == 1 ? "success" : null,
       dice.successes == 2 ? "critical" : null,
       dice.complications > 0 ? "complication" : null,

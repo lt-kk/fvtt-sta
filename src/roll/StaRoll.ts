@@ -3,7 +3,7 @@ import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-v
 import {
   ChatMessageDataConstructorData,
 } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
-import { HasActivateListeners } from "../util/message";
+import { getActor, HasActivateListeners } from "../util/message";
 import { StaEntity } from "../model/StaSystemDocument";
 import { formData, LooseObject } from "../util/util";
 import { tplPath } from "../template/TemplateHelpers";
@@ -20,10 +20,26 @@ export type Actions = {
   task: number,
 }
 
-export interface StaRollDice {
+export abstract class StaRollDice {
   faces: number;
   value: number;
+  rerolled: boolean;
   successes: number;
+
+  rerollable: boolean;
+
+  constructor(
+    faces: number,
+    value: number,
+    rerolled: boolean,
+    successes: number,
+  ) {
+    this.faces = faces;
+    this.rerolled = rerolled ?? false;
+    this.value = value;
+    this.successes = successes;
+    this.rerollable = !this.rerolled;
+  }
 }
 
 export interface StaRollResult<D extends StaRollDice> {
@@ -131,7 +147,36 @@ export abstract class StaRoll<D extends StaRollData<R>, R extends StaRollResult<
 
   /** messages are restored from storage, so no references in action possible */
   handleAction(message: ChatMessage, action: string, formData: LooseObject<any>) {
-    console.log("StaRoll.handleAction", message, action, formData);
+    if (action == "reroll") this.handleReroll(message, formData);
+  }
+
+
+  private handleReroll(message: ChatMessage, formData: LooseObject<any>) {
+    const terms = deepClone(this.terms);
+    const checked = this.facesToReroll(formData, terms);
+
+    checked.forEach((dice, faces) => {
+      terms.push(new Die({ number: dice, faces: faces }));
+    });
+
+    const reroll = this.clone();
+    reroll.data.result = undefined;
+    reroll.terms = terms;
+    return reroll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: getActor(message) }),
+    });
+  }
+
+  private facesToReroll(formData: LooseObject<any>, terms: RollTerm[]) {
+    const checked = new Map<number, number>;
+    Object.keys(formData).forEach((name) => {
+      const [, a, b] = name.split("-");
+      const rollTerm = terms[parseInt(a)] as DiceTerm;
+      rollTerm.results[parseInt(b)].rerolled = true;
+      const faces = rollTerm.faces;
+      checked.set(faces, (checked.get(faces) || 0) + 1);
+    });
+    return checked;
   }
 }
 
