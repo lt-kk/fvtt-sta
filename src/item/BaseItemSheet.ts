@@ -2,6 +2,7 @@ import { LooseObject } from "../util/util";
 import { sta } from "../config";
 import { StaItem } from "./StaItem";
 import { StaSystemItem } from "./StaSystemItem";
+import { EditorDialog } from "../dialog/EditorDialog";
 
 export abstract class BaseItemSheet<STA extends StaItem> extends ItemSheet {
   get sta(): STA {
@@ -36,6 +37,19 @@ export abstract class BaseItemSheet<STA extends StaItem> extends ItemSheet {
 
   additionalData(sta: STA, data: ItemSheet.Data): LooseObject<any> {
     return {};
+  }
+
+  override activateListeners(html: JQuery) {
+    super.activateListeners(html);
+    html.find(".control.text").on("click", this.handleText.bind(this));
+  }
+
+  handleText(event: JQuery.ClickEvent) {
+    event.preventDefault();
+    const element = $(event.currentTarget);
+    const field = element.data("field") as string;
+    const title = element.data("title") as string;
+    new EditorDialog(this.document, field, title, this.isEditable).render(true)
   }
 }
 

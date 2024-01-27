@@ -31,7 +31,7 @@ export class StarshipWeaponRoll extends ChallengeRoll<StarshipWeaponRollData> {
   init() {
     super.init();
     this.tpl.additionalData = tplPath("item/starshipweapon/StarshipWeaponRollData.hbs");
-    this.title = sta.game.i18n.localize("sta.roll.damage")
+    this.title = sta.game.i18n.localize("sta.roll.damage");
     this.actions.push(new StaRollAction("apply-damage"));
   }
 

@@ -31,6 +31,15 @@
     font-size: @text-tiny-size;
   }
 
+  .rich-text {
+    color: @almost-white;
+    min-height: @text-size;
+    max-height: 300px;
+    overflow-y: auto;
+    p {
+      margin-top: 0;
+    }
+  }
 
   .form-bar {
     .lcars-bar(@sta-color-h3-bg, @sta-color-h3-a, @sta-h3-size);
@@ -129,4 +138,8 @@
   .property.rule {
     width: 100%;
   }
+}
+
+#tinymce {
+  color: @almost-white;
 }

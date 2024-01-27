@@ -14,6 +14,5 @@
     </div>
   </section>
 
-  {{> (tplPath "item/_partials/PropertyText.hbs")
-    name="description" title="sta.item.description" value=sta.description}}
+  {{> (tplPath "template/RichTextSection.hbs") sta=sta h="h3" field="description" title="sta.item.description" }}
 </form>

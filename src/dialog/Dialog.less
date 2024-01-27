@@ -27,4 +27,16 @@
       margin-bottom: @gap;
     }
   }
+
+  &.sta-dialog-editor {
+    .window-content {
+      .dialog-content {
+        flex-grow: 1;
+
+        > form, > .editor, .tox-tinymce {
+          min-height: 100%;
+        }
+      }
+    }
+  }
 }

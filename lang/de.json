@@ -235,6 +235,10 @@
       "delete.title": "Löschen bestätigen",
       "delete.content": "Möchtest du '{type}': '{name}' wirklich löschen?"
     },
+    "editor": {
+      "save": "Speichern",
+      "title": "Editieren"
+    },
     "challenge": {
       "_singular": "Herausforderung",
       "_plural": "Herausforderungen"

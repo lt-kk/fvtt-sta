@@ -3,6 +3,7 @@ import { LooseObject } from "../util/util";
 import { confirmDialog } from "../dialog/ConfimDialog";
 import { StaActor } from "./StaActor";
 import { StaSystemActor } from "./StaSystemActor";
+import { EditorDialog } from "../dialog/EditorDialog";
 
 export abstract class BaseActorSheet<STA extends StaActor> extends ActorSheet {
 
@@ -30,6 +31,7 @@ export abstract class BaseActorSheet<STA extends StaActor> extends ActorSheet {
     super.activateListeners(html);
     html.find(".control.create").on("click", this.handleCreate.bind(this));
     html.find(".control.edit").on("click", this.handleEdit.bind(this));
+    html.find(".control.text").on("click", this.handleText.bind(this));
     html.find(".control.delete").on("click", this.handleDelete.bind(this));
     html.find(".control.roll").on("click", this.handleRoll.bind(this));
     html.find(".control.toggle").on("click", this.handleToggle.bind(this));
@@ -53,6 +55,14 @@ export abstract class BaseActorSheet<STA extends StaActor> extends ActorSheet {
     const itemId = this.findItemId(event);
     const item = this.actor.items.get(itemId);
     item?.sheet?.render(true);
+  }
+
+  handleText(event: JQuery.ClickEvent) {
+    event.preventDefault();
+    const element = $(event.currentTarget);
+    const field = element.data("field") as string;
+    const title = element.data("title") as string;
+    new EditorDialog(this.document, field, title, this.isEditable).render(true)
   }
 
   handleDelete(event: JQuery.ClickEvent) {

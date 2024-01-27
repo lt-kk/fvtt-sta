@@ -145,10 +145,7 @@
         list=sta.refits actor=sta}}
     </section>
 
-    <section class="notes border-left">
-      <h2>{{localize "sta.notes._plural"}}</h2>
-      {{editor sta.notes target="system.notes" button=true owner=owner editable=editable}}
-    </section>
+    {{> (tplPath "template/RichTextSection.hbs") sta=sta h="h2" field="notes" title="sta.notes._plural" }}
   </section>
 
 

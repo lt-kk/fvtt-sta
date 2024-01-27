@@ -11,5 +11,6 @@
 * Restrict drag&drop for items
 * Migrate Compendium
 * Chat templates
-* Rich Text editor
 * validations
+* Mission profile as Item
+* Ship class as Item

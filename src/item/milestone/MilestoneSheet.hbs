@@ -1,8 +1,7 @@
 <form class="sta-body" autocomplete="off">
   {{> (tplPath "item/_partials/ItemHeader.hbs") this }}
 
-  {{> (tplPath "item/_partials/PropertyText.hbs")
-    name="description" title="sta.item.description" value=sta.description}}
+  {{> (tplPath "template/RichTextSection.hbs") sta=sta h="h3" field="description" title="sta.item.description" }}
   {{> (tplPath "item/_partials/Rule.hbs")
     title="sta.item.rule" rule=sta.rule}}
 

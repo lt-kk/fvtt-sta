@@ -14,7 +14,7 @@ import { StaRollAction } from "../../roll/StaRoll";
 
 
 export async function weaponRoll(source: StaCharacterWeapon, security: number, damage: number) {
-  const sourceEntity = deepClone(source)
+  const sourceEntity = deepClone(source);
   let rollData: ChallengeRollData = {
     result: undefined,
     actions: { simple: 0, task: 1 },
@@ -36,11 +36,12 @@ export class CharacterWeaponRoll extends ChallengeRoll<ChallengeRollData> {
   init() {
     super.init();
     this.tpl.additionalData = tplPath("item/characterweapon/CharacterWeaponRollData.hbs");
-    this.title = sta.game.i18n.localize("sta.roll.damage")
+    this.title = sta.game.i18n.localize("sta.roll.damage");
     this.actions.push(new StaRollAction("apply-damage"));
   }
 
   handleAction(message: ChatMessage, action: string, formData: LooseObject<any>) {
+    super.handleAction(message, action, formData);
     if (action == "apply-damage") this.handleDamage(message);
   }
 
