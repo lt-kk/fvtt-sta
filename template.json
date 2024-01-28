@@ -161,7 +161,6 @@
     "starshipweapon": {
       "description": "",
       "rule": "",
-      "opportunity": 0,
       "escalation": 0,
       "damage": 0,
       "range": "",

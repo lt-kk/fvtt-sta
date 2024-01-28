@@ -17,7 +17,7 @@ export const sta = {
         max: 2,
       },
       escalation: {
-        max: 2,
+        max: 3,
       },
       armor: {
         protection: {
@@ -27,6 +27,11 @@ export const sta = {
       characterweapon: {
         damage: {
           max: 4,
+        },
+      },
+      starshipweapon: {
+        damage: {
+          max: 5,
         },
       },
     },

@@ -1,11 +1,5 @@
 # Foundry Virtual Tabletop - Star Trek Adventures
 
-### StaActor
-* register actor sheets and entity factories
-
-### StaItem
-* register actor sheets and entity factories
-
 
 ## TODO
 * Restrict drag&drop for items
@@ -14,3 +8,5 @@
 * validations
 * Mission profile as Item
 * Ship class as Item
+* Actor: Smallcraft
+* Actor: Extended Task

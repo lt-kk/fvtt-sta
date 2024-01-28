@@ -5,20 +5,6 @@
     <h1>{{localize "sta.item.properties"}}</h1>
 
     <section class="flags">
-      <section class="property opportunity border-left">
-        <h4>{{localize "sta.item.opportunity"}}</h4>
-        <div class="scale-value">
-          {{#range 0 settings.item.opportunity.max}}
-            <label class="scale-pill
-              {{#if (eq 0 i)}}success{{/if}}
-              {{#if (eq ../sta.opportunity i)}}checked{{/if}}">
-              {{i}}
-              <input name="system.opportunity" type="radio" value="{{i}}" data-dtype="Number"
-                     {{#if (eq ../sta.opportunity i)}}checked="checked"{{/if}} />
-            </label>
-          {{/range}}
-        </div>
-      </section>
       <section class="property escalation border-left">
         <h4>{{localize "sta.item.escalation"}}</h4>
         <div class="scale-value">
@@ -47,7 +33,7 @@
       <section class="property damage border-left">
         <h4>{{localize "sta.item.damage"}}</h4>
         <div class="scale-value">
-          {{#range 0 settings.item.characterweapon.damage.max}}
+          {{#range 0 settings.item.starshipweapon.damage.max}}
             <label class="scale-pill">
               <span class="label">{{i}}</span>
               <input name="system.damage" type="radio" value="{{i}}" data-dtype="Number"

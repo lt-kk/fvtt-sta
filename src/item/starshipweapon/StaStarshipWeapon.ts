@@ -18,7 +18,6 @@ export class StaStarshipWeapon extends StaItem implements HasRule {
   static type = "starshipweapon";
 
   rule: StaRule | undefined;
-  opportunity: number;
   escalation: number;
   damage: number;
   range: StaRange;
@@ -31,7 +30,6 @@ export class StaStarshipWeapon extends StaItem implements HasRule {
     {
       description = "",
       rule = "",
-      opportunity = 0,
       escalation = 0,
       damage = 0,
       range = "near" as StaRange,
@@ -40,7 +38,6 @@ export class StaStarshipWeapon extends StaItem implements HasRule {
   ) {
     super(id, name, img, description);
     this.rule = rule ? new StaRule(`${name}[${id}]`, rule) : undefined;
-    this.opportunity = opportunity;
     this.escalation = escalation;
     this.damage = damage;
     this.range = range;
