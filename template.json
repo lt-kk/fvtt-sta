@@ -2,7 +2,8 @@
   "Actor": {
     "types": [
       "character",
-      "starship"
+      "starship",
+      "smallcraft"
     ],
     "character": {
       "rank": "",
@@ -88,6 +89,68 @@
         "max": 8
       },
       "crew": -1
+    },
+    "smallcraft": {
+      "spaceframe": "",
+      "servicedate": -1,
+      "scale": 1,
+      "resistance": 1,
+      "notes": "",
+      "systems": {
+        "communications": {
+          "value": 7,
+          "breaches": -1
+        },
+        "computers": {
+          "value": 7,
+          "breaches": -1
+        },
+        "engines": {
+          "value": 7,
+          "breaches": -1
+        },
+        "sensors": {
+          "value": 7,
+          "breaches": -1
+        },
+        "structure": {
+          "value": 7,
+          "breaches": -1
+        },
+        "weapons": {
+          "value": 7,
+          "breaches": -1
+        }
+      },
+      "departments": {
+        "command": 0,
+        "conn": 0,
+        "security": 0,
+        "engineering": 0,
+        "science": 0,
+        "medicine": 0
+      },
+      "shields": {
+        "value": 8,
+        "max": 8
+      },
+      "power": {
+        "value": 8,
+        "max": 8
+      },
+      "extendedtask": {
+        "opposition": "",
+        "difficulty": 0,
+        "resistance": 0,
+        "work": {
+          "value": 0,
+          "max": 1
+        },
+        "magnitude": {
+          "value": 0,
+          "max": 1
+        }
+      }
     }
   },
   "Item": {

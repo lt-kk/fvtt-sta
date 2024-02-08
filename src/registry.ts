@@ -28,6 +28,8 @@ import { createLaunchbay } from "./item/launchbay/StaLaunchbay";
 import { createInjury } from "./item/injury/StaInjury";
 import { createFocus } from "./item/focus/StaFocus";
 import { createCharacterWeapon } from "./item/characterweapon/StaCharacterWeapon";
+import { createSmallcraft } from "./actor/smallcraft/StaSmallcraft";
+import { SmallcraftSheet } from "./actor/smallcraft/SmallcraftSheet";
 
 
 export interface ActorTypeConfig {
@@ -44,6 +46,10 @@ export class ActorTypes {
   starship: ActorTypeConfig = {
     entityFactory: createStarship,
     sheet: StarshipSheet,
+  };
+  smallcraft: ActorTypeConfig = {
+    entityFactory: createSmallcraft,
+    sheet: SmallcraftSheet,
   };
 }
 
