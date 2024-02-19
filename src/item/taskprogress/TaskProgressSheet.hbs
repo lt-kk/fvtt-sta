@@ -1,0 +1,15 @@
+<form class="sta-body" autocomplete="off">
+  {{> (tplPath "item/_partials/ItemHeader.hbs") this }}
+
+  <section class="properties">
+    <h1>{{localize "sta.item.properties"}}
+      <label class="property healed on-border">
+        {{localize "sta.item.injury.healed"}}
+        <input class="form-control inner" name="system.healed" {{checked sta.healed}}
+               type="checkbox" data-dtype="Boolean" />
+      </label>
+    </h1>
+  </section>
+
+  {{> (tplPath "template/RichTextSection.hbs") sta=sta h="h3" field="description" title="sta.item.description" }}
+</form>

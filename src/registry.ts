@@ -30,6 +30,10 @@ import { createFocus } from "./item/focus/StaFocus";
 import { createCharacterWeapon } from "./item/characterweapon/StaCharacterWeapon";
 import { createSmallcraft } from "./actor/smallcraft/StaSmallcraft";
 import { SmallcraftSheet } from "./actor/smallcraft/SmallcraftSheet";
+import { createExtendedtask } from "./actor/extendedtask/StaExtendedtask";
+import { ExtendedtaskSheet } from "./actor/extendedtask/ExtendedtaskSheet";
+import { createTaskProgress } from "./item/taskprogress/StaTaskProgress";
+import { TaskProgressSheet } from "./item/taskprogress/TaskProgressSheet";
 
 
 export interface ActorTypeConfig {
@@ -50,6 +54,10 @@ export class ActorTypes {
   smallcraft: ActorTypeConfig = {
     entityFactory: createSmallcraft,
     sheet: SmallcraftSheet,
+  };
+  extendedtask: ActorTypeConfig = {
+    entityFactory: createExtendedtask,
+    sheet: ExtendedtaskSheet,
   };
 }
 
@@ -119,6 +127,12 @@ class ItemTypes {
   talent: ItemTypeConfig = {
     entityFactory: createTalent,
     sheet: TalentSheet,
+    listTemplate: "item/GenericListItem",
+    chatTemplate: "item/GenericItemChat",
+  };
+  taskprogress: ItemTypeConfig = {
+    entityFactory: createTaskProgress,
+    sheet: TaskProgressSheet,
     listTemplate: "item/GenericListItem",
     chatTemplate: "item/GenericItemChat",
   };

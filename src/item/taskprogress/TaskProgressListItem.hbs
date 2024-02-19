@@ -1,0 +1,11 @@
+<img class="icon" src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+<div class="name">{{item.name}}</div>
+<div class="controls">
+  <a class="healed control toggle" data-toggle="healed" title="{{localize "sta.item.injury.healed"}}">
+    <i class="fas {{ifThen item.healed "fa-toggle-on" "fa-toggle-off"}}"></i>
+  </a>
+  {{> (tplPath "item/_partials/ListItemDefaultActions") item=item type=type}}
+</div>
+{{#if item.description }}
+  <div class="description tooltip-container hide">{{{item.description}}}</div>
+{{/if}}

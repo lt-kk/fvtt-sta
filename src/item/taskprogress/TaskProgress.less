@@ -1,0 +1,35 @@
+.injury-sheet {
+  .properties {
+    .property.healed {
+      flex-grow: 0;
+      display: flex;
+      grid-gap: @gap;
+      font-size: @sta-h3-size;
+      color: @sta-color-h3-fg;
+
+      input {
+        width: @sta-h1-size;
+
+        &:after {
+          background-color: @color-level-error;
+        }
+
+        &:checked:after {
+          background-color: @color-level-success;
+        }
+      }
+    }
+  }
+}
+
+.list-injury {
+  .healed {
+    .fa-toggle-on {
+      color: @color-level-success;
+    }
+
+    .fa-toggle-off {
+      color: @color-level-error;
+    }
+  }
+}

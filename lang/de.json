@@ -73,6 +73,18 @@
       "science": "Wissenschaft",
       "security": "Sicherheit"
     },
+    "extendedtask": {
+      "settings": "Einstellungen",
+      "type": "Typ",
+      "leader": "Leiter",
+      "difficulty": "Schwierigkeit",
+      "resistance": "Widerstand",
+      "work": "Arbeit",
+      "magnitude": "Größenordnung",
+      "progress": "Fortschritt",
+      "players": "Spieler",
+      "opposition": "Gegner"
+    },
     "item": {
       "properties": "Eigenschaften",
       "description": "Beschreibung",

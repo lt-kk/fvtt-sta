@@ -1,0 +1,61 @@
+.extendedtask-sheet {
+
+
+  .sta-body {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: @gap;
+
+    > section {
+      flex-grow: 1;
+
+      &.icon {
+        width: 160px;
+        flex-grow: unset;
+      }
+
+      &.summary {
+        width: calc(100% - 160px - @gap);
+
+        .roll-d6 {
+          .lcars-bar(@light-orange, @light-orange, @sta-h2-size);
+          .lcars-scale-select(@light-orange);
+          flex-grow: 1;
+        }
+        .roll-d20 {
+          .lcars-bar(@dark-blue, @dark-blue, @sta-h2-size);
+          .lcars-scale-select(@dark-blue);
+          width: 220px;
+          flex-grow: unset;
+        }
+      }
+
+      &.settings, &.progress {
+        width: calc(50% - @gap);
+      }
+    }
+  }
+
+  .settings {
+    display: flex;
+    flex-direction: column;
+    grid-gap: @gap;
+  }
+
+  .type, .leader, .discipline, .difficulty, .resistance, .work {
+    .scale-value {
+      flex-wrap: wrap;
+    }
+
+    > * {
+      width: 100%;
+    }
+
+    .scale-pill {
+      line-height: calc(@text-tiny-size * 1.2);
+      font-size: @text-tiny-size;
+      font-weight: normal;
+    }
+  }
+
+}

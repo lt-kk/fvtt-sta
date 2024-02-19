@@ -27,7 +27,7 @@ export async function weaponRoll(source: StaCharacterWeapon, security: number, d
   if (rollData.charged == "area") sourceEntity.qualities.area = true;
   if (rollData.charged == "viciousx") sourceEntity.qualities.viciousx = 1;
   if (rollData.charged == "piercingx") sourceEntity.qualities.piercingx = 2;
-  if (rollData.charged == "none") sourceEntity.qualities.charge = false;
+  sourceEntity.qualities.charge = false;
   return new CharacterWeaponRoll("", rollData);
 }
 

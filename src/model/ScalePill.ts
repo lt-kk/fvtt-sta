@@ -1,14 +1,16 @@
 import { StaStatus } from "./StaTypes";
 
 export class ScalePill {
-  value: number;
+  value: string;
   status: StaStatus;
   checked: boolean;
+  name: string;
 
-  constructor(value: number, status: StaStatus, checked: boolean) {
+  constructor(value: string, status: StaStatus, checked: boolean, name: string = value) {
     this.value = value;
     this.status = status;
     this.checked = checked;
+    this.name = name;
   }
 }
 
@@ -36,7 +38,7 @@ export function generatePills(
           : ((info > -1 && (moreIsWorse ? i >= info : i <= info)) ? "info"
             : ((success > -1 && (moreIsWorse ? i >= success : i <= success)) ? "success"
               : ""))));
-    pills.push(new ScalePill(i, status, i == value));
+    pills.push(new ScalePill(`${i}`, status, i == value));
   }
   return pills;
 }

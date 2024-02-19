@@ -3,7 +3,8 @@
     "types": [
       "character",
       "starship",
-      "smallcraft"
+      "smallcraft",
+      "extendedtask"
     ],
     "character": {
       "rank": "",
@@ -137,19 +138,24 @@
       "power": {
         "value": 8,
         "max": 8
+      }
+    },
+    "extendedtask": {
+      "notes": "",
+      "type": "simple",
+      "leader": "",
+      "discipline": "",
+      "difficulty": 0,
+      "resistance": 0,
+      "work": {
+        "value": 0,
+        "max": 1
       },
-      "extendedtask": {
-        "opposition": "",
-        "difficulty": 0,
+      "magnitude": 1,
+      "opposition": {
         "resistance": 0,
-        "work": {
-          "value": 0,
-          "max": 1
-        },
-        "magnitude": {
-          "value": 0,
-          "max": 1
-        }
+        "work": 0,
+        "magnitude":  0
       }
     }
   },
@@ -164,6 +170,7 @@
       "refit",
       "starshipweapon",
       "talent",
+      "taskprogress",
       "thing",
       "trait",
       "value"
@@ -245,6 +252,12 @@
       "description": "",
       "rule": "",
       "type": ""
+    },
+    "taskprogress": {
+      "description": "",
+      "player": true,
+      "hits": 0,
+      "breakthroughs": 0
     },
     "thing": {
       "description": "",

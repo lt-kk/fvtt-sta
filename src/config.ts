@@ -40,5 +40,23 @@ export const sta = {
     maxThreat: 99,
     maxComplication: 5,
     maxTaskPool: 5,
+    extendedtask: {
+      difficulty: {
+        min: 0,
+        max: 5
+      },
+      resistance: {
+        min: 0,
+        max: 5
+      },
+      work: {
+        min: 5,
+        max: 20
+      },
+      magnitude: {
+        min: 1,
+        max: 5
+      }
+    }
   },
 };
